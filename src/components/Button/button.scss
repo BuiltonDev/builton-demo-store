@@ -1,0 +1,34 @@
+$color_1: white;
+$background_color_1: darkcyan;
+
+.mainButton {
+    background-color: $background_color_1;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    -webkit-transition: all 250ms ease-in-out;
+    -moz-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+    letter-spacing: 1px;
+    &:hover {
+        -webkit-transition: all 250ms ease-in-out;
+        -moz-transition: all 250ms ease-in-out;
+        -o-transition: all 250ms ease-in-out;
+        transition: all 250ms ease-in-out;
+        -webkit-box-shadow: 2px 1px 16px -5px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 1px 16px -5px rgba(0,0,0,0.75);
+        box-shadow: 2px 1px 16px -5px rgba(0,0,0,0.75);
+}
+    .adornment {
+        margin-right: 12px;
+}
+    .buttonText {
+        color: $color_1;
+}
+}
+.mainButton.round {
+    border-radius: 24px;
+}

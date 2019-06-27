@@ -1,0 +1,10 @@
+@import '../../constants';
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: $PRIMARY_BACKGROUND;
+}
+
+

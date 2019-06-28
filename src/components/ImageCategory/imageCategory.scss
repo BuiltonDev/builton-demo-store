@@ -1,25 +1,34 @@
-.adidas-container {
-  position: relative;
-  width: 25vw;
-  height: auto;
-  overflow: hidden;
-  cursor: pointer;
-}
 
-.nike-container {
-  position: relative;
-  width: 35vw;
-  overflow: hidden;
+.category-container {
   height: auto;
+  overflow: hidden;
   cursor: pointer;
-}
+  position: relative;
+  &.adidas-container {
+    width: 25vw;
+  }
 
-.puma-container {
-  position: relative;
-  width: 35vw;
-  height: auto;
-  overflow: hidden;
-  cursor: pointer;
+  &.nike-container {
+    width: 35vw;
+  }
+
+  &.puma-container {
+    width: 35vw;
+  }
+
+  @media all and (max-width: 720px) {
+    &.adidas-container {
+      width: 90vw;
+    }
+
+    &.nike-container {
+      width: 90vw;
+    }
+
+    &.puma-container {
+      width: 90vw;
+    }
+  }
 }
 
 .category-title {

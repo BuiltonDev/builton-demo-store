@@ -27,7 +27,7 @@ const ImageCategory = ({
 
   return (
     <ReactCursorPosition onPositionChanged={(elementDimension) => handleImagePosition(elementDimension)}>
-      <div className={`${category}-container`}>
+      <div className={`category-container ${category}-container`}>
         <div className={`category-title ${category}-title`} >
           {category.toUpperCase()}
         </div>

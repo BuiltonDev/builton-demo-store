@@ -32,7 +32,7 @@ const Main = () => {
       <Header/>
       <div className='wrapper'>
         <ImageCategory imageSrc={adidas} category="adidas" />
-        <div className='second-wrapper'>
+        <div className='inner-wrapper'>
           <ImageCategory imageSrc={nike} category="nike" />
           <ImageCategory imageSrc={puma} category="puma" />
         </div>

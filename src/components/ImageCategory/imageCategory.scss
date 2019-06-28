@@ -1,0 +1,49 @@
+.adidas-container {
+  position: relative;
+  width: 25vw;
+  height: auto;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.nike-container {
+  position: relative;
+  width: 35vw;
+  overflow: hidden;
+  height: auto;
+  cursor: pointer;
+}
+
+.puma-container {
+  position: relative;
+  width: 35vw;
+  height: auto;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.category-title {
+  position: absolute;
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 2px #000000;
+  letter-spacing: 1px;
+  z-index: 1;
+  &.adidas-title {
+    left: 16px;
+    top: 16px;
+  }
+  &.nike-title {
+    right: 16px;
+    top: 16px;
+  }
+  &.puma-title {
+    left: 16px;
+    bottom: 16px;
+  }
+}
+
+.category-image {
+  width: 100%;
+  transition: all 150ms;
+}

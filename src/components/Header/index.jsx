@@ -1,13 +1,10 @@
-import React, {useRef} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import './header.scss';
-import Blogo from '../../assets/b_logo';
-import Button from "../Button";
-import Cart from "../../assets/cart";
-import Account from "../../assets/person";
+import Blogo from '../../assets/icons/b_logo';
+import Cart from "../../assets/icons/cart";
+import Account from "../../assets/icons/person";
 
 const Header = () => {
-  const cartRef = useRef(null);
   return (
     <div className='header-container'>
       <div className='top-header-title-container'>
@@ -27,7 +24,7 @@ const Header = () => {
         <a className='header-box-hyperlink' href='https://dashboard.builton.dev/' target="_blank">
           <span><Account width={18} height={18} color='black' /></span>
         </a>
-        <a className='header-box-hyperlink cart' ref={cartRef} onClick={() => {}} href='#'>
+        <a className='header-box-hyperlink cart' onClick={() => {}} href='#'>
           <span><Cart width={18} height={18} color='black' /> <span className="cart-count">0</span></span>
         </a>
       </div>

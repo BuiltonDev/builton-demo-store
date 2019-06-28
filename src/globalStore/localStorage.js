@@ -1,6 +1,6 @@
 const clearAllFields = () => {
   for (let i = localStorage.length - 1; i >= 0; i--) {
-    if (localStorage.key(i).startsWith('builton-')) {
+    if (localStorage.key(i).startsWith('builton-demo-')) {
       localStorage.removeItem(localStorage.key(i));
     }
   }
@@ -9,7 +9,7 @@ const clearAllFields = () => {
 const clearFieldCurry = field => {
   return () => {
     try {
-      localStorage.removeItem(`builton-${field}`);
+      localStorage.removeItem(`builton-demo-${field}`);
     } catch (error) {
       throw error;
     }
@@ -19,7 +19,7 @@ const clearFieldCurry = field => {
 const setFieldCurry = field => {
   return value => {
     try {
-      localStorage.setItem(`builton-${field}`, JSON.stringify(value));
+      localStorage.setItem(`builton-demo-${field}`, JSON.stringify(value));
     } catch (error) {
       throw error;
     }
@@ -30,7 +30,7 @@ const getFieldCurry = field => {
   return () => {
     let value = null;
     try {
-      value = JSON.parse(localStorage.getItem(`builton-${field}`));
+      value = JSON.parse(localStorage.getItem(`builton-demo-${field}`));
     } catch (error) {
       throw error;
     }

@@ -1,3 +1,5 @@
+@import '../../constants';
+
 .header-container {
     max-height: 48px;
     height: 100%;
@@ -8,7 +10,7 @@
     align-self: stretch;
     padding: 0 62px;
     flex: 1;
-    border-bottom: 1px solid #d6d6d6;
+    border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
     .top-header-title-container {
         color: rgb(127, 127, 127);
         text-transform: uppercase;
@@ -33,14 +35,14 @@
         align-items: center;
         transition: all 250ms;
         font-size: 0.82rem;
-        border-left: 1px solid #d6d6d6;
-        color: rgb(141, 141, 141);
+        border-left: 1px solid $PRIMARY_BORDER_COLOR;
+        color: $SECONDARY_TEXT;
         &:last-child {
-            border-right: 1px solid #d6d6d6;
+            border-right: 1px solid $PRIMARY_BORDER_COLOR;
         }
         &:hover {
             transition: all 250ms;
-            background-color: rgba(0, 0, 0, 0.04);
+            background-color: $PRIMARY_BORDER_COLOR;
         }
         &.cart {
             font-size: 1rem;

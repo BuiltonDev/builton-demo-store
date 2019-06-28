@@ -30,11 +30,7 @@ export default {
     }
 
     let data = {
-      user: null,
-      company: null,
-      preferences: null,
-      companyPreferences: null,
-      releaseHash: null
+      user: null
     };
 
     // Check to see if userid and companyid cookie is set. if not, cleanup.

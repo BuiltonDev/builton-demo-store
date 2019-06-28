@@ -1,35 +1,35 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import './header.scss';
 import Blogo from '../../assets/b_logo';
 import Button from "../Button";
 import Cart from "../../assets/cart";
+import Account from "../../assets/person";
 
 const Header = () => {
-  const itemsCount = 0;
+  const cartRef = useRef(null);
   return (
     <div className='header-container'>
-      <div className='sub-header sub-header-top'>
-        <div className='top-header-title-container'>
-          <span>
-            Demo store
-          </span>
-        </div>
-        <div className='top-header-hyperlink-container'>
-          <a className='header-box-hyperlink' href='https://builton.dev' target="_blank">
-            <span>Website</span>
-          </a>
-          <a className='header-box-hyperlink' href='https://docs.builton.dev' target="_blank">
-            <span>Docs</span>
-          </a>
-          <a className='header-box-hyperlink' href='https://dashboard.builton.dev/' target="_blank">
-            <span>Dashboard</span>
-          </a>
-        </div>
-      </div>
-      <div className='sub-header sub-header-bottom'>
+      <div className='top-header-title-container'>
         <Blogo width={82} height={36} />
-        <Button onClick={() => {}} adornment={<Cart width={18} height={18} color='white' />} title={`Cart ${itemsCount}`} />
+        <span className="demo-store-title">Demo store</span>
+      </div>
+      <div className='top-header-hyperlink-container'>
+        <a className='header-box-hyperlink' href='https://builton.dev' target="_blank">
+          <span>Website</span>
+        </a>
+        <a className='header-box-hyperlink' href='https://docs.builton.dev' target="_blank">
+          <span>Docs</span>
+        </a>
+        <a className='header-box-hyperlink' href='https://dashboard.builton.dev/' target="_blank">
+          <span>Dashboard</span>
+        </a>
+        <a className='header-box-hyperlink' href='https://dashboard.builton.dev/' target="_blank">
+          <span><Account width={18} height={18} color='black' /></span>
+        </a>
+        <a className='header-box-hyperlink cart' ref={cartRef} onClick={() => {}} href='#'>
+          <span><Cart width={18} height={18} color='black' /> <span className="cart-count">0</span></span>
+        </a>
       </div>
     </div>
   )

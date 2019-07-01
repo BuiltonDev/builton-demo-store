@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Field } from 'react-final-form';
 import './header.scss';
 import Blogo from '../../assets/icons/b_logo';
 import Cart from "../../assets/icons/cart";
@@ -6,7 +7,15 @@ import Account from "../../assets/icons/person";
 import HeaderDropdown from "../HeaderDropdown";
 
 const Header = () => {
-  const [dropDown, setDropdown] = useState('');
+  const [cartOpen, setCartOpen] = useState(false);
+
+  const validate = (el) => {
+    console.log(el)
+  }
+
+  const onSubmit = (el) => {
+    console.log(el);
+  }
 
   return (
     <div className='header-container'>
@@ -27,8 +36,6 @@ const Header = () => {
         <a
           className='header-box-hyperlink'
           onClick={(e) => e.preventDefault()}
-          onMouseEnter={() => setDropdown('auth')}
-          onMouseLeave={() => setDropdown('')}
           href='#'
         >
           <span><Account width={18} height={18} color='black' /></span>
@@ -36,22 +43,16 @@ const Header = () => {
         <a
           className='header-box-hyperlink cart'
           onClick={(e) => e.preventDefault()}
-          onMouseEnter={() => setDropdown('cart')}
-          onMouseLeave={() => setDropdown('')}
+          onMouseEnter={() => setCartOpen(true)}
+          onMouseLeave={() => setCartOpen(false)}
           href='#'
         >
           <span><Cart width={18} height={18} color='black' /> <span className="cart-count">0</span></span>
         </a>
-        <HeaderDropdown open={!!dropDown}>
-          {dropDown === 'cart' ? (
-            <div>
-              Cart
-            </div>
-          ) : (
-            <div>
-              Test
-            </div>
-          )}
+        <HeaderDropdown open={!!setCartOpen}>
+          <div>
+            Cart
+          </div>
         </HeaderDropdown>
       </div>
     </div>

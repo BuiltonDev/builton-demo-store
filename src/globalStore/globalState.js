@@ -14,13 +14,25 @@ const clearUser = clearFieldCurry('user');
 const getUser = getFieldCurry('user');
 const setUser = setFieldCurry('user');
 
+const clearBuiltonSession = clearFieldCurry('builtonSession');
+const getBuiltonSession = getFieldCurry('builtonSession');
+const setBuiltonSession = setFieldCurry('builtonSession');
 
-addReducer('updateUser', (global, user) => {
+
+addReducer('updateUser', (global, dispatch, user) => {
   setUser(user);
   return {
     user
   };
 });
+
+addReducer('updateBuiltonSession', (global, dispatch, builtonSession) => {
+  setBuiltonSession(builtonSession);
+  return {
+    builtonSession
+  };
+});
+
 
 export default {
   init: () => {
@@ -30,22 +42,18 @@ export default {
     }
 
     let data = {
-      user: null
+      user: null,
+      builtonSession: null,
     };
-
-    // Check to see if userid and companyid cookie is set. if not, cleanup.
-    if (
-      document.cookie.indexOf('builton-userid') < 0
-    ) {
-      clearUser();
-    }
 
     try {
       data = {
-        user: getUser()
+        user: getUser(),
+        builtonSession: getBuiltonSession()
       };
     } catch (err) {
       clearUser();
+      clearBuiltonSession();
     }
 
     // Setting values in global store
@@ -59,6 +67,7 @@ export default {
   },
   logout: time => {
     clearUser();
+    clearBuiltonSession();
     resetGlobal();
 
     INITIALIZED = false;

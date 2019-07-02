@@ -10,6 +10,7 @@
   "dependencies": {
     "@builton/core-sdk": "^3.0.3",
     "final-form": "^4.16.1",
+    "firebase": "^6.2.4",
     "install": "^0.12.2",
     "lodash.get": "^4.4.2",
     "node-sass": "^4.12.0",
@@ -18,6 +19,7 @@
     "react-cursor-position": "^3.0.3",
     "react-dom": "^16.8.6",
     "react-final-form": "^6.3.0",
+    "react-final-form-hooks": "^2.0.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "reactn": "^2.1.4"

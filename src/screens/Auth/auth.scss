@@ -1,0 +1,14 @@
+@import '../../constants';
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  background: url("../../assets/images/background.png") no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}

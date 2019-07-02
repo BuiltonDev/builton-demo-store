@@ -35,8 +35,7 @@ const Header = () => {
         </a>
         <a
           className='header-box-hyperlink'
-          onClick={(e) => e.preventDefault()}
-          href='#'
+          href='/auth'
         >
           <span><Account width={18} height={18} color='black' /></span>
         </a>
@@ -49,7 +48,7 @@ const Header = () => {
         >
           <span><Cart width={18} height={18} color='black' /> <span className="cart-count">0</span></span>
         </a>
-        <HeaderDropdown open={!!setCartOpen}>
+        <HeaderDropdown open={cartOpen}>
           <div>
             Cart
           </div>

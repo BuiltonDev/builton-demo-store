@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useForm, useField } from 'react-final-form-hooks';
+import { Form, Field } from 'react-final-form'
 import builton from '../../utils/builton';
 import { useDispatch } from 'reactn';
 import { withRouter } from 'react-router-dom';
+import notify from '../../utils/toast';
 
 import './auth.scss';
 import { setFirebaseToken } from "../../utils/auth";
@@ -51,55 +52,85 @@ const Auth = () => {
 
       history.push('/');
     } catch (err) {
-      throw err;
+      notify('Failed to load message', { type: 'error' });
     }
   };
 
-  const validate = values => {
-    let errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    }
-    if (formType === 'register' && values.password !== values.confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match';
-    }
-
-    return errors;
-  };
-
-  const { form, handleSubmit, submitting } = useForm({
-    onSubmit,
-    validate
-  });
-
-  const email = useField('email', form);
-  const password = useField('password', form);
-  const confirmPassword = useField('confirmPassword', form);
+  const Error = ({ name }) => (
+    <Field name={name} subscription={{ error: true, touched: true }}>
+      {({ meta: { error, touched } }) =>
+        error && touched ? <span>{error}</span> : null
+      }
+    </Field>
+  );
 
   return (
     <div className='wrapper'>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input {...email.input} placeholder="Email" type="email"/>
-          </div>
-
-          <div>
-            <input {...password.input} placeholder="Password" type="password"/>
-          </div>
-
-          {formType === 'register' &&
-            <div>
-              <input {...confirmPassword.input} placeholder="Confirm password" type="password"/>
-            </div>
+      <Form
+        onSubmit={onSubmit}
+        validate={values => {
+          const errors = {};
+          if (!values.email) {
+            errors.email = 'Required';
           }
+          if (!values.password) {
+            errors.password = 'Required';
+          }
+          if (formType === 'register') {
+            if (!values.confirmPassword) {
+              errors.confirmPassword = 'Required';
+            }
 
-          <button onClick={() => setFormType(formType === 'login' ? 'register' : 'login')}>
-            {formType === 'login' ? 'Register' : 'Login'}
-          </button>
-          <button type="submit">
-            Submit
-          </button>
-        </form>
+            if (values.confirmPassword !== values.password) {
+              errors.confirmPassword = 'Passwords do not match';
+            }
+          }
+          return errors
+        }}
+      >
+        {({ handleSubmit, form, submitting, pristine, values }) => (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <Field
+                name="email"
+                component="input"
+                type="text"
+                placeholder="Email"
+              />
+              <Error name="firstName" />
+            </div>
+            <div>
+              <Field
+                name="password"
+                component="input"
+                type="password"
+                placeholder="Password"
+              />
+              <Error name="password" />
+            </div>
+            {formType === 'register' &&
+              <div>
+                <Field
+                  name="confirmPassword"
+                  component="input"
+                  type="password"
+                  placeholder="Password"
+                />
+                <Error name="confirmPassword" />
+              </div>
+            }
+            <div className="buttons">
+              <button type="button" onClick={() => setFormType(formType === 'register' ? 'login' : 'register')} disabled={submitting}>
+                {formType === 'register' ? 'Login' : 'Register'}
+              </button>
+              <button type="submit" disabled={submitting}>
+                Submit
+              </button>
+            </div>
+          </form>
+        )}
+      </Form>
+
     </div>
   )
 };

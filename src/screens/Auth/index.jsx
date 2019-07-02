@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm, useField } from 'react-final-form-hooks';
-import firebase from 'firebase';
 import builton from '../../utils/builton';
-import { useGlobal, useDispatch } from 'reactn';
+import { useDispatch } from 'reactn';
+import { withRouter } from 'react-router-dom';
 
 import './auth.scss';
 import { setFirebaseToken } from "../../utils/auth";
-
-firebase.initializeApp({
-  apiKey: 'AIzaSyDzNiAaoYnS2kxmaTDDN4T_mPNsTo8Bch0',
-  authDomain: 'builton-demo-store.firebaseapp.com'
-});
+import firebaseClient from '../../utils/firebase';
+import useReactRouter from 'use-react-router';
 
 const Auth = () => {
   const [formType, setFormType] = useState('login');
   const updateUser = useDispatch('updateUser'); //reducer
   const updateBuiltonSession = useDispatch('updateBuiltonSession');
 
+  const { history } = useReactRouter();
+
   const onSubmit = async values => {
     try {
       if (formType === 'register') {
-        await firebase
+        await firebaseClient
           .auth()
           .createUserWithEmailAndPassword(values.email, values.password);
       } else {
-        await firebase
+        await firebaseClient
           .auth()
           .signInWithEmailAndPassword(values.email, values.password);
       }
@@ -46,9 +45,11 @@ const Auth = () => {
 
       await updateUser(apiUser);
 
-      if (!apiUser || !apiUser.user) {
+      if (!apiUser) {
         throw new Error('Missing user data');
       }
+
+      history.push('/');
     } catch (err) {
       throw err;
     }
@@ -103,4 +104,4 @@ const Auth = () => {
   )
 };
 
-export default Auth;
+export default withRouter(Auth);

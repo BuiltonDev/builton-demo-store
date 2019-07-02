@@ -15,13 +15,7 @@ const App = () => {
   return(
     <Router>
       <Switch>
-        <Route exact path="/" render={() => (
-          !loggedIn ? (
-            <Redirect to="/auth"/>
-          ) : (
-            <Home/>
-          )
-        )}/>
+        <Route exact path="/" component={Home}/>
         <Route exact path="/auth" render={() => (
           loggedIn ? (
             <Redirect to="/"/>

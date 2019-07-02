@@ -22,7 +22,8 @@
     "react-final-form-hooks": "^2.0.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "reactn": "^2.1.4"
+    "reactn": "^2.1.4",
+    "use-react-router": "^1.0.7"
   },
   "devDependencies": {
     "husky": "^2.5.0",

@@ -52,7 +52,7 @@ const Auth = () => {
 
       history.push('/');
     } catch (err) {
-      notify('Failed to load message', { type: 'error' });
+      notify(`Failed to ${formType === 'login' ? 'Login' : 'Register'}. Please try again.`, { type: 'error' });
     }
   };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import Builton from '@builton/core-sdk/src/main';
 import globalState from "../globalStore/globalState";
 import { getFieldCurry } from '../globalStore/localStorage';
-import firebase from 'firebase';
+import firebase from './firebase';
 import config from '../config';
 
 globalState.init();

@@ -9,6 +9,7 @@ import './auth.scss';
 import { setFirebaseToken } from "../../utils/auth";
 import firebaseClient from '../../utils/firebase';
 import useReactRouter from 'use-react-router';
+import BLogo from "../../assets/icons/b_logo";
 
 const Auth = () => {
   const [formType, setFormType] = useState('login');
@@ -57,25 +58,26 @@ const Auth = () => {
   };
 
   const Error = ({ name }) => (
-    <Field name={name} subscription={{ error: true, touched: true }}>
-      {({ meta: { error, touched } }) =>
-        error && touched ? <span>{error}</span> : null
-      }
-    </Field>
+    <div className='form-error-container'>
+      <Field name={name} subscription={{ error: true, touched: true }}>
+        {({ meta: { error, touched } }) =>
+          error && touched ? <span>{error}</span> : null
+        }
+      </Field>
+    </div>
   );
 
   return (
     <div className='wrapper'>
+      <div className='builton-logo-container'>
+        <BLogo height={84} width={84} />
+        Demo store
+      </div>
+      <div className='paper-container'>
       <Form
         onSubmit={onSubmit}
         validate={values => {
           const errors = {};
-          if (!values.email) {
-            errors.email = 'Required';
-          }
-          if (!values.password) {
-            errors.password = 'Required';
-          }
           if (formType === 'register') {
             if (!values.confirmPassword) {
               errors.confirmPassword = 'Required';
@@ -90,31 +92,85 @@ const Auth = () => {
       >
         {({ handleSubmit, form, submitting, pristine, values }) => (
           <form onSubmit={handleSubmit}>
-            <div>
+            <div className='input input--hoshi'>
               <Field
                 name="email"
-                component="input"
-                type="text"
-                placeholder="Email"
+                type="email"
+                render={({input}) =>
+                  <>
+                    <input
+                      {...input}
+                      onChange={(el) => {
+                        input.onChange(el.target.value);
+                        if(el.target.value) {
+                          el.target.parentNode.classList.add('input--filled')
+                        } else {
+                          el.target.parentNode.classList.remove('input--filled')
+                        }
+                      }}
+                      className="input__field input__field--hoshi"
+                      id="input-1"
+                    />
+                    <label className="input__label input__label--hoshi input__label--hoshi-color-1" htmlFor="input-1">
+                      <span className="input__label-content input__label-content--hoshi">Email</span>
+                    </label>
+                  </>
+                }
               />
               <Error name="firstName" />
             </div>
-            <div>
+            <div className='input input--hoshi'>
               <Field
                 name="password"
-                component="input"
                 type="password"
-                placeholder="Password"
+                render={({input}) =>
+                  <>
+                    <input
+                      {...input}
+                      onChange={(el) => {
+                        input.onChange(el.target.value);
+                        if(el.target.value) {
+                          el.target.parentNode.classList.add('input--filled')
+                        } else {
+                          el.target.parentNode.classList.remove('input--filled')
+                        }
+                      }}
+                      className="input__field input__field--hoshi"
+                      id='input-3'
+                    />
+                    <label className="input__label input__label--hoshi input__label--hoshi-color-2" htmlFor="input-3">
+                      <span className="input__label-content input__label-content--hoshi">Password</span>
+                    </label>
+                  </>
+                }
               />
               <Error name="password" />
             </div>
             {formType === 'register' &&
-              <div>
+              <div className='input input--hoshi'>
                 <Field
                   name="confirmPassword"
-                  component="input"
                   type="password"
-                  placeholder="Password"
+                  render={({input}) =>
+                    <>
+                      <input
+                        {...input}
+                        onChange={(el) => {
+                          input.onChange(el.target.value);
+                          if(el.target.value) {
+                            el.target.parentNode.classList.add('input--filled')
+                          } else {
+                            el.target.parentNode.classList.remove('input--filled')
+                          }
+                        }}
+                        className="input__field input__field--hoshi"
+                        id='input-2'
+                      />
+                      <label className="input__label input__label--hoshi input__label--hoshi-color-2" htmlFor="input-2">
+                        <span className="input__label-content input__label-content--hoshi">Confirm password</span>
+                      </label>
+                    </>
+                  }
                 />
                 <Error name="confirmPassword" />
               </div>
@@ -130,7 +186,7 @@ const Auth = () => {
           </form>
         )}
       </Form>
-
+      </div>
     </div>
   )
 };

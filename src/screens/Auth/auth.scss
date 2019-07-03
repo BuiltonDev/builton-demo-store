@@ -21,6 +21,8 @@
 
 .paper-container {
   padding: 64px;
+  max-width: 550px;
+  min-height: 480px;
   position: relative;
   z-index: 1;
   &:before {

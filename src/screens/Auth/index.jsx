@@ -91,7 +91,7 @@ const Auth = () => {
         }}
       >
         {({ handleSubmit, form, submitting, pristine, values }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='form-container'>
             <div className='input input--hoshi'>
               <Field
                 name="email"
@@ -146,35 +146,33 @@ const Auth = () => {
               />
               <Error name="password" />
             </div>
-            {formType === 'register' &&
-              <div className='input input--hoshi'>
-                <Field
-                  name="confirmPassword"
-                  type="password"
-                  render={({input}) =>
-                    <>
-                      <input
-                        {...input}
-                        onChange={(el) => {
-                          input.onChange(el.target.value);
-                          if(el.target.value) {
-                            el.target.parentNode.classList.add('input--filled')
-                          } else {
-                            el.target.parentNode.classList.remove('input--filled')
-                          }
-                        }}
-                        className="input__field input__field--hoshi"
-                        id='input-2'
-                      />
-                      <label className="input__label input__label--hoshi input__label--hoshi-color-2" htmlFor="input-2">
-                        <span className="input__label-content input__label-content--hoshi">Confirm password</span>
-                      </label>
-                    </>
-                  }
-                />
-                <Error name="confirmPassword" />
-              </div>
-            }
+            <div className={`input input--hoshi ${formType === 'register' ? 'show-field' : 'hide-field'}`}>
+              <Field
+                name="confirmPassword"
+                type="password"
+                render={({input}) =>
+                  <>
+                    <input
+                      {...input}
+                      onChange={(el) => {
+                        input.onChange(el.target.value);
+                        if(el.target.value) {
+                          el.target.parentNode.classList.add('input--filled')
+                        } else {
+                          el.target.parentNode.classList.remove('input--filled')
+                        }
+                      }}
+                      className="input__field input__field--hoshi"
+                      id='input-2'
+                    />
+                    <label className="input__label input__label--hoshi input__label--hoshi-color-2" htmlFor="input-2">
+                      <span className="input__label-content input__label-content--hoshi">Confirm password</span>
+                    </label>
+                  </>
+                }
+              />
+              <Error name="confirmPassword" />
+            </div>
             <div className="buttons">
               <button type="button" onClick={() => setFormType(formType === 'register' ? 'login' : 'register')} disabled={submitting}>
                 {formType === 'register' ? 'Login' : 'Register'}

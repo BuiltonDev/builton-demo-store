@@ -66,6 +66,37 @@ const Auth = () => {
     }
   };
 
+  const handleInputChange = (ev, input) => {
+    input.onChange(ev.target.value);
+    if (ev.target.value) {
+      ev.target.parentNode.classList.add("input--filled");
+    } else {
+      ev.target.parentNode.classList.remove(
+        "input--filled"
+      );
+    }
+  }
+
+  const validate = (values) => {
+    const errors = {};
+    if (formType === "register") {
+      if (!values.email) {
+        errors.email = "Required";
+      }
+      if (!values.password) {
+        errors.password = "Required";
+      }
+      if (!values.confirmPassword) {
+        errors.confirmPassword = "Required";
+      }
+
+      if (values.confirmPassword !== values.password) {
+        errors.confirmPassword = "Passwords do not match";
+      }
+    }
+    return errors;
+  };
+
   const Error = ({ name }) => (
     <div className="form-error-container">
       <Field name={name} subscription={{ error: true, touched: true }}>
@@ -82,25 +113,7 @@ const Auth = () => {
       <div className="paper-container">
         <Form
           onSubmit={onSubmit}
-          validate={values => {
-            const errors = {};
-            if (formType === "register") {
-              if (!values.email) {
-                errors.email = "Required";
-              }
-              if (!values.password) {
-                errors.password = "Required";
-              }
-              if (!values.confirmPassword) {
-                errors.confirmPassword = "Required";
-              }
-
-              if (values.confirmPassword !== values.password) {
-                errors.confirmPassword = "Passwords do not match";
-              }
-            }
-            return errors;
-          }}
+          validate={values => validate(values)}
         >
           {({ handleSubmit, form, submitting, pristine, values }) => (
             <form onSubmit={handleSubmit} className="form-container">
@@ -113,16 +126,7 @@ const Auth = () => {
                       <input
                         {...input}
                         disabled={submitting}
-                        onChange={el => {
-                          input.onChange(el.target.value);
-                          if (el.target.value) {
-                            el.target.parentNode.classList.add("input--filled");
-                          } else {
-                            el.target.parentNode.classList.remove(
-                              "input--filled"
-                            );
-                          }
-                        }}
+                        onChange={(ev) => handleInputChange(ev, input)}
                         className="input__field input__field"
                         id="input-1"
                       />
@@ -148,16 +152,7 @@ const Auth = () => {
                       <input
                         {...input}
                         disabled={submitting}
-                        onChange={el => {
-                          input.onChange(el.target.value);
-                          if (el.target.value) {
-                            el.target.parentNode.classList.add("input--filled");
-                          } else {
-                            el.target.parentNode.classList.remove(
-                              "input--filled"
-                            );
-                          }
-                        }}
+                        onChange={(ev) => handleInputChange(ev, input)}
                         className="input__field input__field"
                         id="input-3"
                       />
@@ -187,16 +182,7 @@ const Auth = () => {
                       <input
                         {...input}
                         disabled={submitting}
-                        onChange={el => {
-                          input.onChange(el.target.value);
-                          if (el.target.value) {
-                            el.target.parentNode.classList.add("input--filled");
-                          } else {
-                            el.target.parentNode.classList.remove(
-                              "input--filled"
-                            );
-                          }
-                        }}
+                        onChange={(ev) => handleInputChange(ev, input)}
                         className="input__field input__field"
                         id="input-2"
                       />

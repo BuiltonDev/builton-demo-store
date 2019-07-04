@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import ReactCursorPosition from 'react-cursor-position';
 import PropTypes from 'prop-types';
-import './headerDropdown.scss';
+import './index.scss';
 
 const HeaderDropdown = ({children, open}) => {
   const containerRef = useRef(null);

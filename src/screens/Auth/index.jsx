@@ -5,12 +5,13 @@ import { useDispatch } from "reactn";
 import { withRouter } from "react-router-dom";
 import notify from "../../utils/toast";
 
-import "./auth.scss";
+import "./index.scss";
 import { setFirebaseToken } from "../../utils/auth";
 import firebaseClient from "../../utils/firebase";
 import useReactRouter from "use-react-router";
 import BuiltonLogo from "../../components/BuiltonLogo";
 import Button from "../../components/Button";
+import Hyperlink from "../../components/Hyperlink";
 
 const Auth = () => {
   const [formType, setFormType] = useState("login");
@@ -213,14 +214,11 @@ const Auth = () => {
                 <Error name="confirmPassword" />
               </div>
               <div className="buttons">
-                <a
-                  className="link-button"
+                <Hyperlink
                   onClick={() =>
-                    setFormType(formType === "register" ? "login" : "register")
-                  }
-                >
-                  {formType === "register" ? "Login" : "Register"}
-                </a>
+                    setFormType(formType === "register" ? "login" : "register")}
+                  title={formType === "register" ? "Login" : "Register"}
+                />
                 <Button type="submit" loading={submitting} title={formType === 'register' ? 'Register' : 'Login'} />
               </div>
             </form>

@@ -3,7 +3,7 @@ import builton from '../../utils/builton';
 import Header from "../../components/Header";
 import ImageCategory from "../../components/ImageCategory";
 import { withRouter } from 'react-router-dom';
-import './home.scss'
+import './index.scss'
 
 // TODO: switch to API call when implemented on backend
 import adidas from '../../assets/images/Adidas_Cover.jpg';

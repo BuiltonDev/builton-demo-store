@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import ReactCursorPosition from "react-cursor-position";
 import PropTypes from 'prop-types';
-import './imageCategory.scss';
+import './index.scss';
 
 const ImageCategory = ({
   imageSrc,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import './header.scss';
+import './index.scss';
 import Cart from "../../assets/icons/cart";
 import Account from "../../assets/icons/person";
 import HeaderDropdown from "../HeaderDropdown";

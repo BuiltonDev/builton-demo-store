@@ -269,51 +269,6 @@
   }
 }
 
-.link-button {
-  align-self: center;
-  font-size: 0.78rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  text-transform: uppercase;
-  color: $SECONDARY_TEXT;
-  position: relative;
-  -webkit-transition: color 250ms ease-out;
-  -moz-transition: color 250ms ease-out;
-  -o-transition: color 250ms ease-out;
-  transition: color 250ms ease-out;
-  &:hover {
-    color: $PRIMARY_TEXT;
-    -webkit-transition: color 250ms ease-out;
-    -moz-transition: color 250ms ease-out;
-    -o-transition: color 250ms ease-out;
-    transition: color 250ms ease-out;
-  }
-  &:after {
-    position: absolute;
-    content: '';
-    left: 50%;
-    bottom: -4px;
-    width: 0;
-    height: 2px;
-    background-color: $TERTIARY_BORDER_COLOR;
-    -webkit-transition: width 250ms ease-out;
-    -moz-transition: width 250ms ease-out;
-    -o-transition: width 250ms ease-out;
-    transition: width 250ms ease-out;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
-  }
-  &:hover:after {
-    width: 100%;
-    -webkit-transition: width 250ms ease-out;
-    -moz-transition: width 250ms ease-out;
-    -o-transition: width 250ms ease-out;
-    transition: width 250ms ease-out;
-  }
-}
-
 
 
 

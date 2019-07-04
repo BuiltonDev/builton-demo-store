@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import './header.scss';
-import Blogo from '../../assets/icons/b_logo';
 import Cart from "../../assets/icons/cart";
 import Account from "../../assets/icons/person";
 import HeaderDropdown from "../HeaderDropdown";
+import BuiltonLogo from "../BuiltonLogo";
 
 const Header = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -19,10 +19,7 @@ const Header = () => {
 
   return (
     <div className='header-container'>
-      <div className='top-header-title-container'>
-        <Blogo width={82} height={36} />
-        <span className="demo-store-title">Demo store</span>
-      </div>
+      <BuiltonLogo/>
       <div className='top-header-hyperlink-container'>
         <a className='header-box-hyperlink' href='https://builton.dev' target="_blank">
           <span>Website</span>

@@ -11,18 +11,6 @@
     padding: 0 0 0 62px;
     flex: 1;
     border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
-    .top-header-title-container {
-        color: rgb(127, 127, 127);
-        text-transform: uppercase;
-        font-size: 0.72rem;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        .demo-store-title {
-            margin-left: 12px;
-            margin-bottom: 4px;
-        }
-    }
     .top-header-hyperlink-container {
         display: flex;
         align-self: stretch;

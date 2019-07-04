@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { Form, Field } from 'react-final-form'
-import builton from '../../utils/builton';
-import { useDispatch } from 'reactn';
-import { withRouter } from 'react-router-dom';
-import notify from '../../utils/toast';
+import React, { useState } from "react";
+import { Form, Field } from "react-final-form";
+import builton from "../../utils/builton";
+import { useDispatch } from "reactn";
+import { withRouter } from "react-router-dom";
+import notify from "../../utils/toast";
 
-import './auth.scss';
+import "./auth.scss";
 import { setFirebaseToken } from "../../utils/auth";
-import firebaseClient from '../../utils/firebase';
-import useReactRouter from 'use-react-router';
-import BLogo from "../../assets/icons/b_logo";
+import firebaseClient from "../../utils/firebase";
+import useReactRouter from "use-react-router";
+import BuiltonLogo from "../../components/BuiltonLogo";
 
 const Auth = () => {
-  const [formType, setFormType] = useState('login');
-  const updateUser = useDispatch('updateUser'); //reducer
-  const updateBuiltonSession = useDispatch('updateBuiltonSession');
+  const [formType, setFormType] = useState("login");
+  const updateUser = useDispatch("updateUser"); //reducer
+  const updateBuiltonSession = useDispatch("updateBuiltonSession");
 
   const { history } = useReactRouter();
 
   const onSubmit = async values => {
     try {
-      if (formType === 'register') {
+      if (formType === "register") {
         await firebaseClient
           .auth()
           .createUserWithEmailAndPassword(values.email, values.password);
@@ -35,12 +35,14 @@ const Auth = () => {
 
       let apiUser;
 
-      if (formType === 'register') {
-        apiUser = await builton.users.authenticate({body: {
-          email: values.email,
-          first_name: '', // TODO remove
-          last_name: ''  // TODO remove
-        }});
+      if (formType === "register") {
+        apiUser = await builton.users.authenticate({
+          body: {
+            email: values.email,
+            first_name: "", // TODO remove
+            last_name: "" // TODO remove
+          }
+        });
       } else {
         apiUser = await builton.users.setMe().get();
       }
@@ -48,17 +50,22 @@ const Auth = () => {
       await updateUser(apiUser);
 
       if (!apiUser) {
-        throw new Error('Missing user data');
+        throw new Error("Missing user data");
       }
 
-      history.push('/');
+      history.push("/");
     } catch (err) {
-      notify(`Failed to ${formType === 'login' ? 'Login' : 'Register'}. Please try again.`, { type: 'error' });
+      notify(
+        `Failed to ${
+          formType === "login" ? "Login" : "Register"
+        }. Please try again.`,
+        { type: "error" }
+      );
     }
   };
 
   const Error = ({ name }) => (
-    <div className='form-error-container'>
+    <div className="form-error-container">
       <Field name={name} subscription={{ error: true, touched: true }}>
         {({ meta: { error, touched } }) =>
           error && touched ? <span>{error}</span> : null
@@ -68,125 +75,165 @@ const Auth = () => {
   );
 
   return (
-    <div className='wrapper'>
-      <div className='builton-logo-container'>
-        <BLogo height={84} width={84} />
-        Demo store
-      </div>
-      <div className='paper-container'>
-      <Form
-        onSubmit={onSubmit}
-        validate={values => {
-          const errors = {};
-          if (formType === 'register') {
-            if (!values.confirmPassword) {
-              errors.confirmPassword = 'Required';
-            }
+    <div className="wrapper">
+      <BuiltonLogo style={{ position: 'absolute', top: 12, left: 48 }}/>
+      <div className="paper-container">
+        <Form
+          onSubmit={onSubmit}
+          validate={values => {
+            const errors = {};
+            if (formType === "register") {
+              if (!values.email) {
+                errors.email = "Required";
+              }
+              if (!values.password) {
+                errors.password = "Required";
+              }
+              if (!values.confirmPassword) {
+                errors.confirmPassword = "Required";
+              }
 
-            if (values.confirmPassword !== values.password) {
-              errors.confirmPassword = 'Passwords do not match';
+              if (values.confirmPassword !== values.password) {
+                errors.confirmPassword = "Passwords do not match";
+              }
             }
-          }
-          return errors
-        }}
-      >
-        {({ handleSubmit, form, submitting, pristine, values }) => (
-          <form onSubmit={handleSubmit} className='form-container'>
-            <div className='input input--hoshi'>
-              <Field
-                name="email"
-                type="email"
-                render={({input}) =>
-                  <>
-                    <input
-                      {...input}
-                      onChange={(el) => {
-                        input.onChange(el.target.value);
-                        if(el.target.value) {
-                          el.target.parentNode.classList.add('input--filled')
-                        } else {
-                          el.target.parentNode.classList.remove('input--filled')
-                        }
-                      }}
-                      className="input__field input__field--hoshi"
-                      id="input-1"
-                    />
-                    <label className="input__label input__label--hoshi input__label--hoshi-color-1" htmlFor="input-1">
-                      <span className="input__label-content input__label-content--hoshi">Email</span>
-                    </label>
-                  </>
-                }
-              />
-              <Error name="firstName" />
-            </div>
-            <div className='input input--hoshi'>
-              <Field
-                name="password"
-                type="password"
-                render={({input}) =>
-                  <>
-                    <input
-                      {...input}
-                      onChange={(el) => {
-                        input.onChange(el.target.value);
-                        if(el.target.value) {
-                          el.target.parentNode.classList.add('input--filled')
-                        } else {
-                          el.target.parentNode.classList.remove('input--filled')
-                        }
-                      }}
-                      className="input__field input__field--hoshi"
-                      id='input-3'
-                    />
-                    <label className="input__label input__label--hoshi input__label--hoshi-color-2" htmlFor="input-3">
-                      <span className="input__label-content input__label-content--hoshi">Password</span>
-                    </label>
-                  </>
-                }
-              />
-              <Error name="password" />
-            </div>
-            <div className={`input input--hoshi ${formType === 'register' ? 'show-field' : 'hide-field'}`}>
-              <Field
-                name="confirmPassword"
-                type="password"
-                render={({input}) =>
-                  <>
-                    <input
-                      {...input}
-                      onChange={(el) => {
-                        input.onChange(el.target.value);
-                        if(el.target.value) {
-                          el.target.parentNode.classList.add('input--filled')
-                        } else {
-                          el.target.parentNode.classList.remove('input--filled')
-                        }
-                      }}
-                      className="input__field input__field--hoshi"
-                      id='input-2'
-                    />
-                    <label className="input__label input__label--hoshi input__label--hoshi-color-2" htmlFor="input-2">
-                      <span className="input__label-content input__label-content--hoshi">Confirm password</span>
-                    </label>
-                  </>
-                }
-              />
-              <Error name="confirmPassword" />
-            </div>
-            <div className="buttons">
-              <button type="button" onClick={() => setFormType(formType === 'register' ? 'login' : 'register')} disabled={submitting}>
-                {formType === 'register' ? 'Login' : 'Register'}
-              </button>
-              <button type="submit" disabled={submitting}>
-                Submit
-              </button>
-            </div>
-          </form>
-        )}
-      </Form>
+            return errors;
+          }}
+        >
+          {({ handleSubmit, form, submitting, pristine, values }) => (
+            <form onSubmit={handleSubmit} className="form-container">
+              <div className="input input">
+                <Field
+                  name="email"
+                  type="email"
+                  render={({ input }) => (
+                    <>
+                      <input
+                        {...input}
+                        disabled={submitting}
+                        onChange={el => {
+                          input.onChange(el.target.value);
+                          if (el.target.value) {
+                            el.target.parentNode.classList.add("input--filled");
+                          } else {
+                            el.target.parentNode.classList.remove(
+                              "input--filled"
+                            );
+                          }
+                        }}
+                        className="input__field input__field"
+                        id="input-1"
+                      />
+                      <label
+                        className="input__label input__label input__label-color-1"
+                        htmlFor="input-1"
+                      >
+                        <span className="input__label-content input__label-content">
+                          Email
+                        </span>
+                      </label>
+                    </>
+                  )}
+                />
+                <Error name="email" />
+              </div>
+              <div className="input">
+                <Field
+                  name="password"
+                  type="password"
+                  render={({ input }) => (
+                    <>
+                      <input
+                        {...input}
+                        disabled={submitting}
+                        onChange={el => {
+                          input.onChange(el.target.value);
+                          if (el.target.value) {
+                            el.target.parentNode.classList.add("input--filled");
+                          } else {
+                            el.target.parentNode.classList.remove(
+                              "input--filled"
+                            );
+                          }
+                        }}
+                        className="input__field input__field"
+                        id="input-3"
+                      />
+                      <label
+                        className="input__label input__label input__label-color-2"
+                        htmlFor="input-3"
+                      >
+                        <span className="input__label-content input__label-content">
+                          Password
+                        </span>
+                      </label>
+                    </>
+                  )}
+                />
+                <Error name="password" />
+              </div>
+              <div
+                className={`input input ${
+                  formType === "register" ? "show-field" : "hide-field"
+                }`}
+              >
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  render={({ input }) => (
+                    <>
+                      <input
+                        {...input}
+                        disabled={submitting}
+                        onChange={el => {
+                          input.onChange(el.target.value);
+                          if (el.target.value) {
+                            el.target.parentNode.classList.add("input--filled");
+                          } else {
+                            el.target.parentNode.classList.remove(
+                              "input--filled"
+                            );
+                          }
+                        }}
+                        className="input__field input__field"
+                        id="input-2"
+                      />
+                      <label
+                        className="input__label input__label input__label-color-2"
+                        htmlFor="input-2"
+                      >
+                        <span className="input__label-content input__label-content">
+                          Confirm password
+                        </span>
+                      </label>
+                    </>
+                  )}
+                />
+                <Error name="confirmPassword" />
+              </div>
+              <div className="buttons">
+                <a
+                  className="link-button"
+                  onClick={() =>
+                    setFormType(formType === "register" ? "login" : "register")
+                  }
+                >
+                  {formType === "register" ? "Login" : "Register"}
+                </a>
+                <button
+                  disabled={submitting}
+                  type="submit"
+                  className="button button--antiman button--inverted button--round-l button--text-medium"
+                >
+                  {submitting ? <div className="loader"/> : <span>{formType === "login" ? "Login" : "Register"}</span>}
+                </button>
+              </div>
+            </form>
+          )}
+        </Form>
       </div>
     </div>
-  )
+  );
 };
 
 export default withRouter(Auth);

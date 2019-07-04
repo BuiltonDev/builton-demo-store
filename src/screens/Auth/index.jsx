@@ -10,6 +10,7 @@ import { setFirebaseToken } from "../../utils/auth";
 import firebaseClient from "../../utils/firebase";
 import useReactRouter from "use-react-router";
 import BuiltonLogo from "../../components/BuiltonLogo";
+import Button from "../../components/Button";
 
 const Auth = () => {
   const [formType, setFormType] = useState("login");
@@ -220,13 +221,7 @@ const Auth = () => {
                 >
                   {formType === "register" ? "Login" : "Register"}
                 </a>
-                <button
-                  disabled={submitting}
-                  type="submit"
-                  className="button button--antiman button--inverted button--round-l button--text-medium"
-                >
-                  {submitting ? <div className="loader"/> : <span>{formType === "login" ? "Login" : "Register"}</span>}
-                </button>
+                <Button type="submit" loading={submitting} title={formType === 'register' ? 'Register' : 'Login'} />
               </div>
             </form>
           )}

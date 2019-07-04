@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
+import Spinner from "../Spinner";
 
 const Button = ({ loading, type, style, className, title}) => (
   <button
@@ -9,7 +10,7 @@ const Button = ({ loading, type, style, className, title}) => (
     style={style}
     className={className}
   >
-    {loading ? <div className="loader"/> : <span>{title}</span>}
+    {loading ? <Spinner/> : <span>{title}</span>}
   </button>
 );
 

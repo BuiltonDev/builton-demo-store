@@ -11,7 +11,14 @@ const builtonSession = getFieldCurry('builtonSession')();
 
 const BuiltonClient = new Builton({
   ...(builtonSession && { bearerToken: builtonSession }),
-  ...(builtonSession && { refreshTokenFn: async () => await firebase.auth().currentUser.getIdToken()}),
+  ...(builtonSession && { refreshTokenFn: async () => {
+      firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+          await firebase.auth().currentUser.getIdToken()
+        } return false;
+      });
+
+    }}),
   endpoint: config.endpoint,
   apiKey: config.apiKey,
 });

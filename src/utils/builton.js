@@ -17,7 +17,6 @@ const BuiltonClient = new Builton({
           await firebase.auth().currentUser.getIdToken()
         } return false;
       });
-
     }}),
   endpoint: config.endpoint,
   apiKey: config.apiKey,

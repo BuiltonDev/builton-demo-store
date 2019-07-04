@@ -11,6 +11,7 @@
   opacity: 0;
   transform: translateY(-100vh);
   transition: opacity 250ms;
+  z-index: 99999;
   &.show-action {
     opacity: 1;
     transform: translateY(0);

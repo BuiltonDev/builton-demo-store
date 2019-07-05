@@ -12,6 +12,7 @@ import useReactRouter from "use-react-router";
 import BuiltonLogo from "../../components/BuiltonLogo";
 import Button from "../../components/Button";
 import Hyperlink from "../../components/Hyperlink";
+import Input from "../../components/Input";
 
 const Auth = () => {
   const [formType, setFormType] = useState("login");
@@ -122,23 +123,7 @@ const Auth = () => {
                   name="email"
                   type="email"
                   render={({ input }) => (
-                    <>
-                      <input
-                        {...input}
-                        disabled={submitting}
-                        onChange={(ev) => handleInputChange(ev, input)}
-                        className="input__field input__field"
-                        id="input-1"
-                      />
-                      <label
-                        className="input__label input__label input__label-color-1"
-                        htmlFor="input-1"
-                      >
-                        <span className="input__label-content input__label-content">
-                          Email
-                        </span>
-                      </label>
-                    </>
+                    <Input id="input-1" inputProps={input} submitting={submitting} colorScheme={1} placeholder="Email"/>
                   )}
                 />
                 <Error name="email" />
@@ -148,23 +133,7 @@ const Auth = () => {
                   name="password"
                   type="password"
                   render={({ input }) => (
-                    <>
-                      <input
-                        {...input}
-                        disabled={submitting}
-                        onChange={(ev) => handleInputChange(ev, input)}
-                        className="input__field input__field"
-                        id="input-3"
-                      />
-                      <label
-                        className="input__label input__label input__label-color-2"
-                        htmlFor="input-3"
-                      >
-                        <span className="input__label-content input__label-content">
-                          Password
-                        </span>
-                      </label>
-                    </>
+                    <Input id="input-2" inputProps={input} submitting={submitting} colorScheme={2} placeholder="Password"/>
                   )}
                 />
                 <Error name="password" />
@@ -178,23 +147,7 @@ const Auth = () => {
                   name="confirmPassword"
                   type="password"
                   render={({ input }) => (
-                    <>
-                      <input
-                        {...input}
-                        disabled={submitting}
-                        onChange={(ev) => handleInputChange(ev, input)}
-                        className="input__field input__field"
-                        id="input-2"
-                      />
-                      <label
-                        className="input__label input__label input__label-color-2"
-                        htmlFor="input-2"
-                      >
-                        <span className="input__label-content input__label-content">
-                          Confirm password
-                        </span>
-                      </label>
-                    </>
+                    <Input id="input-3" inputProps={input} submitting={submitting} colorScheme={2} placeholder="Confirm Password"/>
                   )}
                 />
                 <Error name="confirmPassword" />

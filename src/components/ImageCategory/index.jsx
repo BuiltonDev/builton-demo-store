@@ -1,11 +1,14 @@
 import React, { useRef } from 'react';
 import ReactCursorPosition from "react-cursor-position";
 import PropTypes from 'prop-types';
-import './imageCategory.scss';
+import './index.scss';
 
 const ImageCategory = ({
   imageSrc,
-  category
+  category,
+  onLoad,
+  style,
+  pageLoaded
          }) => {
 
   let positionX = 0;
@@ -26,12 +29,12 @@ const ImageCategory = ({
   };
 
   return (
-    <ReactCursorPosition onPositionChanged={(elementDimension) => handleImagePosition(elementDimension)}>
+    <ReactCursorPosition className={`${pageLoaded ? 'show-category' : 'hide-category'}`} onPositionChanged={(elementDimension) => handleImagePosition(elementDimension)}>
       <div className={`category-container ${category}-container`}>
         <div className={`category-title ${category}-title`} >
           {category.toUpperCase()}
         </div>
-        <img ref={imageRef} className="category-image" src={imageSrc} alt={`${category}-image`} />
+        <img onLoad={onLoad} ref={imageRef} className="category-image" src={imageSrc} alt={`${category}-image`} />
       </div>
     </ReactCursorPosition>
   )
@@ -40,6 +43,8 @@ const ImageCategory = ({
 ImageCategory.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  onLoad: PropTypes.func,
+  pageLoaded: PropTypes.bool,
 };
 
 export default ImageCategory;

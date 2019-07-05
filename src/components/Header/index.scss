@@ -8,20 +8,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-self: stretch;
-    padding: 0 62px;
+    padding: 0 0 0 62px;
     flex: 1;
     border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
-    .top-header-title-container {
-        color: rgb(127, 127, 127);
-        text-transform: uppercase;
-        font-size: 0.72rem;
+    .dropdown-container {
+        position: relative;
+        padding-right: 62px;
         display: flex;
         flex-direction: row;
-        align-items: flex-end;
-        .demo-store-title {
-            margin-left: 12px;
-            margin-bottom: 4px;
-        }
     }
     .top-header-hyperlink-container {
         display: flex;
@@ -42,7 +36,7 @@
         }
         &:hover {
             transition: all 250ms;
-            background-color: $PRIMARY_BORDER_COLOR;
+            background-color: $SECONDARY_BACKGROUND;
         }
         &.cart {
             font-size: 1rem;

@@ -1,3 +1,23 @@
+.show-category {
+  animation: animate-show-category 450ms forwards;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+.hide-category {
+  display: none;
+}
+
+@keyframes animate-show-category {
+  0% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 .category-container {
   height: auto;

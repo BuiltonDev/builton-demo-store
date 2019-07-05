@@ -1,0 +1,64 @@
+@import '../../constants';
+
+.header-container {
+    max-height: 48px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: stretch;
+    padding: 0 0 0 62px;
+    flex: 1;
+    border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
+    .dropdown-container {
+        position: relative;
+        padding-right: 62px;
+        display: flex;
+        flex-direction: row;
+    }
+    .top-header-hyperlink-container {
+        display: flex;
+        align-self: stretch;
+        position: relative;
+    }
+    .header-box-hyperlink {
+        padding: 0 16px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        transition: all 250ms;
+        font-size: 0.82rem;
+        border-left: 1px solid $PRIMARY_BORDER_COLOR;
+        color: $SECONDARY_TEXT;
+        &:last-child {
+            border-right: 1px solid $PRIMARY_BORDER_COLOR;
+        }
+        &:hover {
+            transition: all 250ms;
+            background-color: $SECONDARY_BACKGROUND;
+        }
+        &.cart {
+            font-size: 1rem;
+            & > span {
+                display: flex;
+                flex-direction: row;
+            }
+            .cart-count {
+                margin-left: 6px;
+                align-self: center;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 780px) {
+    .header-container {
+        flex-direction: column;
+        max-height: 82px;
+        padding: 0 12px;
+        justify-content: space-between
+    }
+}
+
+

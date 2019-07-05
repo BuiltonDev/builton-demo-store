@@ -1,0 +1,78 @@
+.show-category {
+  animation: animate-show-category 450ms forwards;
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+.hide-category {
+  display: none;
+}
+
+@keyframes animate-show-category {
+  0% {
+    opacity: 0;
+    display: block;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.category-container {
+  height: auto;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  &.adidas-container {
+    width: 25vw;
+  }
+
+  &.nike-container {
+    width: 35vw;
+  }
+
+  &.puma-container {
+    width: 35vw;
+  }
+
+  @media all and (max-width: 720px) {
+    &.adidas-container {
+      width: 90vw;
+    }
+
+    &.nike-container {
+      width: 90vw;
+    }
+
+    &.puma-container {
+      width: 90vw;
+    }
+  }
+}
+
+.category-title {
+  position: absolute;
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 2px #000000;
+  letter-spacing: 1px;
+  z-index: 1;
+  &.adidas-title {
+    left: 16px;
+    top: 16px;
+  }
+  &.nike-title {
+    right: 16px;
+    top: 16px;
+  }
+  &.puma-title {
+    left: 16px;
+    bottom: 16px;
+  }
+}
+
+.category-image {
+  width: 100%;
+  transition: all 150ms;
+}

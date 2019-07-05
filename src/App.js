@@ -1,21 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
+import './App.scss';
+import Home from "./screens/Home";
+import Auth from './screens/Auth';
+import {getFieldCurry} from "./globalStore/localStorage";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          TEST
-        </p>
-      </div>
-    );
-  }
-}
+const App = () => {
+  const loggedIn = !!getFieldCurry('builtonSession')();
+  return(
+    <div style={{ display: 'flex', flex: 1}}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/auth" render={() => (
+            loggedIn ? (
+              <Redirect to="/"/>
+            ) : (
+              <Auth/>
+            )
+          )} />
+          <Route render={() => <Redirect to="/" />} />
+        </Switch>
+      </Router>
+      <ToastContainer />
+    </div>
+  )
+};
 
 export default App;

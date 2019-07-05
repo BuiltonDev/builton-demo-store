@@ -1,0 +1,73 @@
+@import '../../constants';
+
+.splash-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  opacity: 1;
+  & .spinner-container {
+    margin-top: 32px;
+  }
+  &.hide-splash {
+    animation: animate-hide-splash 400ms forwards;
+  }
+  & .splash-content-container {
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & .splash-subtitle {
+      font-size: 1rem;
+      padding-top: 12px;
+      letter-spacing: 2px;
+      color: $SECONDARY_TEXT;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@-webkit-keyframes animate-hide-splash {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+    left: 0;
+    top: 0;
+    transform: translateX(0);
+    height: 100%;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-9999px);
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes animate-hide-splash {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+    transform: translateX(0);
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transform: translateX(-9999px);
+    top: 0
+  }
+}

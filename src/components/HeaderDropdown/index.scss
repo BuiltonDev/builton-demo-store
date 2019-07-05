@@ -1,0 +1,21 @@
+@import "../../constants";
+
+.header-action-container {
+  position: absolute;
+  top: 47px;
+  border-top: 1px solid $PRIMARY_BORDER_COLOR;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  opacity: 0;
+  transform: translateY(-100vh);
+  transition: opacity 250ms;
+  z-index: 99999;
+  border-left: 1px solid $PRIMARY_BORDER_COLOR;
+  border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
+  &.show-action {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 250ms;
+  }
+}

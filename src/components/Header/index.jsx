@@ -7,8 +7,10 @@ import { useGlobal } from "reactn";
 import globalState from "../../globalStore/globalState";
 import SignOut from "../../assets/icons/log_out";
 import useReactRouter from "use-react-router";
+import DropdownMenu from "../DropdownMenu";
 
 import "./index.scss";
+import DropdownMenuItem from "../DropdownMenuItem";
 
 const Header = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -77,9 +79,8 @@ const Header = () => {
             </span>
           </a>
           <HeaderDropdown open={userMenuOpen}>
-            <div className="dropdown-menu-container">
-              <div
-                className="dropdown-menu-item"
+            <DropdownMenu>
+              <DropdownMenuItem
                 onClick={() => {
                   globalState.logout();
                   // Force refresh of the header
@@ -90,8 +91,8 @@ const Header = () => {
                   Logout
                 </span>
                 <SignOut color="#c5c5c5" />
-            </div>
-            </div>
+              </DropdownMenuItem>
+            </DropdownMenu>
           </HeaderDropdown>
         </span>
         <HeaderDropdown open={cartOpen}>

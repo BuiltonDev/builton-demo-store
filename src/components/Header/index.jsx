@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Form, Field } from "react-final-form";
-import "./index.scss";
 import Cart from "../../assets/icons/cart";
 import Account from "../../assets/icons/person";
 import HeaderDropdown from "../HeaderDropdown";
@@ -10,20 +8,14 @@ import globalState from "../../globalStore/globalState";
 import SignOut from "../../assets/icons/log_out";
 import useReactRouter from "use-react-router";
 
+import "./index.scss";
+
 const Header = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const [user] = useGlobal("user");
   const { history } = useReactRouter();
-
-  const validate = el => {
-    console.log(el);
-  };
-
-  const onSubmit = el => {
-    console.log(el);
-  };
 
   return (
     <div className="header-container">

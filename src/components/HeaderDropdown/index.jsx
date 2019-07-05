@@ -3,7 +3,7 @@ import ReactCursorPosition from 'react-cursor-position';
 import PropTypes from 'prop-types';
 import './index.scss';
 
-const HeaderDropdown = ({children, open}) => {
+const HeaderDropdown = ({children, open, style}) => {
   const containerRef = useRef(null);
   const cursorPosRef = useRef(null);
   useEffect(() => {
@@ -35,11 +35,25 @@ const HeaderDropdown = ({children, open}) => {
       <div
         ref={containerRef}
         className={`header-action-container`}
+        style={style}
       >
         {children}
       </div>
     </ReactCursorPosition>
   )
+};
+
+HeaderDropdown.defaultProps = {
+  open: false
+};
+
+HeaderDropdown.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ]),
+  style: PropTypes.object,
+  open: PropTypes.bool,
 };
 
 export default HeaderDropdown;

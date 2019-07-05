@@ -71,11 +71,5 @@ export default {
     resetGlobal();
 
     INITIALIZED = false;
-    setTimeout(
-      () => {
-        window.location.href = '/auth/signout';
-      },
-      time ? time : 0
-    );
   }
 };

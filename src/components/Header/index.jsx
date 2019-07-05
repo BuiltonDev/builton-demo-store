@@ -1,58 +1,113 @@
-import React, { useState } from 'react';
-import { Form, Field } from 'react-final-form';
-import './index.scss';
+import React, { useState } from "react";
+import { Form, Field } from "react-final-form";
+import "./index.scss";
 import Cart from "../../assets/icons/cart";
 import Account from "../../assets/icons/person";
 import HeaderDropdown from "../HeaderDropdown";
 import BuiltonLogo from "../BuiltonLogo";
+import { useGlobal } from "reactn";
+import globalState from "../../globalStore/globalState";
+import SignOut from "../../assets/icons/log_out";
+import useReactRouter from "use-react-router";
 
 const Header = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  const validate = (el) => {
-    console.log(el)
-  }
+  const [user] = useGlobal("user");
+  const { history } = useReactRouter();
 
-  const onSubmit = (el) => {
+  const validate = el => {
     console.log(el);
-  }
+  };
+
+  const onSubmit = el => {
+    console.log(el);
+  };
 
   return (
-    <div className='header-container'>
-      <BuiltonLogo/>
-      <div className='top-header-hyperlink-container'>
-        <a className='header-box-hyperlink' href='https://builton.dev' target="_blank">
+    <div className="header-container">
+      <BuiltonLogo />
+      <div className="top-header-hyperlink-container">
+        <a
+          className="header-box-hyperlink"
+          href="https://builton.dev"
+          target="_blank"
+        >
           <span>Website</span>
         </a>
-        <a className='header-box-hyperlink' href='https://docs.builton.dev' target="_blank">
+        <a
+          className="header-box-hyperlink"
+          href="https://docs.builton.dev"
+          target="_blank"
+        >
           <span>Docs</span>
         </a>
-        <a className='header-box-hyperlink' href='https://dashboard.builton.dev/' target="_blank">
+        <a
+          className="header-box-hyperlink"
+          href="https://dashboard.builton.dev/"
+          target="_blank"
+        >
           <span>Dashboard</span>
         </a>
-        <a
-          className='header-box-hyperlink'
-          href='/auth'
-        >
-          <span><Account width={18} height={18} color='black' /></span>
-        </a>
-        <a
-          className='header-box-hyperlink cart'
-          onClick={(e) => e.preventDefault()}
-          onMouseEnter={() => setCartOpen(true)}
-          onMouseLeave={() => setCartOpen(false)}
-          href='#'
-        >
-          <span><Cart width={18} height={18} color='black' /> <span className="cart-count">0</span></span>
-        </a>
+        <span className="dropdown-container">
+          <a
+            className="header-box-hyperlink"
+            href={`${!user ? "/auth" : "#"}`}
+            onClick={e => {
+              user && e.preventDefault();
+            }}
+            onMouseEnter={() => {
+              user && setUserMenuOpen(true);
+            }}
+            onMouseLeave={() => {
+              user && setUserMenuOpen(false);
+            }}
+          >
+            <span>
+              {user ? (
+                <div>{user.email}</div>
+              ) : (
+                <Account width={18} height={18} color="black" />
+              )}
+            </span>
+          </a>
+          <a
+            className="header-box-hyperlink cart"
+            onClick={e => e.preventDefault()}
+            onMouseEnter={() => setCartOpen(true)}
+            onMouseLeave={() => setCartOpen(false)}
+            href="#"
+          >
+            <span>
+              <Cart width={18} height={18} color="black" />{" "}
+              <span className="cart-count">0</span>
+            </span>
+          </a>
+          <HeaderDropdown open={userMenuOpen}>
+            <div className="dropdown-menu-container">
+              <div
+                className="dropdown-menu-item"
+                onClick={() => {
+                  globalState.logout();
+                  // Force refresh of the header
+                  history.push('/');
+                }}
+              >
+                <span>
+                  Logout
+                </span>
+                <SignOut color="#c5c5c5" />
+            </div>
+            </div>
+          </HeaderDropdown>
+        </span>
         <HeaderDropdown open={cartOpen}>
-          <div>
-            Cart
-          </div>
+          <div>Cart</div>
         </HeaderDropdown>
       </div>
     </div>
-  )
+  );
 };
 
 export default Header;

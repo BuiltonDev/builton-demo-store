@@ -7,11 +7,12 @@
   right: 0;
   width: 100%;
   background-color: white;
-  height: 82px;
   opacity: 0;
   transform: translateY(-100vh);
   transition: opacity 250ms;
   z-index: 99999;
+  border-left: 1px solid $PRIMARY_BORDER_COLOR;
+  border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
   &.show-action {
     opacity: 1;
     transform: translateY(0);

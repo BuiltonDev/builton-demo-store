@@ -40,11 +40,14 @@ const Main = () => {
     if (products) {
       const cat = {};
       for (let i = 0; i < products.length; i += 1) {
-        cat[products[i].name.toLowerCase()] = {
-          title: products[i].name.toLowerCase(),
-          image: products[i].image_url,
-          loaded: false
-        };
+        // TODO This check can be removed when tags fetch is implemented
+        if (products[i].tags.includes('category')){
+          cat[products[i].name.toLowerCase()] = {
+            title: products[i].name.toLowerCase(),
+            image: products[i].image_url,
+            loaded: false
+          };
+        }
       }
       setCategories(cat);
     }

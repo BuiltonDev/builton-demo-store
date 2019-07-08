@@ -1,4 +1,3 @@
-import React from 'react';
 import Builton from '@builton/core-sdk/src/main';
 import globalState from "../globalStore/globalState";
 import { getFieldCurry } from '../globalStore/localStorage';

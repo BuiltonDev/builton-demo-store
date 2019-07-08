@@ -41,7 +41,10 @@ Input.propTypes = {
   colorScheme: PropTypes.number,
   submitting: PropTypes.bool,
   placeholder: PropTypes.string,
-  id: PropTypes.number,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ])
 };
 
 export default Input;

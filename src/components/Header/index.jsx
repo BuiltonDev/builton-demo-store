@@ -26,6 +26,7 @@ const Header = () => {
         <a
           className="header-box-hyperlink"
           href="https://builton.dev"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span>Website</span>
@@ -33,6 +34,7 @@ const Header = () => {
         <a
           className="header-box-hyperlink"
           href="https://docs.builton.dev"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span>Docs</span>
@@ -40,6 +42,7 @@ const Header = () => {
         <a
           className="header-box-hyperlink"
           href="https://dashboard.builton.dev/"
+          rel="noopener noreferrer"
           target="_blank"
         >
           <span>Dashboard</span>
@@ -66,18 +69,17 @@ const Header = () => {
               )}
             </span>
           </a>
-          <a
+          <button
+            type="button"
             className="header-box-hyperlink cart"
-            onClick={e => e.preventDefault()}
             onMouseEnter={() => setCartOpen(true)}
             onMouseLeave={() => setCartOpen(false)}
-            href="#"
           >
             <span>
               <Cart width={18} height={18} color="black" />{" "}
               <span className="cart-count">0</span>
             </span>
-          </a>
+          </button>
           <HeaderDropdown open={userMenuOpen}>
             <DropdownMenu>
               <DropdownMenuItem

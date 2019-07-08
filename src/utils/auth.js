@@ -1,5 +1,4 @@
-import React from 'react';
-import firebase from "firebase";
+import firebase from '../utils/firebase';
 import builton from "./builton";
 
 const setFirebaseToken = async () => {

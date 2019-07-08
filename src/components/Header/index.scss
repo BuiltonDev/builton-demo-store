@@ -29,6 +29,8 @@
         align-items: center;
         transition: all 250ms;
         font-size: 0.82rem;
+        border: none;
+        cursor: pointer;
         border-left: 1px solid $PRIMARY_BORDER_COLOR;
         color: $SECONDARY_TEXT;
         &:last-child {

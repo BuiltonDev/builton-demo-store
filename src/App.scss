@@ -1,3 +1,5 @@
+@import './constants';
+
 /* NORMALIZER */
 
 * { box-sizing: border-box; }
@@ -348,6 +350,8 @@ template, [hidden] {
  * Add the correct display in IE 10.
  */
 
+// Main Styles
+
 html, body {
   min-height: 100%;
   min-width: 100%;
@@ -361,4 +365,25 @@ html, body {
 #root {
   display: flex;
   flex: 1;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: $PRIMARY_BACKGROUND;
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    background: url("./assets/images/background.png") no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+  }
 }

@@ -8,6 +8,7 @@ const ImageCategory = ({
   category,
   onLoad,
   style,
+  onClick,
   pageLoaded
          }) => {
 
@@ -30,11 +31,11 @@ const ImageCategory = ({
 
   return (
     <ReactCursorPosition className={`${pageLoaded ? 'show-category' : 'hide-category'}`} onPositionChanged={(elementDimension) => handleImagePosition(elementDimension)}>
-      <div className={`category-container ${category}-container`}>
+      <div onClick={onClick} className={`category-container ${category}-container`}>
         <div className={`category-title ${category}-title`} >
           {category.toUpperCase()}
         </div>
-        <img onLoad={onLoad} ref={imageRef} className="category-image" src={imageSrc} alt={`${category}-image`} />
+        <img onLoad={onLoad} ref={imageRef} className="category-image" src={imageSrc} alt={`${category}-illustration`} />
       </div>
     </ReactCursorPosition>
   )
@@ -45,6 +46,7 @@ ImageCategory.propTypes = {
   category: PropTypes.string.isRequired,
   onLoad: PropTypes.func,
   pageLoaded: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default ImageCategory;

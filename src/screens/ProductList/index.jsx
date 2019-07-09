@@ -23,7 +23,6 @@ const ProductList = () => {
   useEffect(() => {
     if (products && products.length > 0) {
       let loaded = true;
-      console.log(products);
       for (let i = 0; i < products.length; i += 1) {
         if (!products[i].loaded) {
           loaded = false;
@@ -61,7 +60,7 @@ const ProductList = () => {
     try {
       const apiProducts = await builton.products.get({
         urlParams: {
-          tags: match.params.category
+          tags: `${match.params.category}+product`
         }
       });
       setProducts(filterCategory(apiProducts));
@@ -75,8 +74,7 @@ const ProductList = () => {
   const getProductName = (productName) => {
     if (!!~productName.indexOf('-')) {
       const index = productName.indexOf('-');
-      const productTrimmed = productName.substr(0, index).trim();
-      return productTrimmed;
+      return productName.substr(0, index).trim();
     }
 
     return productName;

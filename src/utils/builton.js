@@ -11,7 +11,7 @@ const builtonSession = getFieldCurry('builtonSession')();
 const BuiltonClient = new Builton({
   ...(builtonSession && { bearerToken: builtonSession }),
   ...(builtonSession && { refreshTokenFn: async () => {
-      return firebase.auth().onAuthStateChanged(async (user) => {
+      firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           const idToken = await firebase.auth().currentUser.getIdToken();
           globalState.updateSession(idToken);

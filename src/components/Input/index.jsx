@@ -3,9 +3,25 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-const Input = ({inputProps, submitting, placeholder, id, colorScheme}) => {
+const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce}) => {
+  let debouncedValue;
+  let timeout;
   const handleInputChange = (ev, input) => {
-    input.onChange(ev.target.value);
+    if (input.onChange) {
+      if (debounce) {
+        ev.persist();
+        if (debouncedValue !== ev.target.value) {
+          if (timeout) {
+            clearTimeout(timeout);
+          }
+          timeout = setTimeout(() => {
+            input.onChange(ev.target.value);
+          }, debounce)
+        }
+      } else {
+        input.onChange(ev.target.value);
+      }
+    }
     if (ev.target.value) {
       ev.target.parentNode.classList.add("input--filled");
     } else {
@@ -42,6 +58,10 @@ Input.propTypes = {
   submitting: PropTypes.bool,
   placeholder: PropTypes.string,
   id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  debounce: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ])

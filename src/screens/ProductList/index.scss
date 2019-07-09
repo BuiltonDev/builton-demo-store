@@ -1,5 +1,27 @@
 @import '../../constants';
 
+.page-heading {
+  display: flex;
+  flex-direction: row;
+  & .search-container {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 1em;
+    max-width: 350px;
+    width: calc(100% - 2em);
+    vertical-align: top;
+    overflow: hidden;
+    padding: 8px 0;
+  }
+}
+
+.inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
 .product-list-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));

@@ -107,7 +107,7 @@ const Auth = () => {
         >
           {({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <div className="input input">
+              <div className="input">
                 <Field
                   name="email"
                   type="email"

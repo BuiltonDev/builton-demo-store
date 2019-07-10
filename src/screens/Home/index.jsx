@@ -73,49 +73,51 @@ const Main = () => {
     <div className="main-container">
       <Header />
       <div className="wrapper">
-        <BuiltonSplash show={!pageLoaded} />
-        {Object.keys(categories).length > 0 && (
-          <>
-            <ImageCategory
-              pageLoaded={pageLoaded}
-              onLoad={() =>
-                setCategories({
-                  ...categories,
-                  adidas: { ...categories.adidas, loaded: true }
-                })
-              }
-              onClick={() => history.push(`product_list/${categories.adidas.title}`)}
-              imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
-              category={categories.adidas.title}
-            />
-            <div className="inner-wrapper">
+        <div className="home-wrapper">
+          <BuiltonSplash show={!pageLoaded} />
+          {Object.keys(categories).length > 0 && (
+            <>
               <ImageCategory
                 pageLoaded={pageLoaded}
                 onLoad={() =>
                   setCategories({
                     ...categories,
-                    nike: { ...categories.nike, loaded: true }
+                    adidas: { ...categories.adidas, loaded: true }
                   })
                 }
-                onClick={() => history.push(`product_list/${categories.nike.title}`)}
-                imageSrc={`${config.endpoint}images/${categories.nike.image}?api_key=${config.apiKey}`}
-                category={categories.nike.title}
+                onClick={() => history.push(`product_list/${categories.adidas.title}`)}
+                imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
+                category={categories.adidas.title}
               />
-              <ImageCategory
-                pageLoaded={pageLoaded}
-                onLoad={() =>
-                  setCategories({
-                    ...categories,
-                    puma: { ...categories.puma, loaded: true }
-                  })
-                }
-                onClick={() => history.push(`product_list/${categories.puma.title}`)}
-                imageSrc={`${config.endpoint}images/${categories.puma.image}?api_key=${config.apiKey}`}
-                category={categories.puma.title}
-              />
-            </div>
-          </>
-        )}
+              <div className="inner-wrapper">
+                <ImageCategory
+                  pageLoaded={pageLoaded}
+                  onLoad={() =>
+                    setCategories({
+                      ...categories,
+                      nike: { ...categories.nike, loaded: true }
+                    })
+                  }
+                  onClick={() => history.push(`product_list/${categories.nike.title}`)}
+                  imageSrc={`${config.endpoint}images/${categories.nike.image}?api_key=${config.apiKey}`}
+                  category={categories.nike.title}
+                />
+                <ImageCategory
+                  pageLoaded={pageLoaded}
+                  onLoad={() =>
+                    setCategories({
+                      ...categories,
+                      puma: { ...categories.puma, loaded: true }
+                    })
+                  }
+                  onClick={() => history.push(`product_list/${categories.puma.title}`)}
+                  imageSrc={`${config.endpoint}images/${categories.puma.image}?api_key=${config.apiKey}`}
+                  category={categories.puma.title}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

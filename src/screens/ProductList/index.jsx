@@ -11,6 +11,7 @@ import config from "../../config";
 import Input from "../../components/Input";
 import Spinner from "../../components/Spinner";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import PumaLogo from '../../assets/images/puma-logo.png';
 
 const ProductList = () => {
   const { history, match } = useReactRouter();
@@ -33,6 +34,7 @@ const ProductList = () => {
           break;
         }
       }
+
       if (loaded) {
         if (loading) {
           setLoading(false);
@@ -58,7 +60,7 @@ const ProductList = () => {
       price: product.price,
       currency: product.currency,
       short_description: product.short_description,
-      loaded: products && products.filter((prod) => prod.id === product._id.$oid) || false,
+      loaded: false,
     }));
 
     return mappedProducts;
@@ -88,6 +90,7 @@ const ProductList = () => {
         });
       }
 
+      setProducts(null);
       setProducts(filterCategory(apiProducts));
     } catch(err) {
       notify('Failed to fetch products', {
@@ -109,7 +112,7 @@ const ProductList = () => {
     <div className="main-container">
       <Header />
       <div className="wrapper">
-        <div className="inner-wrapper">
+        <div className="product-wrapper">
           <BuiltonSplash show={loading} />
           <div className="page-heading">
             <div className="search-container">
@@ -129,6 +132,9 @@ const ProductList = () => {
             {searchLoading &&
               <Spinner width={36} height={36} />
             }
+            <div className="brand-logo-container">
+              <img src={PumaLogo} style={{ objectFit: 'contain' }} />
+            </div>
           </div>
           {products &&
             <TransitionGroup className="product-list-grid">

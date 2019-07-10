@@ -375,15 +375,13 @@ html, body {
 
   .wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background: url("./assets/images/background.png") no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     flex: 1;
-    justify-content: center;
     position: relative;
-    align-items: center;
   }
 }

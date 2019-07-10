@@ -10,6 +10,7 @@ import './index.scss';
 import config from "../../config";
 import Input from "../../components/Input";
 import Spinner from "../../components/Spinner";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const ProductList = () => {
   const { history, match } = useReactRouter();
@@ -130,30 +131,36 @@ const ProductList = () => {
             }
           </div>
           {products &&
-            <div className="product-list-grid">
+            <TransitionGroup className="product-list-grid">
               {products.map((product, index) => (
-                <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`} key={`product_image_${product.image_url}`}>
-                  <img
-                    onLoad={() => {
-                      products[index].loaded = true;
-                      setProducts([
-                        ...products
-                      ])
-                    }}
-                    src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
-                  />
-                  <div className='product-description'>
-                    <div className="product-description-inner-container">
-                      <div>{getProductName(product.name)}</div>
-                      <div>{product.short_description}</div>
-                    </div>
-                    <div className='product-price-container'>
-                      {product.price} {product.currency}
+                <CSSTransition
+                  key={`product_image_${product.image_url}`}
+                  timeout={550}
+                  classNames="item"
+                >
+                  <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
+                    <img
+                      onLoad={() => {
+                        products[index].loaded = true;
+                        setProducts([
+                          ...products
+                        ])
+                      }}
+                      src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                    />
+                    <div className='product-description'>
+                      <div className="product-description-inner-container">
+                        <div>{getProductName(product.name)}</div>
+                        <div>{product.short_description}</div>
+                      </div>
+                      <div className='product-price-container'>
+                        {product.price} {product.currency}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </CSSTransition>
                 ))}
-            </div>
+            </TransitionGroup>
           }
         </div>
       </div>

@@ -15,13 +15,13 @@ import PumaLogo from '../../assets/images/puma-logo.png';
 
 const ProductList = () => {
   const { history, match } = useReactRouter();
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
 
   useEffect( () => {
     if (match.params.category) {
-      fetchProducts();
+      getProducts();
     }
   }, [match]);
 
@@ -66,13 +66,19 @@ const ProductList = () => {
     return mappedProducts;
   };
 
-  const fetchProducts = async (searchString) => {
-    if (!products) {
-      setLoading(true);
-    } else if (searchString || searchString === '') {
-      setSearchLoading(true);
-    }
+  const getProducts = async () => {
+    setProducts([]);
+    setLoading(true);
+    await fetchProducts();
+  };
 
+  const searchProducts = async (searchString) => {
+    setProducts([]);
+    setSearchLoading(true);
+    await fetchProducts(searchString)
+  }
+
+  const fetchProducts = async (searchString) => {
     try {
       let apiProducts;
       if (searchString) {
@@ -90,7 +96,6 @@ const ProductList = () => {
         });
       }
 
-      setProducts(null);
       setProducts(filterCategory(apiProducts));
     } catch(err) {
       notify('Failed to fetch products', {
@@ -121,7 +126,7 @@ const ProductList = () => {
                   type: 'text',
                   name: 'product-search',
                   onChange: (val) => {
-                    fetchProducts(val);
+                    searchProducts(val);
                   }
                 }}
                 placeholder="Search"
@@ -136,38 +141,36 @@ const ProductList = () => {
               <img src={PumaLogo} style={{ objectFit: 'contain' }} />
             </div>
           </div>
-          {products &&
-            <TransitionGroup className="product-list-grid">
-              {products.map((product, index) => (
-                <CSSTransition
-                  key={`product_image_${product.image_url}`}
-                  timeout={550}
-                  classNames="item"
-                >
-                  <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
-                    <img
-                      onLoad={() => {
-                        products[index].loaded = true;
-                        setProducts([
-                          ...products
-                        ])
-                      }}
-                      src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
-                    />
-                    <div className='product-description'>
-                      <div className="product-description-inner-container">
-                        <div>{getProductName(product.name)}</div>
-                        <div>{product.short_description}</div>
-                      </div>
-                      <div className='product-price-container'>
-                        {product.price} {product.currency}
-                      </div>
+          <TransitionGroup className="product-list-grid">
+            {products.map((product, index) => (
+              <CSSTransition
+                key={`product_image_${product.image_url}`}
+                timeout={250}
+                classNames="item"
+              >
+                <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
+                  <img
+                    onLoad={() => {
+                      products[index].loaded = true;
+                      setProducts([
+                        ...products
+                      ])
+                    }}
+                    src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                  />
+                  <div className='product-description'>
+                    <div className="product-description-inner-container">
+                      <div>{getProductName(product.name)}</div>
+                      <div>{product.short_description}</div>
+                    </div>
+                    <div className='product-price-container'>
+                      {product.price} {product.currency}
                     </div>
                   </div>
-                </CSSTransition>
-                ))}
-            </TransitionGroup>
-          }
+                </div>
+              </CSSTransition>
+              ))}
+          </TransitionGroup>
         </div>
       </div>
     </div>

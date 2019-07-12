@@ -1,13 +1,19 @@
 @import '../../constants';
 
 .page-heading {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0 48px;
   margin-top: 24px;
   align-self: stretch;
+  &.show-heading {
+    animation: animate-show-heading 1s forwards;
+    animation-delay: 1s;
+    opacity: 0;
+    display: flex;
+  }
   & .search-container {
     position: relative;
     z-index: 1;
@@ -26,5 +32,14 @@
       object-fit: contain;
     }
     margin-right: 24px;
+  }
+}
+
+@keyframes animate-show-heading {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

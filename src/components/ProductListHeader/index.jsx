@@ -7,9 +7,10 @@ import Spinner from "../Spinner";
 const ProductListHeader = ({
   searchLoading,
   onSearchChange,
-  brandLogo
+  brandLogo,
+  show
                            }) => (
-  <div className="page-heading">
+  <div className={`page-heading ${show ? 'show-heading' : ''}`}>
     <div className="search-container">
       <Input
         inputProps={{
@@ -39,6 +40,7 @@ ProductListHeader.propTypes = {
   brandLogo: PropTypes.string,
   onSearchChange: PropTypes.func.isRequired,
   searchLoading: PropTypes.bool,
+  show: PropTypes.bool,
 };
 
 export default ProductListHeader;

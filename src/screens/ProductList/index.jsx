@@ -8,41 +8,60 @@ import Header from "../../components/Header";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import './index.scss';
 import config from "../../config";
-import Input from "../../components/Input";
-import Spinner from "../../components/Spinner";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PumaLogo from '../../assets/images/puma-logo.png';
+import AdidasLogo from '../../assets/images/adidas-logo.png';
+import NikeLogo from '../../assets/images/nike-logo.png';
 import Footer from "../../components/Footer";
 import ProductListHeader from "../../components/ProductListHeader";
+import NoResults from "../../components/NoResults";
 
 const ProductList = () => {
   const { history, match } = useReactRouter();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [brandLogo, setBrandLogo] = useState(null);
 
   useEffect( () => {
     if (match.params.category) {
       getProducts();
+      if (match.params.category === 'adidas') {
+        setBrandLogo(AdidasLogo);
+      } else if (match.params.category === 'puma') {
+        setBrandLogo(PumaLogo);
+      } else if (match.params.category === 'nike') {
+        setBrandLogo(NikeLogo);
+      }
     }
   }, [match]);
 
   useEffect(() => {
-    if (products && products.length > 0) {
-      let loaded = true;
-      for (let i = 0; i < products.length; i += 1) {
-        if (!products[i].loaded) {
-          loaded = false;
-          break;
+    if (products) {
+      if (products.length > 0) {
+        let loaded = true;
+        for (let i = 0; i < products.length; i += 1) {
+          if (!products[i].loaded) {
+            loaded = false;
+            break;
+          }
         }
-      }
 
-      if (loaded) {
+        if (loaded) {
+          if (loading) {
+            setLoading(false);
+          }
+          if (searchLoading) {
+            setSearchLoading(false);
+          }
+        }
+      } else {
         if (loading) {
           setLoading(false);
         }
+
         if (searchLoading) {
-          setSearchLoading(false);
+          setSearchLoading(false)
         }
       }
     }
@@ -69,13 +88,13 @@ const ProductList = () => {
   };
 
   const getProducts = async () => {
-    setProducts([]);
+    setProducts(null);
     setLoading(true);
     await fetchProducts();
   };
 
   const searchProducts = async (searchString) => {
-    setProducts([]);
+    setProducts(null);
     setSearchLoading(true);
     await fetchProducts(searchString)
   }
@@ -120,9 +139,14 @@ const ProductList = () => {
       <Header />
       <div className="product-wrapper">
         <BuiltonSplash show={loading} />
-        <ProductListHeader onSearchChange={(val) => searchProducts(val)} brandLogo={PumaLogo} searchLoading={searchLoading} />
+        <ProductListHeader
+          show={!loading}
+          onSearchChange={(val) => searchProducts(val)}
+          brandLogo={brandLogo}
+          searchLoading={searchLoading}
+        />
         <TransitionGroup className="product-list-grid">
-          {products.map((product, index) => (
+          {products && products.map((product, index) => (
             <CSSTransition
               key={`product_image_${product.image_url}`}
               timeout={250}
@@ -151,6 +175,7 @@ const ProductList = () => {
             </CSSTransition>
             ))}
         </TransitionGroup>
+        <NoResults show={products && products.length === 0} />
       </div>
       <Footer>
         <div className="footer-inner">

@@ -1,0 +1,40 @@
+@import '../../constants';
+
+.footer {
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  & > div {
+    padding: 24px 32px;
+    color: $TERTIARY_TEXT;
+    z-index: 3;
+    font-style: italic;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.12);
+  }
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 29%;
+    width: 102%;
+    height: 100%;
+    transform: rotate(-2deg);
+    background-color: $TERTIARY_BACKGROUND;
+    z-index: 2;
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    left: -40px;
+    top: 60%;
+    width: 102%;
+    height: 100%;
+    transform: rotate(3deg);
+    z-index: 1;
+    background-color: $ORANGE_BACKGROUND;
+  }
+}

@@ -1,42 +1,11 @@
 @import '../../constants';
 
-.wrapper {
-  & .product-wrapper {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-self: stretch;
-  }
-}
-
-.page-heading {
+.product-wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 48px;
-  margin-top: 24px;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
   align-self: stretch;
-  & .search-container {
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    margin: 1em;
-    max-width: 350px;
-    width: calc(100% - 2em);
-    vertical-align: top;
-    overflow: hidden;
-    padding: 8px 0;
-  }
-  & .brand-logo-container {
-    width: 120px;
-    & > img {
-      width: 120px;
-      object-fit: contain;
-    }
-    margin-right: 24px;
-  }
 }
 
 .product-list-grid {

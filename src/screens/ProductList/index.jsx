@@ -12,6 +12,8 @@ import Input from "../../components/Input";
 import Spinner from "../../components/Spinner";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PumaLogo from '../../assets/images/puma-logo.png';
+import Footer from "../../components/Footer";
+import ProductListHeader from "../../components/ProductListHeader";
 
 const ProductList = () => {
   const { history, match } = useReactRouter();
@@ -116,63 +118,45 @@ const ProductList = () => {
   return(
     <div className="main-container">
       <Header />
-      <div className="wrapper">
-        <div className="product-wrapper">
-          <BuiltonSplash show={loading} />
-          <div className="page-heading">
-            <div className="search-container">
-              <Input
-                inputProps={{
-                  type: 'text',
-                  name: 'product-search',
-                  onChange: (val) => {
-                    searchProducts(val);
-                  }
-                }}
-                placeholder="Search"
-                debounce={1000}
-                colorScheme={1}
-              />
-            </div>
-            {searchLoading &&
-              <Spinner width={36} height={36} />
-            }
-            <div className="brand-logo-container">
-              <img src={PumaLogo} style={{ objectFit: 'contain' }} />
-            </div>
-          </div>
-          <TransitionGroup className="product-list-grid">
-            {products.map((product, index) => (
-              <CSSTransition
-                key={`product_image_${product.image_url}`}
-                timeout={250}
-                classNames="item"
-              >
-                <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
-                  <img
-                    onLoad={() => {
-                      products[index].loaded = true;
-                      setProducts([
-                        ...products
-                      ])
-                    }}
-                    src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
-                  />
-                  <div className='product-description'>
-                    <div className="product-description-inner-container">
-                      <div>{getProductName(product.name)}</div>
-                      <div>{product.short_description}</div>
-                    </div>
-                    <div className='product-price-container'>
-                      {product.price} {product.currency}
-                    </div>
+      <div className="product-wrapper">
+        <BuiltonSplash show={loading} />
+        <ProductListHeader onSearchChange={(val) => searchProducts(val)} brandLogo={PumaLogo} searchLoading={searchLoading} />
+        <TransitionGroup className="product-list-grid">
+          {products.map((product, index) => (
+            <CSSTransition
+              key={`product_image_${product.image_url}`}
+              timeout={250}
+              classNames="item"
+            >
+              <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
+                <img
+                  onLoad={() => {
+                    products[index].loaded = true;
+                    setProducts([
+                      ...products
+                    ])
+                  }}
+                  src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                />
+                <div className='product-description'>
+                  <div className="product-description-inner-container">
+                    <div>{getProductName(product.name)}</div>
+                    <div>{product.short_description}</div>
+                  </div>
+                  <div className='product-price-container'>
+                    {product.price} {product.currency}
                   </div>
                 </div>
-              </CSSTransition>
-              ))}
-          </TransitionGroup>
-        </div>
+              </div>
+            </CSSTransition>
+            ))}
+        </TransitionGroup>
       </div>
+      <Footer>
+        <div className="footer-inner">
+          *Note: The products and the ordering system is fictional. None of the illustrated products exists and can be ordered. Please use only for demo purposes and refer to <a href="https://builton.dev" target="_blank">Builton.dev</a>.
+        </div>
+      </Footer>
     </div>
   )
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce}) => {
+const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, leftAdornment}) => {
   let debouncedValue;
   let timeout;
   const handleInputChange = (ev, input) => {
@@ -33,16 +33,21 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce})
 
   return(
     <>
+      <div className="left-adornment">
+        {leftAdornment}
+      </div>
       <input
         {...inputProps}
         disabled={submitting}
         onChange={(ev) => handleInputChange(ev, inputProps)}
         className="input__field"
         id={id}
+        style={{ ...(leftAdornment && { paddingLeft: 24 }) }}
       />
       <label
         className={`input__label input__label-color-${colorScheme}`}
         htmlFor={id}
+        style={{ ...(leftAdornment && { paddingLeft: 24, top: 10 }) }}
       >
         <span className="input__label-content">
           {placeholder}
@@ -64,7 +69,8 @@ Input.propTypes = {
   debounce: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ])
+  ]),
+  leftAdornment: PropTypes.node,
 };
 
 export default Input;

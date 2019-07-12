@@ -134,6 +134,37 @@ const ProductList = () => {
     return productName;
   };
 
+  const renderProductItem = (product, index) => {
+    return (
+      <CSSTransition
+        key={`product_image_${product.image_url}`}
+        timeout={250}
+        classNames="item"
+      >
+        <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
+          <img
+            onLoad={() => {
+              products[index].loaded = true;
+              setProducts([
+                ...products
+              ])
+            }}
+            src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+          />
+          <div className='product-description'>
+            <div className="product-description-inner-container">
+              <div>{getProductName(product.name)}</div>
+              <div>{product.short_description}</div>
+            </div>
+            <div className='product-price-container'>
+              {product.price} {product.currency}
+            </div>
+          </div>
+        </div>
+      </CSSTransition>
+    )
+  };
+
   return(
     <div className="main-container">
       <Header />
@@ -146,34 +177,7 @@ const ProductList = () => {
           searchLoading={searchLoading}
         />
         <TransitionGroup className="product-list-grid">
-          {products && products.map((product, index) => (
-            <CSSTransition
-              key={`product_image_${product.image_url}`}
-              timeout={250}
-              classNames="item"
-            >
-              <div className={`product-container ${loading ? 'hide-product' : 'show-product'}`}>
-                <img
-                  onLoad={() => {
-                    products[index].loaded = true;
-                    setProducts([
-                      ...products
-                    ])
-                  }}
-                  src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
-                />
-                <div className='product-description'>
-                  <div className="product-description-inner-container">
-                    <div>{getProductName(product.name)}</div>
-                    <div>{product.short_description}</div>
-                  </div>
-                  <div className='product-price-container'>
-                    {product.price} {product.currency}
-                  </div>
-                </div>
-              </div>
-            </CSSTransition>
-            ))}
+          {products && products.map((product, index) => renderProductItem(product, index))}
         </TransitionGroup>
         <NoResults show={products && products.length === 0} />
       </div>

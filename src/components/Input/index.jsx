@@ -42,12 +42,12 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
         onChange={(ev) => handleInputChange(ev, inputProps)}
         className="input__field"
         id={id}
-        style={{ ...(leftAdornment && { paddingLeft: 24 }) }}
+        style={{ ...(leftAdornment && { paddingLeft: 28 }) }}
       />
       <label
         className={`input__label input__label-color-${colorScheme}`}
         htmlFor={id}
-        style={{ ...(leftAdornment && { paddingLeft: 24, top: 10 }) }}
+        style={{ ...(leftAdornment && { paddingLeft: 28, top: 10 }) }}
       >
         <span className="input__label-content">
           {placeholder}

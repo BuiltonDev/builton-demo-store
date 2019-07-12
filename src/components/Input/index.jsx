@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, leftAdornment}) => {
+const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, leftAdornment, loading}) => {
   let debouncedValue;
   let timeout;
   const handleInputChange = (ev, input) => {
@@ -33,9 +33,11 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
 
   return(
     <>
-      <div className="left-adornment">
-        {leftAdornment}
-      </div>
+      {leftAdornment &&
+        <div className="left-adornment">
+          {leftAdornment}
+        </div>
+      }
       <input
         {...inputProps}
         disabled={submitting}
@@ -49,6 +51,12 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
         htmlFor={id}
         style={{ ...(leftAdornment && { paddingLeft: 28, top: 10 }) }}
       >
+        <div className={`input-loading-container ${loading ? 'input-loading' : ''}`}>
+          <div className="input-loading-1" />
+          <div className="input-loading-2" />
+          <div className="input-loading-3" />
+          <div className="input-loading-4" />
+        </div>
         <span className="input__label-content">
           {placeholder}
         </span>
@@ -56,6 +64,10 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
     </>
   )
 };
+
+Input.defaultProps = {
+  loading: true,
+}
 
 Input.propTypes = {
   inputProps: PropTypes.object.isRequired,
@@ -71,6 +83,7 @@ Input.propTypes = {
     PropTypes.number,
   ]),
   leftAdornment: PropTypes.node,
+  loading: PropTypes.bool,
 };
 
 export default Input;

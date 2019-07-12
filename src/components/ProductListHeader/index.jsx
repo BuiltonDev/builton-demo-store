@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 import Input from "../Input";
-import Spinner from "../Spinner";
 import Search from "../../assets/icons/search";
 
 const ProductListHeader = ({
@@ -14,6 +13,7 @@ const ProductListHeader = ({
   <div className={`page-heading ${show ? 'show-heading' : ''}`}>
     <div className="search-container">
       <Input
+        loading={searchLoading}
         leftAdornment={<Search width={22} height={22} color="rgb(141, 141, 141)" />}
         inputProps={{
           type: 'text',
@@ -27,9 +27,6 @@ const ProductListHeader = ({
         colorScheme={1}
       />
     </div>
-    {searchLoading &&
-      <Spinner width={36} height={36} />
-    }
     {brandLogo &&
       <div className="brand-logo-container">
         <img src={brandLogo} style={{ objectFit: 'contain' }} />

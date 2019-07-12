@@ -68,13 +68,7 @@ const ProductList = () => {
   }, [products]);
 
   const filterCategory = (apiProducts) => {
-    const filteredProducts =  apiProducts.filter((prod) => {
-      if (prod.tags.includes(match.params.category) && prod.tags.includes('product')) {
-        return prod;
-      }
-    });
-
-    const mappedProducts = filteredProducts.map((product) => ({
+    return apiProducts.map((product) => ({
       id: product._id.$oid,
       image_url: product.image_url,
       name: product.name,
@@ -83,8 +77,6 @@ const ProductList = () => {
       short_description: product.short_description,
       loaded: false,
     }));
-
-    return mappedProducts;
   };
 
   const getProducts = async () => {

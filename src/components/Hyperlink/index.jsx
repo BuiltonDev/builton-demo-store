@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import './index.scss';
 
 const Hyperlink = ({ onClick, title }) => (
-  <a
+  <button
+    type="button"
     className="link-button"
     onClick={onClick}
   >
     {title}
-  </a>
+  </button>
 );
 
 Hyperlink.propTypes = {

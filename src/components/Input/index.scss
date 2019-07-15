@@ -90,3 +90,165 @@
   -webkit-animation: anim-1 0.3s forwards;
   animation: anim-1 0.3s forwards;
 }
+
+.left-adornment {
+  position: absolute;
+  top: 24px;
+}
+
+.input-loading-container {
+  display: none;
+  &.input-loading {
+    display: block;
+    & > div {
+      position: absolute;
+      left: 0;
+      bottom: 16px;
+      transform: skew(60deg);
+      width: 48px;
+      height: 4px;
+      z-index: 10;
+      content: '';
+      background-color: rgb(255, 255, 255);
+      opacity: 0;
+    }
+
+    & .input-loading-1 {
+      animation: animate-tick-1 1250ms infinite;
+    }
+    & .input-loading-2 {
+      animation: animate-tick-1 950ms infinite;
+      animation-delay: 250ms;
+    }
+    & .input-loading-3 {
+      animation: animate-tick-1 950ms infinite;
+      animation-delay: 400ms;
+    }
+    & .input-loading-4 {
+      animation: animate-tick-1 1650ms infinite;
+      animation-delay: 550ms;
+    }
+  }
+}
+
+@-webkit-keyframes animate-tick-1 {
+  0% {
+    opacity: 0.72;
+    left: 0;
+    width: 32px;
+  }
+  50% {
+    width: 120px;
+  }
+  100% {
+    width: 16px;
+    left: 100%;
+  }
+}
+
+@keyframes animate-tick-1 {
+  0% {
+    left: 0;
+    opacity: 0.72;
+    width: 32px;
+  }
+  50% {
+    width: 120px;
+  }
+  100% {
+    width: 16px;
+    left: 100%;
+  }
+}
+
+@-webkit-keyframes animate-tick-2 {
+  0% {
+    left: 0;
+    opacity: 0.72;
+    width: 48px
+  }
+  50% {
+    width: 18px;
+  }
+  100% {
+    width: 78px;
+    left: 100%;
+  }
+}
+
+@keyframes animate-tick-2 {
+  0% {
+    left: 0;
+    opacity: 0.72;
+    width: 48px
+  }
+  50% {
+    width: 18px;
+  }
+  100% {
+    width: 78px;
+    left: 100%;
+  }
+}
+
+@-webkit-keyframes animate-tick-3 {
+  0% {
+    left: 0;
+    opacity: 0.72;
+    width: 24px;
+  }
+  50% {
+    width: 46px;
+  }
+  100% {
+    width: 62px;
+    left: 100%;
+  }
+}
+
+@keyframes animate-tick-3 {
+  0% {
+    left: 0;
+    opacity: 0.72;
+    width: 24px;
+  }
+  50% {
+    width: 46px;
+  }
+  100% {
+    width: 62px;
+    left: 100%;
+  }
+}
+
+@-webkit-keyframes animate-tick-4 {
+  0% {
+    width: 82px;
+    opacity: 0.72;
+    left: 0;
+  }
+  50% {
+    width: 48px;
+  }
+  100% {
+    width: 62px;
+    left: 100%;
+  }
+}
+
+@keyframes animate-tick-4 {
+  0% {
+    width: 82px;
+    opacity: 0.72;
+    left: 0;
+  }
+  50% {
+    width: 48px;
+  }
+  100% {
+    width: 62px;
+    left: 100%;
+  }
+}
+
+

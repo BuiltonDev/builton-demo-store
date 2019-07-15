@@ -1,4 +1,3 @@
-import React from 'react';
 import Builton from '@builton/core-sdk/src/main';
 import globalState from "../globalStore/globalState";
 import { getFieldCurry } from '../globalStore/localStorage';
@@ -14,7 +13,9 @@ const BuiltonClient = new Builton({
   ...(builtonSession && { refreshTokenFn: async () => {
       firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
-          await firebase.auth().currentUser.getIdToken()
+          const idToken = await firebase.auth().currentUser.getIdToken();
+          globalState.updateSession(idToken);
+          return idToken;
         } return false;
       });
     }}),

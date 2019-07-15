@@ -1,0 +1,50 @@
+@import '../../constants';
+
+.no-results-container {
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  opacity: 1;
+  display: none;
+  &.show-no-results {
+    animation: animate-show-no-results 1s forwards;
+    animation-delay: 450ms;
+    display: flex;
+    opacity: 0;
+  }
+  & .no-results-content-container {
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    & .no-results-subtitle {
+      font-size: 1rem;
+      padding-top: 12px;
+      letter-spacing: 2px;
+      color: $SECONDARY_TEXT;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@-webkit-keyframes animate-show-no-results {
+  0% {
+    opacity: 0;
+    display: flex;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-show-no-results {
+  0% {
+    opacity: 0;
+    display: flex;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

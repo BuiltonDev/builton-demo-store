@@ -147,7 +147,7 @@ const Auth = () => {
                     setFormType(formType === "register" ? "login" : "register")}
                   title={formType === "register" ? "Login" : "Register"}
                 />
-                <Button type="submit" loading={submitting} title={formType === 'register' ? 'Register' : 'Login'} />
+                <Button type="submit" className="button round" loading={submitting} title={formType === 'register' ? 'Register' : 'Login'} />
               </div>
             </form>
           )}

@@ -34,6 +34,7 @@ const ProductList = () => {
     await fetchProducts(searchString);
   };
 
+  // TODO: Fix the dependency issue with linter
   useEffect(() => {
     if (match.params.category) {
       getProducts();

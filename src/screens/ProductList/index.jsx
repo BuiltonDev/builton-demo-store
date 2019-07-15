@@ -22,6 +22,18 @@ const ProductList = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [brandLogo, setBrandLogo] = useState(null);
 
+  const getProducts = async () => {
+    setProducts(null);
+    setLoading(true);
+    await fetchProducts();
+  };
+
+  const searchProducts = async searchString => {
+    setProducts(null);
+    setSearchLoading(true);
+    await fetchProducts(searchString);
+  };
+
   useEffect(() => {
     if (match.params.category) {
       getProducts();
@@ -78,18 +90,6 @@ const ProductList = () => {
     }));
   };
 
-  const getProducts = async () => {
-    setProducts(null);
-    setLoading(true);
-    await fetchProducts();
-  };
-
-  const searchProducts = async searchString => {
-    setProducts(null);
-    setSearchLoading(true);
-    await fetchProducts(searchString);
-  };
-
   const fetchProducts = async searchString => {
     try {
       let apiProducts;
@@ -110,6 +110,14 @@ const ProductList = () => {
 
       setProducts(filterCategory(apiProducts));
     } catch (err) {
+      if (loading) {
+        setLoading(false);
+      }
+
+      if (searchLoading) {
+        setSearchLoading(false);
+      }
+
       notify("Failed to fetch products", {
         type: "error"
       });

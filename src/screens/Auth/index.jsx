@@ -67,17 +67,6 @@ const Auth = () => {
     }
   };
 
-  const handleInputChange = (ev, input) => {
-    input.onChange(ev.target.value);
-    if (ev.target.value) {
-      ev.target.parentNode.classList.add("input--filled");
-    } else {
-      ev.target.parentNode.classList.remove(
-        "input--filled"
-      );
-    }
-  }
-
   const validate = (values) => {
     const errors = {};
     if (formType === "register") {
@@ -116,9 +105,9 @@ const Auth = () => {
           onSubmit={onSubmit}
           validate={values => validate(values)}
         >
-          {({ handleSubmit, form, submitting, pristine, values }) => (
+          {({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit} className="form-container">
-              <div className="input input">
+              <div className="input">
                 <Field
                   name="email"
                   type="email"

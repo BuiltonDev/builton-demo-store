@@ -1,29 +1,16 @@
-@import '../../constants';
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-color: $PRIMARY_BACKGROUND;
-
-  .wrapper {
+.wrapper {
+  & .home-wrapper {
     display: flex;
     flex-direction: row;
-    background: url("../../assets/images/background.png") no-repeat center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    flex: 1;
-    justify-content: center;
-    position: relative;
     align-items: center;
+    justify-content: center;
+    flex: 1;
     & > div:not(:last-child) {
       padding: 12px 24px
     }
     & .inner-wrapper {
       & > div {
-        padding: 12px 24px
+        padding: 12px 48px
       }
     }
     .second-wrapper {
@@ -32,9 +19,10 @@
     }
   }
 
-  @media all and (max-width: 720px) {
-    .wrapper {
-      flex-direction: column;
-    }
+}
+
+@media all and (max-width: 720px) {
+  .wrapper {
+    flex-direction: column;
   }
 }

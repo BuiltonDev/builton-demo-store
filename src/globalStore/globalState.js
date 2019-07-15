@@ -61,6 +61,9 @@ export default {
 
     INITIALIZED = true;
   },
+  updateSession: (session) => {
+    setBuiltonSession(session)
+  },
   clear: () => {
     clearAllFields();
     resetGlobal();

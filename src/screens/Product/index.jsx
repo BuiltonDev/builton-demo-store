@@ -10,12 +10,14 @@ import config from "../../config";
 import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
+import {useDispatch} from "reactn";
 
 const Product = () => {
   const { match, history } = useReactRouter();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
+  const addItemToBag = useDispatch("addItemToBag"); //reducer
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,8 +35,35 @@ const Product = () => {
       }
     };
 
+    if (!loading) {
+      setLoading(true);
+    }
+
     fetchProduct();
-  }, []);
+  }, [match.params.productId]);
+
+  const addToBag = async () => {
+    if (!selectedSize) {
+      notify('Please select your desired size.', {
+        type: 'info'
+      })
+    } else {
+      try {
+        await addItemToBag({
+          product,
+          size: selectedSize,
+          category: match.params.category,
+        });
+        notify(`${product.name} successfully added to your bag.`, {
+          type: 'info',
+        })
+      } catch(err) {
+        notify(`Failed to add ${product.name} to your bag.`, {
+          type: 'error',
+        })
+      }
+    }
+  };
 
   return (
     <div className="main-container">
@@ -80,7 +109,7 @@ const Product = () => {
                     .map(prodSize => (
                       <Button
                         key={`prodSize-${prodSize.id}`}
-                        onClick={() => setSelectedSize(prodSize.id)}
+                        onClick={() => setSelectedSize(selectedSize && selectedSize._id.$oid === prodSize.id ? null : prodSize.product)}
                         type="button"
                         style={{
                           fontSize: 14,
@@ -90,18 +119,18 @@ const Product = () => {
                           height: 24
                         }}
                         title={prodSize.size}
-                        className={`button ${selectedSize === prodSize.id ? 'selected' : ''}`}
+                        className={`button ${selectedSize && selectedSize._id.$oid === prodSize.id ? 'selected' : ''}`}
                       />
                     ))}
                 </div>
               </div>
               <div className="add-to-cart-button-container">
                 <Button
-                  onClick={() => console.log('add to cart')}
+                  onClick={() => addToBag()}
                   type="button"
                   style={{ minWidth: 200 }}
                   className="button round"
-                  title="Add to Cart"
+                  title="Add to Bag"
                 />
               </div>
             </div>

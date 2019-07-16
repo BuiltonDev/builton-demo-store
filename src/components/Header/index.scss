@@ -15,6 +15,21 @@
         display: flex;
         flex-direction: row;
     }
+    & .header-checkout-container {
+        margin: 12px 0;
+        border-top: 1px solid $PRIMARY_BORDER_COLOR;
+        display: flex;
+        flex-direction: row;
+        padding: 24px 24px 0;
+        justify-content: space-between;
+        align-items: center;
+        & .header-bag-amount {
+            margin-right: 32px;
+            color: $ALTERNATIVE_TEXT;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+        }
+    }
     .top-header-hyperlink-container {
         display: flex;
         align-self: stretch;

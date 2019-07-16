@@ -13,12 +13,17 @@ const getSneakersSizes = product => {
       if (!!~subProd.short_description.toLowerCase().indexOf('size - ')) {
         return {
           id: subProd._id.$oid,
+          product: subProd,
           size: subProd.short_description.slice(subProd.short_description.toLowerCase().indexOf('size - ') + 'size - '.length)
         }
       }
     })
   }
-  return false;
-}
+  return [];
+};
 
-export { getProductName, getSneakersSizes };
+const getSneakersSize = product => {
+  return product.short_description.slice(product.short_description.toLowerCase().indexOf('size - ') + 'size - '.length)
+};
+
+export { getProductName, getSneakersSizes, getSneakersSize };

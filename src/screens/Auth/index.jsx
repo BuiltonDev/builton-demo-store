@@ -67,7 +67,7 @@ const Auth = () => {
     }
   };
 
-  const validate = (values) => {
+  const validate = values => {
     const errors = {};
     if (formType === "register") {
       if (!values.email) {
@@ -99,12 +99,9 @@ const Auth = () => {
 
   return (
     <div className="wrapper">
-      <BuiltonLogo style={{ position: 'absolute', top: 12, left: 48 }}/>
+      <BuiltonLogo style={{ position: "absolute", top: 12, left: 48 }} />
       <div className="paper-container">
-        <Form
-          onSubmit={onSubmit}
-          validate={values => validate(values)}
-        >
+        <Form onSubmit={onSubmit} validate={values => validate(values)}>
           {({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit} className="form-container">
               <div className="input">
@@ -112,7 +109,13 @@ const Auth = () => {
                   name="email"
                   type="email"
                   render={({ input }) => (
-                    <Input id="input-1" inputProps={input} submitting={submitting} colorScheme={1} placeholder="Email"/>
+                    <Input
+                      id="input-1"
+                      inputProps={input}
+                      submitting={submitting}
+                      colorScheme={1}
+                      placeholder="Email"
+                    />
                   )}
                 />
                 <Error name="email" />
@@ -122,7 +125,13 @@ const Auth = () => {
                   name="password"
                   type="password"
                   render={({ input }) => (
-                    <Input id="input-2" inputProps={input} submitting={submitting} colorScheme={2} placeholder="Password"/>
+                    <Input
+                      id="input-2"
+                      inputProps={input}
+                      submitting={submitting}
+                      colorScheme={2}
+                      placeholder="Password"
+                    />
                   )}
                 />
                 <Error name="password" />
@@ -136,7 +145,13 @@ const Auth = () => {
                   name="confirmPassword"
                   type="password"
                   render={({ input }) => (
-                    <Input id="input-3" inputProps={input} submitting={submitting} colorScheme={2} placeholder="Confirm Password"/>
+                    <Input
+                      id="input-3"
+                      inputProps={input}
+                      submitting={submitting}
+                      colorScheme={2}
+                      placeholder="Confirm Password"
+                    />
                   )}
                 />
                 <Error name="confirmPassword" />
@@ -144,10 +159,16 @@ const Auth = () => {
               <div className="buttons">
                 <Hyperlink
                   onClick={() =>
-                    setFormType(formType === "register" ? "login" : "register")}
+                    setFormType(formType === "register" ? "login" : "register")
+                  }
                   title={formType === "register" ? "Login" : "Register"}
                 />
-                <Button type="submit" className="button round" loading={submitting} title={formType === 'register' ? 'Register' : 'Login'} />
+                <Button
+                  type="submit"
+                  className="button round"
+                  loading={submitting}
+                  title={formType === "register" ? "Register" : "Login"}
+                />
               </div>
             </form>
           )}

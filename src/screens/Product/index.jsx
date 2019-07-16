@@ -73,7 +73,7 @@ const Product = () => {
                     {product.short_description}
                   </span>
                 </div>
-                <div>{product.description}</div>
+                <div className="product-description-content">{product.description}</div>
                 <div className="product-sizes-container">
                   {getSneakersSizes(product)
                     .sort((a, b) => parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0)

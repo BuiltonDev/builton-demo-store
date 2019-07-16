@@ -14,20 +14,33 @@
     position: relative;
     justify-content: center;
     align-items: center;
+    & .product-description-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    & .product-description-content {
+      max-width: 65%;
+      transform: translateX(-40px);
+      margin-top: 32px;
+      font-size: 1.06rem;
+      letter-spacing: 1px;
+    }
     & .product-sizes-container {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       max-width: 380px;
-      transform: translateX(-80px);
-      margin-top: 24px;
-
+      margin-top: 48px;
+      transform: translateX(-160px);
     }
     & .product-description {
       color: $PRIMARY_TEXT;
       min-width: 30vw;
-      min-height: 65vh;
+      max-width: 80%;
+      min-height: 60vh;
       padding: 36px;
+      align-items: center;
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -47,7 +60,8 @@
       }
 
       & .add-to-cart-button-container {
-        transform: translateX(-180px)
+        margin-top: 48px;
+        transform: translateX(-340px)
       }
 
       & .product-title-container {

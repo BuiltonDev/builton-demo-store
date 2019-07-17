@@ -15,6 +15,45 @@
         display: flex;
         flex-direction: row;
     }
+    & .bag-product-row {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        align-items: center;
+        & > div {
+            flex: 0;
+            min-width: 80px;
+        }
+        & > div:first-child {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 210px;
+            padding: 0 12px 0 0;
+        }
+
+        & .remove-bag-item {
+            flex: 0;
+            overflow-x: visible;
+            min-width: auto;
+        }
+    }
+    & .header-checkout-container {
+        margin: 12px 0;
+        border-top: 1px solid $PRIMARY_BORDER_COLOR;
+        display: flex;
+        flex-direction: row;
+        padding: 24px 24px 0;
+        justify-content: space-between;
+        align-items: center;
+        & .header-bag-amount {
+            margin-right: 32px;
+            color: $ALTERNATIVE_TEXT;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+        }
+    }
     .top-header-hyperlink-container {
         display: flex;
         align-self: stretch;

@@ -8,7 +8,7 @@
   font-size: 0.72rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin: 12px 0;
+  margin: 2px 0;
   min-height: 42px;
   padding: 0 36px;
   color: $SECONDARY_TEXT;
@@ -17,6 +17,16 @@
   -moz-transition: all 150ms ease;
   -o-transition: all 150ms ease;
   transition: all 150ms ease;
+  & .remove-bag-item {
+    padding: 12px;
+    &:hover > svg {
+      & > path {
+        &:last-child {
+          fill: rgba(0, 0, 0, 0.84);
+        }
+      }
+    }
+  }
   &:hover {
     background-color: $SECONDARY_BACKGROUND;
     -webkit-transition: all 150ms ease;

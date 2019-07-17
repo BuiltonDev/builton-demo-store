@@ -9,6 +9,7 @@ import './App.scss';
 import Home from "./screens/Home";
 import Auth from './screens/Auth';
 import ProductList from './screens/ProductList';
+import Product from './screens/Product';
 import {getFieldCurry} from "./globalStore/localStorage";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,10 +29,11 @@ const App = () => {
             )
           )} />
           <Route exact path="/product_list/:category" component={ProductList} />
+          <Route exact path="/product_list/:category/:productId" component={Product} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>
-      <ToastContainer />
+      <ToastContainer style={{ top: '4rem' }} />
     </div>
   )
 };

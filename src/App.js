@@ -33,7 +33,7 @@ const App = () => {
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>
-      <ToastContainer />
+      <ToastContainer style={{ top: '4rem' }} />
     </div>
   )
 };

@@ -45,7 +45,7 @@ const Product = () => {
   const addToBag = async () => {
     if (!selectedSize) {
       notify('Please select your desired size.', {
-        type: 'info'
+        type: 'warning'
       })
     } else {
       try {

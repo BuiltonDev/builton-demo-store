@@ -32,7 +32,7 @@ const Header = React.memo(() => {
   const calculateTotalAmount = () => {
     let total = 0;
     for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].size.price
+      total += bag[i].product.price
     }
     return total;
   };
@@ -126,16 +126,18 @@ const Header = React.memo(() => {
                       )
                     }
                   >
-                    <div>{prod.product.name}</div>
-                    <div>{`Size ${getSneakersSize(prod.size)}`}</div>
-                    <div>
-                      {prod.product.price} {prod.product.currency}
-                    </div>
-                    <div
-                      className="remove-bag-item"
-                      onClick={() => removeItem(prod.size._id.$oid)}
-                    >
-                      <RemoveShopping color="#c5c5c5" />
+                    <div className="bag-product-row">
+                      <div>{prod.product.name}</div>
+                      <div>{`Size ${getSneakersSize(prod.size)}`}</div>
+                      <div>
+                        {prod.product.price} {prod.product.currency}
+                      </div>
+                      <div
+                        className="remove-bag-item"
+                        onClick={() => removeItem(prod.size._id.$oid)}
+                      >
+                        <RemoveShopping color="#c5c5c5" />
+                      </div>
                     </div>
                   </DropdownMenuItem>
                 ))}
@@ -146,13 +148,13 @@ const Header = React.memo(() => {
                     className="button round"
                     title="Proceed to checkout"
                     style={{
-                      padding: '4px 6px',
+                      padding: '4px 12px',
                       height: 40,
                       fontSize: '0.72rem'
                     }}
                   />
                   <div className="header-bag-amount">
-                    {calculateTotalAmount()} {bag[0].size.currency}
+                    {calculateTotalAmount()} {bag[0].product.currency}
                   </div>
                 </div>
               </>

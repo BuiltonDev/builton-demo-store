@@ -22,8 +22,8 @@ const getSneakersSizes = product => {
   return [];
 };
 
-const getSneakersSize = product => {
-  return product.short_description.slice(product.short_description.toLowerCase().indexOf('size - ') + 'size - '.length)
+const getSneakersSize = subProduct => {
+  return subProduct.short_description.slice(subProduct.short_description.toLowerCase().indexOf('size - ') + 'size - '.length)
 };
 
 export { getProductName, getSneakersSizes, getSneakersSize };

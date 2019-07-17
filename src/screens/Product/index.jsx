@@ -29,6 +29,7 @@ const Product = () => {
         });
         setProduct(apiProduct);
       } catch (err) {
+        setLoading(false);
         notify("Failed to fetch product", {
           type: "error"
         });
@@ -80,6 +81,7 @@ const Product = () => {
               <div>
                 <img
                   onLoad={() => setLoading(false)}
+                  onError={() => setLoading(false)}
                   src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
                 />
               </div>

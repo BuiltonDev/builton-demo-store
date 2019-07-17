@@ -14,9 +14,10 @@ import NikeLogo from "../../assets/images/nike-logo.png";
 import Footer from "../../components/Footer";
 import ProductListHeader from "../../components/ProductListHeader";
 import NoResults from "../../components/NoResults";
+import { getProductName } from "../../utils/productModifiers";
 
 const ProductList = () => {
-  const { match } = useReactRouter();
+  const { match, history } = useReactRouter();
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -87,6 +88,7 @@ const ProductList = () => {
       price: product.price,
       currency: product.currency,
       short_description: product.short_description,
+      description: product.description,
       loaded: false
     }));
   };
@@ -125,15 +127,6 @@ const ProductList = () => {
     }
   };
 
-  const getProductName = productName => {
-    if (!!~productName.indexOf("-")) {
-      const index = productName.indexOf("-");
-      return productName.substr(0, index).trim();
-    }
-
-    return productName;
-  };
-
   const renderProductItem = (product, index) => {
     return (
       <CSSTransition
@@ -145,6 +138,7 @@ const ProductList = () => {
           className={`product-container ${
             loading ? "hide-product" : "show-product"
           }`}
+          onClick={() => history.push(`/product_list/${match.params.category}/${product.id}`)}
         >
           <img
             onLoad={() => {
@@ -171,7 +165,7 @@ const ProductList = () => {
   return (
     <div className="main-container">
       <Header />
-      <div className="product-wrapper">
+      <div className="product-list-wrapper">
         <BuiltonSplash show={loading} />
         <ProductListHeader
           show={!loading}

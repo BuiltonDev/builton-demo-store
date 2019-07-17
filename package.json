@@ -8,7 +8,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@builton/core-sdk": "^3.0.3",
+    "@builton/core-sdk": "^3.0.4",
     "final-form": "^4.16.1",
     "firebase": "^6.2.4",
     "install": "^0.12.2",

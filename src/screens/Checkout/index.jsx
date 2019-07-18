@@ -1,31 +1,43 @@
 import React, {useState, useEffect} from 'react';
 import { withRouter } from 'react-router-dom';
-import { useGlobal } from 'reactn';
+import { useGlobal, useDispatch } from 'reactn';
 
 import './index.scss';
 import useReactRouter from "use-react-router";
 import Header from "../../components/Header";
 import Button from "../../components/Button";
 
-const MAX_STEPS = 4;
-
-const STEPS = {
-  0: 'bag',
-  1: 'authentication',
-  2: 'payment_method',
-  3: 'delivery_address',
-  4: 'confirm'
-};
+const MAX_checkoutSteps = 3;
 
 const Checkout = () => {
   const [step, setStep] = useState(0);
   const [bag] = useGlobal('bag');
 
+  const [checkout] = useGlobal('checkout');
+  const updateCheckoutStep = useDispatch('updateCheckoutStep');
+
   const { match, history } = useReactRouter();
 
   useEffect(() => {
-    if (match.params.step) {
-      setStep(Object.values(STEPS).indexOf(match.params.step))
+    if (checkout) {
+      const stepsVals = [...Object.values(checkout)];
+      if (match.params.step) {
+        for (let i = 0; i < stepsVals.length; i += 1) {
+          if (match.params.step === stepsVals[i].title) {
+            setStep(i);
+            break;
+          }
+        }
+      } else {
+        for (let i = 0; i < stepsVals.length; i += 1) {
+          if (!stepsVals[i].complete) {
+            setStep(i - 1);
+            break;
+          } else if (i === stepsVals.length - 1) {
+            setStep(stepsVals.length - 1);
+          }
+        }
+      }
     }
   }, [match.params.step]);
 
@@ -42,10 +54,16 @@ const Checkout = () => {
     )
   };
 
-  const pushStep = (stepNumb) => {
-    history.push(`/checkout/${STEPS[stepNumb ? stepNumb : step + 1]}`);
-  };
+  const pushStep = async (stepNumb) => {
+    const checkoutStepsCopy = {...checkout};
+    checkoutStepsCopy[step].complete = true;
+    await updateCheckoutStep(checkoutStepsCopy);
 
+    setStep(typeof stepNumb !== 'undefined' ? stepNumb : step + 1);
+
+    history.push(`/checkout/${checkout[typeof stepNumb !== 'undefined' ? stepNumb : step + 1].title}`);
+  };
+  
   return (
     <div className="main-container">
       <Header />
@@ -92,7 +110,7 @@ const Checkout = () => {
               </div>
             </div>
             <div className="checkout-next-step">
-              {step <= MAX_STEPS &&
+              {step <= MAX_checkoutSteps &&
                 <Button type="button" onClick={() => pushStep()} title="Next" />
               }
             </div>

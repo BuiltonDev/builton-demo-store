@@ -22,6 +22,10 @@ const clearBag = clearFieldCurry('bag');
 const getBag = getFieldCurry('bag');
 const setBag = setFieldCurry('bag');
 
+const clearCheckout = clearFieldCurry('checkout');
+const getCheckout = getFieldCurry('checkout');
+const setCheckout = setFieldCurry('checkout');
+
 addReducer('updateUser', (global, dispatch, user) => {
   setUser(user);
   return {
@@ -33,6 +37,13 @@ addReducer('addItemToBag', (global, dispatch, item) => {
   setBag([...(getBag() || []), item]);
   return {
     bag: [...(getBag() || [])]
+  }
+});
+
+addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
+  setCheckout(checkout);
+  return {
+    checkout
   }
 });
 
@@ -68,7 +79,29 @@ export default {
     let data = {
       user: null,
       builtonSession: null,
-      bag: []
+      bag: [],
+      checkout: {
+        0: {
+          title: 'bag',
+          complete: false,
+        },
+        1: {
+          title: 'authentication',
+          complete: false,
+        },
+        2: {
+          title: 'payment_method',
+          complete: false,
+        },
+        3: {
+          title: 'delivery_address',
+          complete: false,
+        },
+        4: {
+          title: 'confirm',
+          complete: false,
+        }
+      }
     };
 
     try {
@@ -76,11 +109,13 @@ export default {
         user: getUser(),
         builtonSession: getBuiltonSession(),
         bag: getBag(),
+        checkout: getCheckout()
       };
     } catch (err) {
       clearUser();
       clearBuiltonSession();
       clearBag();
+      clearCheckout();
     }
 
     // Setting values in global store
@@ -99,6 +134,7 @@ export default {
     clearUser();
     clearBuiltonSession();
     clearBag();
+    clearCheckout();
     resetGlobal();
 
     INITIALIZED = false;

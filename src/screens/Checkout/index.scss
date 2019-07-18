@@ -67,7 +67,7 @@
       overflow: hidden;
       background-color: #99d9ff;
       margin-left: -12px;
-      &:before {
+      & > div {
         position: absolute;
         left: 0;
         top: 0;
@@ -104,7 +104,7 @@
     &.active-step {
       & .checkout-step-progress {
         border: none;
-        &:before {
+        & > div {
           transition: all 450ms ease-in-out;
           transform: translateX(0);
           transform-origin: center;

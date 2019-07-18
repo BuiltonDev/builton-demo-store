@@ -5,11 +5,15 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
+
 import './App.scss';
+
 import Home from "./screens/Home";
 import Auth from './screens/Auth';
 import ProductList from './screens/ProductList';
 import Product from './screens/Product';
+import Checkout from './screens/Checkout';
+
 import {getFieldCurry} from "./globalStore/localStorage";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,6 +34,7 @@ const App = () => {
           )} />
           <Route exact path="/product_list/:category" component={ProductList} />
           <Route exact path="/product_list/:category/:productId" component={Product} />
+          <Route exact path="/checkout/:step?" component={Checkout} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>

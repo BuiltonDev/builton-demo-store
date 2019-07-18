@@ -143,7 +143,7 @@ const Header = React.memo(() => {
                 ))}
                 <div className="header-checkout-container">
                   <Button
-                    onClick={() => {}}
+                    onClick={() => {history.push('/checkout')}}
                     type="button"
                     className="button round"
                     title="Proceed to checkout"

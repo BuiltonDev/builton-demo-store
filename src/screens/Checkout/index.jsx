@@ -11,6 +11,7 @@ const MAX_checkoutSteps = 3;
 
 const Checkout = () => {
   const [step, setStep] = useState(0);
+  const [isNextStep, setIsNextStep] = useState(false);
   const [bag] = useGlobal('bag');
 
   const [checkout] = useGlobal('checkout');
@@ -25,29 +26,17 @@ const Checkout = () => {
         let length = 0;
         for (let i = 0; i < stepsVals.length; i += 1) {
           if (match.params.step === stepsVals[i].title) {
+            if (isNextStep) {
+              length = 1;
+            } else {
+              length = i;
+            }
             setStep(i);
-            length = i;
             break;
           }
         }
-        const elements = document.getElementsByClassName("checkout-steps-container");
-        if (elements && elements[0] && elements[0].children) {
-          const childrenElements = elements[0].children;
-          let defaultTransitionDelay = 0;
-          for (let i = 0; i < childrenElements.length; i += 1) {
-            if (i < length + 1) {
-              defaultTransitionDelay += 350;
-              for (let x = 0; x < childrenElements[i].children.length; x +=1) {
-                if (childrenElements[i].children[x].className.includes('checkout-step-progress')) {
-                  childrenElements[i].children[x].children[0].style.transitionDelay = `${defaultTransitionDelay}ms`;
-                } else if (childrenElements[i].children[x].className.includes('checkout-step-circle')) {
-                  childrenElements[i].children[x].children[0].style.animationDelay = `${defaultTransitionDelay + 350}ms`;
-                }
-              }
 
-            }
-          }
-        }
+        animateSteps(length);
 
       } else {
         for (let i = 0; i < stepsVals.length; i += 1) {
@@ -61,6 +50,27 @@ const Checkout = () => {
       }
     }
   }, [match.params.step]);
+
+
+  const animateSteps = (length) => {
+    const elements = document.getElementsByClassName("checkout-steps-container");
+    if (elements && elements[0] && elements[0].children) {
+      const childrenElements = elements[0].children;
+      let defaultTransitionDelay = 0;
+      for (let i = 0; i < childrenElements.length; i += 1) {
+        if (i < length + 1) {
+          defaultTransitionDelay += 350;
+          for (let x = 0; x < childrenElements[i].children.length; x +=1) {
+            if (childrenElements[i].children[x].className.includes('checkout-step-progress')) {
+              childrenElements[i].children[x].children[0].style.transitionDelay = `${defaultTransitionDelay}ms`;
+            } else if (childrenElements[i].children[x].className.includes('checkout-step-circle')) {
+              childrenElements[i].children[x].children[0].style.animationDelay = `${defaultTransitionDelay + 350}ms`;
+            }
+          }
+        }
+      }
+    }
+  };
 
   const renderStep1 = () => {
     if (!bag || !bag.length) return null;
@@ -80,9 +90,8 @@ const Checkout = () => {
     checkoutStepsCopy[step].complete = true;
     await updateCheckoutStep(checkoutStepsCopy);
 
-    setStep(typeof stepNumb !== 'undefined' ? stepNumb : step + 1);
-
-    history.push(`/checkout/${checkout[typeof stepNumb !== 'undefined' ? stepNumb : step + 1].title}`);
+    setIsNextStep(true);
+    setTimeout(() => history.push(`/checkout/${checkout[typeof stepNumb !== 'undefined' ? stepNumb : step + 1].title}`));
   };
 
   return (

@@ -65,19 +65,17 @@ const CheckoutNavigation = (
     if (elements && elements[0] && elements[0].children) {
       const childrenElements = elements[0].children;
       let defaultTransitionDelay = 0;
-      for (let i = 0; i < childrenElements.length; i += 1) {
-        if (i < length + 1) {
-          if (length === 1) {
-            defaultTransitionDelay = 350;
-          } else {
-            defaultTransitionDelay += 350;
-          }
-          for (let x = 0; x < childrenElements[i].children.length; x +=1) {
-            if (childrenElements[i].children[x].className.includes('checkout-step-progress')) {
-              childrenElements[i].children[x].children[0].style.transitionDelay = `${defaultTransitionDelay}ms`;
-            } else if (childrenElements[i].children[x].className.includes('checkout-step-circle')) {
-              childrenElements[i].children[x].children[0].style.animationDelay = `${defaultTransitionDelay + 350}ms`;
-            }
+      for (let i = 1; i < childrenElements.length; i += 1) {
+        if (length === 1) {
+          defaultTransitionDelay = i >= 0 ? 0 : 350;
+        } else {
+          defaultTransitionDelay += 350;
+        }
+        for (let x = 0; x < childrenElements[i].children.length; x +=1) {
+          if (childrenElements[i].children[x].className.includes('checkout-step-progress')) {
+            childrenElements[i].children[x].children[0].style.transitionDelay = `${defaultTransitionDelay}ms`;
+          } else if (childrenElements[i].children[x].className.includes('checkout-step-circle')) {
+            childrenElements[i].children[x].children[0].style.animationDelay = `${defaultTransitionDelay + 350}ms`;
           }
         }
       }

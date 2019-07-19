@@ -83,6 +83,9 @@
         height: 32px;
         transition: all 450ms ease-in-out;
         transition-delay: 350ms;
+        &:hover {
+          cursor: pointer;
+        }
         & > div {
           animation: animate-circle 450ms forwards;
           animation-delay: 350ms;

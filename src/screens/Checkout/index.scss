@@ -5,13 +5,14 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  transform: translateY(-100px);
+  transform: translateY(-80px);
+  min-width: 720px;
   &:before {
     position: absolute;
-    left: 0;
+    left: -20%;
     top: 0;
     content: '';
-    width: 100%;
+    width: 120%;
     height: 100%;
     background-color: $PRIMARY_BACKGROUND;
     transform: skew(20deg);
@@ -113,7 +114,7 @@
         padding: 0 12px;
         margin-top: 24px;
         border-top: 1px solid $PRIMARY_BORDER_COLOR;
-        
+
         & > div {
           letter-spacing: 1px;
           padding: 8px 4px;
@@ -141,6 +142,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   & .checkout-next-step {
     min-width: 160px;
   }

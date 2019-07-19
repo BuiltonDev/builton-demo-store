@@ -1,9 +1,17 @@
 @import '../../constants';
 
+.checkout-next-step {
+  position: absolute;
+  right: -145px;
+  top: 0;
+}
+
 .checkout-steps-container {
   display: flex;
   flex-direction: row;
-  min-width: 500px;
+  min-width: 720px;
+  justify-content: center;
+  flex: 1;
 
   & .checkout-step {
     display: flex;

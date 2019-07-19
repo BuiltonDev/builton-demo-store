@@ -5,6 +5,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  transform: translateY(-100px);
   &:before {
     position: absolute;
     left: 0;
@@ -19,7 +20,10 @@
   & .checkout-inner-container {
     z-index: 1;
     & .checkout-items-container {
-      display: none;
+      flex-direction: column;
+      flex: 1;
+      padding: 24px 32px;
+      margin-bottom: 64px;
       &.show-container {
         animation: show-checkout-container 500ms forwards;
         animation-delay: 500ms;
@@ -30,6 +34,103 @@
       &.hide-container {
         animation: hide-checkout-container 500ms forwards;
         opacity: 1;
+        display: none;
+      }
+
+      & .checkout-items-container-title {
+        font-size: 1.6rem;
+        margin: 12px 0;
+        padding: 4px 16px;
+        letter-spacing: 1px;
+        border-bottom: 4px solid $SECONDARY_BORDER_COLOR
+      }
+
+      & .checkout-items-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 12px 12px;
+        border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
+        margin-bottom: 24px;
+
+        & > div {
+          padding: 0 6px;
+          letter-spacing: 1px;
+          font-size: 0.98rem;
+        }
+      }
+
+      & .checkout-bag-item-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 12px;
+        &:hover {
+          background-color: $SECONDARY_BACKGROUND;
+          transition: all 250ms ease-in;
+          cursor: pointer;
+        }
+
+        & > div {
+          padding: 8px 6px;
+          font-size: 0.92rem;
+        }
+
+      }
+      & .checkout-name-col {
+        flex: 1;
+      }
+
+      & .checkout-description-col {
+        flex: 3;
+      }
+
+      & .checkout-size-col {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      & .checkout-price-col {
+        flex: 2;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      & .checkout-remove-col {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      & .checkout-bag-total-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 12px;
+        margin-top: 24px;
+        border-top: 1px solid $PRIMARY_BORDER_COLOR;
+        
+        & > div {
+          letter-spacing: 1px;
+          padding: 8px 4px;
+        }
+        & .checkout-bag-total-title {
+          flex: 5;
+        }
+
+        & .checkout-bag-total {
+          flex: 2;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+        }
+        & .checkout-bag-empty {
+          flex: 1;
+        }
       }
     }
   }

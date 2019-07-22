@@ -59,7 +59,7 @@ const StepOne = () => {
     );
   };
 
-  if (!bag && !bag.length) return null;
+  if (!bag) return null;
 
   return (
     <>

@@ -66,8 +66,8 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
 };
 
 Input.defaultProps = {
-  loading: true,
-}
+  loading: false,
+};
 
 Input.propTypes = {
   inputProps: PropTypes.object.isRequired,

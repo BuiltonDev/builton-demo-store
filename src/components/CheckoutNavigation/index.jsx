@@ -16,6 +16,20 @@ const CheckoutNavigation = (
   const [isNextStep, setIsNextStep] = useState(false);
   const updateCheckoutStep = useDispatch('updateCheckoutStep');
   const [checkout] = useGlobal('checkout');
+  const [user] = useGlobal('user');
+
+  useEffect(() => {
+    if (user) {
+      if (step === 1) {
+        pushStep(2)
+      }
+    } else {
+      if (step > 1) {
+        pushStep(1);
+      }
+    }
+  }, [step]);
+
 
   useEffect(() => {
     if (checkout) {
@@ -128,7 +142,7 @@ const CheckoutNavigation = (
           <div className="checkout-step-title">Confirmation</div>
         </div>
       </div>
-      {step <= MAX_checkoutSteps &&
+      {(step <= MAX_checkoutSteps && step !== 1) &&
         <div className="checkout-next-step">
           <Button type="button" onClick={() => pushStep()} title="Next" />
         </div>

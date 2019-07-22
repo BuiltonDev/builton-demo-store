@@ -34,7 +34,7 @@ const App = () => {
           )} />
           <Route exact path="/product_list/:category" component={ProductList} />
           <Route exact path="/product_list/:category/:productId" component={Product} />
-          <Route exact path="/checkout/:step?" component={Checkout} />
+          <Route exact path="/checkout/:step" component={Checkout} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>

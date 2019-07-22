@@ -1,6 +1,6 @@
 // TODO: For the future authentication
 
-import { setGlobal, resetGlobal, addReducer } from 'reactn';
+import { setGlobal, resetGlobal, addReducer, getDispatch } from 'reactn';
 import {
   clearFieldCurry,
   getFieldCurry,
@@ -26,8 +26,10 @@ const clearCheckout = clearFieldCurry('checkout');
 const getCheckout = getFieldCurry('checkout');
 const setCheckout = setFieldCurry('checkout');
 
-addReducer('updateUser', (global, dispatch, user) => {
-  setUser(user);
+addReducer('updateUser', (global, dispatch, user, setLocalStorage = true) => {
+  if (setLocalStorage) {
+    setUser(user);
+  }
   return {
     user
   };
@@ -40,6 +42,8 @@ addReducer('addItemToBag', (global, dispatch, item) => {
   }
 });
 
+
+
 addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
   setCheckout(checkout);
   return {
@@ -47,8 +51,10 @@ addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
   }
 });
 
-addReducer('updateBuiltonSession', (global, dispatch, builtonSession) => {
-  setBuiltonSession(builtonSession);
+addReducer('updateBuiltonSession', (global, dispatch, builtonSession , setLocalStorage = true) => {
+  if (setLocalStorage) {
+    setBuiltonSession(builtonSession);
+  }
   return {
     builtonSession
   };
@@ -68,6 +74,11 @@ addReducer('removeItemFromBag', (global, dispatch, itemId) => {
   }
 });
 
+addReducer('logout', async (global, dispatch) => {
+  await dispatch.updateUser(undefined, false);
+  await dispatch.updateBuiltonSession(undefined, false);
+})
+
 
 export default {
   init: () => {
@@ -77,32 +88,32 @@ export default {
     }
 
     let data = {
-      user: null,
-      builtonSession: null,
-      bag: [],
-      checkout: {
-        0: {
-          title: 'bag',
-          complete: false,
-        },
-        1: {
-          title: 'authentication',
-          complete: false,
-        },
-        2: {
-          title: 'payment_method',
-          complete: false,
-        },
-        3: {
-          title: 'delivery_address',
-          complete: false,
-        },
-        4: {
-          title: 'confirm',
-          complete: false,
+        user: null,
+        builtonSession: null,
+        bag: null,
+        checkout: {
+          0: {
+            title: 'bag',
+            complete: false,
+          },
+          1: {
+            title: 'authentication',
+            complete: false,
+          },
+          2: {
+            title: 'payment_method',
+            complete: false,
+          },
+          3: {
+            title: 'delivery_address',
+            complete: false,
+          },
+          4: {
+            title: 'confirm',
+            complete: false,
+          }
         }
-      }
-    };
+      };
 
     try {
       data = {
@@ -130,12 +141,11 @@ export default {
     clearAllFields();
     resetGlobal();
   },
-  logout: time => {
+  logout: async () => {
     clearUser();
     clearBuiltonSession();
-    clearBag();
-    clearCheckout();
-    resetGlobal();
+    await getDispatch().logout();
+
 
     INITIALIZED = false;
   }

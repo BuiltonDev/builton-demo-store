@@ -7,11 +7,13 @@ import useReactRouter from "use-react-router";
 import Header from "../../components/Header";
 import CheckoutNavigation from "../../components/CheckoutNavigation";
 import StepOne from "./stepOne";
+import StepTwo from "./stepTwo";
 
 
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
+
   return (
     <div className="main-container">
       <Header />
@@ -19,10 +21,12 @@ const Checkout = () => {
         <div className="checkout-container">
           <div className="checkout-inner-container">
             <div className={`checkout-items-container ${step === 0 ? 'show-container' : 'hide-container'}`} >
-              <StepOne/>
+              <StepOne />
             </div>
             <div className={`checkout-items-container ${step === 1 ? 'show-container' : 'hide-container'}`} >
-              test2
+              <div className="step-auth-container">
+                <StepTwo />
+              </div>
             </div>
             <div className={`checkout-items-container ${step === 2 ? 'show-container' : 'hide-container'}`} >
               test3

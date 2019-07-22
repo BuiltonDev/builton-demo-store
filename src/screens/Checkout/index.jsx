@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import CheckoutNavigation from "../../components/CheckoutNavigation";
 import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
+import StepThree from "./stepThree";
 
 
 const Checkout = () => {
@@ -46,7 +47,7 @@ const Checkout = () => {
               </div>
             </div>
             <div className={`checkout-items-container ${step === 2 ? 'show-container' : 'hide-container'}`} >
-              test3
+              <StepThree/>
             </div>
             <div className={`checkout-items-container ${step === 3 ? 'show-container' : 'hide-container'}`} >
               test4

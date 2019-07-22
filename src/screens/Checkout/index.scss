@@ -5,8 +5,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  transform: translateY(-80px);
   min-width: 720px;
+  min-height: 85vh;
+  justify-content: space-between;
   &:before {
     position: absolute;
     left: -20%;
@@ -40,8 +41,8 @@
 
       & .checkout-items-container-title {
         font-size: 1.6rem;
-        margin: 12px 0;
-        padding: 4px 16px;
+        margin: 12px 0 24px 0;
+        padding: 8px 16px;
         letter-spacing: 1px;
         border-bottom: 4px solid $SECONDARY_BORDER_COLOR
       }
@@ -105,6 +106,15 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        & .remove-bag-item {
+          &:hover > svg {
+            & > path {
+              &:last-child {
+                fill: rgba(0, 0, 0, 0.84);
+              }
+            }
+          }
+        }
       }
 
       & .checkout-bag-total-row {

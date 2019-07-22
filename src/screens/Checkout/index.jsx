@@ -10,9 +10,26 @@ import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
 
 
-
 const Checkout = () => {
   const [step, setStep] = useState(null);
+  const [bag] = useGlobal('bag');
+  const [order] = useGlobal('order');
+  const updateOrder = useDispatch('updateOrder');
+
+  useEffect(() => {
+    if (step === 1 && bag.length > 0) {
+      if (bag.length > 0) {
+        for (let i = 0; i < bag.length; i += 1) {
+          order.items.push({
+            product: bag[i].product._id.$oid,
+            quantity: 1,
+            sub_product: [bag[i].size._id.$oid],
+          });
+        }
+      }
+      updateOrder(order);
+    }
+  }, [step]);
 
   return (
     <div className="main-container">

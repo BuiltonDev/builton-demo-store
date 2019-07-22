@@ -26,6 +26,10 @@ const clearCheckout = clearFieldCurry('checkout');
 const getCheckout = getFieldCurry('checkout');
 const setCheckout = setFieldCurry('checkout');
 
+const clearOrder = clearFieldCurry('order');
+const getOrder = getFieldCurry('order');
+const setOrder = setFieldCurry('order');
+
 addReducer('updateUser', (global, dispatch, user, setLocalStorage = true) => {
   if (setLocalStorage) {
     setUser(user);
@@ -42,12 +46,18 @@ addReducer('addItemToBag', (global, dispatch, item) => {
   }
 });
 
-
-
 addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
   setCheckout(checkout);
   return {
     checkout
+  }
+});
+
+addReducer('updateOrder', (global, dispatch, order) => {
+  console.log(order);
+  setOrder(order);
+  return {
+    order
   }
 });
 
@@ -75,10 +85,10 @@ addReducer('removeItemFromBag', (global, dispatch, itemId) => {
 });
 
 addReducer('logout', async (global, dispatch) => {
-  await dispatch.updateUser(undefined, false);
-  await dispatch.updateBuiltonSession(undefined, false);
-})
-
+  await dispatch.updateUser(null, false);
+  await dispatch.updateBuiltonSession(null, false);
+  await dispatch.updateOrder(null);
+});
 
 export default {
   init: () => {
@@ -91,6 +101,7 @@ export default {
         user: null,
         builtonSession: null,
         bag: null,
+        order: [],
         checkout: {
           0: {
             title: 'bag',
@@ -120,13 +131,15 @@ export default {
         user: getUser(),
         builtonSession: getBuiltonSession(),
         bag: getBag(),
-        checkout: getCheckout()
+        checkout: getCheckout(),
+        order: getOrder(),
       };
     } catch (err) {
       clearUser();
       clearBuiltonSession();
       clearBag();
       clearCheckout();
+      clearOrder();
     }
 
     // Setting values in global store
@@ -144,6 +157,7 @@ export default {
   logout: async () => {
     clearUser();
     clearBuiltonSession();
+    clearOrder();
     await getDispatch().logout();
 
 

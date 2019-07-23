@@ -3,6 +3,7 @@ import builton from '../../../utils/builton';
 import notify from '../../../utils/toast';
 import { useGlobal, useDispatch } from 'reactn';
 import Spinner from "../../../components/Spinner";
+import ListItem from "../../../components/ListItem";
 
 // We create test payment method on Builton API
 // And we attach the payment method to our order
@@ -58,7 +59,7 @@ const StepThree = () => {
         </div>
       }
       {!loading && paymentMethod &&
-        <div className="checkout-payment-method-row">
+        <ListItem>
           <div className="checkout-payment-method-left">
             <div className="checkout-payment-card-number">
               **** **** **** {paymentMethod.card.last4}
@@ -75,7 +76,7 @@ const StepThree = () => {
               &#10003;
             </div>
           </div>
-        </div>
+        </ListItem>
       }
     </>
   )

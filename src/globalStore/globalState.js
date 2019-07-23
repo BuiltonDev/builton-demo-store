@@ -101,7 +101,7 @@ export default {
         user: null,
         builtonSession: null,
         bag: null,
-        order: [],
+        order: {},
         checkout: {
           0: {
             title: 'bag',

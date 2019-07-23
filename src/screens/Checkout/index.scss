@@ -157,6 +157,56 @@
           flex: 1;
         }
       }
+
+      & .checkout-spinner-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 32px;
+      }
+
+      & .checkout-payment-method-row {
+        display: flex;
+        flex-direction: row;
+        padding: 16px 24px;
+        border: 2px solid $SECONDARY_BORDER_COLOR;
+        border-radius: 12px;
+        position: relative;
+        letter-spacing: 1px;
+        transition: all 250ms ease-in;
+        &:hover {
+          transition: all 250ms ease-in;
+          cursor: pointer;
+          -webkit-box-shadow: 0px 0px 20px -11px rgba(0,0,0,0.75);
+          -moz-box-shadow: 0px 0px 20px -11px rgba(0,0,0,0.75);
+          box-shadow: 0px 0px 20px -11px rgba(0,0,0,0.75);
+        }
+        & .checkout-payment-method-left {
+          display: flex;
+          flex-direction: column;
+          flex: 11;
+          & > div {
+            padding: 12px 0;
+          }
+        }
+        & .checkout-payment-method-right {
+          display: flex;
+          flex-direction: column;
+          flex: auto;
+          align-items: flex-end;
+          justify-content: center;
+          & > div {
+            padding: 12px 0;
+          }
+          & .checkout-payment-card-checkmark {
+            font-size: 40px;
+            color: $SECONDARY_BORDER_COLOR;
+            padding-right: 12px;
+            padding-top: 0;
+            padding-bottom: 0;
+          }
+        }
+      }
     }
   }
 }

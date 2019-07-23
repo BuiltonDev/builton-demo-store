@@ -1,28 +1,83 @@
 import React, {useState, useEffect} from 'react';
-import config from '../../../config';
-import {Elements, StripeProvider} from 'react-stripe-elements';
-import StripeCardForm from "./stripeCardForm";
+import builton from '../../../utils/builton';
+import notify from '../../../utils/toast';
+import { useGlobal, useDispatch } from 'reactn';
+import Spinner from "../../../components/Spinner";
+
+// We create test payment method on Builton API
+// And we attach the payment method to our order
 
 const StepThree = () => {
-  let [StripeContext, setStripeContext] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [order] = useGlobal('order');
+  const updateOrder = useDispatch('updateOrder');
+
+  const getPaymentMethod = async () => {
+    try {
+      const paymentMethods = await builton.paymentMethods.get();
+      if (!paymentMethods.length) {
+         const paymentMethod = await builton.paymentMethods.create({
+           body: {
+             payment_method: 'stripe',
+             token: 'tok_visa'
+           }
+         });
+         setPaymentMethod(paymentMethod);
+        updateOrderState(paymentMethod);
+      } else {
+        setPaymentMethod(paymentMethods[0]);
+        updateOrderState(paymentMethods[0]);
+      }
+      setLoading(false);
+    } catch(err) {
+      notify('Failed to get payment method', {
+        type: 'error',
+      });
+      setLoading(false);
+    }
+  };
+
+  const updateOrderState = (paymentMethod) => {
+    updateOrder({
+      ...order,
+      payment_method: paymentMethod._id.$oid,
+    })
+  };
 
   useEffect(() => {
-    if (window.Stripe) {
-      setStripeContext(window.Stripe(config.stripeKey));
-    } else {
-      document.querySelector('#stripe-js').addEventListener('load', () => {
-        // Create Stripe instance once Stripe.js loads
-        setStripeContext(window.Stripe(config.stripeKey));
-      });
-    }
+    getPaymentMethod();
   }, []);
 
   return (
-    <StripeProvider stripe={StripeContext}>
-      <Elements>
-        <StripeCardForm/>
-      </Elements>
-    </StripeProvider>
+    <>
+      <div className="checkout-items-container-title">Payment method</div>
+      {loading &&
+        <div className="checkout-spinner-container">
+          <Spinner height={32} width={32} />
+        </div>
+      }
+      {!loading && paymentMethod &&
+        <div className="checkout-payment-method-row">
+          <div className="checkout-payment-method-left">
+            <div className="checkout-payment-card-number">
+              **** **** **** {paymentMethod.card.last4}
+            </div>
+            <div className="checkout-payment-method-card-name">
+              John Doe
+            </div>
+          </div>
+          <div className="checkout-payment-method-right">
+            <div className="checkout-payment-card-exp-date">
+              {paymentMethod.card.exp_month} / {paymentMethod.card.exp_year}
+            </div>
+            <div className="checkout-payment-card-checkmark">
+              &#10003;
+            </div>
+          </div>
+        </div>
+      }
+    </>
   )
 };
 

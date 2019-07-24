@@ -6,11 +6,11 @@ import './index.scss';
 import useReactRouter from "use-react-router";
 import Header from "../../components/Header";
 import CheckoutNavigation from "../../components/CheckoutNavigation";
-import StepOne from "./stepOne";
-import StepTwo from "./stepTwo";
-import StepThree from "./stepThree";
-import StepFour from "./stepFour";
-import StepFive from "./stepFive";
+import Bag from "./Bag";
+import Authentication from "./Authentication";
+import PaymentMethod from "./PaymentMethod";
+import DeliveryAddress from "./DeliveryAddress";
+import Overview from "./Overview";
 
 
 const Checkout = () => {
@@ -41,11 +41,11 @@ const Checkout = () => {
         <div className="checkout-container">
           <div className="checkout-inner-container">
             <div className={`checkout-items-container ${step === 0 ? 'show-container' : 'hide-container'}`} >
-              {step === 0 &&  <StepOne />}
+              {step === 0 &&  <Bag />}
             </div>
             <div className={`checkout-items-container ${step === 1 ? 'show-container' : 'hide-container'}`} >
               <div className="step-auth-container">
-                {step === 1 && <StepTwo />}
+                {step === 1 && <Authentication />}
               </div>
             </div>
             <div className={`checkout-items-container ${step === 2 ? 'show-container' : 'hide-container'}`} >
@@ -54,13 +54,13 @@ const Checkout = () => {
                 // We render it on order confirmation as well
                 // because we don't say payment information data in the local storage
                 // and we need to fetch and set it again in case the confirmation is reloaded
-                step === 2 || step === 4 && <StepThree/>}
+                step === 2 || step === 4 && <PaymentMethod/>}
             </div>
             <div className={`checkout-items-container ${step === 3 ? 'show-container' : 'hide-container'}`} >
-              {step === 3 && <StepFour/>}
+              {step === 3 && <DeliveryAddress/>}
             </div>
             <div className={`checkout-items-container ${step === 4 ? 'show-container' : 'hide-container'}`} >
-              {step === 4 && <StepFive/>}
+              {step === 4 && <Overview/>}
             </div>
           </div>
           <div className="checkout-nav-container">

@@ -14,7 +14,6 @@ import PaymentMethod from "./PaymentMethod";
 import DeliveryAddress from "./DeliveryAddress";
 import Overview from "./Overview";
 import Disclaimer from "./Disclaimer";
-import BuiltonLogo from "../../components/BuiltonLogo";
 import BLogo from "../../assets/icons/b_logo";
 
 const Checkout = () => {
@@ -23,6 +22,8 @@ const Checkout = () => {
   const [bag] = useGlobal("bag");
   const [order] = useGlobal("order");
   const updateOrder = useDispatch("updateOrder");
+  const clearCheckout = useDispatch("clearCheckout");
+  const { history } = useReactRouter();
 
   useEffect(() => {
     if (step === 1 && bag && bag.length > 0) {
@@ -36,8 +37,6 @@ const Checkout = () => {
       }
       updateOrder(order);
     }
-
-    console.log(step);
 
     if (step === 5) {
       setConfirmOrder(false);
@@ -57,6 +56,8 @@ const Checkout = () => {
           ...order
         }
       });
+      await clearCheckout();
+      history.push('/');
     } catch(err) {
       notify('Failed to create order', {
         type: 'error'

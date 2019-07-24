@@ -75,6 +75,13 @@ addReducer('addItemToBag', (global, dispatch, item) => {
   }
 });
 
+addReducer('clearBag', (globa, dispatch) => {
+  setBag(null);
+  return {
+    bag: null
+  }
+});
+
 addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
   setCheckout(checkout);
   return {
@@ -118,10 +125,17 @@ addReducer('removeItemFromBag', (global, dispatch, itemId) => {
   }
 });
 
+addReducer('clearCheckout', async (globa, dispatch) => {
+  await dispatch.updateOrder(DEFAULT_ORDER);
+  await dispatch.updatePaymentMethod(null);
+  await dispatch.updateCheckoutStep(DEFAULT_CHECKOUT);
+  await dispatch.clearBag(null);
+});
+
 addReducer('logout', async (global, dispatch) => {
   await dispatch.updateUser(null, false);
   await dispatch.updateBuiltonSession(null, false);
-  await dispatch.updateOrder(null);
+  await dispatch.updateOrder(DEFAULT_ORDER);
   await dispatch.updatePaymentMethod(null);
 });
 

@@ -25,6 +25,24 @@
     flex-direction: column;
     flex: 1;
     justify-content: center;
+
+    & .checkout-overview-container {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      overflow-y: auto;
+
+      & .checkout-overview-sub-container {
+        margin-top: 24px;
+      }
+
+      & .checkout-bag-total-row {
+        margin-top: 42px !important;
+        font-size: 1.5rem;
+        color: $SECONDARY_TEXT;
+      }
+    }
+
     & .checkout-sub-header-title {
       border-bottom: 2px solid $PRIMARY_BORDER_COLOR;
       padding: 12px 6px;

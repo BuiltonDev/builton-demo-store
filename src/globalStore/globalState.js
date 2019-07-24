@@ -54,10 +54,15 @@ addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
 });
 
 addReducer('updateOrder', (global, dispatch, order) => {
-  console.log(order);
   setOrder(order);
   return {
     order
+  }
+});
+
+addReducer('updatePaymentMethod', (global, dispatch, paymentMethod) => {
+  return {
+    paymentMethod
   }
 });
 
@@ -88,6 +93,8 @@ addReducer('logout', async (global, dispatch) => {
   await dispatch.updateUser(null, false);
   await dispatch.updateBuiltonSession(null, false);
   await dispatch.updateOrder(null);
+  await dispatch.updatePaymentMethod(null);
+  await dispatch.updateDeliveryAddress(null);
 });
 
 export default {
@@ -102,6 +109,7 @@ export default {
         builtonSession: null,
         bag: null,
         order: {},
+        paymentMethod: null,
         checkout: {
           0: {
             title: 'bag',
@@ -133,6 +141,7 @@ export default {
         bag: getBag(),
         checkout: getCheckout(),
         order: getOrder(),
+        paymentMethod: null,
       };
     } catch (err) {
       clearUser();

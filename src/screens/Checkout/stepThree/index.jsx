@@ -13,6 +13,7 @@ const StepThree = () => {
   const [loading, setLoading] = useState(true);
   const [order] = useGlobal('order');
   const updateOrder = useDispatch('updateOrder');
+  const updatePaymentMethod = useDispatch('updatePaymentMethod');
 
   const getPaymentMethod = async () => {
     try {
@@ -40,6 +41,7 @@ const StepThree = () => {
   };
 
   const updateOrderState = (paymentMethod) => {
+    updatePaymentMethod(paymentMethod);
     updateOrder({
       ...order,
       payment_method: paymentMethod._id.$oid,

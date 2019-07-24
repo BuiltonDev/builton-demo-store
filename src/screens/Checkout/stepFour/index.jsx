@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import ListItem from "../../../components/ListItem";
-import {useDispatch, useGlobal} from "reactn";
+import { useDispatch, useGlobal } from "reactn";
 import PlacesAutocomplete, {
-  geocodeByAddress,
-} from 'react-places-autocomplete';
+  geocodeByAddress
+} from "react-places-autocomplete";
 import Spinner from "../../../components/Spinner";
 import Input from "../../../components/Input";
 import Search from "../../../assets/icons/search";
-import {parseGooglePlace} from "../../../utils/address";
-import notify from '../../../utils/toast';
+import { parseGooglePlace } from "../../../utils/address";
+import notify from "../../../utils/toast";
 
 const StepFour = () => {
-  const [order] = useGlobal('order');
-  const [selectedAddress, setSelectedAddress] = useState(order.delivery_address);
-  const [address, setAddress] = useState('');
+  const [order] = useGlobal("order");
+  const [selectedAddress, setSelectedAddress] = useState(
+    order.delivery_address
+  );
+  const [address, setAddress] = useState("");
 
-  const updateOrder = useDispatch('updateOrder');
+  const updateOrder = useDispatch("updateOrder");
 
   const handleChange = newAddress => {
     setAddress(newAddress);
   };
 
   const handleSelect = async address => {
-    setAddress('');
+    setAddress("");
     try {
       const addressObj = await geocodeByAddress(address);
       const parsedAddress = parseGooglePlace(addressObj[0]);
+
       updateOrder({
         ...order,
         delivery_address: parsedAddress
       });
       setSelectedAddress(parsedAddress);
-    } catch(err) {
-      notify('Failed to get address', {
-        type: 'error'
+    } catch (err) {
+      notify("Failed to get address", {
+        type: "error"
       });
       setSelectedAddress(undefined);
     }
@@ -50,52 +53,55 @@ const StepFour = () => {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
           return (
-          <div className="checkout-address-picker-container">
-            <div className="checkout-address-search-container">
-              <Input
-                leftAdornment={
-                  <Search width={22} height={22} color="rgb(141, 141, 141)" />
-                }
-                inputProps={{
-                  ...getInputProps(),
-                  onChange: (val, ev) => {
-                    getInputProps().onChange(ev);
+            <div className="checkout-address-picker-container">
+              <div className="checkout-address-search-container">
+                <Input
+                  leftAdornment={
+                    <Search width={22} height={22} color="rgb(141, 141, 141)" />
                   }
-                }}
-                placeholder="Search address..."
-                colorScheme={1}
-              />
-            </div>
+                  inputProps={{
+                    ...getInputProps(),
+                    onChange: (val, ev) => {
+                      getInputProps().onChange(ev);
+                    }
+                  }}
+                  placeholder="Search address..."
+                  colorScheme={1}
+                />
+              </div>
 
-            <div className={`autocomplete-dropdown-container ${suggestions.length > 0 ? 'show-suggestions' : ''}`}>
-              {loading &&
-                <div className="checkout-address-spinner-container">
-                  <Spinner/>
-                </div>
-              }
-              {suggestions.map(suggestion => {
-                const className = suggestion.active
-                  ? 'suggestion-item suggestion-item--active'
-                  : 'suggestion-item';
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                    })}
-                  >
-                    <span>{suggestion.description}</span>
+              <div
+                className={`autocomplete-dropdown-container ${
+                  suggestions.length > 0 ? "show-suggestions" : ""
+                }`}
+              >
+                {loading && (
+                  <div className="checkout-address-spinner-container">
+                    <Spinner />
                   </div>
-                );
-              })}
+                )}
+                {suggestions.map(suggestion => {
+                  const className = suggestion.active
+                    ? "suggestion-item suggestion-item--active"
+                    : "suggestion-item";
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}}
+          );
+        }}
       </PlacesAutocomplete>
-      <div className="checkout-sub-header-title">
-        Selected delivery address
-      </div>
+      <div className="checkout-sub-header-title">Selected delivery address</div>
       <div>
-        {selectedAddress &&
+        {selectedAddress && (
           <ListItem>
             <div className="checkout-list-item-left">
               <div>{selectedAddress.street_name}</div>
@@ -106,15 +112,13 @@ const StepFour = () => {
             </div>
             <div className="checkout-list-item-right">
               <div>{selectedAddress.country}</div>
-              <div className="checkout-list-item-checkmark">
-                &#10003;
-              </div>
+              <div className="checkout-list-item-checkmark">&#10003;</div>
             </div>
           </ListItem>
-        }
+        )}
       </div>
     </>
-  )
+  );
 };
 
 export default StepFour;

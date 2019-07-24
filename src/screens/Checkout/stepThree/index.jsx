@@ -58,9 +58,12 @@ const StepThree = () => {
           <Spinner height={32} width={32} />
         </div>
       }
+      <div className="checkout-sub-header-title">
+        Selected payment method
+      </div>
       {!loading && paymentMethod &&
         <ListItem>
-          <div className="checkout-payment-method-left">
+          <div className="checkout-list-item-left">
             <div className="checkout-payment-card-number">
               **** **** **** {paymentMethod.card.last4}
             </div>
@@ -68,11 +71,11 @@ const StepThree = () => {
               John Doe
             </div>
           </div>
-          <div className="checkout-payment-method-right">
+          <div className="checkout-list-item-right">
             <div className="checkout-payment-card-exp-date">
               {paymentMethod.card.exp_month} / {paymentMethod.card.exp_year}
             </div>
-            <div className="checkout-payment-card-checkmark">
+            <div className="checkout-list-item-checkmark">
               &#10003;
             </div>
           </div>

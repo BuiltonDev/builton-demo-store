@@ -1,12 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
-const ListItem = ({ children }) => {
+const ListItem = ({ children, onClick }) => {
   return(
-    <div className="list-item-row">
+    <div onClick={onClick} className="list-item-row">
       {children}
     </div>
   )
+};
+
+ListItem.defaultProps = {
+  onClick: () => {}
+};
+
+ListItem.propTypes = {
+  onClick: PropTypes.func,
 };
 
 export default ListItem;

@@ -10,6 +10,35 @@ import {
 
 let INITIALIZED = false;
 
+const DEFAULT_CHECKOUT = {
+  0: {
+    title: 'bag',
+    complete: false,
+  },
+  1: {
+    title: 'authentication',
+    complete: false,
+  },
+  2: {
+    title: 'payment_method',
+    complete: false,
+  },
+  3: {
+    title: 'delivery_address',
+    complete: false,
+  },
+  4: {
+    title: 'confirm',
+    complete: false,
+  }
+};
+
+const DEFAULT_ORDER = {
+  items: [],
+  delivery_address: '',
+  payment_method: '',
+};
+
 const clearUser = clearFieldCurry('user');
 const getUser = getFieldCurry('user');
 const setUser = setFieldCurry('user');
@@ -94,7 +123,6 @@ addReducer('logout', async (global, dispatch) => {
   await dispatch.updateBuiltonSession(null, false);
   await dispatch.updateOrder(null);
   await dispatch.updatePaymentMethod(null);
-  await dispatch.updateDeliveryAddress(null);
 });
 
 export default {
@@ -108,30 +136,9 @@ export default {
         user: null,
         builtonSession: null,
         bag: null,
-        order: {},
+        order: DEFAULT_ORDER,
         paymentMethod: null,
-        checkout: {
-          0: {
-            title: 'bag',
-            complete: false,
-          },
-          1: {
-            title: 'authentication',
-            complete: false,
-          },
-          2: {
-            title: 'payment_method',
-            complete: false,
-          },
-          3: {
-            title: 'delivery_address',
-            complete: false,
-          },
-          4: {
-            title: 'confirm',
-            complete: false,
-          }
-        }
+        checkout: DEFAULT_CHECKOUT
       };
 
     try {
@@ -139,16 +146,14 @@ export default {
         user: getUser(),
         builtonSession: getBuiltonSession(),
         bag: getBag(),
-        checkout: getCheckout(),
-        order: getOrder(),
+        checkout: getCheckout() || DEFAULT_CHECKOUT,
+        order: getOrder() || DEFAULT_ORDER,
         paymentMethod: null,
       };
     } catch (err) {
       clearUser();
       clearBuiltonSession();
       clearBag();
-      clearCheckout();
-      clearOrder();
     }
 
     // Setting values in global store
@@ -167,6 +172,7 @@ export default {
     clearUser();
     clearBuiltonSession();
     clearOrder();
+    clearCheckout();
     await getDispatch().logout();
 
 

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 import useReactRouter from "use-react-router";
 import {useDispatch, useGlobal} from "reactn";
 import Button from "../Button";
 
-const MAX_checkoutSteps = 3;
-
 const CheckoutNavigation = (
   {
-    onStep
+    onStep,
+    onPlaceOrder,
   }
 ) => {
   const { match, history } = useReactRouter();
@@ -142,14 +142,18 @@ const CheckoutNavigation = (
           <div className="checkout-step-title">Confirmation</div>
         </div>
       </div>
-      {(step <= MAX_checkoutSteps && step !== 1) &&
+      {(step !== 1) &&
         <div className="checkout-next-step">
-          <Button type="button" onClick={() => pushStep()} title="Next" />
+          <Button type="button" onClick={() => step === 4 ? onPlaceOrder() :  pushStep()} title={step === 4 ? 'Place order' : 'Next'} />
         </div>
       }
     </>
-
   )
-}
+};
+
+CheckoutNavigation.propTypes = {
+  onStep: PropTypes.func,
+  onPlaceOrder: PropTypes.func,
+};
 
 export default CheckoutNavigation;

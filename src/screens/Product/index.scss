@@ -7,6 +7,7 @@
   justify-content: flex-start;
   align-self: stretch;
   overflow: hidden;
+  position: relative;
   & .product-description-container {
     flex: 1;
     flex-direction: column;;
@@ -19,6 +20,18 @@
       flex-direction: column;
       align-items: center;
     }
+    & .product-id {
+      transform: translateX(80px);
+      margin-top: 32px;
+      letter-spacing: 1px;
+      align-self: flex-start;
+      font-size: 1.06rem;
+      & > span {
+        font-size: 1.08rem;
+        text-decoration: underline;
+      }
+    }
+
     & .product-description-content {
       max-width: 65%;
       transform: translateX(-40px);

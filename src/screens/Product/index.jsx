@@ -69,8 +69,8 @@ const Product = () => {
   return (
     <div className="main-container">
       <Header />
-      <BuiltonSplash show={loading} />
       <div className="product-wrapper">
+        <BuiltonSplash show={loading} />
         <div className="product-image-container">
           {product && (
             <div
@@ -105,6 +105,9 @@ const Product = () => {
                   </span>
                 </div>
                 <div className="product-description-content">{product.description}</div>
+                <div className="product-id">
+                  Article id: <span>{product.human_id}</span>
+                </div>
                 <div className="product-sizes-container">
                   {getSneakersSizes(product)
                     .sort((a, b) => parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0)

@@ -9,6 +9,16 @@
     align-self: stretch;
     padding: 0 0 0 62px;
     border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
+    & .header-logo-container {
+        cursor: pointer;
+    }
+    & .empty-bag-container {
+        padding: 12px 24px;
+        font-size: 0.82rem;
+        color: $SECONDARY_TEXT;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
     .dropdown-container {
         position: relative;
         padding-right: 62px;
@@ -20,6 +30,7 @@
         flex-direction: row;
         flex: 1;
         align-items: center;
+        justify-content: space-between;
         & > div {
             flex: 0;
             min-width: 80px;

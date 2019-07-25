@@ -19,7 +19,7 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
           }, debounce)
         }
       } else {
-        input.onChange(ev.target.value);
+        input.onChange(ev.target.value, ev);
       }
     }
     if (ev.target.value) {
@@ -66,8 +66,8 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
 };
 
 Input.defaultProps = {
-  loading: true,
-}
+  loading: false,
+};
 
 Input.propTypes = {
   inputProps: PropTypes.object.isRequired,

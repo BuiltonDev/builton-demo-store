@@ -9,7 +9,6 @@ const parseGooglePlace = place => {
   };
 
   let address = {};
-  console.log(place);
   place.address_components.map(component => {
     let addressType = component.types[0];
     if (componentForm[addressType]) {

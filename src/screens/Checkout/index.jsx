@@ -19,6 +19,7 @@ import BLogo from "../../assets/icons/b_logo";
 const Checkout = () => {
   const [step, setStep] = useState(null);
   const [confirmOrder, setConfirmOrder] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [bag] = useGlobal("bag");
   const [order] = useGlobal("order");
   const updateOrder = useDispatch("updateOrder");
@@ -51,6 +52,8 @@ const Checkout = () => {
   }, [confirmOrder]);
 
   const placeOrder = async () => {
+    setLoading(true);
+
     try {
       await builton.orders.create({
         body: {
@@ -63,6 +66,8 @@ const Checkout = () => {
         type: 'error'
       })
     }
+
+    setLoading(false);
 
     // Clear the checkout and the bag after the order has been create
     await clearCheckout();
@@ -157,6 +162,7 @@ const Checkout = () => {
             </div>
             <div className="checkout-nav-container">
               <CheckoutNavigation
+                loading={loading}
                 shouldNavigate={(stepNumb) => checkShouldNavigate(stepNumb)}
                 onPlaceOrder={() => step === 5 ? setConfirmOrder(true) : setStep(5)}
                 onStep={currentStep => setStep(currentStep)}

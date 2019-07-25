@@ -25,7 +25,8 @@ const Header = React.memo(() => {
 
   const { history } = useReactRouter();
 
-  const removeItem = itemId => {
+  const removeItem = (itemId, ev) => {
+    ev.stopPropagation();
     removeItemFrombag(itemId);
   };
 
@@ -112,7 +113,7 @@ const Header = React.memo(() => {
                   </div>
                   <div
                     className="remove-bag-item"
-                    onClick={() => removeItem(prod.size._id.$oid)}
+                    onClick={(ev) => removeItem(prod.size._id.$oid, ev)}
                   >
                     <RemoveShopping color="#c5c5c5" />
                   </div>

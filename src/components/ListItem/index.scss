@@ -1,0 +1,20 @@
+@import '../../constants';
+
+.list-item-row {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 24px;
+  border: 2px solid $SECONDARY_BORDER_COLOR;
+  border-radius: 12px;
+  position: relative;
+  letter-spacing: 1px;
+  transition: all 250ms ease-in;
+  margin-top: 16px;
+  &:hover {
+    transition: all 250ms ease-in;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 20px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 20px -11px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 20px -11px rgba(0,0,0,0.75);
+  }
+}

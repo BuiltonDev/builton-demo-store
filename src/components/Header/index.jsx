@@ -37,6 +37,114 @@ const Header = React.memo(() => {
     return total;
   };
 
+  const renderLogoutContainer = () => {
+    return (
+      <>
+        <a
+          className="header-box-hyperlink"
+          href={`${!user ? "/auth" : "#"}`}
+          onClick={e => {
+            user && e.preventDefault();
+          }}
+          onMouseEnter={() => {
+            user && setUserMenuOpen(true);
+          }}
+          onMouseLeave={() => {
+            user && setUserMenuOpen(false);
+          }}
+        >
+            <span>
+              {user ? (
+                <div>{user.email}</div>
+              ) : (
+                <Account width={18} height={18} color="black" />
+              )}
+            </span>
+        </a>
+        <button
+          type="button"
+          className="header-box-hyperlink cart"
+          onMouseEnter={() => setCartOpen(true)}
+          onMouseLeave={() => setCartOpen(false)}
+        >
+            <span>
+              <Cart width={18} height={18} color="black" />{" "}
+              <span className="cart-count">{(bag && bag.length) || 0}</span>
+            </span>
+        </button>
+        <HeaderDropdown open={userMenuOpen}>
+          <DropdownMenu>
+            <DropdownMenuItem
+              onClick={() => {
+                globalState.logout();
+                // Force refresh of the header
+                history.push("/");
+              }}
+            >
+              <span>Logout</span>
+              <SignOut color="#c5c5c5" />
+            </DropdownMenuItem>
+          </DropdownMenu>
+        </HeaderDropdown>
+      </>
+    )
+  };
+
+  const renderCartContainer = () => {
+    return (
+      <DropdownMenu>
+        {bag && bag.length > 0 ? (
+          <>
+            {bag.map((prod, index) => (
+              <DropdownMenuItem
+                key={`bag-product-${prod.size._id.$oid}${index}`}
+                onClick={() =>
+                  history.push(
+                    `/product_list/${prod.category}/${prod.product._id.$oid}`
+                  )
+                }
+              >
+                <div className="bag-product-row">
+                  <div>{prod.product.name}</div>
+                  <div>{`Size ${getSneakersSize(prod.size)}`}</div>
+                  <div>
+                    {prod.product.price} {prod.product.currency}
+                  </div>
+                  <div
+                    className="remove-bag-item"
+                    onClick={() => removeItem(prod.size._id.$oid)}
+                  >
+                    <RemoveShopping color="#c5c5c5" />
+                  </div>
+                </div>
+              </DropdownMenuItem>
+            ))}
+            <div className="header-checkout-container">
+              <Button
+                onClick={() => {
+                  history.push('/checkout/bag');
+                }}
+                type="button"
+                className="button round"
+                title="Proceed to checkout"
+                style={{
+                  padding: '4px 12px',
+                  height: 40,
+                  fontSize: '0.72rem'
+                }}
+              />
+              <div className="header-bag-amount">
+                {calculateTotalAmount()} {bag[0].product.currency}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div>No items in the bag.</div>
+        )}
+      </DropdownMenu>
+    )
+  };
+
   return (
     <div className="header-container">
       <BuiltonLogo />
@@ -66,104 +174,10 @@ const Header = React.memo(() => {
           <span>Dashboard</span>
         </a>
         <span className="dropdown-container">
-          <a
-            className="header-box-hyperlink"
-            href={`${!user ? "/auth" : "#"}`}
-            onClick={e => {
-              user && e.preventDefault();
-            }}
-            onMouseEnter={() => {
-              user && setUserMenuOpen(true);
-            }}
-            onMouseLeave={() => {
-              user && setUserMenuOpen(false);
-            }}
-          >
-            <span>
-              {user ? (
-                <div>{user.email}</div>
-              ) : (
-                <Account width={18} height={18} color="black" />
-              )}
-            </span>
-          </a>
-          <button
-            type="button"
-            className="header-box-hyperlink cart"
-            onMouseEnter={() => setCartOpen(true)}
-            onMouseLeave={() => setCartOpen(false)}
-          >
-            <span>
-              <Cart width={18} height={18} color="black" />{" "}
-              <span className="cart-count">{(bag && bag.length) || 0}</span>
-            </span>
-          </button>
-          <HeaderDropdown open={userMenuOpen}>
-            <DropdownMenu>
-              <DropdownMenuItem
-                onClick={() => {
-                  globalState.logout();
-                  // Force refresh of the header
-                  history.push("/");
-                }}
-              >
-                <span>Logout</span>
-                <SignOut color="#c5c5c5" />
-              </DropdownMenuItem>
-            </DropdownMenu>
-          </HeaderDropdown>
+          {renderLogoutContainer()}
         </span>
         <HeaderDropdown open={cartOpen}>
-          <DropdownMenu>
-            {bag && bag.length > 0 ? (
-              <>
-                {bag.map((prod, index) => (
-                  <DropdownMenuItem
-                    key={`bag-product-${prod.size._id.$oid}${index}`}
-                    onClick={() =>
-                      history.push(
-                        `/product_list/${prod.category}/${prod.product._id.$oid}`
-                      )
-                    }
-                  >
-                    <div className="bag-product-row">
-                      <div>{prod.product.name}</div>
-                      <div>{`Size ${getSneakersSize(prod.size)}`}</div>
-                      <div>
-                        {prod.product.price} {prod.product.currency}
-                      </div>
-                      <div
-                        className="remove-bag-item"
-                        onClick={() => removeItem(prod.size._id.$oid)}
-                      >
-                        <RemoveShopping color="#c5c5c5" />
-                      </div>
-                    </div>
-                  </DropdownMenuItem>
-                ))}
-                <div className="header-checkout-container">
-                  <Button
-                    onClick={() => {
-                      history.push('/checkout/bag');
-                    }}
-                    type="button"
-                    className="button round"
-                    title="Proceed to checkout"
-                    style={{
-                      padding: '4px 12px',
-                      height: 40,
-                      fontSize: '0.72rem'
-                    }}
-                  />
-                  <div className="header-bag-amount">
-                    {calculateTotalAmount()} {bag[0].product.currency}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div>No items in the bag.</div>
-            )}
-          </DropdownMenu>
+          {renderCartContainer()}
         </HeaderDropdown>
       </div>
     </div>

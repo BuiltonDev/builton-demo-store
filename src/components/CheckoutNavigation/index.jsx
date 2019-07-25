@@ -40,9 +40,22 @@ const CheckoutNavigation = (
         for (let i = 0; i < stepsVals.length; i += 1) {
           if (match.params.step === stepsVals[i].title) {
             if (isNextStep) {
+              // In case the user has pressed on "NEXT", we navigate to the next step and animate 1
+              // Or navigates from the checkout navigator
               length = 1;
             } else {
-              length = i;
+              // In case the user has loaded the url by typing
+              // We check if the steps before the loaded one are complete
+              // if not complete, then we navigate to the step that is not completed
+              if (stepsVals[i - 1] && stepsVals[i - 1].complete) {
+                length = i;
+              } else {
+                for (let x = i; x >= 0; x -= 1) {
+                  if (!stepsVals[x].complete) {
+                    pushStep(x);
+                  }
+                }
+              }
             }
             onStep(i);
             setStep(i);
@@ -51,26 +64,18 @@ const CheckoutNavigation = (
         }
 
         animateSteps(length);
-
-      } else {
-        for (let i = 0; i < stepsVals.length; i += 1) {
-          if (!stepsVals[i].complete) {
-            setStep(i - 1);
-            break;
-          } else if (i === stepsVals.length - 1) {
-            setStep(stepsVals.length - 1);
-          }
-        }
       }
     }
   }, [match.params.step]);
 
   const pushStep = async (stepNumb) => {
-    if (!shouldNavigate()) return false;
+    if (!shouldNavigate(stepNumb) && !stepNumb) return false;
 
-    const checkoutStepsCopy = {...checkout};
-    checkoutStepsCopy[step].complete = true;
-    await updateCheckoutStep(checkoutStepsCopy);
+    if (!stepNumb)  {
+      const checkoutStepsCopy = {...checkout};
+      checkoutStepsCopy[step].complete = true;
+      await updateCheckoutStep(checkoutStepsCopy);
+    }
 
     setIsNextStep(true);
     setTimeout(() => history.push(`/checkout/${checkout[typeof stepNumb !== 'undefined' ? stepNumb : step + 1].title}`));

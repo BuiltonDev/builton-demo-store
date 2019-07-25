@@ -68,7 +68,8 @@ const Checkout = () => {
   };
 
   const checkShouldNavigate = (stepNumb) => {
-    if (step === 3 && !stepNumb) {
+    console.log(stepNumb);
+    if (step === 3 && typeof stepNumb === 'undefined') {
       if (!order.delivery_address) {
         notify('Please select delivery address to proceed', {
           type: 'warning'

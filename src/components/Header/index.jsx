@@ -147,7 +147,9 @@ const Header = React.memo(() => {
 
   return (
     <div className="header-container">
-      <BuiltonLogo />
+      <div className="header-logo-container" onClick={() => history.push('/')}>
+        <BuiltonLogo />
+      </div>
       <div className="top-header-hyperlink-container">
         <a
           className="header-box-hyperlink"

@@ -22,7 +22,8 @@ const CheckoutNavigation = (
   useEffect(() => {
     if (user) {
       if (step === 1) {
-        pushStep(2)
+        setCheckoutStep();
+        pushStep(2);
       }
     } else {
       if (step > 1) {
@@ -68,13 +69,17 @@ const CheckoutNavigation = (
     }
   }, [match.params.step]);
 
+  const setCheckoutStep = async () => {
+    const checkoutStepsCopy = {...checkout};
+    checkoutStepsCopy[step].complete = true;
+    await updateCheckoutStep(checkoutStepsCopy);
+  };
+
   const pushStep = async (stepNumb) => {
     if (!shouldNavigate(stepNumb) && !stepNumb) return false;
 
     if (!stepNumb)  {
-      const checkoutStepsCopy = {...checkout};
-      checkoutStepsCopy[step].complete = true;
-      await updateCheckoutStep(checkoutStepsCopy);
+      await setCheckoutStep();
     }
 
     setIsNextStep(true);
@@ -88,7 +93,10 @@ const CheckoutNavigation = (
       const childrenElements = elements[0].children;
       let defaultTransitionDelay = 0;
       for (let i = 1; i < childrenElements.length; i += 1) {
-        if (length === 1) {
+        if (length === 1 && step === 1 && user) {
+          // This is if the user is authenticated
+          defaultTransitionDelay = 350;
+        } else if (length === 1) {
           defaultTransitionDelay = i >= 0 ? 0 : 350;
         } else {
           defaultTransitionDelay += 350;

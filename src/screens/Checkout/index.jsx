@@ -23,6 +23,7 @@ const Checkout = () => {
   const [order] = useGlobal("order");
   const updateOrder = useDispatch("updateOrder");
   const clearCheckout = useDispatch("clearCheckout");
+  const clearBag = useDispatch("clearBag");
   const { history } = useReactRouter();
 
   useEffect(() => {
@@ -57,6 +58,7 @@ const Checkout = () => {
         }
       });
       await clearCheckout();
+      await clearBag();
       history.push('/');
     } catch(err) {
       notify('Failed to create order', {
@@ -123,7 +125,7 @@ const Checkout = () => {
               >
                 {
                   // We render it on order confirmation as well
-                  // because we don't say payment information data in the local storage
+                  // because we don't save payment information data in the local storage
                   // and we need to fetch and set it again in case the confirmation is reloaded
                   (step === 2 || step === 4) && <PaymentMethod />
                 }

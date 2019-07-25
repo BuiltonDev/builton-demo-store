@@ -12,6 +12,13 @@
     & .header-logo-container {
         cursor: pointer;
     }
+    & .empty-bag-container {
+        padding: 12px 24px;
+        font-size: 0.82rem;
+        color: $SECONDARY_TEXT;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
     .dropdown-container {
         position: relative;
         padding-right: 62px;

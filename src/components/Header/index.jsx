@@ -140,7 +140,7 @@ const Header = React.memo(() => {
             </div>
           </>
         ) : (
-          <div>No items in the bag.</div>
+          <div className="empty-bag-container">No items in the bag.</div>
         )}
       </DropdownMenu>
     )

@@ -69,8 +69,8 @@ const Product = () => {
   return (
     <div className="main-container">
       <Header />
-      <BuiltonSplash show={loading} />
       <div className="product-wrapper">
+        <BuiltonSplash show={loading} />
         <div className="product-image-container">
           {product && (
             <div

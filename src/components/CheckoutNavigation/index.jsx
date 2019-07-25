@@ -9,6 +9,7 @@ const CheckoutNavigation = (
   {
     onStep,
     onPlaceOrder,
+    shouldNavigate,
   }
 ) => {
   const { match, history } = useReactRouter();
@@ -65,6 +66,8 @@ const CheckoutNavigation = (
   }, [match.params.step]);
 
   const pushStep = async (stepNumb) => {
+    if (!shouldNavigate()) return false;
+
     const checkoutStepsCopy = {...checkout};
     checkoutStepsCopy[step].complete = true;
     await updateCheckoutStep(checkoutStepsCopy);
@@ -144,7 +147,7 @@ const CheckoutNavigation = (
       </div>
       {(step !== 1) &&
         <div className="checkout-next-step">
-          <Button type="button" onClick={() => step === 4 ? onPlaceOrder() :  pushStep()} title={step === 4 ? 'Place order' : 'Next'} />
+          <Button type="button" onClick={() => step === 4 ? onPlaceOrder() : pushStep()} title={step === 4 ? 'Place order' : 'Next'} />
         </div>
       }
     </>
@@ -154,6 +157,7 @@ const CheckoutNavigation = (
 CheckoutNavigation.propTypes = {
   onStep: PropTypes.func,
   onPlaceOrder: PropTypes.func,
+  shouldNavigate: PropTypes.func,
 };
 
 export default CheckoutNavigation;

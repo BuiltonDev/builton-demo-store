@@ -11,11 +11,13 @@ import ListItem from "../../../components/ListItem";
 const StepThree = () => {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [user] = useGlobal('user');
   const [order] = useGlobal('order');
   const updateOrder = useDispatch('updateOrder');
   const updatePaymentMethod = useDispatch('updatePaymentMethod');
 
   const getPaymentMethod = async () => {
+    if (!user) return;
     try {
       const paymentMethods = await builton.paymentMethods.get();
       if (!paymentMethods.length) {

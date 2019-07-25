@@ -65,6 +65,20 @@ const Checkout = () => {
     }
   };
 
+  const checkShouldNavigate = (currentStep) => {
+    console.log(currentStep);
+    if (step === 3) {
+      if (!order.delivery_address) {
+        notify('Please select delivery address to proceed', {
+          type: 'warning'
+        });
+        return false;
+      }
+      return true;
+    }
+    return true;
+  };
+
   return (
     <div className="main-container">
       <Header />
@@ -109,10 +123,12 @@ const Checkout = () => {
                   step === 2 ? "show-container" : "hide-container"
                   }`}
               >
-                {// We render it on order confirmation as well
+                {
+                  // We render it on order confirmation as well
                   // because we don't say payment information data in the local storage
                   // and we need to fetch and set it again in case the confirmation is reloaded
-                  (step === 2 || step === 4) && <PaymentMethod />}
+                  (step === 2 || step === 4) && <PaymentMethod />
+                }
               </div>
               <div
                 className={`checkout-items-container ${
@@ -138,6 +154,7 @@ const Checkout = () => {
             </div>
             <div className="checkout-nav-container">
               <CheckoutNavigation
+                shouldNavigate={() => checkShouldNavigate()}
                 onPlaceOrder={() => step === 5 ? setConfirmOrder(true) : setStep(5)}
                 onStep={currentStep => setStep(currentStep)}
               />

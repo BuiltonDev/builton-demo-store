@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 import './index.scss';
@@ -30,6 +30,12 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
       );
     }
   };
+
+  useEffect(() => {
+    if (typeof inputProps.value !== 'undefined' && inputProps.value !== '') {
+      document.getElementById(id).parentNode.classList.add("input--filled");
+    }
+  });
 
   return(
     <>

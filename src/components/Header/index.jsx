@@ -14,6 +14,7 @@ import DropdownMenuItem from "../DropdownMenuItem";
 import { getSneakersSize } from "../../utils/productModifiers";
 import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
+import MyAccount from "../../assets/icons/my_account";
 
 const Header = React.memo(() => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -75,6 +76,14 @@ const Header = React.memo(() => {
         </button>
         <HeaderDropdown open={userMenuOpen}>
           <DropdownMenu>
+            <DropdownMenuItem
+              onClick={() => {
+                history.push("/my-account/my-profile");
+              }}
+            >
+              <span>MyAccount</span>
+              <MyAccount color="#c5c5c5" />
+            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => {
                 globalState.logout();

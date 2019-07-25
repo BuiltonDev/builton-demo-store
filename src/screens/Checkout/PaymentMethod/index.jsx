@@ -8,7 +8,7 @@ import ListItem from "../../../components/ListItem";
 // We create test payment method on Builton API
 // And we attach the payment method to our order
 
-const StepThree = () => {
+const CheckoutPaymentMethod = () => {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [loading, setLoading] = useState(true);
   const [user] = useGlobal('user');
@@ -89,4 +89,4 @@ const StepThree = () => {
   )
 };
 
-export default StepThree;
+export default CheckoutPaymentMethod;

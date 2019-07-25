@@ -3,7 +3,7 @@ import AuthForm from "../../Auth/authForm";
 import useReactRouter from "use-react-router";
 import { useGlobal, useDispatch } from 'reactn';
 
-const StepTwo = () => {
+const CheckoutAuthentication = () => {
   const { history } = useReactRouter();
   const [checkout] = useGlobal('checkout');
   const updateCheckout = useDispatch('updateCheckoutStep');
@@ -15,4 +15,4 @@ const StepTwo = () => {
   }} />;
 };
 
-export default StepTwo;
+export default CheckoutAuthentication;

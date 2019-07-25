@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dislaimer = () => {
+const Disclaimer = () => {
   return (
     <>
       <div className="checkout-disclaimer-container">
@@ -12,4 +12,4 @@ const Dislaimer = () => {
     )
 };
 
-export default Dislaimer;
+export default Disclaimer;

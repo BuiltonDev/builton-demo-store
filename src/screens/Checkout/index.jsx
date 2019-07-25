@@ -57,18 +57,20 @@ const Checkout = () => {
           ...order
         }
       });
-      await clearCheckout();
-      await clearBag();
       history.push('/');
     } catch(err) {
       notify('Failed to create order', {
         type: 'error'
       })
     }
+
+    // Clear the checkout and the bag after the order has been create
+    await clearCheckout();
+    await clearBag();
   };
 
   const checkShouldNavigate = (stepNumb) => {
-    console.log(stepNumb);
+    // Check if delivery address has been set to navigate further
     if (step === 3 && typeof stepNumb === 'undefined') {
       if (!order.delivery_address) {
         notify('Please select delivery address to proceed', {
@@ -87,10 +89,10 @@ const Checkout = () => {
         <div className="checkout-container">
           <div
             className={`checkout-items-container checkout-no-items-container ${
-              !bag || bag.length < 1 ? "show-container" : "hide-container"
+              !bag || bag.length === 0 ? "show-container" : "hide-container"
               }`}
           >
-            {(!bag || bag.length < 1) &&
+            {(!bag || bag.length === 0) &&
               <div className="checkout-no-items">
                 <BLogo width={160} height={80} />
                 No items in the bag

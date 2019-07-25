@@ -7,7 +7,7 @@ import {
 import useReactRouter from "use-react-router";
 import ListItem from "../../../components/ListItem";
 
-const StepFive = () => {
+const CheckoutConfirmation = () => {
   const [order] = useGlobal("order");
   const [bag] = useGlobal("bag");
   const [paymentMethod] = useGlobal("paymentMethod");
@@ -120,4 +120,4 @@ const StepFive = () => {
   );
 };
 
-export default StepFive;
+export default CheckoutConfirmation;

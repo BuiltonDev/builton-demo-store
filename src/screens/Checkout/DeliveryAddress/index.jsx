@@ -10,7 +10,7 @@ import Search from "../../../assets/icons/search";
 import { parseGooglePlace } from "../../../utils/address";
 import notify from "../../../utils/toast";
 
-const StepFour = () => {
+const CheckoutDeliveryAddress = () => {
   const [order] = useGlobal("order");
   const [selectedAddress, setSelectedAddress] = useState(
     order.delivery_address
@@ -121,4 +121,4 @@ const StepFour = () => {
   );
 };
 
-export default StepFour;
+export default CheckoutDeliveryAddress;

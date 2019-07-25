@@ -7,7 +7,7 @@ import RemoveShopping from "../../../assets/icons/remove_shopping";
 import useReactRouter from "use-react-router";
 import { useDispatch, useGlobal } from "reactn";
 
-const StepOne = () => {
+const CheckoutBag = () => {
   const [bag] = useGlobal("bag");
 
   const removeItemFrombag = useDispatch("removeItemFromBag");
@@ -83,4 +83,4 @@ const StepOne = () => {
   );
 };
 
-export default StepOne;
+export default CheckoutBag;

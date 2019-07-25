@@ -69,7 +69,6 @@ const CheckoutDeliveryAddress = () => {
                   colorScheme={1}
                 />
               </div>
-
               <div
                 className={`autocomplete-dropdown-container ${
                   suggestions.length > 0 ? "show-suggestions" : ""

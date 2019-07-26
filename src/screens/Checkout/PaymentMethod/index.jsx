@@ -4,6 +4,7 @@ import notify from '../../../utils/toast';
 import { useGlobal, useDispatch } from 'reactn';
 import Spinner from "../../../components/Spinner";
 import ListItem from "../../../components/ListItem";
+import SectionHeader from "../../../components/SectionHeader";
 
 // We create test payment method on Builton API
 // And we attach the payment method to our order
@@ -56,7 +57,7 @@ const CheckoutPaymentMethod = () => {
 
   return (
     <>
-      <div className="checkout-items-container-title">Payment method</div>
+      <SectionHeader title="Payment method" />
       {loading &&
         <div className="checkout-spinner-container">
           <Spinner height={32} width={32} />

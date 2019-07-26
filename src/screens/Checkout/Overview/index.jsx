@@ -6,6 +6,7 @@ import {
 } from "../../../utils/productModifiers";
 import useReactRouter from "use-react-router";
 import ListItem from "../../../components/ListItem";
+import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutConfirmation = () => {
   const [order] = useGlobal("order");
@@ -106,7 +107,7 @@ const CheckoutConfirmation = () => {
 
   return (
     <div className="checkout-overview-container">
-      <div className="checkout-items-container-title">Order Overview</div>
+      <SectionHeader title="Order Overview" />
       {bag && renderBag()}
       {paymentMethod && renderPaymentMethod()}
       {order.delivery_address && renderDeliveryAddress()}

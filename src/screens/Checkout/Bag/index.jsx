@@ -6,6 +6,7 @@ import {
 import RemoveShopping from "../../../assets/icons/remove_shopping";
 import useReactRouter from "use-react-router";
 import { useDispatch, useGlobal } from "reactn";
+import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutBag = () => {
   const [bag] = useGlobal("bag");
@@ -63,7 +64,7 @@ const CheckoutBag = () => {
 
   return (
     <>
-      <div className="checkout-items-container-title">Your items</div>
+      <SectionHeader title="Your items" />
       <div className="checkout-items-header">
         <div className="checkout-name-col">Brand</div>
         <div className="checkout-description-col">Model</div>

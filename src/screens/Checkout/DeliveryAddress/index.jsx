@@ -9,6 +9,7 @@ import Input from "../../../components/Input";
 import Search from "../../../assets/icons/search";
 import { parseGooglePlace } from "../../../utils/address";
 import notify from "../../../utils/toast";
+import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutDeliveryAddress = () => {
   const [order] = useGlobal("order");
@@ -44,7 +45,7 @@ const CheckoutDeliveryAddress = () => {
 
   return (
     <>
-      <div className="checkout-items-container-title">Delivery address</div>
+      <SectionHeader title="Delivery address" />
       <PlacesAutocomplete
         value={address}
         onChange={handleChange}

@@ -1,0 +1,230 @@
+@import "../../constants";
+
+.my-account-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-self: stretch;
+  overflow: hidden;
+  position: relative;
+  &:before {
+    position: absolute;
+    content: "";
+    width: 200%;
+    height: 100%;
+    background-color: $TERTIARY_BACKGROUND;
+    z-index: 0;
+    transform: translateX(32%) skew(-42deg);
+  }
+  & .my-account-menu-container {
+    position: fixed;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 2;
+    &:before {
+      position: absolute;
+      content: "";
+      width: 200%;
+      height: 100%;
+      top: 0;
+      background-color: $ORANGE_BACKGROUND;
+      transform: translate(-30%) skew(5deg);
+      z-index: 1;
+    }
+
+    & .my-account-menu-wrapper {
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      justify-content: center;
+      position: relative;
+      background-color: $PRIMARY_BACKGROUND;
+      padding: 12px 0;
+      & > div {
+        font-size: 0.86rem;
+        color: $PRIMARY_TEXT;
+        letter-spacing: 2px;
+        position: relative;
+        cursor: pointer;
+        text-transform: uppercase;
+        align-self: flex-start;
+        padding: 16px 64px;
+        width: calc(100% - 45px);
+        z-index: 2;
+        display: block;
+        &:hover {
+          &:after {
+            position: absolute;
+            content: "";
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $SECONDARY_BACKGROUND;
+            z-index: -1;
+            display: block;
+          }
+        }
+
+        &.active-menu-item {
+          &:before {
+            position: absolute;
+            content: "";
+            left: 2px;
+            top: 50%;
+            width: 4px;
+            height: 60%;
+            transform: translateY(-50%);
+            background-color: $TERTIARY_BACKGROUND;
+          }
+          &:after {
+            position: absolute;
+            content: "";
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: $SECONDARY_BACKGROUND;
+          }
+        }
+      }
+    }
+  }
+  & .my-account-content-container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+
+    .my-account-content {
+      padding: 64px;
+      max-width: 920px;
+      min-height: 480px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      z-index: 1;
+      &:before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: $PRIMARY_BACKGROUND;
+        transform: translateX(100px) skew(-15deg);
+        z-index: -1;
+      }
+
+      &.show-my-account {
+        animation: animate-show-account 1s forwards;
+        opacity: 0;
+        animation-delay: 1s;
+        height: 0;
+      }
+
+      &.hide-my-account {
+        display: none;
+      }
+
+      & .spinner-container {
+        flex: 1;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &.my-profile-content {
+        max-width: 550px;
+      }
+
+      & .human-id--row {
+        flex: 1;
+        font-size: 0.72rem;
+      }
+
+      & .delivery-status--row {
+        flex: 2;
+        font-size: 0.72rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        &.undetermined {
+          color: $UNDERTERMINED_STATUS;
+        }
+        &.positive {
+          color: $POSITIVE_STATUS;
+        }
+        &.negative {
+          color: $NEGATIVE_STATUS;
+        }
+      }
+
+      & .created--row {
+        font-size: 0.82rem;
+        flex: 3;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      & .no-orders {
+        font-size: 0.92rem;
+        display: flex;
+        flex-direction: column;
+        color: $SECONDARY_TEXT;
+        text-transform: uppercase;
+        align-items: center;
+        justify-content: center;
+      }
+
+      & .amount--row {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        color: $ALTERNATIVE_TEXT;
+      }
+
+      & .table-header {
+        & > div {
+          font-size: 0.92rem;
+          color: $PRIMARY_TEXT;
+        }
+      }
+
+      & .button-container {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        margin-top: 32px;
+        align-self: flex-end;
+      }
+    }
+  }
+}
+
+@keyframes animate-show-account {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  20% {
+    height: auto;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+}

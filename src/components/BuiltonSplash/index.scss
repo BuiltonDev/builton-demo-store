@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .splash-container {
   position: absolute;
@@ -68,6 +68,6 @@
     width: 0;
     height: 0;
     transform: translateX(-9999px);
-    top: 0
+    top: 0;
   }
 }

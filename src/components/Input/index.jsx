@@ -1,9 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
-import './index.scss';
+import "./index.scss";
 
-const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, leftAdornment, loading}) => {
+const Input = ({
+  inputProps,
+  submitting,
+  placeholder,
+  id,
+  colorScheme,
+  debounce,
+  leftAdornment,
+  loading
+}) => {
   let debouncedValue;
   let timeout;
   const handleInputChange = (ev, input) => {
@@ -16,7 +25,7 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
           }
           timeout = setTimeout(() => {
             input.onChange(ev.target.value);
-          }, debounce)
+          }, debounce);
         }
       } else {
         input.onChange(ev.target.value, ev);
@@ -25,23 +34,23 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
     if (ev.target.value) {
       ev.target.parentNode.classList.add("input--filled");
     } else {
-      ev.target.parentNode.classList.remove(
-        "input--filled"
-      );
+      ev.target.parentNode.classList.remove("input--filled");
     }
   };
 
-  return(
+  useEffect(() => {
+    if (typeof inputProps.value !== "undefined" && inputProps.value !== "") {
+      document.getElementById(id).parentNode.classList.add("input--filled");
+    }
+  });
+
+  return (
     <>
-      {leftAdornment &&
-        <div className="left-adornment">
-          {leftAdornment}
-        </div>
-      }
+      {leftAdornment && <div className="left-adornment">{leftAdornment}</div>}
       <input
         {...inputProps}
         disabled={submitting}
-        onChange={(ev) => handleInputChange(ev, inputProps)}
+        onChange={ev => handleInputChange(ev, inputProps)}
         className="input__field"
         id={id}
         style={{ ...(leftAdornment && { paddingLeft: 28 }) }}
@@ -51,22 +60,24 @@ const Input = ({inputProps, submitting, placeholder, id, colorScheme, debounce, 
         htmlFor={id}
         style={{ ...(leftAdornment && { paddingLeft: 28, top: 10 }) }}
       >
-        <div className={`input-loading-container ${loading ? 'input-loading' : ''}`}>
+        <div
+          className={`input-loading-container ${
+            loading ? "input-loading" : ""
+          }`}
+        >
           <div className="input-loading-1" />
           <div className="input-loading-2" />
           <div className="input-loading-3" />
           <div className="input-loading-4" />
         </div>
-        <span className="input__label-content">
-          {placeholder}
-        </span>
+        <span className="input__label-content">{placeholder}</span>
       </label>
     </>
-  )
+  );
 };
 
 Input.defaultProps = {
-  loading: false,
+  loading: false
 };
 
 Input.propTypes = {
@@ -74,16 +85,10 @@ Input.propTypes = {
   colorScheme: PropTypes.number,
   submitting: PropTypes.bool,
   placeholder: PropTypes.string,
-  id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  debounce: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  debounce: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   leftAdornment: PropTypes.node,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default Input;

@@ -44,6 +44,7 @@ const AuthForm = ({ onAuth }) => {
     }
     return errors;
   };
+
   const onSubmit = async values => {
     try {
       if (formType === "register") {

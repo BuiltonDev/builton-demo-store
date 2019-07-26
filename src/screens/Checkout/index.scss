@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .checkout-container {
   padding: 64px;
@@ -12,7 +12,7 @@
     position: absolute;
     left: -20%;
     top: 0;
-    content: '';
+    content: "";
     width: 120%;
     height: 100%;
     background-color: $PRIMARY_BACKGROUND;
@@ -74,15 +74,6 @@
       }
     }
 
-    & .checkout-sub-header-title {
-      border-bottom: 2px solid $PRIMARY_BORDER_COLOR;
-      padding: 12px 6px;
-      margin-bottom: 24px;
-      letter-spacing: 1px;
-      font-size: 0.72rem;
-      color: $SECONDARY_TEXT;
-      text-transform: uppercase;
-    }
     & .checkout-items-container {
       flex-direction: column;
       flex: 1;
@@ -125,14 +116,6 @@
         }
       }
 
-      & .checkout-items-container-title {
-        font-size: 1.6rem;
-        margin: 12px 0 24px 0;
-        padding: 8px 16px;
-        letter-spacing: 1px;
-        border-bottom: 4px solid $SECONDARY_BORDER_COLOR
-      }
-
       & .checkout-items-header {
         display: flex;
         flex-direction: row;
@@ -163,7 +146,6 @@
           padding: 8px 6px;
           font-size: 0.92rem;
         }
-
       }
       & .checkout-name-col {
         flex: 1;

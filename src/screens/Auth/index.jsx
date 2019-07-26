@@ -1,9 +1,9 @@
-import React  from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import "./index.scss";
 import BuiltonLogo from "../../components/BuiltonLogo";
 import AuthForm from "./authForm";
-import useReactRouter from 'use-react-router';
+import useReactRouter from "use-react-router";
 
 const Auth = () => {
   const { history } = useReactRouter();

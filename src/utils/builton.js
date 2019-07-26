@@ -10,13 +10,24 @@ const builtonSession = getFieldCurry('builtonSession')();
 
 const BuiltonClient = new Builton({
   ...(builtonSession && { bearerToken: builtonSession }),
-  refreshTokenFn: async () => {
-    firebase.auth().onAuthStateChanged(async (user) => {
+  refreshTokenFn: () => {
+    return new Promise(async (resolve, reject) => {
+      const user = firebase.auth().currentUser;
       if (user) {
-        const idToken = await firebase.auth().currentUser.getIdToken();
-        globalState.updateSession(idToken);
-        return idToken;
-      } return false;
+        const idToken = await user.getIdToken();
+        resolve(idToken);
+      } else {
+        const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+          unsubscribe();
+          if (user) {
+            const idToken = await user.getIdToken();
+            resolve(idToken);
+          } else {
+            const error = new Error('User is not authenticated');
+            reject(error);
+          }
+        });
+      }
     });
     },
   endpoint: config.endpoint,

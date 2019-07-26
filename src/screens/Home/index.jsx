@@ -7,7 +7,7 @@ import notify from "../../utils/toast";
 import config from "../../config";
 import "./index.scss";
 import BuiltonSplash from "../../components/BuiltonSplash";
-import useReactRouter from 'use-react-router';
+import useReactRouter from "use-react-router";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -40,14 +40,11 @@ const Main = () => {
     if (products) {
       const cat = {};
       for (let i = 0; i < products.length; i += 1) {
-        // TODO This check can be removed when tags fetch is implemented
-        if (products[i].tags.includes('category')){
-          cat[products[i].name.toLowerCase()] = {
-            title: products[i].name.toLowerCase(),
-            image: products[i].image_url,
-            loaded: false
-          };
-        }
+        cat[products[i].name.toLowerCase()] = {
+          title: products[i].name.toLowerCase(),
+          image: products[i].image_url,
+          loaded: false
+        };
       }
       setCategories(cat);
     }
@@ -85,7 +82,9 @@ const Main = () => {
                     adidas: { ...categories.adidas, loaded: true }
                   })
                 }
-                onClick={() => history.push(`product_list/${categories.adidas.title}`)}
+                onClick={() =>
+                  history.push(`product_list/${categories.adidas.title}`)
+                }
                 imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
                 category={categories.adidas.title}
               />
@@ -98,7 +97,9 @@ const Main = () => {
                       nike: { ...categories.nike, loaded: true }
                     })
                   }
-                  onClick={() => history.push(`product_list/${categories.nike.title}`)}
+                  onClick={() =>
+                    history.push(`product_list/${categories.nike.title}`)
+                  }
                   imageSrc={`${config.endpoint}images/${categories.nike.image}?api_key=${config.apiKey}`}
                   category={categories.nike.title}
                 />
@@ -110,7 +111,9 @@ const Main = () => {
                       puma: { ...categories.puma, loaded: true }
                     })
                   }
-                  onClick={() => history.push(`product_list/${categories.puma.title}`)}
+                  onClick={() =>
+                    history.push(`product_list/${categories.puma.title}`)
+                  }
                   imageSrc={`${config.endpoint}images/${categories.puma.image}?api_key=${config.apiKey}`}
                   category={categories.puma.title}
                 />

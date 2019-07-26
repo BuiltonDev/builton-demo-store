@@ -6,6 +6,7 @@ import {
 } from "../../../utils/productModifiers";
 import useReactRouter from "use-react-router";
 import ListItem from "../../../components/ListItem";
+import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutConfirmation = () => {
   const [order] = useGlobal("order");
@@ -25,10 +26,8 @@ const CheckoutConfirmation = () => {
   const renderPaymentMethod = () => {
     return (
       <div className="checkout-overview-sub-container">
-        <div className="checkout-sub-header-title">
-          Selected payment method
-        </div>
-        <ListItem onClick={() => history.push('/checkout/payment_method')}>
+        <SectionHeader title="Selected payment method" type="sub" />
+        <ListItem onClick={() => history.push("/checkout/payment_method")}>
           <div className="checkout-list-item-left">
             <div className="checkout-payment-card-number">
               **** **** **** {paymentMethod.card.last4}
@@ -43,16 +42,14 @@ const CheckoutConfirmation = () => {
           </div>
         </ListItem>
       </div>
-    )
+    );
   };
 
   const renderDeliveryAddress = () => {
     return (
       <div className="checkout-overview-sub-container">
-        <div className="checkout-sub-header-title">
-          Selected delivery address
-        </div>
-        <ListItem onClick={() => history.push('/checkout/delivery_address')}>
+        <SectionHeader title="Selected delivery address" type="sub" />
+        <ListItem onClick={() => history.push("/checkout/delivery_address")}>
           <div className="checkout-list-item-left">
             <div>{order.delivery_address.street_name}</div>
             <div className="checkout-address-city">
@@ -66,7 +63,7 @@ const CheckoutConfirmation = () => {
           </div>
         </ListItem>
       </div>
-    )
+    );
   };
 
   const renderBag = () => {
@@ -80,8 +77,8 @@ const CheckoutConfirmation = () => {
         </div>
         {bag && bag.map((item, index) => renderBagRow(item, index))}
       </div>
-    )
-  }
+    );
+  };
 
   const renderBagRow = (item, index) => {
     return (
@@ -106,7 +103,7 @@ const CheckoutConfirmation = () => {
 
   return (
     <div className="checkout-overview-container">
-      <div className="checkout-items-container-title">Order Overview</div>
+      <SectionHeader title="Order Overview" />
       {bag && renderBag()}
       {paymentMethod && renderPaymentMethod()}
       {order.delivery_address && renderDeliveryAddress()}

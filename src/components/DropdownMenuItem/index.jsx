@@ -1,16 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './index.scss';
+import "./index.scss";
 
-const DropdownMenuItem = ({
-  onClick,
-  children,
-}) => (
-  <div
-    className="dropdown-menu-item"
-    onClick={onClick}
-  >
+const DropdownMenuItem = ({ onClick, children }) => (
+  <div className="dropdown-menu-item" onClick={onClick}>
     {children}
   </div>
 );
@@ -20,7 +14,7 @@ DropdownMenuItem.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]).isRequired,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default DropdownMenuItem;

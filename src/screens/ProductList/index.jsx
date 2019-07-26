@@ -138,7 +138,9 @@ const ProductList = () => {
           className={`product-container ${
             loading ? "hide-product" : "show-product"
           }`}
-          onClick={() => history.push(`/product_list/${match.params.category}/${product.id}`)}
+          onClick={() =>
+            history.push(`/product_list/${match.params.category}/${product.id}`)
+          }
         >
           <img
             onLoad={() => {

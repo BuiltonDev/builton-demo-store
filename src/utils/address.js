@@ -32,4 +32,21 @@ const parseGooglePlace = place => {
   return address;
 };
 
-export { parseGooglePlace }
+
+// Used to parse google place address object into a string representation
+const parseAddress = address => {
+  if (!address) return;
+  let stringAddress = '';
+  if (address.street_name)
+    stringAddress += address.street_name + (address.building ? ' ' : ', ');
+  if (address.street_name && address.building)
+    stringAddress += address.building + ', ';
+  if (address.zipcode) stringAddress += address.zipcode + ' ';
+  if (address.city) stringAddress += address.city + ', ';
+  if (address.state && address.state !== address.city)
+    stringAddress += address.state + ', ';
+  if (address.country) stringAddress += address.country;
+  return stringAddress;
+};
+
+export { parseGooglePlace, parseAddress }

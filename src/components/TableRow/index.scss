@@ -1,0 +1,22 @@
+@import "../../constants";
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 12px;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  &.clickable-row {
+    cursor: pointer;
+    &:hover {
+      background-color: $SECONDARY_BACKGROUND;
+      transition: all 250ms ease-in;
+    }
+  }
+
+  & > div {
+    padding: 8px 6px;
+    font-size: 0.92rem;
+  }
+}

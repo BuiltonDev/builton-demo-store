@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 import ReactCursorPosition from "react-cursor-position";
-import PropTypes from 'prop-types';
-import './index.scss';
+import PropTypes from "prop-types";
+import "./index.scss";
 
 const ImageCategory = ({
   imageSrc,
@@ -10,14 +10,13 @@ const ImageCategory = ({
   style,
   onClick,
   pageLoaded
-         }) => {
-
+}) => {
   let positionX = 0;
   let positionY = 0;
 
   const imageRef = useRef(null);
 
-  const handleImagePosition = (el) => {
+  const handleImagePosition = el => {
     if (el.elementDimensions) {
       const midWidth = el.elementDimensions.width / 2;
       const midHeight = el.elementDimensions.height / 2;
@@ -30,15 +29,29 @@ const ImageCategory = ({
   };
 
   return (
-    <ReactCursorPosition className={`${pageLoaded ? 'show-category' : 'hide-category'}`} onPositionChanged={(elementDimension) => handleImagePosition(elementDimension)}>
-      <div onClick={onClick} className={`category-container ${category}-container`}>
-        <div className={`category-title ${category}-title`} >
+    <ReactCursorPosition
+      className={`${pageLoaded ? "show-category" : "hide-category"}`}
+      onPositionChanged={elementDimension =>
+        handleImagePosition(elementDimension)
+      }
+    >
+      <div
+        onClick={onClick}
+        className={`category-container ${category}-container`}
+      >
+        <div className={`category-title ${category}-title`}>
           {category.toUpperCase()}
         </div>
-        <img onLoad={onLoad} ref={imageRef} className="category-image" src={imageSrc} alt={`${category}-illustration`} />
+        <img
+          onLoad={onLoad}
+          ref={imageRef}
+          className="category-image"
+          src={imageSrc}
+          alt={`${category}-illustration`}
+        />
       </div>
     </ReactCursorPosition>
-  )
+  );
 };
 
 ImageCategory.propTypes = {
@@ -46,7 +59,7 @@ ImageCategory.propTypes = {
   category: PropTypes.string.isRequired,
   onLoad: PropTypes.func,
   pageLoaded: PropTypes.bool,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default ImageCategory;

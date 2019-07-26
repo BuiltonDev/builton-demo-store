@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './index.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import "./index.scss";
 import Spinner from "../Spinner";
 
-const Button = ({ loading, type, style, className, title, onClick}) => (
+const Button = ({ loading, type, style, className, title, onClick }) => (
   <button
     disabled={loading}
     type={type}
@@ -11,7 +11,7 @@ const Button = ({ loading, type, style, className, title, onClick}) => (
     className={className}
     onClick={onClick}
   >
-    {loading ? <Spinner/> : <span>{title}</span>}
+    {loading ? <Spinner /> : <span>{title}</span>}
   </button>
 );
 
@@ -26,7 +26,7 @@ Button.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   title: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default Button;

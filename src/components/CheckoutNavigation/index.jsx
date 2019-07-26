@@ -1,24 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
-import './index.scss';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import "./index.scss";
 import useReactRouter from "use-react-router";
-import {useDispatch, useGlobal} from "reactn";
+import { useDispatch, useGlobal } from "reactn";
 import Button from "../Button";
 
-const CheckoutNavigation = (
-  {
-    onStep,
-    onPlaceOrder,
-    shouldNavigate,
-    loading,
-  }
-) => {
+const CheckoutNavigation = ({
+  onStep,
+  onPlaceOrder,
+  shouldNavigate,
+  loading
+}) => {
   const { match, history } = useReactRouter();
   const [step, setStep] = useState(0);
   const [isNextStep, setIsNextStep] = useState(false);
-  const updateCheckoutStep = useDispatch('updateCheckoutStep');
-  const [checkout] = useGlobal('checkout');
-  const [user] = useGlobal('user');
+  const updateCheckoutStep = useDispatch("updateCheckoutStep");
+  const [checkout] = useGlobal("checkout");
+  const [user] = useGlobal("user");
 
   useEffect(() => {
     if (user) {
@@ -32,7 +30,6 @@ const CheckoutNavigation = (
       }
     }
   }, [step]);
-
 
   useEffect(() => {
     if (checkout) {
@@ -71,25 +68,30 @@ const CheckoutNavigation = (
   }, [match.params.step]);
 
   const setCheckoutStep = async () => {
-    const checkoutStepsCopy = {...checkout};
+    const checkoutStepsCopy = { ...checkout };
     checkoutStepsCopy[step].complete = true;
     await updateCheckoutStep(checkoutStepsCopy);
   };
 
-  const pushStep = async (stepNumb) => {
+  const pushStep = async stepNumb => {
     if ((!shouldNavigate(stepNumb) && !stepNumb) || loading) return false;
 
-    if (!stepNumb)  {
+    if (!stepNumb) {
       await setCheckoutStep();
     }
 
     setIsNextStep(true);
-    setTimeout(() => history.push(`/checkout/${checkout[typeof stepNumb !== 'undefined' ? stepNumb : step + 1].title}`));
+    setTimeout(() =>
+      history.push(
+        `/checkout/${checkout[typeof stepNumb !== "undefined" ? stepNumb : step + 1].title}`
+      )
+    );
   };
 
-
-  const animateSteps = (length) => {
-    const elements = document.getElementsByClassName("checkout-steps-container");
+  const animateSteps = length => {
+    const elements = document.getElementsByClassName(
+      "checkout-steps-container"
+    );
     if (elements && elements[0] && elements[0].children) {
       const childrenElements = elements[0].children;
       let defaultTransitionDelay = 0;
@@ -102,11 +104,24 @@ const CheckoutNavigation = (
         } else {
           defaultTransitionDelay += 350;
         }
-        for (let x = 0; x < childrenElements[i].children.length; x +=1) {
-          if (childrenElements[i].children[x].className.includes('checkout-step-progress')) {
-            childrenElements[i].children[x].children[0].style.transitionDelay = `${defaultTransitionDelay}ms`;
-          } else if (childrenElements[i].children[x].className.includes('checkout-step-circle')) {
-            childrenElements[i].children[x].children[0].style.animationDelay = `${defaultTransitionDelay + 350}ms`;
+        for (let x = 0; x < childrenElements[i].children.length; x += 1) {
+          if (
+            childrenElements[i].children[x].className.includes(
+              "checkout-step-progress"
+            )
+          ) {
+            childrenElements[i].children[
+              x
+            ].children[0].style.transitionDelay = `${defaultTransitionDelay}ms`;
+          } else if (
+            childrenElements[i].children[x].className.includes(
+              "checkout-step-circle"
+            )
+          ) {
+            childrenElements[i].children[
+              x
+            ].children[0].style.animationDelay = `${defaultTransitionDelay +
+              350}ms`;
           }
         }
       }
@@ -116,67 +131,87 @@ const CheckoutNavigation = (
   return (
     <>
       <div className="checkout-steps-container">
-        <div className={`checkout-step ${step >= 0 ? 'active-step' : ''}`}>
-          <div className="checkout-step-circle" onClick={() => step >= 0 && pushStep(0)}>
-            <div/>
+        <div className={`checkout-step ${step >= 0 ? "active-step" : ""}`}>
+          <div
+            className="checkout-step-circle"
+            onClick={() => step >= 0 && pushStep(0)}
+          >
+            <div />
           </div>
           <div className="checkout-step-title">Your bag</div>
         </div>
-        <div className={`checkout-step ${step >= 1 ? 'active-step' : ''}`}>
+        <div className={`checkout-step ${step >= 1 ? "active-step" : ""}`}>
           <div className="checkout-step-progress">
-            <div/>
+            <div />
           </div>
-          <div className="checkout-step-circle" onClick={() => step >= 1 && pushStep(1)}>
-            <div/>
+          <div
+            className="checkout-step-circle"
+            onClick={() => step >= 1 && pushStep(1)}
+          >
+            <div />
           </div>
           <div className="checkout-step-title">Authentication</div>
         </div>
-        <div className={`checkout-step ${step >= 2 ? 'active-step' : ''}`}>
+        <div className={`checkout-step ${step >= 2 ? "active-step" : ""}`}>
           <div className="checkout-step-progress">
-            <div/>
+            <div />
           </div>
-          <div className="checkout-step-circle" onClick={() => step >= 2 && pushStep(2)}>
-            <div/>
+          <div
+            className="checkout-step-circle"
+            onClick={() => step >= 2 && pushStep(2)}
+          >
+            <div />
           </div>
           <div className="checkout-step-title">Payment method</div>
         </div>
-        <div className={`checkout-step ${step >= 3 ? 'active-step' : ''}`}>
+        <div className={`checkout-step ${step >= 3 ? "active-step" : ""}`}>
           <div className="checkout-step-progress">
-            <div/>
+            <div />
           </div>
-          <div className="checkout-step-circle" onClick={() => step >= 3 && pushStep(3)}>
-            <div/>
+          <div
+            className="checkout-step-circle"
+            onClick={() => step >= 3 && pushStep(3)}
+          >
+            <div />
           </div>
           <div className="checkout-step-title">Delivery address</div>
         </div>
-        <div className={`checkout-step ${step >= 4 ? 'active-step' : ''}`}>
+        <div className={`checkout-step ${step >= 4 ? "active-step" : ""}`}>
           <div className="checkout-step-progress">
-            <div/>
+            <div />
           </div>
-          <div className="checkout-step-circle" onClick={() => step >= 4 && pushStep(4)}>
-            <div/>
+          <div
+            className="checkout-step-circle"
+            onClick={() => step >= 4 && pushStep(4)}
+          >
+            <div />
           </div>
           <div className="checkout-step-title">Confirmation</div>
         </div>
       </div>
-      {(step !== 1) &&
+      {step !== 1 && (
         <div className="checkout-next-step">
-          <Button loading={loading} type="button" onClick={() => step === 4 ? onPlaceOrder() : pushStep()} title={step === 4 ? 'Place order' : 'Next'} />
+          <Button
+            loading={loading}
+            type="button"
+            onClick={() => (step === 4 ? onPlaceOrder() : pushStep())}
+            title={step === 4 ? "Place order" : "Next"}
+          />
         </div>
-      }
+      )}
     </>
-  )
+  );
 };
 
 CheckoutNavigation.defaultProps = {
-  loading: false,
+  loading: false
 };
 
 CheckoutNavigation.propTypes = {
   onStep: PropTypes.func,
   onPlaceOrder: PropTypes.func,
   shouldNavigate: PropTypes.func,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default CheckoutNavigation;

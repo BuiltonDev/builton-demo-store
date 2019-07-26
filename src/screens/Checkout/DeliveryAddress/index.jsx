@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ListItem from "../../../components/ListItem";
 import { useDispatch, useGlobal } from "reactn";
 import PlacesAutocomplete, {
@@ -9,6 +9,7 @@ import Input from "../../../components/Input";
 import Search from "../../../assets/icons/search";
 import { parseGooglePlace } from "../../../utils/address";
 import notify from "../../../utils/toast";
+import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutDeliveryAddress = () => {
   const [order] = useGlobal("order");
@@ -44,7 +45,7 @@ const CheckoutDeliveryAddress = () => {
 
   return (
     <>
-      <div className="checkout-items-container-title">Delivery address</div>
+      <SectionHeader title="Delivery address" />
       <PlacesAutocomplete
         value={address}
         onChange={handleChange}
@@ -98,7 +99,7 @@ const CheckoutDeliveryAddress = () => {
           );
         }}
       </PlacesAutocomplete>
-      <div className="checkout-sub-header-title">Selected delivery address</div>
+      <SectionHeader title="Selected delivery address" type="sub" />
       <div>
         {selectedAddress && (
           <ListItem>

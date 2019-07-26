@@ -10,7 +10,7 @@ import config from "../../config";
 import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
-import {useDispatch} from "reactn";
+import { useDispatch } from "reactn";
 
 const Product = () => {
   const { match, history } = useReactRouter();
@@ -45,23 +45,23 @@ const Product = () => {
 
   const addToBag = async () => {
     if (!selectedSize) {
-      notify('Please select your desired size.', {
-        type: 'warning'
-      })
+      notify("Please select your desired size.", {
+        type: "warning"
+      });
     } else {
       try {
         await addItemToBag({
           product,
           size: selectedSize,
-          category: match.params.category,
+          category: match.params.category
         });
         notify(`${product.name} successfully added to your bag.`, {
-          type: 'info',
-        })
-      } catch(err) {
+          type: "info"
+        });
+      } catch (err) {
         notify(`Failed to add ${product.name} to your bag.`, {
-          type: 'error',
-        })
+          type: "error"
+        });
       }
     }
   };
@@ -104,17 +104,28 @@ const Product = () => {
                     {product.short_description}
                   </span>
                 </div>
-                <div className="product-description-content">{product.description}</div>
+                <div className="product-description-content">
+                  {product.description}
+                </div>
                 <div className="product-id">
                   Article id: <span>{product.human_id}</span>
                 </div>
                 <div className="product-sizes-container">
                   {getSneakersSizes(product)
-                    .sort((a, b) => parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0)
+                    .sort((a, b) =>
+                      parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
+                    )
                     .map(prodSize => (
                       <Button
                         key={`prodSize-${prodSize.id}`}
-                        onClick={() => setSelectedSize(selectedSize && selectedSize._id.$oid === prodSize.id ? null : prodSize.product)}
+                        onClick={() =>
+                          setSelectedSize(
+                            selectedSize &&
+                              selectedSize._id.$oid === prodSize.id
+                              ? null
+                              : prodSize.product
+                          )
+                        }
                         type="button"
                         style={{
                           fontSize: 14,
@@ -124,7 +135,11 @@ const Product = () => {
                           height: 24
                         }}
                         title={prodSize.size}
-                        className={`button ${selectedSize && selectedSize._id.$oid === prodSize.id ? 'selected' : ''}`}
+                        className={`button ${
+                          selectedSize && selectedSize._id.$oid === prodSize.id
+                            ? "selected"
+                            : ""
+                        }`}
                       />
                     ))}
                 </div>

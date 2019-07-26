@@ -1,114 +1,114 @@
-@import '../../constants';
+@import "../../constants";
 
 .header-container {
-    height: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: stretch;
+  padding: 0 0 0 62px;
+  background-color: white;
+  z-index: 2;
+  border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
+  & .header-logo-container {
+    cursor: pointer;
+  }
+  & .empty-bag-container {
+    padding: 12px 24px;
+    font-size: 0.82rem;
+    color: $SECONDARY_TEXT;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .dropdown-container {
+    position: relative;
+    padding-right: 62px;
+    display: flex;
+    flex-direction: row;
+  }
+  & .bag-product-row {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    & > div {
+      flex: 0;
+      min-width: 80px;
+    }
+    & > div:first-child {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 210px;
+      padding: 0 12px 0 0;
+    }
+
+    & .remove-bag-item {
+      flex: 0;
+      overflow-x: visible;
+      min-width: auto;
+    }
+  }
+  & .header-checkout-container {
+    margin: 12px 0;
+    border-top: 1px solid $PRIMARY_BORDER_COLOR;
+    display: flex;
+    flex-direction: row;
+    padding: 24px 24px 0;
+    justify-content: space-between;
+    align-items: center;
+    & .header-bag-amount {
+      margin-right: 32px;
+      color: $ALTERNATIVE_TEXT;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+    }
+  }
+  .top-header-hyperlink-container {
+    display: flex;
+    align-self: stretch;
+    position: relative;
+  }
+  .header-box-hyperlink {
+    padding: 0 16px;
+    text-decoration: none;
     display: flex;
     align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    align-self: stretch;
-    padding: 0 0 0 62px;
-    border-bottom: 1px solid $PRIMARY_BORDER_COLOR;
-    & .header-logo-container {
-        cursor: pointer;
+    transition: all 250ms;
+    font-size: 0.82rem;
+    border: none;
+    cursor: pointer;
+    border-left: 1px solid $PRIMARY_BORDER_COLOR;
+    color: $SECONDARY_TEXT;
+    &:last-child {
+      border-right: 1px solid $PRIMARY_BORDER_COLOR;
     }
-    & .empty-bag-container {
-        padding: 12px 24px;
-        font-size: 0.82rem;
-        color: $SECONDARY_TEXT;
-        letter-spacing: 1px;
-        text-transform: uppercase;
+    &:hover {
+      transition: all 250ms;
+      background-color: $SECONDARY_BACKGROUND;
     }
-    .dropdown-container {
-        position: relative;
-        padding-right: 62px;
+    &.cart {
+      font-size: 1rem;
+      & > span {
         display: flex;
         flex-direction: row;
+      }
+      .cart-count {
+        margin-left: 6px;
+        align-self: center;
+      }
     }
-    & .bag-product-row {
-        display: flex;
-        flex-direction: row;
-        flex: 1;
-        align-items: center;
-        justify-content: space-between;
-        & > div {
-            flex: 0;
-            min-width: 80px;
-        }
-        & > div:first-child {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 210px;
-            padding: 0 12px 0 0;
-        }
-
-        & .remove-bag-item {
-            flex: 0;
-            overflow-x: visible;
-            min-width: auto;
-        }
-    }
-    & .header-checkout-container {
-        margin: 12px 0;
-        border-top: 1px solid $PRIMARY_BORDER_COLOR;
-        display: flex;
-        flex-direction: row;
-        padding: 24px 24px 0;
-        justify-content: space-between;
-        align-items: center;
-        & .header-bag-amount {
-            margin-right: 32px;
-            color: $ALTERNATIVE_TEXT;
-            font-size: 1.08rem;
-            letter-spacing: 1px;
-        }
-    }
-    .top-header-hyperlink-container {
-        display: flex;
-        align-self: stretch;
-        position: relative;
-    }
-    .header-box-hyperlink {
-        padding: 0 16px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        transition: all 250ms;
-        font-size: 0.82rem;
-        border: none;
-        cursor: pointer;
-        border-left: 1px solid $PRIMARY_BORDER_COLOR;
-        color: $SECONDARY_TEXT;
-        &:last-child {
-            border-right: 1px solid $PRIMARY_BORDER_COLOR;
-        }
-        &:hover {
-            transition: all 250ms;
-            background-color: $SECONDARY_BACKGROUND;
-        }
-        &.cart {
-            font-size: 1rem;
-            & > span {
-                display: flex;
-                flex-direction: row;
-            }
-            .cart-count {
-                margin-left: 6px;
-                align-self: center;
-            }
-        }
-    }
+  }
 }
 
 @media all and (max-width: 780px) {
-    .header-container {
-        flex-direction: column;
-        max-height: 82px;
-        padding: 0 12px;
-        justify-content: space-between
-    }
+  .header-container {
+    flex-direction: column;
+    max-height: 82px;
+    padding: 0 12px;
+    justify-content: space-between;
+  }
 }
-
-

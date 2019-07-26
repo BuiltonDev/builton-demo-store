@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .footer {
   height: 120px;
@@ -17,7 +17,7 @@
   }
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     left: 0;
     top: 29%;
     width: 102%;
@@ -28,7 +28,7 @@
   }
   &:after {
     position: absolute;
-    content: '';
+    content: "";
     left: -40px;
     top: 60%;
     width: 102%;

@@ -1,20 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './index.scss';
+import "./index.scss";
 
-const DropdownMenu = ({children}) => (
-  <div className="dropdown-menu-container">
-    {children}
-  </div>
+const DropdownMenu = ({ children }) => (
+  <div className="dropdown-menu-container">{children}</div>
 );
 
 DropdownMenu.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
-  ]).isRequired,
+  ]).isRequired
 };
 
 export default DropdownMenu;
-

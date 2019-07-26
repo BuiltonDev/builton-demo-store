@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .checkout-next-step {
   position: absolute;
@@ -48,7 +48,7 @@
         left: 0;
         top: 0;
         background-color: $SECONDARY_BORDER_COLOR;
-        content: '';
+        content: "";
         width: 100%;
         height: 100%;
         transform: translateX(calc(-100% - 1px));

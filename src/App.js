@@ -13,6 +13,8 @@ import Auth from './screens/Auth';
 import ProductList from './screens/ProductList';
 import Product from './screens/Product';
 import Checkout from './screens/Checkout';
+import MyAccount from './screens/MyAccount';
+import MyOrder from './screens/MyOrder';
 
 import {getFieldCurry} from "./globalStore/localStorage";
 import {ToastContainer} from "react-toastify";
@@ -35,6 +37,20 @@ const App = () => {
           <Route exact path="/product_list/:category" component={ProductList} />
           <Route exact path="/product_list/:category/:productId" component={Product} />
           <Route exact path="/checkout/:step" component={Checkout} />
+          <Route exact path="/my-account/:menuId" render={() => (
+            !loggedIn ? (
+              <Redirect to="/auth"/>
+            ) : (
+              <MyAccount/>
+            )
+          )} />
+          <Route exact path="/my-account/my-orders/:orderId" render={() => (
+            !loggedIn ? (
+              <Redirect to="/auth"/>
+            ) : (
+              <MyOrder/>
+            )
+          )} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>

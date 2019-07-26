@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .paper-container {
   padding: 64px;
@@ -11,14 +11,14 @@
   z-index: 1;
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     background-color: white;
     width: 100%;
     height: calc(100% + 200px);
     top: 0;
     left: 0;
     z-index: 0;
-    transform: translate(0, -20%) rotate(45deg) skew(-10deg, -20deg);;
+    transform: translate(0, -20%) rotate(45deg) skew(-10deg, -20deg);
   }
 }
 
@@ -42,8 +42,6 @@
   display: flex;
   align-items: center;
 }
-
-
 
 .form-container {
   display: flex;
@@ -149,8 +147,3 @@
     transform: translate3d(0, -40%, 0);
   }
 }
-
-
-
-
-

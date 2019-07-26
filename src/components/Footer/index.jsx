@@ -1,12 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './index.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import "./index.scss";
 
-const Footer = ({children}) => (
-  <div className="footer">
-    {children}
-  </div>
-);
+const Footer = ({ children }) => <div className="footer">{children}</div>;
 
 Footer.propTypes = {
   children: PropTypes.oneOfType([

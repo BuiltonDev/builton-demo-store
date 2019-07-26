@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import SectionHeader from "../../../components/SectionHeader";
 import Table from "../../../components/Table";
 import TableHeader from "../../../components/TableHeader";
@@ -7,7 +7,7 @@ import { parseAddress } from "../../../utils/address";
 import builton from "../../../utils/builton";
 import notify from "../../../utils/toast";
 import Spinner from "../../../components/Spinner";
-import {timestampToDateString} from "../../../utils/dateModifiers";
+import { timestampToDateString } from "../../../utils/dateModifiers";
 
 const MyOrders = () => {
   const [loading, setLoading] = useState(true);
@@ -17,13 +17,13 @@ const MyOrders = () => {
     fetchOrders();
   }, []);
 
-  const getStatusColor = (status) => {
-    if (status === 'PENDING') {
-      return 'undetermined';
-    } else if (status === 'CANCELLED') {
-      return 'negative';
+  const getStatusColor = status => {
+    if (status === "PENDING") {
+      return "undetermined";
+    } else if (status === "CANCELLED") {
+      return "negative";
     } else {
-      return 'positive';
+      return "positive";
     }
   };
 
@@ -31,10 +31,10 @@ const MyOrders = () => {
     try {
       const orders = await builton.users.setMe().getOrders();
       setOrders(orders);
-    } catch(err) {
-      notify('Failed to fetch orders. Please try again.', {
-        type: 'error'
-      })
+    } catch (err) {
+      notify("Failed to fetch orders. Please try again.", {
+        type: "error"
+      });
     }
     setLoading(false);
   };
@@ -42,12 +42,12 @@ const MyOrders = () => {
   return (
     <>
       <SectionHeader title="My Orders" />
-      {loading &&
+      {loading && (
         <div className="spinner-container">
-          <Spinner/>
+          <Spinner />
         </div>
-      }
-      {!loading &&
+      )}
+      {!loading && (
         <Table>
           <TableHeader>
             <div className="human-id--row">#id</div>
@@ -55,28 +55,29 @@ const MyOrders = () => {
             <div className="created--row">Created</div>
             <div className="amount--row">Amount</div>
           </TableHeader>
-          {orders && orders.map((order, index) => {
-            return (
-              <TableRow key={`order-${order.human_id}`} onClick={() => {}}>
-                <div className="human-id--row">{order.human_id}</div>
-                <div
-                  className={`delivery-status--row ${getStatusColor(
-                    order.delivery_status
-                  )}`}
-                >
-                  {order.delivery_status}
-                </div>
-                <div className="created--row">
-                  {timestampToDateString(order.created.$date)}
-                </div>
-                <div className="amount--row">
-                  {order.total_amount} {order.currency}
-                </div>
-              </TableRow>
-            );
-          })}
+          {orders &&
+            orders.map((order, index) => {
+              return (
+                <TableRow key={`order-${order.human_id}`} onClick={() => {}}>
+                  <div className="human-id--row">{order.human_id}</div>
+                  <div
+                    className={`delivery-status--row ${getStatusColor(
+                      order.delivery_status
+                    )}`}
+                  >
+                    {order.delivery_status}
+                  </div>
+                  <div className="created--row">
+                    {timestampToDateString(order.created.$date)}
+                  </div>
+                  <div className="amount--row">
+                    {order.total_amount} {order.currency}
+                  </div>
+                </TableRow>
+              );
+            })}
         </Table>
-      }
+      )}
     </>
   );
 };

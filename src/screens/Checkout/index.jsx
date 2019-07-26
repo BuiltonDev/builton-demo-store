@@ -4,8 +4,8 @@ import { useGlobal, useDispatch } from "reactn";
 
 import "./index.scss";
 import useReactRouter from "use-react-router";
-import builton from '../../utils/builton';
-import notify from '../../utils/toast';
+import builton from "../../utils/builton";
+import notify from "../../utils/toast";
 import Header from "../../components/Header";
 import CheckoutNavigation from "../../components/CheckoutNavigation";
 import Bag from "./Bag";
@@ -60,11 +60,11 @@ const Checkout = () => {
           ...order
         }
       });
-      history.push('/');
-    } catch(err) {
-      notify('Failed to create order', {
-        type: 'error'
-      })
+      history.push("/");
+    } catch (err) {
+      notify("Failed to create order", {
+        type: "error"
+      });
     }
 
     setLoading(false);
@@ -74,12 +74,12 @@ const Checkout = () => {
     await clearBag();
   };
 
-  const checkShouldNavigate = (stepNumb) => {
+  const checkShouldNavigate = stepNumb => {
     // Check if delivery address has been set to navigate further
-    if (step === 3 && typeof stepNumb === 'undefined') {
+    if (step === 3 && typeof stepNumb === "undefined") {
       if (!order.delivery_address) {
-        notify('Please select delivery address to proceed', {
-          type: 'warning'
+        notify("Please select delivery address to proceed", {
+          type: "warning"
         });
         return false;
       }
@@ -95,81 +95,79 @@ const Checkout = () => {
           <div
             className={`checkout-items-container checkout-no-items-container ${
               !bag || bag.length === 0 ? "show-container" : "hide-container"
-              }`}
+            }`}
           >
-            {(!bag || bag.length === 0) &&
+            {(!bag || bag.length === 0) && (
               <div className="checkout-no-items">
                 <BLogo width={160} height={80} />
                 No items in the bag
               </div>
-            }
+            )}
           </div>
-          {(bag && bag.length > 0) &&
+          {bag && bag.length > 0 && (
             <>
               <div className="checkout-inner-container">
-              {bag && bag.length > 0 &&
-              <>
-              </>}
-              <div
-                className={`checkout-items-container ${
-                  step === 0 ? "show-container" : "hide-container"
+                {bag && bag.length > 0 && <></>}
+                <div
+                  className={`checkout-items-container ${
+                    step === 0 ? "show-container" : "hide-container"
                   }`}
-              >
-                {step === 0 && <Bag />}
-              </div>
-              <div
-                className={`checkout-items-container ${
-                  step === 1 ? "show-container" : "hide-container"
-                  }`}
-              >
-                <div className="step-auth-container">
-                  {step === 1 && <Authentication />}
+                >
+                  {step === 0 && <Bag />}
                 </div>
-              </div>
-              <div
-                className={`checkout-items-container ${
-                  step === 2 ? "show-container" : "hide-container"
+                <div
+                  className={`checkout-items-container ${
+                    step === 1 ? "show-container" : "hide-container"
                   }`}
-              >
-                {
-                  // We render it on order confirmation as well
+                >
+                  <div className="step-auth-container">
+                    {step === 1 && <Authentication />}
+                  </div>
+                </div>
+                <div
+                  className={`checkout-items-container ${
+                    step === 2 ? "show-container" : "hide-container"
+                  }`}
+                >
+                  {// We render it on order confirmation as well
                   // because we don't save payment information data in the local storage
                   // and we need to fetch and set it again in case the confirmation is reloaded
-                  (step === 2 || step === 4) && <PaymentMethod />
-                }
-              </div>
-              <div
-                className={`checkout-items-container ${
-                  step === 3 ? "show-container" : "hide-container"
+                  (step === 2 || step === 4) && <PaymentMethod />}
+                </div>
+                <div
+                  className={`checkout-items-container ${
+                    step === 3 ? "show-container" : "hide-container"
                   }`}
-              >
-                {step === 3 && <DeliveryAddress />}
-              </div>
-              <div
-                className={`checkout-items-container ${
-                  step === 4 ? "show-container" : "hide-container"
+                >
+                  {step === 3 && <DeliveryAddress />}
+                </div>
+                <div
+                  className={`checkout-items-container ${
+                    step === 4 ? "show-container" : "hide-container"
                   }`}
-              >
-                {step === 4 && <Overview />}
-              </div>
-              <div
-                className={`checkout-items-container ${
-                  step === 5 ? "show-container" : "hide-container"
+                >
+                  {step === 4 && <Overview />}
+                </div>
+                <div
+                  className={`checkout-items-container ${
+                    step === 5 ? "show-container" : "hide-container"
                   }`}
-              >
-                {step === 5 && <Disclaimer/>}
+                >
+                  {step === 5 && <Disclaimer />}
+                </div>
               </div>
-            </div>
-            <div className="checkout-nav-container">
-              <CheckoutNavigation
-                loading={loading}
-                shouldNavigate={(stepNumb) => checkShouldNavigate(stepNumb)}
-                onPlaceOrder={() => step === 5 ? setConfirmOrder(true) : setStep(5)}
-                onStep={currentStep => setStep(currentStep)}
-              />
-            </div>
-          </>
-          }
+              <div className="checkout-nav-container">
+                <CheckoutNavigation
+                  loading={loading}
+                  shouldNavigate={stepNumb => checkShouldNavigate(stepNumb)}
+                  onPlaceOrder={() =>
+                    step === 5 ? setConfirmOrder(true) : setStep(5)
+                  }
+                  onStep={currentStep => setStep(currentStep)}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

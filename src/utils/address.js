@@ -36,7 +36,7 @@ const parseGooglePlace = place => {
 // Used to parse google place address object into a string representation
 const parseAddress = address => {
   if (!address) return;
-  var stringAddress = '';
+  let stringAddress = '';
   if (address.street_name)
     stringAddress += address.street_name + (address.building ? ' ' : ', ');
   if (address.street_name && address.building)

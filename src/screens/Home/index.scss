@@ -6,11 +6,11 @@
     justify-content: center;
     flex: 1;
     & > div:not(:last-child) {
-      padding: 12px 24px
+      padding: 12px 24px;
     }
     & .inner-wrapper {
       & > div {
-        padding: 12px 48px
+        padding: 12px 48px;
       }
     }
     .second-wrapper {
@@ -18,7 +18,6 @@
       flex-direction: column;
     }
   }
-
 }
 
 @media all and (max-width: 720px) {

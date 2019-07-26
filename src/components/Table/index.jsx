@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import "./index.scss";
 
 const Table = ({ children }) => {
@@ -9,7 +9,7 @@ const Table = ({ children }) => {
 Table.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
+    PropTypes.node
   ]).isRequired
 };
 

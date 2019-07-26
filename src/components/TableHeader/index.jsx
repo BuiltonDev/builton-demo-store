@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './index.scss';
+import "./index.scss";
 
-const TableHeader = ({children, className, style}) => {
+const TableHeader = ({ children, className, style }) => {
   return (
     <div className={`table-header ${className}`} style={style}>
       {children}
     </div>
-  )
+  );
 };
 
 TableHeader.defaultProps = {
-  className: '',
+  className: "",
   style: {}
 };
 
@@ -22,8 +22,7 @@ TableHeader.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]).isRequired,
-  style: PropTypes.object,
+  style: PropTypes.object
 };
 
 export default TableHeader;
-

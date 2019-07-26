@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .product-list-wrapper {
   display: flex;
@@ -41,9 +41,9 @@
     }
 
     &:hover {
-      -webkit-box-shadow: 2px 0px 19px -7px rgba(0,0,0,0.75);
-      -moz-box-shadow: 2px 0px 19px -7px rgba(0,0,0,0.75);
-      box-shadow: 2px 0px 19px -7px rgba(0,0,0,0.75);
+      -webkit-box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
+      box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
       -webkit-transform: translate3d(0, -12px, 1);
       -moz-transform: translate3d(0, -12px, 0);
       -o-transform: translate3d(0, -12px, 0);
@@ -81,7 +81,7 @@
         justify-content: flex-end;
         min-width: 86px;
         font-size: 1.2rem;
-        color: $PRIMARY_TEXT
+        color: $PRIMARY_TEXT;
       }
     }
     & > img {

@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .link-button {
   align-self: center;
@@ -22,7 +22,7 @@
   }
   &:after {
     position: absolute;
-    content: '';
+    content: "";
     left: 50%;
     bottom: -4px;
     width: 0;

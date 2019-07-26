@@ -34,7 +34,7 @@ const CheckoutBag = () => {
     return (
       <TableRow
         key={`bag-item-${item.product.id}-${index}`}
-        style={{ padding: '6px 12px'}}
+        style={{ padding: "6px 12px" }}
         onClick={() =>
           history.push(
             `/product_list/${item.category}/${item.product._id.$oid}`

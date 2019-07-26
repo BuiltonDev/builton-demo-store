@@ -1,4 +1,4 @@
-@import '../../constants';
+@import "../../constants";
 
 .button {
   min-width: 120px;
@@ -44,7 +44,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     z-index: -1;
     border-radius: inherit;
     pointer-events: none;

@@ -1,34 +1,34 @@
-import React, { useRef, useEffect } from 'react';
-import ReactCursorPosition from 'react-cursor-position';
-import PropTypes from 'prop-types';
-import './index.scss';
+import React, { useRef, useEffect } from "react";
+import ReactCursorPosition from "react-cursor-position";
+import PropTypes from "prop-types";
+import "./index.scss";
 
-const HeaderDropdown = ({children, open, style}) => {
+const HeaderDropdown = ({ children, open, style }) => {
   const containerRef = useRef(null);
   const cursorPosRef = useRef(null);
   useEffect(() => {
     setTimeout(() => {
       if (open) {
-        containerRef.current.classList.add('show-action')
+        containerRef.current.classList.add("show-action");
       } else {
         if (cursorPosRef.current) {
           if (!cursorPosRef.current.state.isActive) {
-            containerRef.current.classList.remove('show-action')
+            containerRef.current.classList.remove("show-action");
           }
         }
       }
-    }, 50)
+    }, 50);
   });
 
-  return(
+  return (
     <ReactCursorPosition
       ref={cursorPosRef}
       hoverOffDelayInMs={50}
-      onActivationChanged={({isActive}) => {
+      onActivationChanged={({ isActive }) => {
         if (!isActive) {
-          containerRef.current.classList.remove('show-action');
+          containerRef.current.classList.remove("show-action");
         } else {
-          containerRef.current.classList.add('show-action');
+          containerRef.current.classList.add("show-action");
         }
       }}
     >
@@ -40,7 +40,7 @@ const HeaderDropdown = ({children, open, style}) => {
         {children}
       </div>
     </ReactCursorPosition>
-  )
+  );
 };
 
 HeaderDropdown.defaultProps = {
@@ -53,7 +53,7 @@ HeaderDropdown.propTypes = {
     PropTypes.arrayOf(PropTypes.node)
   ]),
   style: PropTypes.object,
-  open: PropTypes.bool,
+  open: PropTypes.bool
 };
 
 export default HeaderDropdown;

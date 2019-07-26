@@ -34,7 +34,7 @@ const ProductListHeader = ({
         <img
           src={brandLogo}
           style={{ objectFit: "contain" }}
-          alt='brand-logo'
+          alt="brand-logo"
         />
       </div>
     )}

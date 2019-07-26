@@ -11,7 +11,7 @@
   padding: 0.85em 0.15em;
   width: 100%;
   background: transparent;
-  color: #595F6E;
+  color: #595f6e;
 }
 
 .input__field:focus {
@@ -50,13 +50,13 @@
 
 .input__label::before,
 .input__label::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: calc(100% - 20px);
-  border-bottom: 1px solid #B9C1CA;
+  border-bottom: 1px solid #b9c1ca;
 }
 
 .input__label::after {
@@ -108,7 +108,7 @@
       width: 48px;
       height: 4px;
       z-index: 10;
-      content: '';
+      content: "";
       background-color: rgb(255, 255, 255);
       opacity: 0;
     }
@@ -165,7 +165,7 @@
   0% {
     left: 0;
     opacity: 0.72;
-    width: 48px
+    width: 48px;
   }
   50% {
     width: 18px;
@@ -180,7 +180,7 @@
   0% {
     left: 0;
     opacity: 0.72;
-    width: 48px
+    width: 48px;
   }
   50% {
     width: 18px;
@@ -250,5 +250,3 @@
     left: 100%;
   }
 }
-
-

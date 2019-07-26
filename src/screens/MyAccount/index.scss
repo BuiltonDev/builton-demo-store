@@ -10,7 +10,7 @@
   position: relative;
   &:before {
     position: absolute;
-    content: '';
+    content: "";
     width: 200%;
     height: 100%;
     background-color: $TERTIARY_BACKGROUND;
@@ -28,7 +28,7 @@
     z-index: 2;
     &:before {
       position: absolute;
-      content: '';
+      content: "";
       width: 200%;
       height: 100%;
       top: 0;
@@ -61,7 +61,7 @@
         &:hover {
           &:after {
             position: absolute;
-            content: '';
+            content: "";
             left: 0;
             top: 0;
             width: 100%;
@@ -70,13 +70,12 @@
             z-index: -1;
             display: block;
           }
-
         }
 
         &.active-menu-item {
           &:before {
             position: absolute;
-            content: '';
+            content: "";
             left: 2px;
             top: 50%;
             width: 4px;
@@ -86,7 +85,7 @@
           }
           &:after {
             position: absolute;
-            content: '';
+            content: "";
             left: 0;
             top: 0;
             width: 100%;
@@ -117,7 +116,7 @@
       z-index: 1;
       &:before {
         position: absolute;
-        content: '';
+        content: "";
         width: 100%;
         height: 100%;
         left: 0;
@@ -128,10 +127,10 @@
       }
 
       &.show-my-account {
-          animation: animate-show-account 1s forwards;
-          opacity: 0;
-          animation-delay: 1s;
-          height: 0;
+        animation: animate-show-account 1s forwards;
+        opacity: 0;
+        animation-delay: 1s;
+        height: 0;
       }
 
       &.hide-my-account {

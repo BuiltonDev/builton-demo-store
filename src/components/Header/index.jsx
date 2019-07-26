@@ -34,7 +34,7 @@ const Header = React.memo(() => {
   const calculateTotalAmount = () => {
     let total = 0;
     for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.price
+      total += bag[i].product.price;
     }
     return total;
   };
@@ -55,13 +55,13 @@ const Header = React.memo(() => {
             user && setUserMenuOpen(false);
           }}
         >
-            <span>
-              {user ? (
-                <div>{user.email}</div>
-              ) : (
-                <Account width={18} height={18} color="black" />
-              )}
-            </span>
+          <span>
+            {user ? (
+              <div>{user.email}</div>
+            ) : (
+              <Account width={18} height={18} color="black" />
+            )}
+          </span>
         </a>
         <button
           type="button"
@@ -69,10 +69,10 @@ const Header = React.memo(() => {
           onMouseEnter={() => setCartOpen(true)}
           onMouseLeave={() => setCartOpen(false)}
         >
-            <span>
-              <Cart width={18} height={18} color="black" />{" "}
-              <span className="cart-count">{(bag && bag.length) || 0}</span>
-            </span>
+          <span>
+            <Cart width={18} height={18} color="black" />{" "}
+            <span className="cart-count">{(bag && bag.length) || 0}</span>
+          </span>
         </button>
         <HeaderDropdown open={userMenuOpen}>
           <DropdownMenu>
@@ -97,7 +97,7 @@ const Header = React.memo(() => {
           </DropdownMenu>
         </HeaderDropdown>
       </>
-    )
+    );
   };
 
   const renderCartContainer = () => {
@@ -122,7 +122,7 @@ const Header = React.memo(() => {
                   </div>
                   <div
                     className="remove-bag-item"
-                    onClick={(ev) => removeItem(prod.size._id.$oid, ev)}
+                    onClick={ev => removeItem(prod.size._id.$oid, ev)}
                   >
                     <RemoveShopping color="#c5c5c5" />
                   </div>
@@ -132,15 +132,15 @@ const Header = React.memo(() => {
             <div className="header-checkout-container">
               <Button
                 onClick={() => {
-                  history.push('/checkout/bag');
+                  history.push("/checkout/bag");
                 }}
                 type="button"
                 className="button round"
                 title="Proceed to checkout"
                 style={{
-                  padding: '4px 12px',
+                  padding: "4px 12px",
                   height: 40,
-                  fontSize: '0.72rem'
+                  fontSize: "0.72rem"
                 }}
               />
               <div className="header-bag-amount">
@@ -152,12 +152,12 @@ const Header = React.memo(() => {
           <div className="empty-bag-container">No items in the bag.</div>
         )}
       </DropdownMenu>
-    )
+    );
   };
 
   return (
     <div className="header-container">
-      <div className="header-logo-container" onClick={() => history.push('/')}>
+      <div className="header-logo-container" onClick={() => history.push("/")}>
         <BuiltonLogo />
       </div>
       <div className="top-header-hyperlink-container">
@@ -185,12 +185,8 @@ const Header = React.memo(() => {
         >
           <span>Dashboard</span>
         </a>
-        <span className="dropdown-container">
-          {renderLogoutContainer()}
-        </span>
-        <HeaderDropdown open={cartOpen}>
-          {renderCartContainer()}
-        </HeaderDropdown>
+        <span className="dropdown-container">{renderLogoutContainer()}</span>
+        <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>
       </div>
     </div>
   );

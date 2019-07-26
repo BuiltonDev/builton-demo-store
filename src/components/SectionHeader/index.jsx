@@ -1,12 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './index.scss';
+import "./index.scss";
 
-const SectionHeader = ({title, style, type}) => {
+const SectionHeader = ({ title, style, type }) => {
   return (
-    <div className={`section-header-container ${type}`} style={style}>{title}</div>
-  )
+    <div className={`section-header-container ${type}`} style={style}>
+      {title}
+    </div>
+  );
 };
 
 SectionHeader.defaultProps = {
@@ -17,10 +19,7 @@ SectionHeader.defaultProps = {
 SectionHeader.propTypes = {
   title: PropTypes.string.isRequired,
   style: PropTypes.object,
-  type: PropTypes.oneOf([
-    "main",
-    "sub"
-  ])
+  type: PropTypes.oneOf(["main", "sub"])
 };
 
 export default SectionHeader;

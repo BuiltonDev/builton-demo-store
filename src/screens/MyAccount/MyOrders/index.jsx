@@ -7,6 +7,7 @@ import { parseAddress } from "../../../utils/address";
 import builton from "../../../utils/builton";
 import notify from "../../../utils/toast";
 import Spinner from "../../../components/Spinner";
+import {timestampToDateString} from "../../../utils/dateModifiers";
 
 const MyOrders = () => {
   const [loading, setLoading] = useState(true);
@@ -51,7 +52,7 @@ const MyOrders = () => {
           <TableHeader>
             <div className="human-id--row">#id</div>
             <div className="delivery-status--row">Delivery status</div>
-            <div className="delivery-address--row">Delivery address</div>
+            <div className="created--row">Created</div>
             <div className="amount--row">Amount</div>
           </TableHeader>
           {orders && orders.map((order, index) => {
@@ -65,8 +66,8 @@ const MyOrders = () => {
                 >
                   {order.delivery_status}
                 </div>
-                <div className="delivery-address--row">
-                  {parseAddress(order.delivery_address)}
+                <div className="created--row">
+                  {timestampToDateString(order.created.$date)}
                 </div>
                 <div className="amount--row">
                   {order.total_amount} {order.currency}

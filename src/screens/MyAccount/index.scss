@@ -172,9 +172,12 @@
         }
       }
 
-      & .delivery-address--row {
-        font-size: 0.92rem;
-        flex: 4;
+      & .created--row {
+        font-size: 0.82rem;
+        flex: 3;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
       }
 
       & .amount--row {

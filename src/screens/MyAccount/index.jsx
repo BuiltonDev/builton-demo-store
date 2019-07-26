@@ -1,167 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import useReactRouter from "use-react-router";
-import { useGlobal, useDispatch } from "reactn";
 
 import "./index.scss";
 import Header from "../../components/Header";
-import { Field, Form } from "react-final-form";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-import builton from "../../utils/builton";
-import notify from "../../utils/toast";
-import SectionHeader from "../../components/SectionHeader";
-import TableRow from "../../components/TableRow";
-import TableHeader from "../../components/TableHeader";
-import {parseAddress} from "../../utils/address";
-import Table from "../../components/Table";
+import MyOrders from "./MyOrders";
+import MyProfile from "./MyProfile";
 
 const MyAccount = () => {
   const { match, history } = useReactRouter();
   const [activeMenu, setActiveMenu] = useState("my-profile");
-  const [orders, setOrders] = useState(undefined);
-  const [user] = useGlobal("user");
-  const updateUser = useDispatch("updateUser");
 
   useEffect(() => {
     if (match.params.menuId) {
-      if (match.params.menuId === 'my-orders') {
-        fetchOrders();
-      }
       setActiveMenu(match.params.menuId);
     }
   }, [match.params.menuId]);
-
-  const fetchOrders = async () => {
-    try {
-      const orders = await builton.users.setMe().getOrders();
-      setOrders(orders);
-    } catch(err) {
-      notify('Failed to fetch orders. Please try again.', {
-        type: 'error'
-      })
-    }
-  };
-
-  const Error = ({ name }) => (
-    <div className="form-error-container">
-      <Field name={name} subscription={{ error: true, touched: true }}>
-        {({ meta: { error, touched } }) =>
-          error && touched ? <span>{error}</span> : null
-        }
-      </Field>
-    </div>
-  );
-
-  const onSubmit = async values => {
-    try {
-      const updatedUser = await builton.users.setMe().update({
-        body: values
-      });
-      updateUser(updatedUser);
-    } catch (err) {
-      notify(`Failed to update user. Please try again.`, { type: "error" });
-    }
-  };
-
-  const validate = values => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    }
-    return errors;
-  };
-
-  const renderUserProfleForm = () => {
-    return (
-      <div className="form-content-container">
-        <Form
-          onSubmit={onSubmit}
-          initialValues={{
-            first_name: user.first_name,
-            last_name: user.last_name,
-            email: user.email
-          }}
-          validate={values => validate(values)}
-        >
-          {({ handleSubmit, submitting }) => (
-            <form onSubmit={handleSubmit} className="form-container">
-              <div className="input">
-                <Field
-                  name="first_name"
-                  type="text"
-                  render={({ input }) => (
-                    <Input
-                      id="input-1"
-                      inputProps={input}
-                      submitting={submitting}
-                      colorScheme={1}
-                      placeholder="First Name"
-                    />
-                  )}
-                />
-                <Error name="first_name" />
-              </div>
-              <div className="input">
-                <Field
-                  name="last_name"
-                  type="text"
-                  render={({ input, meta }) => (
-                    <Input
-                      id="input-2"
-                      inputProps={input}
-                      meta={meta}
-                      submitting={submitting}
-                      colorScheme={1}
-                      placeholder="Last Name"
-                    />
-                  )}
-                />
-                <Error name="last_name" />
-              </div>
-              <div className="input">
-                <Field
-                  name="email"
-                  type="email"
-                  render={({ input, meta }) => (
-                    <Input
-                      id="input-3"
-                      inputProps={input}
-                      submitting={submitting}
-                      meta={meta}
-                      colorScheme={1}
-                      placeholder="Email"
-                    />
-                  )}
-                />
-                <Error name="email" />
-              </div>
-              <div className="button-container">
-                <Button
-                  type="submit"
-                  className="button round"
-                  loading={submitting}
-                  title="Save"
-                />
-              </div>
-            </form>
-          )}
-        </Form>
-      </div>
-    );
-  };
-
-  console.log(orders);
-
-  const getStatusColor = (status) => {
-    if (status === 'PENDING') {
-      return 'undetermined';
-    } else if (status === 'CANCELLED') {
-      return 'negative';
-    } else {
-      return 'positive';
-    }
-  };
 
   return (
     <div className="main-container">
@@ -195,50 +49,14 @@ const MyAccount = () => {
                 : "hide-my-account"
             }`}
           >
-            <SectionHeader title="My Profile" />
-            <SectionHeader title="General settings" type="sub" />
-            {activeMenu === "my-profile" && renderUserProfleForm()}
+            {activeMenu === "my-profile" && <MyProfile />}
           </div>
           <div
             className={`my-account-content ${
               activeMenu === "my-orders" ? "show-my-account" : "hide-my-account"
             }`}
           >
-            <SectionHeader title="My Orders" />
-            <Table>
-              <TableHeader>
-                <div className="human-id--row">
-                  #id
-                </div>
-                <div className="delivery-status--row">
-                  Delivery status
-                </div>
-                <div className="delivery-address--row">
-                  Delivery address
-                </div>
-                <div className="amount--row">
-                  Amount
-                </div>
-              </TableHeader>
-              {(activeMenu === 'my-orders' && orders) && orders.map((order, index) => {
-                return (
-                  <TableRow key={`order-${order.human_id}`}>
-                    <div className="human-id--row">
-                      {order.human_id}
-                    </div>
-                    <div className={`delivery-status--row ${getStatusColor(order.delivery_status)}`}>
-                      {order.delivery_status}
-                    </div>
-                    <div className="delivery-address--row">
-                      {parseAddress(order.delivery_address)}
-                    </div>
-                    <div className="amount--row">
-                      {order.total_amount} {order.currency}
-                    </div>
-                  </TableRow>
-                )
-              })}
-            </Table>
+            {activeMenu === "my-orders" && <MyOrders />}
           </div>
         </div>
       </div>

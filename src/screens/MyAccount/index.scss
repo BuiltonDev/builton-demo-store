@@ -179,6 +179,16 @@
         justify-content: center;
       }
 
+      & .no-orders {
+        font-size: 0.92rem;
+        display: flex;
+        flex-direction: column;
+        color: $SECONDARY_TEXT;
+        text-transform: uppercase;
+        align-items: center;
+        justify-content: center;
+      }
+
       & .amount--row {
         flex: 1;
         display: flex;

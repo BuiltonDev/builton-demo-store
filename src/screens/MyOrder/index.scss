@@ -1,0 +1,163 @@
+@import '../../constants';
+
+.my-order-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  &:before {
+    position: absolute;
+    content: "";
+    width: 200%;
+    height: 100%;
+    background-color: $TERTIARY_BACKGROUND;
+    z-index: 0;
+    transform: translateX(55%) skew(-50deg);
+  }
+
+  & .my-order-container {
+    flex: 1;
+    flex-direction: column;
+    max-width: 920px;
+    width: 100%;
+
+    & .my-order-inner-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      & > div {
+        z-index: 1;
+        padding: 24px 64px;
+      }
+
+      &:before {
+        position: absolute;
+        left: 0;
+        content: '';
+        z-index: 0;
+        top: 0;
+        background-color: $PRIMARY_BACKGROUND;
+        width: 100%;
+        height: 100%;
+        transform: rotate(1deg) skew(1deg);
+      }
+    }
+
+    & .my-order-general {
+      & .my-order-general-row {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        padding: 12px 4px;
+        justify-content: space-between;
+
+        & .my-order-left {
+          text-transform: uppercase;
+          color: $SECONDARY_TEXT;
+          font-size: 0.82rem;
+          letter-spacing: 1px;
+        }
+        & .my-order-right {
+          text-transform: uppercase;
+          color: $PRIMARY_TEXT;
+          font-size: 0.82rem;
+          letter-spacing: 1px;
+        }
+
+        & .undetermined {
+          color: $UNDERTERMINED_STATUS;
+        }
+
+        & .positive {
+          color: $POSITIVE_STATUS;
+        }
+
+        & .negative {
+          color: $NEGATIVE_STATUS;
+        }
+      }
+
+
+    }
+
+    & .my-order-payment-method {
+      & .payment-method-left {
+        display: flex;
+        flex-direction: column;
+        flex: 11;
+        & > div {
+          padding: 12px 0;
+        }
+      }
+      & .payment-method-right {
+        display: flex;
+        flex-direction: column;
+        flex: auto;
+        align-items: flex-end;
+        justify-content: center;
+        & > div {
+          padding: 12px 0;
+        }
+        & .payment-method-checkmark {
+          font-size: 40px;
+          color: $SECONDARY_BORDER_COLOR;
+          padding-right: 12px;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+
+    & .my-order-products {
+      & .my-order-product-img {
+        flex: 1;
+        &.row {
+          width: 120px;
+          height: 120px;
+          & > img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      & .my-order-product-name {
+        flex: 4;
+      }
+
+      & .my-order-product-price {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        flex: 1;
+      }
+
+      & .my-order-product-price {
+        &.row {
+          color: $ALTERNATIVE_TEXT;
+        }
+      }
+
+      & .product-total-row {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        border-top: 1px solid $PRIMARY_BORDER_COLOR;
+        justify-content: space-between;
+
+        & .product-total-title {
+          font-size: 1.16rem;
+        }
+
+        & .product-total {
+          font-size: 1.16rem;
+          color: $ALTERNATIVE_TEXT;
+        }
+      }
+    }
+  }
+}

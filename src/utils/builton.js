@@ -11,10 +11,11 @@ const builtonSession = getFieldCurry('builtonSession')();
 const BuiltonClient = new Builton({
   ...(builtonSession && { bearerToken: builtonSession }),
   refreshTokenFn: () => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const user = firebase.auth().currentUser;
       if (user) {
-        resolve(user);
+        const idToken = await user.getIdToken();
+        resolve(idToken);
       } else {
         const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
           unsubscribe();

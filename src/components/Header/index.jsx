@@ -81,7 +81,7 @@ const Header = React.memo(() => {
                 history.push("/my-account/my-profile");
               }}
             >
-              <span>MyAccount</span>
+              <span>My Account</span>
               <MyAccount color="#c5c5c5" />
             </DropdownMenuItem>
             <DropdownMenuItem

@@ -9,6 +9,7 @@ import { useDispatch, useGlobal } from "reactn";
 import SectionHeader from "../../../components/SectionHeader";
 import TableRow from "../../../components/TableRow";
 import TableHeader from "../../../components/TableHeader";
+import Table from "../../../components/Table";
 
 const CheckoutBag = () => {
   const [bag] = useGlobal("bag");
@@ -67,21 +68,23 @@ const CheckoutBag = () => {
   return (
     <>
       <SectionHeader title="Your items" />
-      <TableHeader className="checkout-items-header">
-        <div className="checkout-name-col">Brand</div>
-        <div className="checkout-description-col">Model</div>
-        <div className="checkout-size-col">Size</div>
-        <div className="checkout-price-col">Price</div>
-        <div className="checkout-remove-col" />
-      </TableHeader>
-      {bag && bag.map((item, index) => renderBagRow(item, index))}
-      <div className="checkout-bag-total-row">
-        <div className="checkout-bag-total-title">Total</div>
-        <div className="checkout-bag-total">
-          {calculateTotalAmount()} {bag[0].product.currency}
-        </div>
-        <div className="checkout-bag-empty" />
-      </div>
+      <Table>
+        <TableHeader className="checkout-items-header">
+          <div className="checkout-name-col">Brand</div>
+          <div className="checkout-description-col">Model</div>
+          <div className="checkout-size-col">Size</div>
+          <div className="checkout-price-col">Price</div>
+          <div className="checkout-remove-col" />
+        </TableHeader>
+        {bag && bag.map((item, index) => renderBagRow(item, index))}
+        <TableRow className="checkout-bag-total-row">
+          <div className="checkout-bag-total-title">Total</div>
+          <div className="checkout-bag-total">
+            {calculateTotalAmount()} {bag[0].product.currency}
+          </div>
+          <div className="checkout-bag-empty" />
+        </TableRow>
+      </Table>
     </>
   );
 };

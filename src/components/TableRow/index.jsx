@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-const TableRow = ({children, onClick, style}) => {
+const TableRow = ({children, onClick, style, className}) => {
   return (
-    <div className="table-row" style={style} onClick={onClick}>
+    <div className={`table-row ${onClick ? 'clickable-row' : ''} ${className}`} style={style} onClick={onClick}>
       {children}
     </div>
   )
@@ -13,7 +13,8 @@ const TableRow = ({children, onClick, style}) => {
 
 TableRow.defaultProps = {
   onClick: undefined,
-  style: {}
+  style: {},
+  className: '',
 };
 
 TableRow.propTypes = {
@@ -23,6 +24,7 @@ TableRow.propTypes = {
     PropTypes.node,
   ]).isRequired,
   style: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export default TableRow;

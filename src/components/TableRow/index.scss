@@ -5,12 +5,14 @@
   flex-direction: row;
   align-items: center;
   padding: 10px 12px;
-  cursor: pointer;
   font-size: 0.78rem;
   letter-spacing: 1px;
-  &:hover {
-    background-color: $SECONDARY_BACKGROUND;
-    transition: all 250ms ease-in;
+  &.clickable-row {
+    cursor: pointer;
+    &:hover {
+      background-color: $SECONDARY_BACKGROUND;
+      transition: all 250ms ease-in;
+    }
   }
 
   & > div {

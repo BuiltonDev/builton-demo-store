@@ -153,6 +153,16 @@ const MyAccount = () => {
 
   console.log(orders);
 
+  const getStatusColor = (status) => {
+    if (status === 'PENDING') {
+      return 'undetermined';
+    } else if (status === 'CANCELLED') {
+      return 'negative';
+    } else {
+      return 'positive';
+    }
+  };
+
   return (
     <div className="main-container">
       <Header />
@@ -174,14 +184,6 @@ const MyAccount = () => {
               }`}
             >
               My Orders
-            </div>
-            <div
-              onClick={() => history.push("/my-account/my-payments")}
-              className={`${
-                activeMenu === "my-payments" ? "active-menu-item" : ""
-              }`}
-            >
-              My Payments
             </div>
           </div>
         </div>
@@ -223,7 +225,7 @@ const MyAccount = () => {
                     <div className="human-id--row">
                       {order.human_id}
                     </div>
-                    <div className="delivery-status--row">
+                    <div className={`delivery-status--row ${getStatusColor(order.delivery_status)}`}>
                       {order.delivery_status}
                     </div>
                     <div className="delivery-address--row">
@@ -236,15 +238,6 @@ const MyAccount = () => {
                 )
               })}
             </Table>
-          </div>
-          <div
-            className={`my-account-content ${
-              activeMenu === "my-payments"
-                ? "show-my-account"
-                : "hide-my-account"
-            }`}
-          >
-
           </div>
         </div>
       </div>

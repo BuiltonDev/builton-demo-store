@@ -143,15 +143,30 @@
       }
 
       & .human-id--row {
-        flex: 1
+        flex: 1;
+        font-size: 0.72rem;
       }
 
       & .delivery-status--row {
-        flex: 2
+        flex: 2;
+        font-size: 0.72rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        &.undetermined {
+          color: $UNDERTERMINED_STATUS;
+        }
+        &.positive {
+          color: $POSITIVE_STATUS;
+        }
+        &.negative {
+          color: $NEGATIVE_STATUS;
+        }
       }
 
       & .delivery-address--row {
-        flex: 3
+        font-size: 0.92rem;
+        flex: 4;
       }
 
       & .amount--row {
@@ -159,6 +174,14 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        color: $ALTERNATIVE_TEXT;
+      }
+
+      & .table-header {
+        & > div {
+          font-size: 0.92rem;
+          color: $PRIMARY_TEXT;
+        }
       }
 
       & .button-container {

@@ -63,9 +63,7 @@ const CheckoutPaymentMethod = () => {
           <Spinner height={32} width={32} />
         </div>
       }
-      <div className="checkout-sub-header-title">
-        Selected payment method
-      </div>
+      <SectionHeader title="Selected payment method" type="sub" />
       {!loading && paymentMethod &&
         <ListItem>
           <div className="checkout-list-item-left">

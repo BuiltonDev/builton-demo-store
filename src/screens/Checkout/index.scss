@@ -73,16 +73,7 @@
         color: $SECONDARY_TEXT;
       }
     }
-
-    & .checkout-sub-header-title {
-      border-bottom: 2px solid $PRIMARY_BORDER_COLOR;
-      padding: 12px 6px;
-      margin-bottom: 24px;
-      letter-spacing: 1px;
-      font-size: 0.72rem;
-      color: $SECONDARY_TEXT;
-      text-transform: uppercase;
-    }
+    
     & .checkout-items-container {
       flex-direction: column;
       flex: 1;

@@ -26,9 +26,7 @@ const CheckoutConfirmation = () => {
   const renderPaymentMethod = () => {
     return (
       <div className="checkout-overview-sub-container">
-        <div className="checkout-sub-header-title">
-          Selected payment method
-        </div>
+        <SectionHeader title="Selected payment method" type="sub" />
         <ListItem onClick={() => history.push('/checkout/payment_method')}>
           <div className="checkout-list-item-left">
             <div className="checkout-payment-card-number">
@@ -50,9 +48,7 @@ const CheckoutConfirmation = () => {
   const renderDeliveryAddress = () => {
     return (
       <div className="checkout-overview-sub-container">
-        <div className="checkout-sub-header-title">
-          Selected delivery address
-        </div>
+        <SectionHeader title="Selected delivery address" type="sub" />
         <ListItem onClick={() => history.push('/checkout/delivery_address')}>
           <div className="checkout-list-item-left">
             <div>{order.delivery_address.street_name}</div>

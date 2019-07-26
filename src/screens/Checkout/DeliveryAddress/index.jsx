@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ListItem from "../../../components/ListItem";
 import { useDispatch, useGlobal } from "reactn";
 import PlacesAutocomplete, {
@@ -99,7 +99,7 @@ const CheckoutDeliveryAddress = () => {
           );
         }}
       </PlacesAutocomplete>
-      <div className="checkout-sub-header-title">Selected delivery address</div>
+      <SectionHeader title="Selected delivery address" type="sub" />
       <div>
         {selectedAddress && (
           <ListItem>

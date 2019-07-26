@@ -1,9 +1,21 @@
 @import '../../constants';
 
 .section-header-container {
-  font-size: 1.6rem;
-  margin: 12px 0 24px 0;
-  padding: 8px 16px;
-  letter-spacing: 1px;
-  border-bottom: 4px solid $SECONDARY_BORDER_COLOR
+  &.main {
+    font-size: 1.6rem;
+    margin: 12px 0 24px 0;
+    padding: 8px 16px;
+    letter-spacing: 1px;
+    border-bottom: 4px solid $SECONDARY_BORDER_COLOR
+  }
+
+  &.sub {
+    border-bottom: 2px solid $PRIMARY_BORDER_COLOR;
+    padding: 12px 6px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    font-size: 0.72rem;
+    color: $SECONDARY_TEXT;
+    text-transform: uppercase;
+  }
 }

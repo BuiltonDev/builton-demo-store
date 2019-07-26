@@ -196,6 +196,7 @@ const MyAccount = () => {
             }`}
           >
             <SectionHeader title="My Profile" />
+            <SectionHeader title="General settings" type="sub" />
             {activeMenu === "my-profile" && renderUserProfleForm()}
           </div>
           <div

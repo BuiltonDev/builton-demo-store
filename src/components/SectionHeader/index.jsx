@@ -3,19 +3,24 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-const SectionHeader = ({title, style}) => {
+const SectionHeader = ({title, style, type}) => {
   return (
-    <div className="section-header-container" style={style}>{title}</div>
+    <div className={`section-header-container ${type}`} style={style}>{title}</div>
   )
 };
 
 SectionHeader.defaultProps = {
-  style: {}
+  style: {},
+  type: "main"
 };
 
 SectionHeader.propTypes = {
   title: PropTypes.string.isRequired,
   style: PropTypes.object,
+  type: PropTypes.oneOf([
+    "main",
+    "sub"
+  ])
 };
 
 export default SectionHeader;

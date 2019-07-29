@@ -26,7 +26,6 @@
     justify-content: center;
     height: 100%;
     max-height: 60px;
-    z-index: 2;
     &:before {
       position: absolute;
       content: "";
@@ -35,11 +34,9 @@
       bottom: 0;
       background-color: $ORANGE_BACKGROUND;
       transform: rotate(-1deg);
-      z-index: -1;
     }
 
     & .my-account-menu-wrapper {
-      z-index: 4;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -55,7 +52,6 @@
         text-transform: uppercase;
         padding: 16px 24px;
         width: 100%;
-        z-index: 2;
         display: block;
         min-width: 180px;
         text-align: center;

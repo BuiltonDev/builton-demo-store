@@ -15,10 +15,13 @@ import { getSneakersSize } from "../../utils/productModifiers";
 import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
 import MyAccount from "../../assets/icons/my_account";
+import MenuIcon from "../../assets/icons/menuIcon";
 
 const Header = React.memo(() => {
   const [cartOpen, setCartOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [user] = useGlobal("user");
   const [bag] = useGlobal("bag");
@@ -160,7 +163,7 @@ const Header = React.memo(() => {
       <div className="header-logo-container" onClick={() => history.push("/")}>
         <BuiltonLogo />
       </div>
-      <div className="top-header-hyperlink-container">
+      <div className="top-header-menu-container">
         <a
           className="header-box-hyperlink"
           href="https://builton.dev"
@@ -187,6 +190,15 @@ const Header = React.memo(() => {
         </a>
         <span className="dropdown-container">{renderLogoutContainer()}</span>
         <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>
+      </div>
+      <div className="menu-button-container">
+        <div className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
+          <MenuIcon />
+        </div>
+      </div>
+      <div className={`responsive-menu ${menuOpen ? 'responsive-menu-open' : 'responsive-menu-closed'}`}>
+      </div>
+      <div className={`responsive-menu-backdrop ${menuOpen ? 'backdrop-open' : 'backdrop-close'}`} onClick={() => setMenuOpen(false)}>
       </div>
     </div>
   );

@@ -191,15 +191,98 @@ const Header = React.memo(() => {
         <span className="dropdown-container">{renderLogoutContainer()}</span>
         <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>
       </div>
-      <div className="menu-button-container">
-        <div className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
-          <MenuIcon />
+      <div className="responsive-actions-container">
+        <button
+          type="button"
+          className="header-box-hyperlink cart"
+          onMouseEnter={() => setCartOpen(true)}
+          onMouseLeave={() => setCartOpen(false)}
+        >
+          <span>
+            <Cart width={18} height={18} color="black" />{" "}
+            <span className="cart-count">{(bag && bag.length) || 0}</span>
+          </span>
+        </button>
+        <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>
+        <div className="menu-button-container">
+          <div className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
+            <MenuIcon />
+          </div>
         </div>
       </div>
-      <div className={`responsive-menu ${menuOpen ? 'responsive-menu-open' : 'responsive-menu-closed'}`}>
+      <div
+        className={`responsive-menu ${
+          menuOpen ? "responsive-menu-open" : "responsive-menu-closed"
+        }`}
+      >
+        <div className="internal-menu-items">
+          <div className="header-title">
+            {user.email}
+          </div>
+          <a
+            className="header-box-hyperlink"
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              setMenuOpen(false);
+              history.push("/my-account/my-profile");
+            }}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span>My Account</span>
+          </a>
+          <a
+            className="header-box-hyperlink"
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              setMenuOpen(false);
+              globalState.logout();
+              history.push("/");
+            }}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span>Log out</span>
+          </a>
+        </div>
+        <div className="external-menu-items">
+          <div>
+            <a
+              href="https://builton.dev"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span>Website</span>
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://docs.builton.dev"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span>Docs</span>
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://dashboard.builton.dev/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span>Dashboard</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div className={`responsive-menu-backdrop ${menuOpen ? 'backdrop-open' : 'backdrop-close'}`} onClick={() => setMenuOpen(false)}>
-      </div>
+      <div
+        className={`responsive-menu-backdrop ${
+          menuOpen ? "backdrop-open" : "backdrop-close"
+        }`}
+        onClick={() => setMenuOpen(false)}
+      />
     </div>
   );
 });

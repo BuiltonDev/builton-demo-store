@@ -24,25 +24,25 @@ const MyOrder = () => {
 
   useEffect(() => {
     if (match.params.orderId) {
+      const fetchOrder = async () => {
+        try {
+          const order = await builton.orders.get(match.params.orderId, {
+            urlParams: {
+              expand: 'payments,items.product,payments.payment_method'
+            }
+          });
+          setOrder(order);
+        } catch(err) {
+          notify('Failed to fetch order. Please try again', {
+            type: 'error'
+          })
+        }
+        setLoading(false)
+      };
+
       fetchOrder();
     }
   }, [match.params.orderId]);
-
-  const fetchOrder = async () => {
-    try {
-      const order = await builton.orders.get(match.params.orderId, {
-        urlParams: {
-          expand: 'payments,items.product,payments.payment_method'
-        }
-      });
-      setOrder(order);
-    } catch(err) {
-      notify('Failed to fetch order. Please try again', {
-        type: 'error'
-      })
-    }
-    setLoading(false)
-  };
 
   const calculateTotalAmount = () => {
     let total = 0;
@@ -128,6 +128,7 @@ const MyOrder = () => {
                       <div className="my-order-product-img row">
                         <img
                           src={`${config.endpoint}images/${product.product.image_url}?api_key=${config.apiKey}`}
+                          alt={`${product.name}-img`}
                         />
                       </div>
                       <div className="my-order-product-name">

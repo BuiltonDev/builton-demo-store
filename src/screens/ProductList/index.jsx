@@ -47,6 +47,7 @@ const ProductList = () => {
         setBrandLogo(NikeLogo);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match]);
 
   useEffect(() => {
@@ -78,6 +79,7 @@ const ProductList = () => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products]);
 
   const filterCategory = apiProducts => {

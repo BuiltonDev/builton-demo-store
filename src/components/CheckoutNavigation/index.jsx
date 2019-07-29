@@ -29,6 +29,7 @@ const CheckoutNavigation = ({
         pushStep(1);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const CheckoutNavigation = ({
         animateSteps(length);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.step]);
 
   const setCheckoutStep = async () => {

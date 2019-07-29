@@ -43,12 +43,14 @@ const Checkout = () => {
     if (step === 5) {
       setConfirmOrder(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   useEffect(() => {
     if (confirmOrder) {
       placeOrder();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [confirmOrder]);
 
   const placeOrder = async () => {

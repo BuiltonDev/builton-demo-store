@@ -119,3 +119,20 @@
     background-color: $SECONDARY_BORDER_COLOR;
   }
 }
+
+@media all and (max-width: 780px) {
+  .checkout-steps-container {
+    padding: 16px;
+    min-width: 0;
+    justify-content: flex-start;
+    & .checkout-step {
+      & .checkout-step-title {
+        top: 40px;
+      }
+    }
+  }
+
+  .checkout-next-step {
+    right: 0;
+  }
+}

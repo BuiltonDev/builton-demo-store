@@ -353,3 +353,12 @@
     display: none;
   }
 }
+
+
+@media all and (max-width: 780px) {
+  .checkout-container {
+    min-width: 100vw;
+    padding: 24px;
+    overflow-x: hidden;
+  }
+}

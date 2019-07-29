@@ -14,6 +14,7 @@ import SignOut from "../../assets/icons/log_out";
 import { getSneakersSize } from "../../utils/productModifiers";
 import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
+import './index.scss';
 
 const Menu = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -287,10 +288,10 @@ const Menu = () => {
   };
 
   return (
-    <>
+    <div className="main-menu-container">
       {renderMenu()}
       {renderResponsiveMenu()}
-    </>
+    </div>
   );
 };
 

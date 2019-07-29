@@ -60,12 +60,14 @@ const CheckoutDeliveryAddress = () => {
                   leftAdornment={
                     <Search width={22} height={22} color="rgb(141, 141, 141)" />
                   }
+                  id="delivery_address_input"
                   inputProps={{
                     ...getInputProps(),
                     onChange: (val, ev) => {
                       getInputProps().onChange(ev);
                     }
                   }}
+                  loading={loading}
                   placeholder="Search address..."
                   colorScheme={1}
                 />

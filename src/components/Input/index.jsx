@@ -39,6 +39,7 @@ const Input = ({
   };
 
   useEffect(() => {
+    console.log(id)
     if (typeof inputProps.value !== "undefined" && inputProps.value !== "") {
       document.getElementById(id).parentNode.classList.add("input--filled");
     }

@@ -125,7 +125,7 @@
     content: '';
     background-color: white;
     flex-direction: column;
-    padding: 64px 0;
+    padding: 24px 0 64px;
     overflow: hidden;
     justify-content: space-between;
 
@@ -275,9 +275,17 @@
       display: flex;
       flex-direction: row;
       & .header-box-hyperlink {
+        background-color: transparent;
         &.cart {
           border: none;
         }
+      }
+    }
+  }
+  .main-menu-container {
+    & .header-checkout-container {
+      & .header-bag-amount {
+        margin: 0;
       }
     }
   }

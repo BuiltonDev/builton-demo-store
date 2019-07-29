@@ -220,6 +220,19 @@ const Menu = () => {
               </a>
             </div>
           }
+          {!user &&
+            <div className="internal-menu-items">
+              <a href="#"
+                 className="header-box-hyperlink"
+                 onClick={(e) => {
+                e.preventDefault();
+                history.push('/auth')
+              }}
+              >
+              Log in
+              </a>
+            </div>
+          }
           <div className="external-menu-items">
             <div>
               <a

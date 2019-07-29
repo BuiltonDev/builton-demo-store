@@ -13,7 +13,7 @@ import Button from "../../components/Button";
 import { useDispatch } from "reactn";
 
 const Product = () => {
-  const { match, history } = useReactRouter();
+  const { match } = useReactRouter();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -41,7 +41,7 @@ const Product = () => {
     }
 
     fetchProduct();
-  }, [match.params.productId]);
+  }, [match.params.productId, loading]);
 
   const addToBag = async () => {
     if (!selectedSize) {
@@ -83,6 +83,7 @@ const Product = () => {
                   onLoad={() => setLoading(false)}
                   onError={() => setLoading(false)}
                   src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                  alt={`${product.name}-img`}
                 />
               </div>
             </div>

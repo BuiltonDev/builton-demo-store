@@ -17,6 +17,7 @@ const getSneakersSizes = product => {
           size: subProd.short_description.slice(subProd.short_description.toLowerCase().indexOf('size - ') + 'size - '.length)
         }
       }
+      return true;
     })
   }
   return [];

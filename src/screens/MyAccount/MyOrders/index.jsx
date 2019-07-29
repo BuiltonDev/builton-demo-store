@@ -9,7 +9,6 @@ import Spinner from "../../../components/Spinner";
 import { timestampToDateString } from "../../../utils/dateModifiers";
 import useReactRouter from "use-react-router";
 import { getStatusColor } from "../../../utils/orderModifiers";
-import BuiltonSplash from "../../../components/BuiltonSplash";
 import BLogo from "../../../assets/icons/b_logo";
 
 const MyOrders = () => {

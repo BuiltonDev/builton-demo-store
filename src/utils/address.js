@@ -22,6 +22,7 @@ const parseGooglePlace = place => {
       }
       address[myComponentForm.apiName] = val;
     }
+    return true;
   });
 
   address['geo'] = [

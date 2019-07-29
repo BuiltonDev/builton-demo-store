@@ -15,6 +15,7 @@ import { getSneakersSize } from "../../utils/productModifiers";
 import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
 import './index.scss';
+import {checkIfMobile} from "../../utils/mobile";
 
 const Menu = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -72,8 +73,9 @@ const Menu = () => {
         <button
           type="button"
           className="header-box-hyperlink cart"
-          onMouseEnter={() => setCartOpen(true)}
-          onMouseLeave={() => setCartOpen(false)}
+          onClick={() => checkIfMobile() && setCartOpen(true)}
+          onMouseEnter={() => !checkIfMobile() && setCartOpen(true)}
+          onMouseLeave={() => !checkIfMobile() && setCartOpen(false)}
         >
           <span>
             <Cart width={18} height={18} color="black" />{" "}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderDropdown from "../HeaderDropdown";
 import Cart from "../../assets/icons/cart";
 import CloseIcon from "../../assets/icons/closeIcon";
@@ -27,6 +27,10 @@ const Menu = () => {
   const removeItemFrombag = useDispatch("removeItemFromBag"); //reducer
 
   const { history } = useReactRouter();
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
+  }, [menuOpen]);
 
   const removeItem = (itemId, ev) => {
     ev.stopPropagation();

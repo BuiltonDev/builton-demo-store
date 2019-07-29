@@ -184,36 +184,38 @@ const Menu = () => {
             menuOpen ? "responsive-menu-open" : "responsive-menu-closed"
           }`}
         >
-          <div className="internal-menu-items">
-            <div className="header-title">{user.email}</div>
-            <a
-              className="header-box-hyperlink"
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                setMenuOpen(false);
-                history.push("/my-account/my-profile");
-              }}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <span>My Account</span>
-            </a>
-            <a
-              className="header-box-hyperlink"
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                setMenuOpen(false);
-                globalState.logout();
-                history.push("/");
-              }}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <span>Log out</span>
-            </a>
-          </div>
+          {user &&
+            <div className="internal-menu-items">
+              <div className="header-title">{user.email}</div>
+              <a
+                className="header-box-hyperlink"
+                href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  setMenuOpen(false);
+                  history.push("/my-account/my-profile");
+                }}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span>My Account</span>
+              </a>
+              <a
+                className="header-box-hyperlink"
+                href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  setMenuOpen(false);
+                  globalState.logout();
+                  history.push("/");
+                }}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span>Log out</span>
+              </a>
+            </div>
+          }
           <div className="external-menu-items">
             <div>
               <a

@@ -12,7 +12,9 @@ const Auth = () => {
     <div className="wrapper">
       <BuiltonLogo style={{ position: "absolute", top: 12, left: 48 }} />
       <div className="paper-container">
-        <AuthForm onAuth={() => history.push("/")} />
+        <AuthForm onAuth={() => {
+          window.location.replace('/');
+        }} />
       </div>
     </div>
   );

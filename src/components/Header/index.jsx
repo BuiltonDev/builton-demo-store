@@ -16,6 +16,7 @@ import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
 import MyAccount from "../../assets/icons/my_account";
 import MenuIcon from "../../assets/icons/menuIcon";
+import CloseIcon from "../../assets/icons/closeIcon";
 
 const Header = React.memo(() => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -209,7 +210,7 @@ const Header = React.memo(() => {
           <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>
           <div className="menu-button-container">
             <div className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>
-              <MenuIcon />
+              {menuOpen ? <CloseIcon /> : <MenuIcon />}
             </div>
           </div>
         </div>

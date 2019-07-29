@@ -115,10 +115,10 @@
     position: absolute;
     width: 100%;
     max-width: 420px;
-    z-index: 99999;
-    top: 48px;
+    z-index: 99998;
+    top: 54px;
     left: 0;
-    height: calc(100% - 48px);
+    height: calc(100% - 54px);
     content: '';
     background-color: white;
     flex-direction: column;
@@ -206,12 +206,12 @@
 
   & .responsive-menu-backdrop {
     position: absolute;
-    z-index: 99998;
+    z-index: 99997;
     content: '';
     background-color: rgba(0, 0, 0, 0.06);
     width: 100%;
-    height: calc(100% - 48px);
-    top: 48px;
+    height: calc(100% - 54px);
+    top: 54px;
     left: 0;
     display: none;
     &.backdrop-open {
@@ -256,7 +256,7 @@
 @media all and (max-width: 780px) {
   .header-container {
     flex-direction: row;
-    max-height: 82px;
+    height: 54px;
     padding: 0 12px;
     justify-content: space-between;
     & .top-header-menu-container {

@@ -385,4 +385,14 @@
       }
     }
   }
+
+  .checkout-nav-container {
+    flex-direction: column;
+    margin-bottom: 60px;
+    & .checkout-next-step {
+      position: relative;
+      margin-top: 60px;
+      align-self: flex-end;
+    }
+  }
 }

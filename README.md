@@ -11,7 +11,7 @@ resource allocation with baked-in machine learning capabilities. This is a demo 
 
 To run this project locally, a couple of prerequisities need to be met.
 
-1. You need to have valid BuiltOn API key. You can get it by logging in/creating an account in [BuiltOn Dashboard](https://dashboard.builton.dev) and navigate to `Settings` from the main menu. The key is located under the `API keys section`.
+1. You need to have valid BuiltOn API key. You can get it by logging in/creating an account in [BuiltOn Dashboard](https://dashboard.builton.dev) and navigate to `Settings` from the main menu. The key is located under the `API keys` section.
 
 2. You will need [Firebase](https://firebase.google.com/) authentication services as an authentication provider. You will need to link it in your [BuiltOn Dashboard](https://dashboard.builton.dev) account. You can do that by navigating to `Settings` and linking `Firebase` under `Auth Providers` section.
 

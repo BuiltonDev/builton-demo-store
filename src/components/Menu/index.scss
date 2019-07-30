@@ -283,6 +283,9 @@
     }
   }
   .main-menu-container {
+    & .responsive-menu {
+      max-width: 320px;
+    }
     & .header-checkout-container {
       & .header-bag-amount {
         margin: 0;

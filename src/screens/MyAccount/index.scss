@@ -238,3 +238,16 @@
     opacity: 1;
   }
 }
+
+@media all and (max-width: 780px) {
+  .my-account-wrapper {
+    & .my-account-content-container {
+      & .my-account-content {
+        padding: 12px;
+        &:before {
+          transform: translateX(0) ;
+        }
+      }
+    }
+  }
+}

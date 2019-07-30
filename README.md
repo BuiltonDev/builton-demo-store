@@ -4,12 +4,7 @@
 
 ## Getting Started
 
-This is a demo store showcasing API capabilities of [Builton.dev](https://builton.dev) API's. The orders/products/users created in the system will not be processed. This demo supports:
-
-1. Browsing through products catalogue
-2. Authentication
-3. Ordering
-4. Orders overview
+This is a demo store showcasing API capabilities of [Builton.dev](https://builton.dev) API's. The orders/products/users created in the system will not be processed.
 
 ### Prerequisites
 

@@ -16,7 +16,7 @@ To run this project locally, a couple of prerequisities need to be met.
 
 2. You will need [Stripe](https://stripe.com) test account to process payments for the orders. After creating your account you will need to link it in your [BuiltOn Dashboard](https://dashboard.builton.dev). You can do that by navigating to `Settings` and linking `Stripe` under `Payment Providers` section.
 
-3. After cloning the project those keys need to be put in a `keys.json` config file under `/src/config/` directory.
+3. After cloning the project the respective keys need to be put in a `keys.json` config file under `/src/config/` directory.
 
 ```
 {

@@ -161,3 +161,27 @@
     }
   }
 }
+
+@media all and (max-width: 780px) {
+  .my-order-wrapper {
+    & .my-order-container {
+      & .my-order-inner-container {
+        & > div {
+          padding: 24px 12px;
+        }
+      }
+    }
+    & .my-order-products {
+      & .my-order-product-img {
+        display: none;
+      }
+
+      & .my-order-product-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 220px;
+      }
+    }
+  }
+}

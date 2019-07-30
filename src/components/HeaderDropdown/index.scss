@@ -19,3 +19,9 @@
     transition: opacity 250ms;
   }
 }
+
+@media all and (max-width: 780px) {
+  .header-action-container {
+    width: 100%;
+  }
+}

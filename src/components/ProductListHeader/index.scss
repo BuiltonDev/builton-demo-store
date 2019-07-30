@@ -43,3 +43,11 @@
     opacity: 1;
   }
 }
+
+@media all and (max-width: 780px) {
+  .page-heading {
+    & .brand-logo-container {
+      display: none;
+    }
+  }
+}

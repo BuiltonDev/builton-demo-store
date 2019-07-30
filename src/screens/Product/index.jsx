@@ -41,7 +41,7 @@ const Product = () => {
     }
 
     fetchProduct();
-  }, [match.params.productId, loading]);
+  }, [match.params.productId]);
 
   const addToBag = async () => {
     if (!selectedSize) {

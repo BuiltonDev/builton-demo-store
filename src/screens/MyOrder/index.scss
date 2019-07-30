@@ -23,6 +23,7 @@
     flex-direction: column;
     max-width: 920px;
     width: 100%;
+    margin: 64px 0 12px;
 
     & .my-order-inner-container {
       position: relative;
@@ -157,6 +158,31 @@
           font-size: 1.16rem;
           color: $ALTERNATIVE_TEXT;
         }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 780px) {
+  .my-order-wrapper {
+    & .my-order-container {
+      margin: 32px 0 12px;
+      & .my-order-inner-container {
+        & > div {
+          padding: 24px 12px;
+        }
+      }
+    }
+    & .my-order-products {
+      & .my-order-product-img {
+        display: none;
+      }
+
+      & .my-order-product-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 220px;
       }
     }
   }

@@ -1,5 +1,3 @@
-// TODO: For the future authentication
-
 import { setGlobal, resetGlobal, addReducer, getDispatch } from 'reactn';
 import {
   clearFieldCurry,

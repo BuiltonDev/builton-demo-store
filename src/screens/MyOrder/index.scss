@@ -23,6 +23,7 @@
     flex-direction: column;
     max-width: 920px;
     width: 100%;
+    margin: 64px 0 12px;
 
     & .my-order-inner-container {
       position: relative;
@@ -165,6 +166,7 @@
 @media all and (max-width: 780px) {
   .my-order-wrapper {
     & .my-order-container {
+      margin: 32px 0 12px;
       & .my-order-inner-container {
         & > div {
           padding: 24px 12px;

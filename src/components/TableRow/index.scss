@@ -20,3 +20,12 @@
     font-size: 0.92rem;
   }
 }
+
+@media all and (max-width: 780px) {
+  .table-row {
+    & > div {
+      padding: 8px 6px;
+      font-size: 0.86rem;
+    }
+  }
+}

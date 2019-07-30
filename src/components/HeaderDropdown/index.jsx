@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import ReactCursorPosition from "react-cursor-position";
+import ReactCursorPosition, {
+  INTERACTIONS
+} from "react-cursor-position";
 import PropTypes from "prop-types";
 import "./index.scss";
 import {checkIfMobile} from "../../utils/mobile";
@@ -25,8 +27,10 @@ const HeaderDropdown = ({ children, open, style }) => {
     <ReactCursorPosition
       ref={cursorPosRef}
       hoverOffDelayInMs={50}
+      activationInteractionMouse={INTERACTIONS.HOVER}
+      activationInteractionTouch={INTERACTIONS.TAP}
       onActivationChanged={({ isActive }) => {
-        if (!checkIfMobile()) {
+        if (containerRef && containerRef.current) {
           if (!isActive) {
             containerRef.current.classList.remove("show-action");
           } else {

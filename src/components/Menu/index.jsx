@@ -73,7 +73,7 @@ const Menu = () => {
         <button
           type="button"
           className="header-box-hyperlink cart"
-          onClick={() => checkIfMobile() && setCartOpen(true)}
+          onClick={() => checkIfMobile() && setCartOpen(!cartOpen)}
           onMouseEnter={() => !checkIfMobile() && setCartOpen(true)}
           onMouseLeave={() => !checkIfMobile() && setCartOpen(false)}
         >

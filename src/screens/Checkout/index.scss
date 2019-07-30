@@ -353,3 +353,46 @@
     display: none;
   }
 }
+
+
+@media all and (max-width: 780px) {
+  .checkout-container {
+    min-width: 100vw;
+    padding: 12px;
+    overflow-x: hidden;
+    & .checkout-inner-container {
+      & .checkout-items-container {
+        padding: 0;
+        & .checkout-name-col {
+          display: none;
+        }
+
+        & .checkout-description-col {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 125px;
+        }
+        & .checkout-bag-total-row {
+          & .checkout-bag-total-title {
+            font-size: 1.12rem;
+          }
+          & .checkout-bag-total {
+            font-size: 1.12rem;
+            min-width: 120px;
+          }
+        }
+      }
+    }
+  }
+
+  .checkout-nav-container {
+    flex-direction: column;
+    margin-bottom: 60px;
+    & .checkout-next-step {
+      position: relative;
+      margin-top: 60px;
+      align-self: flex-end;
+    }
+  }
+}

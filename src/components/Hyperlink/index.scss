@@ -13,6 +13,7 @@
   -o-transition: color 250ms ease-out;
   border: none;
   transition: color 250ms ease-out;
+  background-color: transparent;
   &:hover {
     color: $PRIMARY_TEXT;
     -webkit-transition: color 250ms ease-out;

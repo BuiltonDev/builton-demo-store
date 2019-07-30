@@ -23,5 +23,16 @@
 @media all and (max-width: 720px) {
   .wrapper {
     flex-direction: column;
+    & .home-wrapper {
+      flex-direction: column;
+      & > div:not(:last-child) {
+        padding: 12px 0px;
+      }
+      & .inner-wrapper {
+        & > div {
+          padding: 12px 0px;
+        }
+      }
+    }
   }
 }

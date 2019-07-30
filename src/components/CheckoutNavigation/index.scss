@@ -87,8 +87,6 @@
         }
       }
       & .checkout-step-circle {
-        width: 32px;
-        height: 32px;
         transition: all 450ms ease-in-out;
         transition-delay: 350ms;
         &:hover {
@@ -117,5 +115,38 @@
     height: 32px;
     border-radius: 16px;
     background-color: $SECONDARY_BORDER_COLOR;
+  }
+}
+
+@media all and (max-width: 780px) {
+  .checkout-steps-container {
+    padding: 16px;
+    min-width: 0;
+    justify-content: flex-start;
+    & .checkout-step {
+      max-width: 62px;
+      & .checkout-step-title {
+        top: 40px;
+      }
+
+      & .checkout-step-progress {
+        margin-left: -22px;
+      }
+
+      & .checkout-step-circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        & > div {
+          width: 12px;
+          height: 12px;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+
+  .checkout-next-step {
+    right: 0;
   }
 }

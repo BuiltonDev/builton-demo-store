@@ -173,3 +173,12 @@
     opacity: 1;
   }
 }
+
+@media all and (max-width: 780px) {
+  .product-list-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 2rem;
+    align-items: start;
+    padding: 0 12px;
+  }
+}

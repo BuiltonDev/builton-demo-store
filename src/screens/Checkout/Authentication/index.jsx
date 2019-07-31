@@ -13,7 +13,7 @@ const CheckoutAuthentication = () => {
         const checkoutCopy = { ...checkout };
         checkoutCopy[1].complete = true;
         updateCheckout(checkoutCopy);
-        window.location.replace('/checkout/payment_method');
+        history.push("/checkout/payment_method");
       }}
     />
   );

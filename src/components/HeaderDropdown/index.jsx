@@ -4,7 +4,6 @@ import ReactCursorPosition, {
 } from "react-cursor-position";
 import PropTypes from "prop-types";
 import "./index.scss";
-import {checkIfMobile} from "../../utils/mobile";
 
 const HeaderDropdown = ({ children, open, style }) => {
   const containerRef = useRef(null);

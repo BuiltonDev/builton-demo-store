@@ -53,12 +53,12 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <ProtectedRoute component={Home} path="/auth" />
+          <ProtectedRoute exact component={Home} path="/auth" />
           <Route exact path="/product_list/:category" component={ProductList} />
           <Route exact path="/product_list/:category/:productId" component={Product} />
           <Route exact path="/checkout/:step" component={Checkout} />
-          <ProtectedRoute path="/my-account/:menuId" component={MyAccount} />
-          <ProtectedRoute path="/my-account/my-orders/:orderId" component={MyOrder} />
+          <ProtectedRoute exact path="/my-account/:menuId" component={MyAccount} />
+          <ProtectedRoute exact path="/my-account/my-orders/:orderId" component={MyOrder} />
           <Route render={() => <Redirect to="/" />} />
         </Switch>
       </Router>

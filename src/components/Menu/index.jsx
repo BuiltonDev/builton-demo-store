@@ -193,9 +193,8 @@ const Menu = () => {
           {user &&
             <div className="internal-menu-items">
               <div className="header-title">{user.email}</div>
-              <a
+              <button
                 className="header-box-hyperlink"
-                href="#"
                 onClick={e => {
                   e.preventDefault();
                   setMenuOpen(false);
@@ -205,10 +204,9 @@ const Menu = () => {
                 target="_blank"
               >
                 <span>My Account</span>
-              </a>
-              <a
+              </button>
+              <button
                 className="header-box-hyperlink"
-                href="#"
                 onClick={e => {
                   e.preventDefault();
                   setMenuOpen(false);
@@ -219,12 +217,12 @@ const Menu = () => {
                 target="_blank"
               >
                 <span>Log out</span>
-              </a>
+              </button>
             </div>
           }
           {!user &&
             <div className="internal-menu-items">
-              <a href="#"
+              <button
                  className="header-box-hyperlink"
                  onClick={(e) => {
                 e.preventDefault();
@@ -232,7 +230,7 @@ const Menu = () => {
               }}
               >
               Log in
-              </a>
+              </button>
             </div>
           }
           <div className="external-menu-items">

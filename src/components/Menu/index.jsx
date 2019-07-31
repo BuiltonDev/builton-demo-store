@@ -49,10 +49,10 @@ const Menu = () => {
   const renderLogoutContainer = () => {
     return (
       <>
-        <a
+        <button
           className="header-box-hyperlink"
-          href={`${!user ? "/auth" : "#"}`}
           onClick={e => {
+            if (!user) history.push('/auth');
             user && e.preventDefault();
           }}
           onMouseEnter={() => {
@@ -69,7 +69,7 @@ const Menu = () => {
               <Account width={18} height={18} color="black" />
             )}
           </span>
-        </a>
+        </button>
         <button
           type="button"
           className="header-box-hyperlink cart"

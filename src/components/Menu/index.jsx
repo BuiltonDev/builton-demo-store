@@ -263,6 +263,15 @@ const Menu = () => {
                 <span>Dashboard</span>
               </a>
             </div>
+            <div>
+              <a
+                href="https://github.com/BuiltonDev/builton-demo-store"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span>Github</span>
+              </a>
+            </div>
           </div>
         </div>
         <div
@@ -301,6 +310,14 @@ const Menu = () => {
           target="_blank"
         >
           <span>Dashboard</span>
+        </a>
+        <a
+          className="header-box-hyperlink"
+          href="https://github.com/BuiltonDev/builton-demo-store"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span>Github</span>
         </a>
         <span className="dropdown-container">{renderLogoutContainer()}</span>
         <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>

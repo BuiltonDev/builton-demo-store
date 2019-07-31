@@ -39,8 +39,9 @@ const Product = () => {
     if (!loading) {
       setLoading(true);
     }
-
     fetchProduct();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
 
   const addToBag = async () => {

@@ -102,7 +102,10 @@ const AuthForm = ({ onAuth }) => {
               render={({ input }) => (
                 <Input
                   id="input-1"
-                  inputProps={input}
+                  inputProps={{
+                    ...input,
+                    autoComplete: "username email"
+                  }}
                   submitting={submitting}
                   colorScheme={1}
                   placeholder="Email"
@@ -118,7 +121,10 @@ const AuthForm = ({ onAuth }) => {
               render={({ input }) => (
                 <Input
                   id="input-2"
-                  inputProps={input}
+                  inputProps={{
+                    ...input,
+                    autoComplete: "new-password"
+                  }}
                   submitting={submitting}
                   colorScheme={2}
                   placeholder="Password"
@@ -135,10 +141,14 @@ const AuthForm = ({ onAuth }) => {
             <Field
               name="confirmPassword"
               type="password"
+              autoComplete="new-password"
               render={({ input }) => (
                 <Input
                   id="input-3"
-                  inputProps={input}
+                  inputProps={{
+                    ...input,
+                    autoComplete: "new-password"
+                  }}
                   submitting={submitting}
                   colorScheme={2}
                   placeholder="Confirm Password"

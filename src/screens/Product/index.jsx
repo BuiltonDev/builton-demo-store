@@ -11,10 +11,12 @@ import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
 import { useDispatch } from "reactn";
+import Carousel from "../../components/Carousel";
 
 const Product = () => {
   const { match } = useReactRouter();
   const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
   const addItemToBag = useDispatch("addItemToBag"); //reducer
@@ -36,13 +38,54 @@ const Product = () => {
       }
     };
 
+
     if (!loading) {
       setLoading(true);
     }
     fetchProduct();
+    getRecommendations();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
+
+  const getSimilarProducts = async (productId, callback) => {
+    try {
+      const similarProduct = await builton.products.get(productId);
+      callback(similarProduct);
+    } catch(err) {
+      console.warn('Failed to fetch similar product.')
+    }
+  };
+
+  const getRecommendations = async () => {
+    try {
+      const recommendations = await builton.aiModels.getRecommendations('5d42a02534a12e000c2e4140', {
+        body: {
+          data: match.params.productId,
+          options: {
+            size: 7
+          }
+        }
+      });
+
+      if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
+        const simProds = [];
+        const similarProds = recommendations.result[0].similar;
+
+        const setSimilarProd = (prod) => {
+          simProds.push(prod);
+        };
+
+        for (let i = 0; i < similarProds.length; i += 1) {
+          await getSimilarProducts(similarProds[i].reference_label, setSimilarProd);
+        }
+
+        setSimilarProducts(simProds);
+      }
+    } catch(err) {
+      console.warn('Failed to fetch similar products.')
+    }
+  };
 
   const addToBag = async () => {
     if (!selectedSize) {
@@ -89,6 +132,11 @@ const Product = () => {
               </div>
             </div>
           )}
+          <div className="similar-products-container">
+            {similarProducts.length > 0 &&
+              <Carousel items={similarProducts}/>
+            }
+          </div>
         </div>
         <div className="product-description-container">
           {product && (

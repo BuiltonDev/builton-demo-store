@@ -1,0 +1,51 @@
+@import '../../constants';
+
+.carousel-container {
+  /* line them up horizontally */
+  display: flex;
+
+  /* allow for scrolling */
+  overflow: hidden;
+  position:relative;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  flex: 1;
+
+  /* make it smooth on iOS */
+  -webkit-overflow-scrolling: touch;
+  z-index: 999;
+  & > div {
+    flex: 0 0 auto;
+    -webkit-transition: all 450ms ease-in-out;
+    -moz-transition: all 450ms ease-in-out;
+    -o-transition: all 450ms ease-in-out;
+    transition: all 450ms ease-in-out;
+    -webkit-transform: translateX(100vw);
+    -moz-transform: translateX(100vw);
+    -o-transform: translateX(100vw);
+    transform: translateX(100vw);
+    cursor: pointer;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.64);
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 450ms ease-in;
+    }
+    &.next-active-carousel-item, &.previous-active-carousel-item {
+      &:before {
+        opacity: 1;
+        transition: opacity 450ms ease-in;
+      }
+    }
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

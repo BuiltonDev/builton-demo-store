@@ -12,9 +12,10 @@ import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
 import { useDispatch } from "reactn";
 import Carousel from "../../components/Carousel";
+import SectionHeader from "../../components/SectionHeader";
 
 const Product = () => {
-  const { match } = useReactRouter();
+  const { history, match } = useReactRouter();
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ const Product = () => {
         body: {
           data: match.params.productId,
           options: {
-            size: 7
+            size: 7,
           }
         }
       });
@@ -117,24 +118,29 @@ const Product = () => {
         <BuiltonSplash show={loading} />
         <div className="product-image-container">
           {product && (
-            <div
-              className={`product-image-inner-container ${
-                loading ? "hide-product" : "show-product"
-              }`}
-            >
-              <div>
-                <img
-                  onLoad={() => setLoading(false)}
-                  onError={() => setLoading(false)}
-                  src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
-                  alt={`${product.name}-img`}
-                />
+            <>
+              <div
+                className={`product-image-inner-container ${
+                  loading ? "hide-product" : "show-product"
+                }`}
+              >
+                <div>
+                  <img
+                    onLoad={() => setLoading(false)}
+                    onError={() => setLoading(false)}
+                    src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                    alt={`${product.name}-img`}
+                  />
+                </div>
               </div>
-            </div>
+            </>
           )}
-          <div className="similar-products-container">
+          <div className={`similar-products-container ${loading ? "hide-product" : "show-product"}`}>
+            <div className={`similar-products-title-container`}>
+              <SectionHeader title="You might also like" type="sub" style={{ flex: 1, marginBottom: 0 }} />
+            </div>
             {similarProducts.length > 0 &&
-              <Carousel items={similarProducts}/>
+              <Carousel items={similarProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
             }
           </div>
         </div>

@@ -34,7 +34,7 @@ const Checkout = () => {
         order.items.push({
           product: bag[i].product._id.$oid,
           quantity: 1,
-          sub_product: [bag[i].size._id.$oid]
+          sub_products: [bag[i].size._id.$oid]
         });
       }
       updateOrder(order);

@@ -116,6 +116,7 @@
 
   & .product-image-container {
     flex: 1;
+    flex-basis: auto;
     flex-direction: column;
     display: flex;
 
@@ -191,7 +192,9 @@
     flex-direction: column;
     & .product-image-container {
       & .product-image-inner-container {
-        max-width: 100vw;
+        & > div {
+          max-width: 100vw;
+        }
       }
     }
 

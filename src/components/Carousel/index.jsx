@@ -4,31 +4,14 @@ import "./index.scss";
 import config from "../../config";
 import {getProductName} from "../../utils/productModifiers";
 
-const Carousel = ({ items, onActiveItemClick }) => {
+const Carousel = React.memo(({ items, onActiveItemClick }) => {
   const [activeItem, setActiveItem] = useState(0);
   const carouselRef = useRef(null);
-  useEffect(() => {
-    const setCarouselItems = () => {
-      for (let i = 0; i < carouselRef.current.children.length; i += 1) {
-        if (carouselRef.current.children[i]) {
-          const maxWidth = carouselRef.current.clientWidth / 3;
-          carouselRef.current.children[i].style.maxWidth = `${maxWidth}px`;
-        }
-      }
-    };
-    window.addEventListener("resize", setCarouselItems);
 
-    setCarouselItems();
-
-    return () => {
-      window.removeEventListener("resize", setCarouselItems);
-    }
-  }, []);
-
-  useEffect(() => {
+  const setCarouselItems = () => {
     const carousel = carouselRef.current;
     for (let i = 0; i < carousel.children.length; i += 1) {
-      const maxWidth = carousel.clientWidth / 3;
+      const maxWidth = (carousel.clientWidth / 3) - 48;
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
       if (activeItem === i) {
         const currentActiveItem = carousel.children[i];
@@ -54,7 +37,28 @@ const Carousel = ({ items, onActiveItemClick }) => {
         }
       }
     }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", setCarouselItems);
+    setCarouselItems();
+    return () => {
+      window.removeEventListener("resize", setCarouselItems);
+    }
+  }, []);
+
+  useEffect(() => {
+    setCarouselItems();
   }, [activeItem]);
+
+  useEffect(() => {
+    setActiveItem(0);
+    setCarouselItems();
+  }, [items]);
+
+  const handleClick = (prod) => {
+    onActiveItemClick(getProductName(prod.name).toLowerCase(), prod._id.$oid)
+  };
 
   return (
     <div className="carousel-container" ref={carouselRef} id="carousel">
@@ -71,21 +75,23 @@ const Carousel = ({ items, onActiveItemClick }) => {
                 : ""
             }`}
             key={`${prod._id.$oid}-product-${index}`}
-            onClick={() => activeItem === index ? onActiveItemClick(getProductName(prod.name).toLowerCase(), prod._id.$oid) : setActiveItem(index)}
+            onClick={() => activeItem === index ? handleClick(prod) : setActiveItem(index)}
           >
-            <img
-              src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
-            />
+            <div className="carousel-image-container">
+              <img
+                src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
+              />
+              <div className="carousel-item-overlay"/>
+            </div>
             <div className={`similar-product-name-container ${activeItem === index ? 'show-title' : 'hide-title'}`}>
               <span>{getProductName(prod.name)}</span>
               <span>{prod.short_description}</span>
             </div>
-            <div className="carousel-item-overlay"/>
           </div> : <div />
       ))}
     </div>
   );
-};
+});
 
 Carousel.defaultProps = {
   onActiveItemClick: () => {},

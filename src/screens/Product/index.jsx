@@ -14,7 +14,7 @@ import { useDispatch } from "reactn";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 
-const Product = () => {
+const Product = React.memo(() => {
   const { history, match } = useReactRouter();
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -23,6 +23,7 @@ const Product = () => {
   const addItemToBag = useDispatch("addItemToBag"); //reducer
 
   useEffect(() => {
+    setSimilarProducts([]);
     const fetchProduct = async () => {
       try {
         const apiProduct = await builton.products.get(match.params.productId, {
@@ -215,6 +216,6 @@ const Product = () => {
       </div>
     </div>
   );
-};
+});
 
 export default withRouter(Product);

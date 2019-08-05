@@ -27,7 +27,7 @@
     transform: translateX(100vw);
     cursor: pointer;
     position: relative;
-    margin: 0 24px 24px;
+    margin: 0 0 24px;
     background-color: $PRIMARY_BACKGROUND;
     & .carousel-item-overlay {
       position: absolute;
@@ -79,7 +79,7 @@
 @media all and (max-width: 1280px) {
   .carousel-container {
     & > div {
-      margin: 24px;
+      margin: 24px 0;
     }
   }
 }

@@ -4,36 +4,47 @@ import "./index.scss";
 import config from "../../config";
 import {getProductName} from "../../utils/productModifiers";
 
+const BREAKPOINT = 720;
+
 const Carousel = React.memo(({ items, onActiveItemClick }) => {
   const [activeItem, setActiveItem] = useState(0);
   const carouselRef = useRef(null);
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
+    let maxWidth = 0;
+    if(carousel.clientWidth < BREAKPOINT) {
+      maxWidth = (carousel.clientWidth / 3);
+    } else {
+      maxWidth = (carousel.clientWidth / 3) - 48;
+    }
     for (let i = 0; i < carousel.children.length; i += 1) {
-      const maxWidth = (carousel.clientWidth / 3) - 48;
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
       if (activeItem === i) {
         const currentActiveItem = carousel.children[i];
         const previousActiveItem = carousel.children[i - 1];
         const nextActiveItem = carousel.children[i + 1];
-        const transform = (carousel.clientWidth / 2 - maxWidth / 2) - 32;
+
+        const transform = Math.ceil(maxWidth * (i > 0 ? i - 1 : i));
+
+        console.log(transform - Math.abs(maxWidth / 2));
+
         if (activeItem === 0) {
-          currentActiveItem.style.transform = `translate3d(${transform}px, 0px, 0px)`;
-          nextActiveItem.style.transform = `translate3d(${transform}px, 0px, 0px)`;
+          currentActiveItem.style.transform = `translate3d(${transform + maxWidth}px, 0px, 0px)`;
+          nextActiveItem.style.transform = `translate3d(${carousel.clientWidth < BREAKPOINT ? `${i <= 1 ? '' : '-'}${ Math.abs(transform + (maxWidth + (maxWidth / 2))) }` : '0'}px, 0px, 0px)`;
         } else if (activeItem + 1 === carousel.children.length) {
-          previousActiveItem.style.transform = `translate3d(-${transform}px, 0px, 0px)`;
-          currentActiveItem.style.transform = `translate3d(-${transform}px, 0px, 0px)`;
+          previousActiveItem.style.transform = `translate3d(${carousel.clientWidth < BREAKPOINT ? `-${transform + (maxWidth / 2)}` : '0'}px, 0px, 0px)`;
+          currentActiveItem.style.transform = `translate3d(-${carousel.clientWidth < BREAKPOINT ? transform : transform}px, 0px, 0px)`;
         } else {
-          currentActiveItem.style.transform = `translate3d(0px, 0px, 0px)`;
-          previousActiveItem.style.transform = `translate3d(0px, 0px, 0px)`;
-          nextActiveItem.style.transform = `translate3d(0px, 0px, 0px)`;
+          currentActiveItem.style.transform = `translate3d(${carousel.clientWidth < BREAKPOINT ? `-${transform}` : '0'}px, 0px, 0px)`;
+          previousActiveItem.style.transform = `translate3d(${carousel.clientWidth < BREAKPOINT ? `-${transform + (maxWidth / 2)}` : '0'}px, 0px, 0px)`;
+          nextActiveItem.style.transform = `translate3d(${carousel.clientWidth < BREAKPOINT ? `${i <= 1 ? '' : '-'}${ Math.abs(transform - (maxWidth / 2)) }` : '0'}px, 0px, 0px)`;
         }
       } else {
         if (i !== activeItem - 1 && i !== activeItem + 1) {
           carousel.children[i].style.transform = `translateX(${
             activeItem < i ? "" : "-"
-          }100vw)`;
+          }${100 * (i + 1)}vw)`;
         }
       }
     }

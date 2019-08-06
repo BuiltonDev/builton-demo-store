@@ -152,6 +152,7 @@
     flex-direction: column;
     max-width: 50vw;
     z-index: 2;
+    position: relative;
     &.show-product {
       animation: animate-show-product 1s forwards;
       opacity: 0;
@@ -169,6 +170,20 @@
       align-self: stretch;
       padding: 0 48px;
     }
+  }
+}
+
+@-webkit-keyframes animate-show-product {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  20% {
+    height: auto;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
   }
 }
 
@@ -200,6 +215,7 @@
 
     & .similar-products-container {
       max-width: 100vw;
+      min-height: 320px;
     }
 
     & .product-description-container {

@@ -1,5 +1,12 @@
 @import '../../constants';
 
+.carousel-spinner-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .carousel-container {
   /* line them up horizontally */
   display: flex;
@@ -15,6 +22,17 @@
   /* make it smooth on iOS */
   -webkit-overflow-scrolling: touch;
   z-index: 999;
+
+  &.show-carousel {
+    animation: animate-show-carousel 1s forwards;
+    opacity: 0;
+    animation-delay: 1s;
+    height: 0;
+  }
+
+  &.hide-carousel {
+    display: none;
+  }
   & > div {
     flex: 0 0 auto;
     -webkit-transition: all 450ms ease-in-out;
@@ -76,6 +94,7 @@
   }
 }
 
+
 @media all and (max-width: 1280px) {
   .carousel-container {
     & > div {
@@ -84,11 +103,48 @@
   }
 }
 
+@-webkit-keyframes animate-show-title {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes animate-show-title {
   0% {
     opacity: 0;
   }
   100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes animate-show-carousel {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  20% {
+    height: auto;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@keyframes animate-show-carousel {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  20% {
+    height: auto;
+  }
+  100% {
+    height: auto;
     opacity: 1;
   }
 }

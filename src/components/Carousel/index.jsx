@@ -2,13 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./index.scss";
 import config from "../../config";
-import {getProductName} from "../../utils/productModifiers";
+import Spinner from '../../components/Spinner';
+import { getProductName } from "../../utils/productModifiers";
 
 const BREAKPOINT = 1280;
 
 const Carousel = React.memo(({ items, onActiveItemClick }) => {
   const [activeItem, setActiveItem] = useState(0);
   const carouselRef = useRef(null);
+  const [loadedItems, setLoadedItems] = useState(items.map(item => ({id: item._id.$oid, imageLoaded: false})));
+  const [loaded, setLoaded] = useState(false);
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
@@ -58,42 +61,67 @@ const Carousel = React.memo(({ items, onActiveItemClick }) => {
   useEffect(() => {
     setActiveItem(0);
     setCarouselItems();
-  }, [items]);
+  }, [loaded]);
+
+  useEffect(() => {
+    let hasLoaded = true;
+    for (let i = 0; i < loadedItems.length; i += 1) {
+      if (loadedItems[i].imageLoaded) {
+        hasLoaded = false;
+        break;
+      }
+    }
+
+    if (hasLoaded) {
+      setLoaded(true);
+    }
+  }, [loadedItems]);
 
   const handleClick = (prod) => {
     onActiveItemClick(getProductName(prod.name).toLowerCase(), prod._id.$oid)
   };
 
   return (
-    <div className="carousel-container" ref={carouselRef} id="carousel">
-      {items.map((prod, index) => (
-        prod.image_url ?
-          <div
-            className={`${activeItem === index ? "active-carousel-item" : ""} ${
-              index === activeItem - 1 && activeItem > 0
-                ? "previous-active-carousel-item"
-                : ""
-            } ${
-              index === activeItem + 1 && activeItem < items.length
-                ? "next-active-carousel-item"
-                : ""
-            }`}
-            key={`${prod._id.$oid}-product-${index}`}
-            onClick={() => activeItem === index ? handleClick(prod) : setActiveItem(index)}
-          >
-            <div className="carousel-image-container">
-              <img
-                src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
-              />
-              <div className="carousel-item-overlay"/>
-            </div>
-            <div className={`similar-product-name-container ${activeItem === index ? 'show-title' : 'hide-title'}`}>
-              <span>{getProductName(prod.name)}</span>
-              <span>{prod.short_description}</span>
-            </div>
-          </div> : <div />
-      ))}
-    </div>
+    <>
+      <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
+        {items.map((prod, index) => (
+          prod.image_url ?
+            <div
+              className={`${activeItem === index ? "active-carousel-item" : ""} ${
+                index === activeItem - 1 && activeItem > 0
+                  ? "previous-active-carousel-item"
+                  : ""
+              } ${
+                index === activeItem + 1 && activeItem < items.length
+                  ? "next-active-carousel-item"
+                  : ""
+              }`}
+              key={`${prod._id.$oid}-product-${index}`}
+              onClick={() => activeItem === index ? handleClick(prod) : setActiveItem(index)}
+            >
+              <div className="carousel-image-container">
+                <img
+                  src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
+                  onLoad={() => {
+                    loadedItems[index].imageLoaded = true;
+                    setLoadedItems({...loadedItems})
+                  }}
+                />
+                <div className="carousel-item-overlay"/>
+              </div>
+              <div className={`similar-product-name-container ${activeItem === index ? 'show-title' : 'hide-title'}`}>
+                <span>{getProductName(prod.name)}</span>
+                <span>{prod.short_description}</span>
+              </div>
+            </div> : <div />
+        ))}
+      </div>
+      {!loaded &&
+        <div className="carousel-spinner-container">
+          <Spinner />
+        </div>
+      }
+    </>
   );
 });
 

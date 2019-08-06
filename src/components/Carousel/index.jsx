@@ -24,14 +24,14 @@ const Carousel = React.memo(({ items, onActiveItemClick }) => {
 
         if (activeItem === 0) {
           currentActiveItem.style.transform = `translate3d(${transform + maxWidth}px, 0px, 0px)`;
-          nextActiveItem.style.transform = `translate3d(${(carousel.clientWidth < BREAKPOINT && carousel.clientWidth === window.innerWidth) ? `${i <= 1 ? '' : '-'}${ Math.abs(transform + (maxWidth + (maxWidth / 2))) }` : `${transform + maxWidth}`}px, 0px, 0px)`;
+          nextActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `${i <= 1 ? '' : '-'}${ Math.abs(transform + (maxWidth + (maxWidth / 2))) }` : `${transform + maxWidth}`}px, 0px, 0px)`;
         } else if (activeItem + 1 === carousel.children.length) {
-          previousActiveItem.style.transform = `translate3d(${(carousel.clientWidth < BREAKPOINT && carousel.clientWidth === window.innerWidth) ? `-${transform + (maxWidth / 2)}` : `-${transform}`}px, 0px, 0px)`;
+          previousActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `-${transform + (maxWidth / 2)}` : `-${transform}`}px, 0px, 0px)`;
           currentActiveItem.style.transform = `translate3d(-${transform}px, 0px, 0px)`;
         } else {
           currentActiveItem.style.transform = `translate3d(-${transform}px, 0px, 0px)`;
-          previousActiveItem.style.transform = `translate3d(${(carousel.clientWidth < BREAKPOINT && carousel.clientWidth === window.innerWidth) ? `-${transform + (maxWidth / 2)}` : `-${transform}`}px, 0px, 0px)`;
-          nextActiveItem.style.transform = `translate3d(${(carousel.clientWidth < BREAKPOINT && carousel.clientWidth === window.innerWidth) ? `${i <= 1 ? '' : '-'}${ Math.abs(transform - (maxWidth / 2)) }` : `${i <= 1 ? '' : '-'}${transform}`}px, 0px, 0px)`;
+          previousActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `-${transform + (maxWidth / 2)}` : `-${transform}`}px, 0px, 0px)`;
+          nextActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `${i <= 1 ? '' : '-'}${ Math.abs(transform - (maxWidth / 2)) }` : `${i <= 1 ? '' : '-'}${transform}`}px, 0px, 0px)`;
         }
       } else {
         if (i !== activeItem - 1 && i !== activeItem + 1) {

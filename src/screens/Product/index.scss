@@ -216,7 +216,7 @@
 
     & .similar-products-container {
       max-width: 100vw;
-      min-height: 42vw;
+      min-height: 46vw;
     }
 
     & .product-description-container {
@@ -244,5 +244,15 @@
         transform: translateX(0);
       }
     }
+  }
+}
+
+@media all and (max-width: 720px) {
+  .product-wrapper {
+
+    & .similar-products-container {
+      min-height: 340px;
+    }
+
   }
 }

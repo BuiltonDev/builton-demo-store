@@ -22,6 +22,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
           // Active items
           const left = (100 / (activeItems + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
           const leftStyle = window.innerWidth < breakpoint ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
+          
           carousel.children[activeItem[x]].style.left = leftStyle;
           carousel.children[activeItem[x]].style.transform = `translate3d(${window.innerWidth < breakpoint ? '-50%' : '0'}, 0, 0)`;
         } else {
@@ -67,7 +68,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
   useEffect(() => {
     let hasLoaded = true;
     for (let i = 0; i < loadedItems.length; i += 1) {
-      if (loadedItems[i].imageLoaded) {
+      if (!loadedItems[i].imageLoaded) {
         hasLoaded = false;
         break;
       }
@@ -109,7 +110,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
                   src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
                   onLoad={() => {
                     loadedItems[index].imageLoaded = true;
-                    setLoadedItems({...loadedItems})
+                    setLoadedItems([ ...loadedItems ])
                   }}
                 />
                 <div className={`similar-product-title-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>

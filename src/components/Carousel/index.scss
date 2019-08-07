@@ -16,6 +16,17 @@
   min-height: 90%;
   overflow: hidden;
 
+  &.show-carousel {
+    animation: animate-show-carousel 1s forwards;
+    opacity: 0;
+    animation-delay: 1s;
+    height: 0;
+  }
+
+  &.hide-carousel {
+    display: none;
+  }
+
   & > div {
     -webkit-transition: all 450ms ease-in-out;
     -moz-transition: all 450ms ease-in-out;

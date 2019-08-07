@@ -151,6 +151,7 @@
     display: flex;
     flex-direction: column;
     max-width: 50vw;
+    min-height: 460px;
     z-index: 2;
     position: relative;
     &.show-product {

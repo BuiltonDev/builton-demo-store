@@ -112,10 +112,12 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
                     setLoadedItems({...loadedItems})
                   }}
                 />
+                <div className={`similar-product-title-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
+                  <span>{getProductName(prod.name)}</span>
+                </div>
                 <div className="carousel-item-overlay"/>
               </div>
               <div className={`similar-product-name-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                <span>{getProductName(prod.name)}</span>
                 <span>{prod.short_description}</span>
               </div>
             </div> : <div />
@@ -132,7 +134,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
 
 Carousel.defaultProps = {
   onActiveItemClick: () => {},
-  activeItems: 2,
+  activeItems: 1,
   breakpoint: 1280
 };
 

@@ -58,11 +58,34 @@
     & .similar-product-name-container {
       display: flex;
       flex-direction: row;
+      align-self: stretch;
+      font-size: 0.88rem;
+      color: $PRIMARY_TEXT;
+      padding: 12px 12px;
+      letter-spacing: 1px;
+      justify-content: center;
+      &.show-title {
+        animation: animate-show-title 1s forwards;
+        opacity: 0;
+        animation-delay: 500ms;
+      }
+      &.hide-title {
+        opacity: 0;
+      }
+    }
+
+    & .similar-product-title-container {
+      display: flex;
+      flex-direction: row;
       justify-content: space-between;
       align-self: stretch;
-      font-size: 0.92rem;
+      position: absolute;
+      top: 20%;
+      right: 0px;
+      letter-spacing: 1px;
+      font-size: 0.82rem;
       color: $SECONDARY_TEXT;
-      padding: 12px 24px;
+      padding: 12px 12px;
       &.show-title {
         animation: animate-show-title 1s forwards;
         opacity: 0;
@@ -80,6 +103,13 @@
   .carousel-container {
     & > div {
       margin: 24px 0;
+      & .similar-product-title-container {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10%;
+        font-size: 1.04rem;
+        right: auto;
+      }
     }
   }
 }

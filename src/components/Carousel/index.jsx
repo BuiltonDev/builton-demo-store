@@ -5,9 +5,7 @@ import config from "../../config";
 import Spinner from '../../components/Spinner';
 import { getProductName } from "../../utils/productModifiers";
 
-const BREAKPOINT = 1280;
-
-const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
+const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint }) => {
   const [activeItem, setActiveItem] = useState(new Array(activeItems).fill(0).map((i, index) => index));
   const carouselRef = useRef(null);
   const [loadedItems, setLoadedItems] = useState(items.map(item => ({id: item._id.$oid, imageLoaded: false})));
@@ -22,19 +20,19 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
       for (let x = 0; x < activeItem.length; x += 1) {
         if (activeItem.includes(i)) {
           // Active items
-          const left = (100 / (activeItems + (window.innerWidth < BREAKPOINT ? 1 : 2 ))) * (x + 1);
-          const leftStyle = window.innerWidth < BREAKPOINT ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
+          const left = (100 / (activeItems + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
+          const leftStyle = window.innerWidth < breakpoint ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
           carousel.children[activeItem[x]].style.left = leftStyle;
-          carousel.children[activeItem[x]].style.transform = `translate3d(${window.innerWidth < BREAKPOINT ? '-50%' : '0'}, 0, 0)`;
+          carousel.children[activeItem[x]].style.transform = `translate3d(${window.innerWidth < breakpoint ? '-50%' : '0'}, 0, 0)`;
         } else {
           if (i === activeItem[activeItem.length - 1] + 1) {
             // Next item
             carousel.children[i].style.left = `calc(100% - ${maxWidth}px)`;
-            carousel.children[i].style.transform = `translate3d(${window.innerWidth < BREAKPOINT ? '50%' : '0'}, 0, 0)`;
+            carousel.children[i].style.transform = `translate3d(${window.innerWidth < breakpoint ? '50%' : '0'}, 0, 0)`;
           } else if (i === activeItem[0] - 1) {
             // Previous item
             carousel.children[i].style.left = `0`;
-            carousel.children[i].style.transform = `translate3d(${window.innerWidth < BREAKPOINT ? '-50%' : '0'}, 0, 0)`;
+            carousel.children[i].style.transform = `translate3d(${window.innerWidth < breakpoint ? '-50%' : '0'}, 0, 0)`;
           } else if (i > activeItem[activeItem.length - 1] + 1) {
             // Next items
             carousel.children[i].style.right = `-${maxWidth}px`;
@@ -104,6 +102,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
             <div
               key={`${prod._id.$oid}-product-${index}`}
               onClick={() => activeItem.includes(index) ? handleClick(prod) : pushActiveItem(index)}
+              className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
                 <img
@@ -115,7 +114,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
                 />
                 <div className="carousel-item-overlay"/>
               </div>
-              <div className={`similar-product-name-container ${activeItem === index ? 'show-title' : 'hide-title'}`}>
+              <div className={`similar-product-name-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
                 <span>{getProductName(prod.name)}</span>
                 <span>{prod.short_description}</span>
               </div>
@@ -133,7 +132,8 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
 
 Carousel.defaultProps = {
   onActiveItemClick: () => {},
-  activeItems: 2
+  activeItems: 2,
+  breakpoint: 1280
 };
 
 Carousel.propTypes = {

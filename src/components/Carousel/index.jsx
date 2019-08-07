@@ -15,24 +15,26 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
-    const maxWidth = (carousel.clientWidth / (activeItems + 1)) - 48;
+    const marginFactor = 12;
+    const maxWidth = (carousel.clientWidth / (activeItems + 2)) - marginFactor;
     for (let i = 0; i < carousel.children.length; i += 1) {
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
       for (let x = 0; x < activeItem.length; x += 1) {
         if (activeItem.includes(i)) {
           // Active items
-          const left = (100 / (activeItems + 1)) * (x + 1);
-          carousel.children[activeItem[x]].style.left = `${left}%`;
-          carousel.children[activeItem[x]].style.transform = `translate3d(-50%, 0, 0)`;
+          const left = (100 / (activeItems + (window.innerWidth < BREAKPOINT ? 1 : 2 ))) * (x + 1);
+          const leftStyle = window.innerWidth < BREAKPOINT ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
+          carousel.children[activeItem[x]].style.left = leftStyle;
+          carousel.children[activeItem[x]].style.transform = `translate3d(${window.innerWidth < BREAKPOINT ? '-50%' : '0'}, 0, 0)`;
         } else {
           if (i === activeItem[activeItem.length - 1] + 1) {
             // Next item
             carousel.children[i].style.left = `calc(100% - ${maxWidth}px)`;
-            carousel.children[i].style.transform = `translate3d(50%, 0, 0)`;
+            carousel.children[i].style.transform = `translate3d(${window.innerWidth < BREAKPOINT ? '50%' : '0'}, 0, 0)`;
           } else if (i === activeItem[0] - 1) {
             // Previous item
             carousel.children[i].style.left = `0`;
-            carousel.children[i].style.transform = `translate3d(-50%, 0, 0)`;
+            carousel.children[i].style.transform = `translate3d(${window.innerWidth < BREAKPOINT ? '-50%' : '0'}, 0, 0)`;
           } else if (i > activeItem[activeItem.length - 1] + 1) {
             // Next items
             carousel.children[i].style.right = `-${maxWidth}px`;

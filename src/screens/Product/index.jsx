@@ -61,7 +61,7 @@ const Product = React.memo(() => {
 
   const getRecommendations = async () => {
     try {
-      const recommendations = await builton.aiModels.getRecommendations('5d42a02534a12e000c2e4140', {
+      const recommendations = await builton.aiModels.getRecommendations('5d42948134a12e000f8376d8', {
         body: {
           data: match.params.productId,
           options: {
@@ -70,16 +70,16 @@ const Product = React.memo(() => {
         }
       });
 
-      if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
+      if (recommendations.result[0].recommendations && recommendations.result[0].recommendations.length > 0) {
         const simProds = [];
-        const similarProds = recommendations.result[0].similar;
+        const similarProds = recommendations.result[0].recommendations;
 
         const setSimilarProd = (prod) => {
           simProds.push(prod);
         };
 
         for (let i = 0; i < similarProds.length; i += 1) {
-          await getSimilarProducts(similarProds[i].reference_label, setSimilarProd);
+          await getSimilarProducts(similarProds[i].product, setSimilarProd);
         }
 
         setSimilarProducts(simProds);

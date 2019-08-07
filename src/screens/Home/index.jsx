@@ -8,11 +8,14 @@ import config from "../../config";
 import "./index.scss";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import useReactRouter from "use-react-router";
+import Carousel from "../../components/Carousel";
+import SectionHeader from "../../components/SectionHeader";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState({});
   const [pageLoaded, setPageLoaded] = useState(false);
+  const [popularProducts, setPopularProducts] = useState([]);
 
   const { history } = useReactRouter();
 
@@ -32,8 +35,48 @@ const Main = () => {
     return false;
   };
 
+  const getPopularProducts = async (productId, callback) => {
+    try {
+      const similarProduct = await builton.products.get(productId);
+      callback(similarProduct);
+    } catch(err) {
+      console.warn('Failed to fetch similar product.')
+    }
+  };
+
+  const getRecommendations = async () => {
+    try {
+      const recommendations = await builton.aiModels.getRecommendations('5d42948134a12e000f8376d8', {
+        body: {
+          data: "",
+          options: {
+            size: 7,
+          }
+        }
+      });
+
+      if (recommendations.result[0].recommendations && recommendations.result[0].recommendations.length > 0) {
+        const simProds = [];
+        const similarProds = recommendations.result[0].recommendations;
+
+        const setSimilarProd = (prod) => {
+          simProds.push(prod);
+        };
+
+        for (let i = 0; i < similarProds.length; i += 1) {
+          await getPopularProducts(similarProds[i].product, setSimilarProd);
+        }
+
+        setPopularProducts(simProds);
+      }
+    } catch(err) {
+      console.warn('Failed to fetch similar products.')
+    }
+  };
+
   useEffect(() => {
     getProducts();
+    getRecommendations();
   }, []);
 
   useEffect(() => {
@@ -70,8 +113,8 @@ const Main = () => {
     <div className="main-container">
       <Header />
       <div className="wrapper">
+        <BuiltonSplash show={!pageLoaded} />
         <div className="home-wrapper">
-          <BuiltonSplash show={!pageLoaded} />
           {Object.keys(categories).length > 0 && (
             <>
               <ImageCategory
@@ -120,6 +163,12 @@ const Main = () => {
               </div>
             </>
           )}
+        </div>
+        <div className="home-popular-products-container">
+          <SectionHeader title="Most pupular sneakers" type="sub" />
+          {popularProducts.length > 0 &&
+            <Carousel activeItems={4} items={popularProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
+          }
         </div>
       </div>
     </div>

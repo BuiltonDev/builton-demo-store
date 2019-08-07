@@ -22,7 +22,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
           // Active items
           const left = (100 / (activeItems + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
           const leftStyle = window.innerWidth < breakpoint ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
-          
+
           carousel.children[activeItem[x]].style.left = leftStyle;
           carousel.children[activeItem[x]].style.transform = `translate3d(${window.innerWidth < breakpoint ? '-50%' : '0'}, 0, 0)`;
         } else {

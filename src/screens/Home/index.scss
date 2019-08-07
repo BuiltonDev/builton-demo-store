@@ -1,3 +1,5 @@
+@import "../../constants";
+
 .wrapper {
   & .home-wrapper {
     display: flex;
@@ -5,6 +7,12 @@
     align-items: center;
     justify-content: center;
     flex: 1;
+    min-height: 100vh;
+    background: url("../../assets/images/background.png") no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     & > div:not(:last-child) {
       padding: 12px 24px;
     }
@@ -16,6 +24,22 @@
     .second-wrapper {
       display: flex;
       flex-direction: column;
+    }
+  }
+
+  & .home-popular-products-container {
+    flex: 1;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    min-height: 460px;
+    background-color: $PRIMARY_BACKGROUND;
+    padding: 0 64px;
+    margin-top: 32px;
+    z-index: 2;
+    position: relative;
+    & > .carousel-container {
+      width: 100%;
     }
   }
 }

@@ -8,7 +8,7 @@ import userReactRouter from 'use-react-router';
 const Auth = () => {
   const { history } = userReactRouter();
   return (
-    <div className="wrapper">
+    <div className="auth-wrapper">
       <BuiltonLogo style={{ position: "absolute", top: 12, left: 48 }} />
       <div className="paper-container">
         <AuthForm onAuth={() => {

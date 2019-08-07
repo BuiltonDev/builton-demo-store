@@ -8,43 +8,24 @@
 }
 
 .carousel-container {
-  /* line them up horizontally */
-  display: flex;
-
-  /* allow for scrolling */
-  overflow: hidden;
-  position:relative;
-  white-space: nowrap;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  flex: 1;
-
+  display: block;
   /* make it smooth on iOS */
   -webkit-overflow-scrolling: touch;
   z-index: 999;
+  position: relative;
+  min-height: 20vh;
+  overflow: hidden;
+  flex: 1;
 
-  &.show-carousel {
-    animation: animate-show-carousel 1s forwards;
-    opacity: 0;
-    animation-delay: 1s;
-    height: 0;
-  }
-
-  &.hide-carousel {
-    display: none;
-  }
   & > div {
-    flex: 0 0 auto;
     -webkit-transition: all 450ms ease-in-out;
     -moz-transition: all 450ms ease-in-out;
     -o-transition: all 450ms ease-in-out;
     transition: all 450ms ease-in-out;
-    -webkit-transform: translateX(100vw);
-    -moz-transform: translateX(100vw);
-    -o-transform: translateX(100vw);
-    transform: translateX(100vw);
     cursor: pointer;
-    position: relative;
+    position: absolute;
+    display: inline-block;
+    top: 0;
     margin: 0 0 24px;
     background-color: $PRIMARY_BACKGROUND;
     & .carousel-item-overlay {

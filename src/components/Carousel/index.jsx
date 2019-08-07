@@ -7,40 +7,41 @@ import { getProductName } from "../../utils/productModifiers";
 
 const BREAKPOINT = 1280;
 
-const Carousel = React.memo(({ items, onActiveItemClick }) => {
-  const [activeItem, setActiveItem] = useState(0);
+const Carousel = React.memo(({ items, onActiveItemClick, activeItems }) => {
+  const [activeItem, setActiveItem] = useState(new Array(activeItems).fill(0).map((i, index) => index));
   const carouselRef = useRef(null);
   const [loadedItems, setLoadedItems] = useState(items.map(item => ({id: item._id.$oid, imageLoaded: false})));
   const [loaded, setLoaded] = useState(false);
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
-    const maxWidth = carousel.clientWidth / 3;
+    const maxWidth = (carousel.clientWidth / (activeItems + 1)) - 48;
     for (let i = 0; i < carousel.children.length; i += 1) {
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
-      if (activeItem === i) {
-        const currentActiveItem = carousel.children[i];
-        const previousActiveItem = carousel.children[i - 1];
-        const nextActiveItem = carousel.children[i + 1];
-
-        const transform = Math.ceil(maxWidth * (i > 0 ? i - 1 : i));
-
-        if (activeItem === 0) {
-          currentActiveItem.style.transform = `translate3d(${transform + maxWidth}px, 0px, 0px)`;
-          nextActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `${i <= 1 ? '' : '-'}${ Math.abs(transform + (maxWidth + (maxWidth / 2))) }` : `${transform + maxWidth}`}px, 0px, 0px)`;
-        } else if (activeItem + 1 === carousel.children.length) {
-          previousActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `-${transform + (maxWidth / 2)}` : `-${transform}`}px, 0px, 0px)`;
-          currentActiveItem.style.transform = `translate3d(-${transform}px, 0px, 0px)`;
+      for (let x = 0; x < activeItem.length; x += 1) {
+        if (activeItem.includes(i)) {
+          // Active items
+          const left = (100 / (activeItems + 1)) * (x + 1);
+          carousel.children[activeItem[x]].style.left = `${left}%`;
+          carousel.children[activeItem[x]].style.transform = `translate3d(-50%, 0, 0)`;
         } else {
-          currentActiveItem.style.transform = `translate3d(-${transform}px, 0px, 0px)`;
-          previousActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `-${transform + (maxWidth / 2)}` : `-${transform}`}px, 0px, 0px)`;
-          nextActiveItem.style.transform = `translate3d(${(BREAKPOINT >= window.innerWidth) ? `${i <= 1 ? '' : '-'}${ Math.abs(transform - (maxWidth / 2)) }` : `${i <= 1 ? '' : '-'}${transform}`}px, 0px, 0px)`;
-        }
-      } else {
-        if (i !== activeItem - 1 && i !== activeItem + 1) {
-          carousel.children[i].style.transform = `translateX(${
-            activeItem < i ? "" : "-"
-          }${100 * (i + 1)}vw)`;
+          if (i === activeItem[activeItem.length - 1] + 1) {
+            // Next item
+            carousel.children[i].style.left = `calc(100% - ${maxWidth}px)`;
+            carousel.children[i].style.transform = `translate3d(50%, 0, 0)`;
+          } else if (i === activeItem[0] - 1) {
+            // Previous item
+            carousel.children[i].style.left = `0`;
+            carousel.children[i].style.transform = `translate3d(-50%, 0, 0)`;
+          } else if (i > activeItem[activeItem.length - 1] + 1) {
+            // Next items
+            carousel.children[i].style.right = `-${maxWidth}px`;
+            carousel.children[i].style.transform = `translate3d(300%, 0, 0)`;
+          } else {
+            // Previous items
+            carousel.children[i].style.left = `0px`;
+            carousel.children[i].style.transform = `translate3d(-300%, 0, 0)`;
+          }
         }
       }
     }
@@ -59,7 +60,7 @@ const Carousel = React.memo(({ items, onActiveItemClick }) => {
   }, [activeItem]);
 
   useEffect(() => {
-    setActiveItem(0);
+    setActiveItem(new Array(activeItems).fill(0).map((i, index) => index));
     setCarouselItems();
   }, [loaded]);
 
@@ -81,23 +82,26 @@ const Carousel = React.memo(({ items, onActiveItemClick }) => {
     onActiveItemClick(getProductName(prod.name).toLowerCase(), prod._id.$oid)
   };
 
+  const pushActiveItem = (activeItemIndex) => {
+    const copyActiveItem = [...activeItem];
+    for (let i = 0; i < copyActiveItem.length; i += 1) {
+      if (activeItemIndex <= copyActiveItem[0]) {
+        copyActiveItem[i] -= 1;
+      } else {
+        copyActiveItem[i] += 1;
+      }
+    }
+    setActiveItem(copyActiveItem);
+  };
+
   return (
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
         {items.map((prod, index) => (
           prod.image_url ?
             <div
-              className={`${activeItem === index ? "active-carousel-item" : ""} ${
-                index === activeItem - 1 && activeItem > 0
-                  ? "previous-active-carousel-item"
-                  : ""
-              } ${
-                index === activeItem + 1 && activeItem < items.length
-                  ? "next-active-carousel-item"
-                  : ""
-              }`}
               key={`${prod._id.$oid}-product-${index}`}
-              onClick={() => activeItem === index ? handleClick(prod) : setActiveItem(index)}
+              onClick={() => activeItem.includes(index) ? handleClick(prod) : pushActiveItem(index)}
             >
               <div className="carousel-image-container">
                 <img
@@ -127,6 +131,7 @@ const Carousel = React.memo(({ items, onActiveItemClick }) => {
 
 Carousel.defaultProps = {
   onActiveItemClick: () => {},
+  activeItems: 2
 };
 
 Carousel.propTypes = {

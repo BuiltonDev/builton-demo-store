@@ -127,20 +127,22 @@ const Main = () => {
           <BuiltonSplash show={!pageLoaded} />
           {Object.keys(categories).length > 0 && (
             <>
-              <ImageCategory
-                pageLoaded={pageLoaded}
-                onLoad={() =>
-                  setCategories({
-                    ...categories,
-                    adidas: { ...categories.adidas, loaded: true }
-                  })
-                }
-                onClick={() =>
-                  history.push(`product_list/${categories.adidas.title}`)
-                }
-                imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
-                category={categories.adidas.title}
-              />
+              <div className="left-category-wrapper">
+                <ImageCategory
+                  pageLoaded={pageLoaded}
+                  onLoad={() =>
+                    setCategories({
+                      ...categories,
+                      adidas: { ...categories.adidas, loaded: true }
+                    })
+                  }
+                  onClick={() =>
+                    history.push(`product_list/${categories.adidas.title}`)
+                  }
+                  imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
+                  category={categories.adidas.title}
+                />
+              </div>
               <div className="inner-wrapper">
                 <ImageCategory
                   pageLoaded={pageLoaded}

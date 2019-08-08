@@ -7,12 +7,13 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-    min-height: 100vh;
+    min-height: calc(100vh - 48px);
     background: url("../../assets/images/background.png") no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    position: relative;
     & > div:not(:last-child) {
       padding: 12px 24px;
     }

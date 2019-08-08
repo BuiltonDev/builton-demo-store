@@ -4,12 +4,16 @@ import "./index.scss";
 import config from "../../config";
 import Spinner from '../../components/Spinner';
 import { getProductName } from "../../utils/productModifiers";
+import useReactRouter from 'use-react-router';
 
-const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint }) => {
+const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   const [activeItem, setActiveItem] = useState(new Array(activeItems).fill(0).map((i, index) => index));
-  const carouselRef = useRef(null);
-  const [loadedItems, setLoadedItems] = useState(items.map(item => ({id: item._id.$oid, imageLoaded: false})));
+  const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
+
+  const carouselRef = useRef(null);
+
+  const { match } = useReactRouter();
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
@@ -57,15 +61,27 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
   }, []);
 
   useEffect(() => {
+    if (match.params && match.params.productId) {
+      setLoaded(false);
+    }
+  }, [match.params.productId]);
+
+  useEffect(() => {
     setCarouselItems();
   }, [activeItem]);
 
   useEffect(() => {
     setActiveItem(new Array(activeItems).fill(0).map((i, index) => index));
-    setCarouselItems();
   }, [loaded]);
 
   useEffect(() => {
+    if (items.length > 0) {
+      setLoadedItems(items.map(item => item.image_url && ({id: item._id.$oid, imageLoaded: false})));
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if (!loadedItems.length) return;
     let hasLoaded = true;
     for (let i = 0; i < loadedItems.length; i += 1) {
       if (!loadedItems[i].imageLoaded) {
@@ -98,7 +114,7 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
   return (
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
-        {items.map((prod, index) => (
+        {items.length > 0 && items.map((prod, index) => (
           prod.image_url ?
             <div
               key={`${prod._id.$oid}-product-${index}`}
@@ -109,6 +125,10 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
                 <img
                   src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
                   onLoad={() => {
+                    loadedItems[index].imageLoaded = true;
+                    setLoadedItems([ ...loadedItems ])
+                  }}
+                  onError={() => {
                     loadedItems[index].imageLoaded = true;
                     setLoadedItems([ ...loadedItems ])
                   }}
@@ -131,7 +151,11 @@ const Carousel = React.memo(({ items, onActiveItemClick, activeItems, breakpoint
       }
     </>
   );
-});
+};
+
+const shouldUpdate = (newProp, oldProp) => {
+  return newProp.items.length === oldProp.items.length;
+};
 
 Carousel.defaultProps = {
   onActiveItemClick: () => {},
@@ -142,6 +166,9 @@ Carousel.defaultProps = {
 Carousel.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onActiveItemClick: PropTypes.func,
+  breakpoint: PropTypes.number,
+  activeItems: PropTypes.number,
+  comparisonProdId: PropTypes.string,
 };
 
-export default Carousel;
+export default React.memo(Carousel, shouldUpdate);

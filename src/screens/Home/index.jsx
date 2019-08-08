@@ -113,8 +113,8 @@ const Main = () => {
     <div className="main-container">
       <Header />
       <div className="wrapper">
-        <BuiltonSplash show={!pageLoaded} />
         <div className="home-wrapper">
+          <BuiltonSplash show={!pageLoaded} />
           {Object.keys(categories).length > 0 && (
             <>
               <ImageCategory
@@ -166,9 +166,7 @@ const Main = () => {
         </div>
         <div className="home-popular-products-container">
           <SectionHeader title="Most pupular sneakers" type="sub" />
-          {popularProducts.length > 0 &&
-            <Carousel activeItems={4} items={popularProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
-          }
+          <Carousel activeItems={4} items={popularProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
         </div>
       </div>
     </div>

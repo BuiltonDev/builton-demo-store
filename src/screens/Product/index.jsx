@@ -140,9 +140,10 @@ const Product = React.memo(() => {
             <div className={`similar-products-title-container`}>
               <SectionHeader title="You might also like" type="sub" style={{ flex: 1, marginBottom: 0 }} />
             </div>
-            {similarProducts.length > 0 &&
-              <Carousel items={similarProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
-            }
+            <Carousel
+              items={similarProducts}
+              onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}
+            />
           </div>
         </div>
         <div className="product-description-container">
@@ -218,4 +219,4 @@ const Product = React.memo(() => {
   );
 });
 
-export default withRouter(Product);
+export default withRouter(React.memo(Product));

@@ -61,7 +61,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
     } else if (activeItems >= 4 && window.innerWidth <= 1280) {
       setActiveItem(calcActiveItems(2));
     } else {
-      setCarouselItems();
+      setActiveItem(calcActiveItems(activeItems));
     }
   };
 

@@ -176,7 +176,7 @@ const Main = () => {
         </div>
         <div className="home-popular-products-container">
           <div className="home-popular-products-title-container">
-            <SectionHeader title="Hotest sneakers" type="sub" />
+            <SectionHeader title="Most popular products" type="sub" />
           </div>
           <Carousel
             activeItems={4}
@@ -249,7 +249,7 @@ const Main = () => {
                 </div>
               </div>
               <div className="home-footer-col">
-                <div className="home-footer-col-title">Disclaimer</div>
+                <div className="home-footer-col-title">About</div>
                 <div className="home-footer-col-content">
                   <div>
                     This is a DEMO to showcase Builton.dev API functionality.

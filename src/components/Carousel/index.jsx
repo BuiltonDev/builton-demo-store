@@ -142,12 +142,16 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
                 <img
                   src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
                   onLoad={() => {
-                    loadedItems[index].imageLoaded = true;
-                    setLoadedItems([ ...loadedItems ])
+                    if (loadedItems[index]) {
+                      loadedItems[index].imageLoaded = true;
+                      setLoadedItems([ ...loadedItems ])
+                    }
                   }}
                   onError={() => {
-                    loadedItems[index].imageLoaded = true;
-                    setLoadedItems([ ...loadedItems ])
+                    if (loadedItems[index]) {
+                      loadedItems[index].imageLoaded = true;
+                      setLoadedItems([ ...loadedItems ])
+                    }
                   }}
                   alt={`${prod.name}-img`}
                 />

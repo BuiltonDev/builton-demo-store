@@ -58,7 +58,7 @@
       margin: 0 24px;
       & .home-footer-col-title {
         border-bottom: 2px solid $PRIMARY_BACKGROUND;
-        padding-bottom: 6px;
+        padding: 0 12px 6px;
         letter-spacing: 1px;
         margin-bottom: 12px;
       }
@@ -147,6 +147,14 @@
       & .home-popular-products-title-container {
         margin: 0 32px;
       }
+    }
+  }
+}
+
+@media all and (max-width: 720px) {
+  .wrapper {
+    & .home-popular-products-container {
+      min-height: 260px;
     }
   }
 }

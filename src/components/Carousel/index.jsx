@@ -6,8 +6,10 @@ import Spinner from '../../components/Spinner';
 import { getProductName } from "../../utils/productModifiers";
 import useReactRouter from 'use-react-router';
 
+const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
+
 const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
-  const [activeItem, setActiveItem] = useState(new Array(activeItems).fill(0).map((i, index) => index));
+  const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
   const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
@@ -18,13 +20,13 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
     const marginFactor = 12;
-    const maxWidth = (carousel.clientWidth / (activeItems + 2)) - marginFactor;
+    const maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
     for (let i = 0; i < carousel.children.length; i += 1) {
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
       for (let x = 0; x < activeItem.length; x += 1) {
         if (activeItem.includes(i)) {
           // Active items
-          const left = (100 / (activeItems + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
+          const left = (100 / (activeItem.length + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
           const leftStyle = window.innerWidth < breakpoint ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
 
           carousel.children[activeItem[x]].style.left = leftStyle;
@@ -52,11 +54,20 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
     }
   };
 
+  const handleResize = () => {
+    if (activeItems >= 4 && window.innerWidth <= 780) {
+      setActiveItem(calcActiveItems(1));
+    } else if (activeItems >= 4 && window.innerWidth <= 1280) {
+      setActiveItem(calcActiveItems(2));
+    } else {
+      setCarouselItems();
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener("resize", setCarouselItems);
-    setCarouselItems();
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", setCarouselItems);
+      window.removeEventListener("resize", handleResize);
     }
   }, []);
 
@@ -71,7 +82,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   }, [activeItem]);
 
   useEffect(() => {
-    setActiveItem(new Array(activeItems).fill(0).map((i, index) => index));
+    handleResize();
   }, [loaded]);
 
   useEffect(() => {

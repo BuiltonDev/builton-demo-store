@@ -6,7 +6,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex: 1;
     min-height: calc(100vh - 48px);
     background: url("../../assets/images/background.png") no-repeat center;
     -webkit-background-size: cover;
@@ -58,6 +57,9 @@
           padding: 12px 0px;
         }
       }
+    }
+    & .home-popular-products-container {
+      padding: 0;
     }
   }
 }

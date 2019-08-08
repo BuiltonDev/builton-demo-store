@@ -5,11 +5,14 @@ import ImageCategory from "../../components/ImageCategory";
 import { withRouter } from "react-router-dom";
 import notify from "../../utils/toast";
 import config from "../../config";
+import { useGlobal } from "reactn";
 import "./index.scss";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import useReactRouter from "use-react-router";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import Footer from "../../components/Footer";
+import globalState from "../../globalStore/globalState";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -18,33 +21,40 @@ const Main = () => {
   const [popularProducts, setPopularProducts] = useState([]);
 
   const { history } = useReactRouter();
+  const [user] = useGlobal("user");
 
   const getPopularProducts = async (productId, callback) => {
     try {
       const similarProduct = await builton.products.get(productId);
       callback(similarProduct);
-    } catch(err) {
-      console.warn('Failed to fetch similar product.')
+    } catch (err) {
+      console.warn("Failed to fetch similar product.");
     }
   };
 
   useEffect(() => {
     const getRecommendations = async () => {
       try {
-        const recommendations = await builton.aiModels.getRecommendations('5d42948134a12e000f8376d8', {
-          body: {
-            data: "",
-            options: {
-              size: 7,
+        const recommendations = await builton.aiModels.getRecommendations(
+          "5d42948134a12e000f8376d8",
+          {
+            body: {
+              data: "",
+              options: {
+                size: 7
+              }
             }
           }
-        });
+        );
 
-        if (recommendations.result[0].recommendations && recommendations.result[0].recommendations.length > 0) {
+        if (
+          recommendations.result[0].recommendations &&
+          recommendations.result[0].recommendations.length > 0
+        ) {
           const simProds = [];
           const similarProds = recommendations.result[0].recommendations;
 
-          const setSimilarProd = (prod) => {
+          const setSimilarProd = prod => {
             simProds.push(prod);
           };
 
@@ -54,8 +64,8 @@ const Main = () => {
 
           setPopularProducts(simProds);
         }
-      } catch(err) {
-        console.warn('Failed to fetch similar products.')
+      } catch (err) {
+        console.warn("Failed to fetch similar products.");
       }
     };
 
@@ -166,9 +176,99 @@ const Main = () => {
         </div>
         <div className="home-popular-products-container">
           <div className="home-popular-products-title-container">
-            <SectionHeader title="Most pupular sneakers" type="sub" />
+            <SectionHeader title="Hotest sneakers" type="sub" />
           </div>
-          <Carousel activeItems={4} items={popularProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
+          <Carousel
+            activeItems={4}
+            items={popularProducts}
+            onActiveItemClick={(category, productId) =>
+              history.push(`/product_list/${category}/${productId}`)
+            }
+          />
+        </div>
+        <div className="home-footer-container">
+          <Footer>
+            <div className="home-footer-content">
+              <div className="home-footer-col">
+                <div className="home-footer-col-title">Quick links</div>
+                <div className="home-footer-col-content">
+                  <div>
+                    <a
+                      href="https://builton.dev"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span>Website</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://docs.builton.dev"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span>Docs</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://dashboard.builton.dev/"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span>Dashboard</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="https://github.com/BuiltonDev/builton-demo-store"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <span>Github</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="home-footer-col">
+                <div className="home-footer-col-title">Menu</div>
+                <div className="home-footer-col-content">
+                  <button
+                    onClick={e => {
+                      if (!user) {
+                        history.push("/auth");
+                      } else {
+                        globalState.logout();
+                      }
+                    }}
+                  >
+                    <span>
+                      <div>{user ? "Sign out" : "Sign up/in"}</div>
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div className="home-footer-col">
+                <div className="home-footer-col-title">Disclaimer</div>
+                <div className="home-footer-col-content">
+                  <div>
+                    This is a DEMO to showcase Builton.dev API functionality.
+                    The products, prices, payment method, checkout process and
+                    its affiliates are fictional. No charges and deliveries will
+                    be made. For more information please check{" "}
+                    <a
+                      href="https://builton.dev"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Builton.dev
+                    </a>{" "}
+                    website.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Footer>
         </div>
       </div>
     </div>

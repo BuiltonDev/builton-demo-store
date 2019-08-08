@@ -42,6 +42,69 @@
       width: 100%;
     }
   }
+
+  & .home-footer-content {
+    display: flex;
+    flex-direction: row;
+    padding: 12px 32px;
+    flex: 1;
+    & .home-footer-col {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      align-self: flex-start;
+      color: $TERTIARY_TEXT;
+      margin: 0 24px;
+      & .home-footer-col-title {
+        border-bottom: 2px solid $PRIMARY_BACKGROUND;
+        padding-bottom: 6px;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+      }
+
+      & .home-footer-col-content {
+        & > div {
+          padding: 6px 12px;
+          letter-spacing: 1px;
+          & > a {
+            text-decoration: none;
+            color: $TERTIARY_TEXT;
+            -webkit-transition: all 250ms ease-in-out;
+            -moz-transition: all 250ms ease-in-out;
+            -o-transition: all 250ms ease-in-out;
+            transition: all 250ms ease-in-out;
+            &:hover {
+              opacity: 0.82;
+              -webkit-transition: all 250ms ease-in-out;
+              -moz-transition: all 250ms ease-in-out;
+              -o-transition: all 250ms ease-in-out;
+              transition: all 250ms ease-in-out;
+            }
+          }
+        }
+        & > button {
+          border: none;
+          padding: 6px 12px;
+          background-color: transparent;
+          color: $TERTIARY_TEXT;
+          -webkit-transition: all 250ms ease-in-out;
+          -moz-transition: all 250ms ease-in-out;
+          -o-transition: all 250ms ease-in-out;
+          transition: all 250ms ease-in-out;
+          letter-spacing: 1px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.82;
+            -webkit-transition: all 250ms ease-in-out;
+            -moz-transition: all 250ms ease-in-out;
+            -o-transition: all 250ms ease-in-out;
+            transition: all 250ms ease-in-out;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media all and (max-width: 720px) {
@@ -50,7 +113,7 @@
     & .home-wrapper {
       flex-direction: column;
       & > div:not(:last-child) {
-        padding: 12px 0px;
+        padding: 12px 0;
       }
       & .inner-wrapper {
         & > div {
@@ -58,7 +121,22 @@
         }
       }
     }
-
+    & .home-footer-content {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 36px;
+      & .home-footer-col {
+        align-self: stretch;
+        margin: 24px 0;
+        & .home-footer-col-title {
+          text-align: center;
+        }
+        & .home-footer-col-content {
+          text-align: center;
+        }
+      }
+    }
   }
 }
 

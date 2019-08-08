@@ -39,6 +39,18 @@
     bottom: 0;
     margin: 0 0 24px;
     background-color: $PRIMARY_BACKGROUND;
+
+    &:not(.next-active-carousel-item):not(.previous-active-carousel-item):hover {
+      -webkit-box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
+      box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
+      -webkit-transform: translate3d(0, -12px, 1);
+      -moz-transform: translate3d(0, -12px, 0);
+      -o-transform: translate3d(0, -12px, 0);
+      -ms-transform: translate3d(0, -12px, 0);
+      transform: translate3d(0, -12px, 0);
+    }
+
     & .carousel-item-overlay {
       position: absolute;
       left: 0;

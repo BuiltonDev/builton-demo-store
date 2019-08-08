@@ -58,6 +58,12 @@
         }
       }
     }
+
+  }
+}
+
+@media all and (max-width: 1280px) {
+  .wrapper {
     & .home-popular-products-container {
       padding: 0;
     }

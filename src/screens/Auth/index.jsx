@@ -9,7 +9,9 @@ const Auth = () => {
   const { history } = userReactRouter();
   return (
     <div className="auth-wrapper">
-      <BuiltonLogo style={{ position: "absolute", top: 12, left: 48 }} />
+      <a href="/">
+        <BuiltonLogo style={{ position: "absolute", top: 12, left: 48 }} />
+      </a>
       <div className="paper-container">
         <AuthForm onAuth={() => {
           history.push('/');

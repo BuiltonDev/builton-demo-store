@@ -19,22 +19,6 @@ const Main = () => {
 
   const { history } = useReactRouter();
 
-  const getProducts = async () => {
-    try {
-      const products = await builton.products.get({
-        urlParams: {
-          tags: "category"
-        }
-      });
-      setProducts(products);
-    } catch (err) {
-      notify("Failed to load products", {
-        type: "error"
-      });
-    }
-    return false;
-  };
-
   const getPopularProducts = async (productId, callback) => {
     try {
       const similarProduct = await builton.products.get(productId);
@@ -44,37 +28,53 @@ const Main = () => {
     }
   };
 
-  const getRecommendations = async () => {
-    try {
-      const recommendations = await builton.aiModels.getRecommendations('5d42948134a12e000f8376d8', {
-        body: {
-          data: "",
-          options: {
-            size: 7,
-          }
-        }
-      });
-
-      if (recommendations.result[0].recommendations && recommendations.result[0].recommendations.length > 0) {
-        const simProds = [];
-        const similarProds = recommendations.result[0].recommendations;
-
-        const setSimilarProd = (prod) => {
-          simProds.push(prod);
-        };
-
-        for (let i = 0; i < similarProds.length; i += 1) {
-          await getPopularProducts(similarProds[i].product, setSimilarProd);
-        }
-
-        setPopularProducts(simProds);
-      }
-    } catch(err) {
-      console.warn('Failed to fetch similar products.')
-    }
-  };
-
   useEffect(() => {
+    const getRecommendations = async () => {
+      try {
+        const recommendations = await builton.aiModels.getRecommendations('5d42948134a12e000f8376d8', {
+          body: {
+            data: "",
+            options: {
+              size: 7,
+            }
+          }
+        });
+
+        if (recommendations.result[0].recommendations && recommendations.result[0].recommendations.length > 0) {
+          const simProds = [];
+          const similarProds = recommendations.result[0].recommendations;
+
+          const setSimilarProd = (prod) => {
+            simProds.push(prod);
+          };
+
+          for (let i = 0; i < similarProds.length; i += 1) {
+            await getPopularProducts(similarProds[i].product, setSimilarProd);
+          }
+
+          setPopularProducts(simProds);
+        }
+      } catch(err) {
+        console.warn('Failed to fetch similar products.')
+      }
+    };
+
+    const getProducts = async () => {
+      try {
+        const products = await builton.products.get({
+          urlParams: {
+            tags: "category"
+          }
+        });
+        setProducts(products);
+      } catch (err) {
+        notify("Failed to load products", {
+          type: "error"
+        });
+      }
+      return false;
+    };
+
     getProducts();
     getRecommendations();
   }, []);

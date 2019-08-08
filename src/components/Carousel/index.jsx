@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import "./index.scss";
 import config from "../../config";
 import Spinner from '../../components/Spinner';
 import { getProductName } from "../../utils/productModifiers";
 import useReactRouter from 'use-react-router';
+
+import "./index.scss";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
@@ -69,26 +70,31 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (match.params && match.params.productId) {
       setLoaded(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
 
   useEffect(() => {
     setCarouselItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeItem]);
 
   useEffect(() => {
     handleResize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded]);
 
   useEffect(() => {
     if (items.length > 0) {
       setLoadedItems(items.map(item => item.image_url && ({id: item._id.$oid, imageLoaded: false})));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   useEffect(() => {
@@ -143,6 +149,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
                     loadedItems[index].imageLoaded = true;
                     setLoadedItems([ ...loadedItems ])
                   }}
+                  alt={`${prod.name}-img`}
                 />
                 <div className={`similar-product-title-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
                   <span>{getProductName(prod.name)}</span>

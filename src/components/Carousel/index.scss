@@ -37,7 +37,7 @@
     display: inline-block;
     top: 0;
     bottom: 0;
-    margin: 0 0 24px;
+    margin: 24px 0;
     background-color: $PRIMARY_BACKGROUND;
 
     &:not(.next-active-carousel-item):not(.previous-active-carousel-item):hover {

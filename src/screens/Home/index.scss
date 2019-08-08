@@ -22,15 +22,18 @@
       left: 50%;
       transform: translateX(10%) skew(-50deg);
     }
-    &:after {
-      position: absolute;
-      content: "";
-      width: 200%;
-      height: 100%;
-      background-color: $ORANGE_BACKGROUND;
-      right: 100%;
-      bottom: -20%;
-      transform: translateX(5%) skew(70deg);
+
+    & .background-left-fragment {
+      &:before {
+        position: absolute;
+        content: "";
+        width: 200%;
+        height: 100%;
+        background-color: $ORANGE_BACKGROUND;
+        right: 100%;
+        bottom: -20%;
+        transform: translateX(5%) skew(70deg);
+      }
     }
 
     & > .left-category-wrapper {

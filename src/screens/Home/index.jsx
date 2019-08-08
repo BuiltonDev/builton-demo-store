@@ -125,6 +125,7 @@ const Main = () => {
       <div className="wrapper">
         <div className="home-wrapper">
           <BuiltonSplash show={!pageLoaded} />
+          <div className="background-left-fragment" />
           {Object.keys(categories).length > 0 && (
             <>
               <div className="left-category-wrapper">

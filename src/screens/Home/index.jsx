@@ -165,7 +165,9 @@ const Main = () => {
           )}
         </div>
         <div className="home-popular-products-container">
-          <SectionHeader title="Most pupular sneakers" type="sub" />
+          <div className="home-popular-products-title-container">
+            <SectionHeader title="Most pupular sneakers" type="sub" />
+          </div>
           <Carousel activeItems={4} items={popularProducts} onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}/>
         </div>
       </div>

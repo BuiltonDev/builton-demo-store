@@ -66,6 +66,9 @@
   .wrapper {
     & .home-popular-products-container {
       padding: 0;
+      & .home-popular-products-title-container {
+        margin: 0 32px;
+      }
     }
   }
 }

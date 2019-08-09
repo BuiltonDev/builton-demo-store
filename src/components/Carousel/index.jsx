@@ -47,7 +47,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
             carousel.children[i].style.transform = `translate3d(300%, 0, 0)`;
           } else {
             // Previous items
-            carousel.children[i].style.left = `0px`;
+            carousel.children[i].style.left = `0`;
             carousel.children[i].style.transform = `translate3d(-300%, 0, 0)`;
           }
         }

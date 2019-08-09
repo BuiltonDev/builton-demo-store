@@ -101,7 +101,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
     if (!loadedItems.length) return;
     let hasLoaded = true;
     for (let i = 0; i < loadedItems.length; i += 1) {
-      if (!loadedItems[i].imageLoaded) {
+      if (loadedItems[i] && !loadedItems[i].imageLoaded) {
         hasLoaded = false;
         break;
       }

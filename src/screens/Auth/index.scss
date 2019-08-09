@@ -7,7 +7,6 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  overflow: hidden;
   flex: 1;
   z-index: 1;
   &:before {
@@ -23,10 +22,9 @@
   }
 }
 
-.wrapper {
+.auth-wrapper {
   display: flex;
   flex-direction: row;
-  background: url("../../assets/images/background.png") no-repeat center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -34,6 +32,28 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  &:before {
+    z-index: 1;
+    position: absolute;
+    content: "";
+    width: 200%;
+    height: 100%;
+    background-color: $TERTIARY_BACKGROUND;
+    left: 50%;
+    transform: translateX(5%) skew(-50deg);
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    width: 200%;
+    height: 100%;
+    background-color: $ORANGE_BACKGROUND;
+    right: 100%;
+    bottom: -20%;
+    transform: translateX(5%) skew(70deg);
+  }
 }
 
 .builton-logo-container {

@@ -1,13 +1,13 @@
 @import "../../constants";
 
 .footer {
-  height: 120px;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: center;
+  padding: 120px 0 60px;
   & > div {
     padding: 24px 32px;
     color: $TERTIARY_TEXT;
@@ -19,9 +19,9 @@
     position: absolute;
     content: "";
     left: 0;
-    top: 29%;
+    top: 2vh;
     width: 102%;
-    height: 100%;
+    height: 200%;
     transform: rotate(-2deg);
     background-color: $TERTIARY_BACKGROUND;
     z-index: 2;
@@ -30,9 +30,9 @@
     position: absolute;
     content: "";
     left: -40px;
-    top: 60%;
+    top: 4vh;
     width: 102%;
-    height: 100%;
+    height: 200%;
     transform: rotate(3deg);
     z-index: 1;
     background-color: $ORANGE_BACKGROUND;

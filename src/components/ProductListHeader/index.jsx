@@ -26,7 +26,8 @@ const ProductListHeader = ({
   searchLoading,
   onSearchChange,
   brandLogo,
-  show
+  show,
+  onFilter,
 }) => {
 
   const [ filterOptions, setFilterOptions ] = useState(FILTER_OPTIONS);
@@ -73,7 +74,7 @@ const ProductListHeader = ({
           colorScheme={1}
         />
       </div>
-      <Filter filterOptions={filterOptions} renderOption="size" />
+      <Filter filterOptions={filterOptions} onFilter={(sort) => onFilter(sort)} renderOption="size" />
       {brandLogo && (
         <div className="brand-logo-container">
           <img
@@ -91,7 +92,8 @@ ProductListHeader.propTypes = {
   brandLogo: PropTypes.string,
   onSearchChange: PropTypes.func.isRequired,
   searchLoading: PropTypes.bool,
-  show: PropTypes.bool
+  show: PropTypes.bool,
+  onFilter: PropTypes.func.isRequired,
 };
 
 export default ProductListHeader;

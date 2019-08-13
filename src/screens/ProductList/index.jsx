@@ -22,6 +22,7 @@ const ProductList = () => {
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
   const [brandLogo, setBrandLogo] = useState(null);
+  const [tagsString, setTagsString] = useState(`${match.params.category}+product`);
 
   const getProducts = async () => {
     setProducts(null);
@@ -38,7 +39,6 @@ const ProductList = () => {
   // TODO: Fix the dependency issue with linter
   useEffect(() => {
     if (match.params.category) {
-      getProducts();
       if (match.params.category === "adidas") {
         setBrandLogo(AdidasLogo);
       } else if (match.params.category === "puma") {
@@ -49,6 +49,10 @@ const ProductList = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [tagsString]);
 
   useEffect(() => {
     if (products) {
@@ -102,13 +106,13 @@ const ProductList = () => {
         apiProducts = await builton.products.search({
           query: searchString,
           urlParams: {
-            tags: `${match.params.category}+product`
+            tags: tagsString
           }
         });
       } else {
         apiProducts = await builton.products.get({
           urlParams: {
-            tags: `${match.params.category}+product`
+            tags: tagsString
           }
         });
       }
@@ -166,6 +170,19 @@ const ProductList = () => {
     );
   };
 
+  const sortProducts = (sort) => {
+    let tagsString = `${match.params.category}+product`;
+    for (let i = 0; i < sort.length; i += 1) {
+      if (typeof sort[i] === "object") {
+        tagsString += `+size${sort[i].size}`;
+      } else {
+        tagsString += `+${sort[i]}`;
+      }
+    }
+    setProducts(null);
+    setTagsString(tagsString);
+  };
+
   return (
     <div className="main-container">
       <Header />
@@ -175,6 +192,7 @@ const ProductList = () => {
           show={!loading}
           onSearchChange={val => searchProducts(val)}
           brandLogo={brandLogo}
+          onFilter={(sort) => sortProducts(sort)}
           searchLoading={searchLoading}
         />
         <TransitionGroup className="product-list-grid">

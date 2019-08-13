@@ -44,7 +44,7 @@
     background-color: $PRIMARY_BACKGROUND;
     border: 1px solid $PRIMARY_BORDER_COLOR;
     transform: translateX(-50%);
-    max-height: 320px;
+    max-height: 600px;
     overflow: auto;
     &.show-filter {
       display: block;

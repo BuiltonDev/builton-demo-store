@@ -51,6 +51,7 @@ const ProductList = () => {
   }, [match]);
 
   useEffect(() => {
+    setProducts(null);
     fetchProducts();
   }, [tagsString]);
 
@@ -179,7 +180,6 @@ const ProductList = () => {
         tagsString += `+${sort[i]}`;
       }
     }
-    setProducts(null);
     setTagsString(tagsString);
   };
 

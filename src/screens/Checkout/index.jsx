@@ -90,9 +90,9 @@ const Checkout = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container checkout-main-container">
       <Header />
-      <div className="wrapper">
+      <div className="wrapper checkout-wrapper">
         <div className="checkout-container">
           <div
             className={`checkout-items-container checkout-no-items-container ${

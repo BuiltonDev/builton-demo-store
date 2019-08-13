@@ -5,11 +5,7 @@ import FilterIcon from "../../assets/icons/filterIcon";
 
 import './index.scss';
 
-const Filter = ({
-  filterOptions,
-  renderOption,
-  onFilter,
-                }) => {
+const Filter = ({ filterOptions, renderOption, onFilter }) => {
   const contentRef = useRef(null);
 
   const [filterOpen, setFilterOpen] = useState(false);

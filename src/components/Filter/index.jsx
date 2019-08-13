@@ -45,7 +45,7 @@ const Filter = ({
         className={`filter-button ${filterOpen ? 'active-button' : ''}`}
         onClick={() => setFilterOpen(true)}
       >
-        Filter <FilterIcon />
+        <FilterIcon />
       </div>
       <div className={`filter-main-container ${filterOpen ? 'show-filter' : 'hide-filter'}`}>
         <div ref={contentRef} className="filter-inner-container">

@@ -8,8 +8,9 @@ const getProductName = productName => {
 };
 
 const getSneakersSizes = product => {
-  if (product && product._sub_products.length > 0) {
-    return product._sub_products.map(subProd => {
+  const prod = product.constructor === Array ? product : product._sub_products;
+  if (prod.length > 0) {
+    return prod.map(subProd => {
       if (!!~subProd.short_description.toLowerCase().indexOf('size - ')) {
         return {
           id: subProd._id.$oid,

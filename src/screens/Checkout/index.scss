@@ -105,7 +105,7 @@
           flex: 1;
           display: flex;
           padding: 24px 32px;
-          margin-bottom: 64px;
+          margin-bottom: 16px;
           &.show-container {
             animation: show-checkout-container 500ms forwards;
             animation-delay: 500ms;
@@ -326,6 +326,13 @@
               padding-bottom: 0;
             }
           }
+        }
+      }
+
+      & .checkout-carousel-container {
+        & .checkout-carousel-content {
+          height: 360px;
+          position: relative;
         }
       }
     }

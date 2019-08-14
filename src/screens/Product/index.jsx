@@ -61,7 +61,7 @@ const Product = React.memo(() => {
 
   const getRecommendations = async () => {
     try {
-      const recommendations = await builton.aiModels.getRecommendations('5d52c6780c8f4c000c47a13e', {
+      const recommendations = await builton.aiModels.getRecommendations('5d53e9e6c38a61000ac030c1', {
         body: {
           data: match.params.productId,
           options: {

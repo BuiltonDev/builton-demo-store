@@ -36,10 +36,10 @@ const Main = () => {
     const getRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-          "5d42948134a12e000f8376d8",
+          user ? '5d52c70e0c8f4c000c47a140' : "5d53b0f91a7e86000fd0d84e",
           {
             body: {
-              data: "",
+              data: user ? user._id.$oid : "",
               options: {
                 size: 7
               }

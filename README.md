@@ -7,6 +7,8 @@
 [BuiltOn](https://builton.dev) offers a platform as a service that digitizes core business functions and optimizes 
 resource allocation with baked-in machine learning capabilities. This is a demo store showcasing capabilities of [BuiltOn](https://builton.dev) API's. The orders/products/users created in the system will not be processed.
 
+The demo is available on: [Demo store](https://demo-store.builton.dev/)
+
 ### Prerequisites
 
 To run this project locally, a couple of prerequisities need to be met.

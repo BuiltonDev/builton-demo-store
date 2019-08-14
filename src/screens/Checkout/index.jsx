@@ -143,8 +143,6 @@ const Checkout = () => {
     return true;
   };
 
-  console.log(step);
-
   return (
     <div className="main-container checkout-main-container">
       <Header />

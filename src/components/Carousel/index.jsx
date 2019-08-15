@@ -86,13 +86,19 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   }, [activeItem]);
 
   useEffect(() => {
-    handleResize();
+    if (items && items.length > 0) {
+      handleResize();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded]);
 
   useEffect(() => {
-    if (items.length > 0) {
+    if (items && items.length > 0) {
       setLoadedItems(items.map(item => item.image_url && ({id: item._id.$oid, imageLoaded: false})));
+    } else {
+      if (typeof items === 'undefined') {
+        setLoaded(true);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
@@ -131,7 +137,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   return (
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
-        {items.length > 0 && items.map((prod, index) => (
+        {(items && items.length > 0) && items.map((prod, index) => (
           prod.image_url ?
             <div
               key={`${prod._id.$oid}-product-${index}`}
@@ -171,12 +177,21 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
           <Spinner />
         </div>
       }
+      {typeof items === 'undefined' &&
+        <div className="carousel-empty">
+          Nothing to recommend
+        </div>
+      }
     </>
   );
 };
 
-const shouldUpdate = (newProp, oldProp) => {
-  return newProp.items.length === oldProp.items.length;
+const shouldUpdate = (oldProp, newProp) => {
+  if (typeof newProp.items !== 'undefined') {
+    return newProp.items.length === oldProp.items.length
+  } else {
+    return typeof newProp.items === typeof oldProp.items;
+  }
 };
 
 Carousel.defaultProps = {
@@ -186,7 +201,7 @@ Carousel.defaultProps = {
 };
 
 Carousel.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
   onActiveItemClick: PropTypes.func,
   breakpoint: PropTypes.number,
   activeItems: PropTypes.number,

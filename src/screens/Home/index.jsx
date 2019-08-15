@@ -63,8 +63,11 @@ const Main = () => {
           }
 
           setPopularProducts(simProds);
+        } else {
+          setPopularProducts(undefined);
         }
       } catch (err) {
+        setPopularProducts(undefined);
         console.warn("Failed to fetch similar products.");
       }
     };

@@ -13,6 +13,7 @@ import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
+import { getRecommendations } from "../../utils/MLModifiers";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -23,20 +24,12 @@ const Main = () => {
   const { history } = useReactRouter();
   const [user] = useGlobal("user");
 
-  const getPopularProducts = async (productId, callback) => {
-    try {
-      const similarProduct = await builton.products.get(productId);
-      callback(similarProduct);
-    } catch (err) {
-      console.warn("Failed to fetch similar product.");
-    }
-  };
-
   useEffect(() => {
-    const getRecommendations = async () => {
+
+    const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-          "5d42948134a12e000f8376d8",
+           "5d53b0f91a7e86000fd0d84e",
           {
             body: {
               data: "",
@@ -51,21 +44,16 @@ const Main = () => {
           recommendations.result[0].recommendations &&
           recommendations.result[0].recommendations.length > 0
         ) {
-          const simProds = [];
-          const similarProds = recommendations.result[0].recommendations;
 
-          const setSimilarProd = prod => {
-            simProds.push(prod);
-          };
+          const recommendedProducts = await getRecommendations(recommendations.result[0].recommendations, 'popularProducts');
 
-          for (let i = 0; i < similarProds.length; i += 1) {
-            await getPopularProducts(similarProds[i].product, setSimilarProd);
-          }
-
-          setPopularProducts(simProds);
+          setPopularProducts(recommendedProducts.length > 0 ? recommendedProducts : undefined);
+        } else {
+          setPopularProducts(undefined);
         }
       } catch (err) {
-        console.warn("Failed to fetch similar products.");
+        setPopularProducts(undefined);
+        console.error("Failed to fetch similar products.");
       }
     };
 
@@ -86,7 +74,7 @@ const Main = () => {
     };
 
     getProducts();
-    getRecommendations();
+    fetchRecommendations();
   }, []);
 
   useEffect(() => {

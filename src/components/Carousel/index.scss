@@ -7,6 +7,20 @@
   transform: translate(-50%, -50%);
 }
 
+.carousel-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: $SECONDARY_TEXT;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.92rem;
+}
+
 .carousel-container {
   display: block;
   /* make it smooth on iOS */

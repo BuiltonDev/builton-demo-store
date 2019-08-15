@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 import { useDispatch } from "reactn";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import { getRecommendations } from "../../utils/MLModifiers";
 
 const Product = React.memo(() => {
   const { history, match } = useReactRouter();
@@ -45,47 +46,32 @@ const Product = React.memo(() => {
       setLoading(true);
     }
     fetchProduct();
-    getRecommendations();
+    fetchRecommendations();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
 
-  const getSimilarProducts = async (productId, callback) => {
+  const fetchRecommendations = async () => {
     try {
-      const similarProduct = await builton.products.get(productId);
-      callback(similarProduct);
-    } catch(err) {
-      console.warn('Failed to fetch similar product.')
-    }
-  };
-
-  const getRecommendations = async () => {
-    try {
-      const recommendations = await builton.aiModels.getRecommendations('5d42a02534a12e000c2e4140', {
+      const recommendations = await builton.aiModels.getRecommendations('5d53e9e6c38a61000ac030c1', {
         body: {
           data: match.params.productId,
           options: {
-            size: 7,
+            size: 3,
           }
         }
       });
 
       if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
-        const simProds = [];
-        const similarProds = recommendations.result[0].similar;
+        const simProds = await getRecommendations(recommendations.result[0].similar, 'similarProducts');
 
-        const setSimilarProd = (prod) => {
-          simProds.push(prod);
-        };
-
-        for (let i = 0; i < similarProds.length; i += 1) {
-          await getSimilarProducts(similarProds[i].reference_label, setSimilarProd);
-        }
-
-        setSimilarProducts(simProds);
+        setSimilarProducts(simProds.length > 0 ? simProds : undefined);
+      } else {
+        setSimilarProducts(undefined);
       }
     } catch(err) {
-      console.warn('Failed to fetch similar products.')
+      setSimilarProducts(undefined);
+      console.error('Failed to fetch similar products.')
     }
   };
 

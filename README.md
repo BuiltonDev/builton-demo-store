@@ -38,6 +38,26 @@ To run this project locally, a couple of prerequisities need to be met.
 }
 ```
 
+6. ML Support - currently this Demo Store supports [Complementary Items](https://docs.builton.dev/machine-learning/simple-ml#complementary-items), [Similar Products](https://docs.builton.dev/machine-learning/simple-ml#similar-products) and [Popular Product Recommendations](https://docs.builton.dev/machine-learning/simple-ml#popular-product-recommendations). To make those work on a local copy, products need to be created, order history need to be available and the respective models need to be trained through our [Dashboard](https://dashboard.builton.dev/). Model ID's need to be replaced in their respective API calls. For more information please follow our [ML Docs](https://docs.builton.dev/machine-learning/intro-to-ml-tools).
+
+_Example_:
+```
+    try {
+      const recommendations = await builton.aiModels.getRecommendations(<model-id>, {
+        body: {
+          data: <product_id>,
+          options: {
+            size: 3,
+          }
+        }
+      });
+
+     console.log(recommendations)
+    } catch(err) {
+      console.error(err)
+    }
+```
+
 ### Installing
 
 1. ```git clone https://github.com/BuiltonDev/builton-demo-store.git```

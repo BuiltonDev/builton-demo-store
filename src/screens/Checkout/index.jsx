@@ -17,6 +17,7 @@ import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import {getComplementaryItems} from "../../utils/MLModifiers";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -31,15 +32,6 @@ const Checkout = () => {
   const [recommendedProducts, setRecommendedProducts] = useState([]);
 
   useEffect(() => {
-    const getPopularProducts = async (productId, callback) => {
-      try {
-        const similarProduct = await builton.products.get(productId);
-        callback(similarProduct);
-      } catch (err) {
-        console.warn("Failed to fetch similar product.");
-      }
-    };
-
     const getRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
@@ -58,26 +50,14 @@ const Checkout = () => {
           recommendations.result &&
           recommendations.result.length > 0
         ) {
-          const simProds = [];
-          const complementaryProds = recommendations.result;
+          const complementaryItems = await getComplementaryItems(recommendations.result);
 
-          const setSimilarProd = prod => {
-            simProds.push(prod);
-          };
-
-          for (let i = 0; i < complementaryProds.length; i += 1) {
-            if (complementaryProds[i].predictions.prediction.length > 0) {
-              for (let x = 0; x < complementaryProds[i].predictions.prediction.length; x += 1) {
-                await getPopularProducts(complementaryProds[i].predictions.prediction[x], setSimilarProd);
-              }
-            }
-          }
-
-          setRecommendedProducts(simProds);
+          setRecommendedProducts(complementaryItems);
         } else {
           setRecommendedProducts(undefined);
         }
       } catch (err) {
+        console.log(err);
         setRecommendedProducts(undefined);
         console.warn("Failed to fetch similar products.");
       }

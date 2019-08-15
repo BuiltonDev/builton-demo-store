@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 import { useDispatch } from "reactn";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import { getRecommendations } from "../../utils/MLModifiers";
 
 const Product = React.memo(() => {
   const { history, match } = useReactRouter();
@@ -45,21 +46,12 @@ const Product = React.memo(() => {
       setLoading(true);
     }
     fetchProduct();
-    getRecommendations();
+    fetchRecommendations();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
 
-  const getSimilarProducts = async (productId, callback) => {
-    try {
-      const similarProduct = await builton.products.get(productId);
-      callback(similarProduct);
-    } catch(err) {
-      console.warn('Failed to fetch similar product.')
-    }
-  };
-
-  const getRecommendations = async () => {
+  const fetchRecommendations = async () => {
     try {
       const recommendations = await builton.aiModels.getRecommendations('5d53e9e6c38a61000ac030c1', {
         body: {
@@ -71,16 +63,7 @@ const Product = React.memo(() => {
       });
 
       if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
-        const simProds = [];
-        const similarProds = recommendations.result[0].similar;
-
-        const setSimilarProd = (prod) => {
-          simProds.push(prod);
-        };
-
-        for (let i = 0; i < similarProds.length; i += 1) {
-          await getSimilarProducts(similarProds[i].reference_label, setSimilarProd);
-        }
+        const simProds = await getRecommendations(recommendations.result[0].similar, 'similarProducts');
 
         setSimilarProducts(simProds);
       } else {
@@ -88,7 +71,7 @@ const Product = React.memo(() => {
       }
     } catch(err) {
       setSimilarProducts(undefined);
-      console.warn('Failed to fetch similar products.')
+      console.error('Failed to fetch similar products.')
     }
   };
 

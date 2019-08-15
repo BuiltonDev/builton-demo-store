@@ -24,6 +24,7 @@ const HeaderDropdown = ({ children, open, style }) => {
 
   return (
     <ReactCursorPosition
+      className="main-cursor-container"
       ref={cursorPosRef}
       hoverOffDelayInMs={50}
       activationInteractionMouse={INTERACTIONS.HOVER}

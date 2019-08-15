@@ -15,6 +15,9 @@ import DeliveryAddress from "./DeliveryAddress";
 import Overview from "./Overview";
 import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
+import Carousel from "../../components/Carousel";
+import SectionHeader from "../../components/SectionHeader";
+import {getComplementaryItems} from "../../utils/MLModifiers";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -25,7 +28,44 @@ const Checkout = () => {
   const updateOrder = useDispatch("updateOrder");
   const clearCheckout = useDispatch("clearCheckout");
   const clearBag = useDispatch("clearBag");
-  const { history } = useReactRouter();
+  const { history, match } = useReactRouter();
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
+
+  useEffect(() => {
+    const getRecommendations = async () => {
+      try {
+        const recommendations = await builton.aiModels.getRecommendations(
+          "5d55180941f4e7000dea3ca4",
+          {
+            body: {
+              data: bag.map(item => item.product._id.$oid),
+              options: {
+                size: 4
+              }
+            }
+          }
+        );
+
+        if (
+          recommendations.result &&
+          recommendations.result.length > 0
+        ) {
+          const complementaryItems = await getComplementaryItems(recommendations.result);
+
+          setRecommendedProducts(complementaryItems.length > 0 ? complementaryItems : undefined);
+        } else {
+          setRecommendedProducts(undefined);
+        }
+      } catch (err) {
+        setRecommendedProducts(undefined);
+        console.warn("Failed to fetch similar products.");
+      }
+    };
+
+    if (!recommendedProducts.length && bag && bag.length > 0) {
+      getRecommendations();
+    }
+  }, []);
 
   useEffect(() => {
     if (step === 1 && bag && bag.length > 0) {
@@ -34,7 +74,7 @@ const Checkout = () => {
         order.items.push({
           product: bag[i].product._id.$oid,
           quantity: 1,
-          sub_product: [bag[i].size._id.$oid]
+          sub_products: [bag[i].size._id.$oid]
         });
       }
       updateOrder(order);
@@ -90,9 +130,9 @@ const Checkout = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container checkout-main-container">
       <Header />
-      <div className="wrapper">
+      <div className="wrapper checkout-wrapper">
         <div className="checkout-container">
           <div
             className={`checkout-items-container checkout-no-items-container ${
@@ -108,55 +148,71 @@ const Checkout = () => {
           </div>
           {bag && bag.length > 0 && (
             <>
-              <div className="checkout-inner-container">
-                {bag && bag.length > 0 && <></>}
-                <div
-                  className={`checkout-items-container ${
-                    step === 0 ? "show-container" : "hide-container"
-                  }`}
-                >
-                  {step === 0 && <Bag />}
-                </div>
-                <div
-                  className={`checkout-items-container ${
-                    step === 1 ? "show-container" : "hide-container"
-                  }`}
-                >
-                  <div className="step-auth-container">
-                    {step === 1 && <Authentication />}
+              <div style={{ overflow: 'hidden' }}>
+                <div className="checkout-inner-container">
+                  {bag && bag.length > 0 && <></>}
+                  <div
+                    className={`checkout-items-container ${
+                      step === 0 ? "show-container" : "hide-container"
+                    }`}
+                  >
+                    {step === 0 && <Bag />}
+                  </div>
+                  <div
+                    className={`checkout-items-container ${
+                      step === 1 ? "show-container" : "hide-container"
+                    }`}
+                  >
+                    <div className="step-auth-container">
+                      {step === 1 && <Authentication />}
+                    </div>
+                  </div>
+                  <div
+                    className={`checkout-items-container ${
+                      step === 2 ? "show-container" : "hide-container"
+                    }`}
+                  >
+                    {// We render it on order confirmation as well
+                    // because we don't save payment information data in the local storage
+                    // and we need to fetch and set it again in case the confirmation is reloaded
+                    (step === 2 || step === 4) && <PaymentMethod />}
+                  </div>
+                  <div
+                    className={`checkout-items-container ${
+                      step === 3 ? "show-container" : "hide-container"
+                    }`}
+                  >
+                    {step === 3 && <DeliveryAddress />}
+                  </div>
+                  <div
+                    className={`checkout-items-container ${
+                      step === 4 ? "show-container" : "hide-container"
+                    }`}
+                  >
+                    {step === 4 && <Overview />}
+                  </div>
+                  <div
+                    className={`checkout-items-container ${
+                      step === 5 ? "show-container" : "hide-container"
+                    }`}
+                  >
+                    {step === 5 && <Disclaimer />}
                   </div>
                 </div>
-                <div
-                  className={`checkout-items-container ${
-                    step === 2 ? "show-container" : "hide-container"
-                  }`}
-                >
-                  {// We render it on order confirmation as well
-                  // because we don't save payment information data in the local storage
-                  // and we need to fetch and set it again in case the confirmation is reloaded
-                  (step === 2 || step === 4) && <PaymentMethod />}
-                </div>
-                <div
-                  className={`checkout-items-container ${
-                    step === 3 ? "show-container" : "hide-container"
-                  }`}
-                >
-                  {step === 3 && <DeliveryAddress />}
-                </div>
-                <div
-                  className={`checkout-items-container ${
-                    step === 4 ? "show-container" : "hide-container"
-                  }`}
-                >
-                  {step === 4 && <Overview />}
-                </div>
-                <div
-                  className={`checkout-items-container ${
-                    step === 5 ? "show-container" : "hide-container"
-                  }`}
-                >
-                  {step === 5 && <Disclaimer />}
-                </div>
+                {step === 0 &&
+                  <div className="checkout-carousel-container">
+                    <SectionHeader title="Complementary items" type="sub" style={{ position: 'relative' }} />
+                    <div className="checkout-carousel-content">
+                      <Carousel
+                        items={recommendedProducts}
+                        activeItems={2}
+                        onActiveItemClick={(category, productId) =>
+                          history.push(`/product_list/${category}/${productId}`)
+                        }
+                      />
+                    </div>
+                  </div>
+                }
               </div>
               <div className="checkout-nav-container">
                 <CheckoutNavigation

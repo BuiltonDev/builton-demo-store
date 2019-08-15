@@ -11,15 +11,20 @@ import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
 import { useDispatch } from "reactn";
+import Carousel from "../../components/Carousel";
+import SectionHeader from "../../components/SectionHeader";
+import { getRecommendations } from "../../utils/MLModifiers";
 
-const Product = () => {
-  const { match } = useReactRouter();
+const Product = React.memo(() => {
+  const { history, match } = useReactRouter();
   const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
   const addItemToBag = useDispatch("addItemToBag"); //reducer
 
   useEffect(() => {
+    setSimilarProducts([]);
     const fetchProduct = async () => {
       try {
         const apiProduct = await builton.products.get(match.params.productId, {
@@ -36,13 +41,39 @@ const Product = () => {
       }
     };
 
+
     if (!loading) {
       setLoading(true);
     }
     fetchProduct();
+    fetchRecommendations();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
+
+  const fetchRecommendations = async () => {
+    try {
+      const recommendations = await builton.aiModels.getRecommendations('5d53e9e6c38a61000ac030c1', {
+        body: {
+          data: match.params.productId,
+          options: {
+            size: 3,
+          }
+        }
+      });
+
+      if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
+        const simProds = await getRecommendations(recommendations.result[0].similar, 'similarProducts');
+
+        setSimilarProducts(simProds.length > 0 ? simProds : undefined);
+      } else {
+        setSimilarProducts(undefined);
+      }
+    } catch(err) {
+      setSimilarProducts(undefined);
+      console.error('Failed to fetch similar products.')
+    }
+  };
 
   const addToBag = async () => {
     if (!selectedSize) {
@@ -74,21 +105,32 @@ const Product = () => {
         <BuiltonSplash show={loading} />
         <div className="product-image-container">
           {product && (
-            <div
-              className={`product-image-inner-container ${
-                loading ? "hide-product" : "show-product"
-              }`}
-            >
-              <div>
-                <img
-                  onLoad={() => setLoading(false)}
-                  onError={() => setLoading(false)}
-                  src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
-                  alt={`${product.name}-img`}
-                />
+            <>
+              <div
+                className={`product-image-inner-container ${
+                  loading ? "hide-product" : "show-product"
+                }`}
+              >
+                <div>
+                  <img
+                    onLoad={() => setLoading(false)}
+                    onError={() => setLoading(false)}
+                    src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                    alt={`${product.name}-img`}
+                  />
+                </div>
               </div>
-            </div>
+            </>
           )}
+          <div className={`similar-products-container ${loading ? "hide-product" : "show-product"}`}>
+            <div className={`similar-products-title-container`}>
+              <SectionHeader title="You might also like" type="sub" style={{ flex: 1, marginBottom: 0 }} />
+            </div>
+            <Carousel
+              items={similarProducts}
+              onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}
+            />
+          </div>
         </div>
         <div className="product-description-container">
           {product && (
@@ -161,6 +203,6 @@ const Product = () => {
       </div>
     </div>
   );
-};
+});
 
-export default withRouter(Product);
+export default withRouter(React.memo(Product));

@@ -1,10 +1,41 @@
+@import "../../constants";
+
 .wrapper {
   & .home-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    min-height: calc(100vh - 48px);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    &:before {
+      position: absolute;
+      content: "";
+      width: 200%;
+      height: 100%;
+      background-color: $TERTIARY_BACKGROUND;
+      left: 50%;
+      transform: translateX(10%) skew(-50deg);
+    }
+
+    & .background-left-fragment {
+      &:before {
+        position: absolute;
+        content: "";
+        width: 200%;
+        height: 100%;
+        background-color: $ORANGE_BACKGROUND;
+        right: 100%;
+        bottom: -20%;
+        transform: translateX(5%) skew(70deg);
+      }
+    }
+
     & > div:not(:last-child) {
       padding: 12px 24px;
     }
@@ -18,6 +49,85 @@
       flex-direction: column;
     }
   }
+
+  & .home-popular-products-container {
+    flex: 1;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    min-height: 460px;
+    background-color: $PRIMARY_BACKGROUND;
+    padding: 0 64px;
+    margin: 32px 0 64px;
+    z-index: 2;
+    position: relative;
+    & > .carousel-container {
+      width: 100%;
+    }
+  }
+
+  & .home-footer-content {
+    display: flex;
+    flex-direction: row;
+    padding: 12px 32px;
+    flex: 1;
+    & .home-footer-col {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      align-self: flex-start;
+      color: $TERTIARY_TEXT;
+      margin: 0 24px;
+      & .home-footer-col-title {
+        border-bottom: 2px solid $PRIMARY_BACKGROUND;
+        padding: 0 12px 6px;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+      }
+
+      & .home-footer-col-content {
+        & > div {
+          padding: 6px 12px;
+          letter-spacing: 1px;
+          & > a {
+            text-decoration: none;
+            color: $TERTIARY_TEXT;
+            -webkit-transition: all 250ms ease-in-out;
+            -moz-transition: all 250ms ease-in-out;
+            -o-transition: all 250ms ease-in-out;
+            transition: all 250ms ease-in-out;
+            &:hover {
+              opacity: 0.82;
+              -webkit-transition: all 250ms ease-in-out;
+              -moz-transition: all 250ms ease-in-out;
+              -o-transition: all 250ms ease-in-out;
+              transition: all 250ms ease-in-out;
+            }
+          }
+        }
+        & > button {
+          border: none;
+          padding: 6px 12px;
+          background-color: transparent;
+          color: $TERTIARY_TEXT;
+          -webkit-transition: all 250ms ease-in-out;
+          -moz-transition: all 250ms ease-in-out;
+          -o-transition: all 250ms ease-in-out;
+          transition: all 250ms ease-in-out;
+          letter-spacing: 1px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.82;
+            -webkit-transition: all 250ms ease-in-out;
+            -moz-transition: all 250ms ease-in-out;
+            -o-transition: all 250ms ease-in-out;
+            transition: all 250ms ease-in-out;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media all and (max-width: 720px) {
@@ -26,13 +136,48 @@
     & .home-wrapper {
       flex-direction: column;
       & > div:not(:last-child) {
-        padding: 12px 0px;
+        padding: 12px 0;
       }
       & .inner-wrapper {
         & > div {
           padding: 12px 0px;
         }
       }
+    }
+    & .home-footer-content {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 36px;
+      & .home-footer-col {
+        align-self: stretch;
+        margin: 24px 0;
+        & .home-footer-col-title {
+          text-align: center;
+        }
+        & .home-footer-col-content {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 1280px) {
+  .wrapper {
+    & .home-popular-products-container {
+      padding: 0;
+      & .home-popular-products-title-container {
+        margin: 0 32px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 720px) {
+  .wrapper {
+    & .home-popular-products-container {
+      min-height: 260px;
     }
   }
 }

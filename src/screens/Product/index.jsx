@@ -83,8 +83,11 @@ const Product = React.memo(() => {
         }
 
         setSimilarProducts(simProds);
+      } else {
+        setSimilarProducts(undefined);
       }
     } catch(err) {
+      setSimilarProducts(undefined);
       console.warn('Failed to fetch similar products.')
     }
   };

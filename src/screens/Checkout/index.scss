@@ -31,7 +31,6 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      min-width: 720px;
       min-height: 85vh;
       justify-content: space-between;
       &:before {
@@ -330,8 +329,9 @@
       }
 
       & .checkout-carousel-container {
+        overflow: hidden;
         & .checkout-carousel-content {
-          height: 360px;
+          height: 340px;
           position: relative;
         }
       }
@@ -395,8 +395,8 @@
 @media all and (max-width: 780px) {
   .checkout-container {
     min-width: 100vw;
-    padding: 12px;
-    overflow-x: hidden;
+    padding: 0px !important;
+    overflow: hidden;
     & .checkout-inner-container {
       & .checkout-items-container {
         padding: 0;

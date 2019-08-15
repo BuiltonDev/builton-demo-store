@@ -56,7 +56,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   };
 
   const handleResize = () => {
-    if (activeItems >= 4 && window.innerWidth <= 780) {
+    if (activeItems >= 2 && window.innerWidth <= 780) {
       setActiveItem(calcActiveItems(1));
     } else if (activeItems >= 4 && window.innerWidth <= 1280) {
       setActiveItem(calcActiveItems(2));

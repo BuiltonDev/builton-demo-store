@@ -43,40 +43,47 @@ const Checkout = () => {
     const getRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-          "5d53b0f91a7e86000fd0d84e",
+          "5d55180941f4e7000dea3ca4",
           {
             body: {
-              data: "",
+              data: bag.map(item => item.product._id.$oid),
               options: {
-                size: 7
+                size: 4
               }
             }
           }
         );
 
         if (
-          recommendations.result[0].recommendations &&
-          recommendations.result[0].recommendations.length > 0
+          recommendations.result &&
+          recommendations.result.length > 0
         ) {
           const simProds = [];
-          const similarProds = recommendations.result[0].recommendations;
+          const complementaryProds = recommendations.result;
 
           const setSimilarProd = prod => {
             simProds.push(prod);
           };
 
-          for (let i = 0; i < similarProds.length; i += 1) {
-            await getPopularProducts(similarProds[i].product, setSimilarProd);
+          for (let i = 0; i < complementaryProds.length; i += 1) {
+            if (complementaryProds[i].predictions.prediction.length > 0) {
+              for (let x = 0; x < complementaryProds[i].predictions.prediction.length; x += 1) {
+                await getPopularProducts(complementaryProds[i].predictions.prediction[x], setSimilarProd);
+              }
+            }
           }
 
           setRecommendedProducts(simProds);
+        } else {
+          setRecommendedProducts(undefined);
         }
       } catch (err) {
+        setRecommendedProducts(undefined);
         console.warn("Failed to fetch similar products.");
       }
     };
 
-    if (!recommendedProducts.length) {
+    if (!recommendedProducts.length && bag && bag.length > 0) {
       getRecommendations();
     }
   }, []);
@@ -162,7 +169,7 @@ const Checkout = () => {
           </div>
           {bag && bag.length > 0 && (
             <>
-              <div>
+              <div style={{ overflow: 'hidden' }}>
                 <div className="checkout-inner-container">
                   {bag && bag.length > 0 && <></>}
                   <div

@@ -52,12 +52,11 @@ const Checkout = () => {
         ) {
           const complementaryItems = await getComplementaryItems(recommendations.result);
 
-          setRecommendedProducts(complementaryItems);
+          setRecommendedProducts(complementaryItems.length > 0 ? complementaryItems : undefined);
         } else {
           setRecommendedProducts(undefined);
         }
       } catch (err) {
-        console.log(err);
         setRecommendedProducts(undefined);
         console.warn("Failed to fetch similar products.");
       }

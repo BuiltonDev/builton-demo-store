@@ -65,7 +65,7 @@ const Product = React.memo(() => {
       if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
         const simProds = await getRecommendations(recommendations.result[0].similar, 'similarProducts');
 
-        setSimilarProducts(simProds);
+        setSimilarProducts(simProds.length > 0 ? simProds : undefined);
       } else {
         setSimilarProducts(undefined);
       }

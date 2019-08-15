@@ -25,6 +25,7 @@ const Main = () => {
   const [user] = useGlobal("user");
 
   useEffect(() => {
+
     const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
@@ -46,12 +47,11 @@ const Main = () => {
 
           const recommendedProducts = await getRecommendations(recommendations.result[0].recommendations, 'popularProducts');
 
-          setPopularProducts(recommendedProducts);
+          setPopularProducts(recommendedProducts.length > 0 ? recommendedProducts : undefined);
         } else {
           setPopularProducts(undefined);
         }
       } catch (err) {
-        console.log(err)
         setPopularProducts(undefined);
         console.error("Failed to fetch similar products.");
       }

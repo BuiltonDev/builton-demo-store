@@ -3,10 +3,9 @@ import builton from "./builton";
 const getProduct = async (productId, callback) => {
   try {
     const similarProduct = await builton.products.get(productId);
-    console.log(similarProduct)
     callback(similarProduct);
   } catch (err) {
-    console.log(err);
+    callback(err);
     console.error("Failed to fetch similar product.");
   }
 };
@@ -16,6 +15,7 @@ const getComplementaryItems = async (recommendations) => {
   const complementaryProds = recommendations;
 
   const setSimilarProd = prod => {
+    if (prod instanceof Error) return;
     prods.push(prod);
   };
 
@@ -38,11 +38,11 @@ const getRecommendations = async (recommendations, type) => {
     if (type === 'popularProducts') {
       return prod.product;
     }
-    console.log(prod);
     return prod.reference_label;
   };
 
   const setSimilarProd = prod => {
+    if (prod instanceof Error) return;
     recommendedProds.push(prod);
   };
 

@@ -7,6 +7,8 @@
 [BuiltOn](https://builton.dev) offers a platform as a service that digitizes core business functions and optimizes 
 resource allocation with baked-in machine learning capabilities. This is a demo store showcasing capabilities of [BuiltOn](https://builton.dev) API's. The orders/products/users created in the system will not be processed.
 
+The demo is available on: [Demo store](https://demo-store.builton.dev/)
+
 ### Prerequisites
 
 To run this project locally, a couple of prerequisities need to be met.
@@ -16,6 +18,8 @@ To run this project locally, a couple of prerequisities need to be met.
 2. You will need [Firebase](https://firebase.google.com/) authentication services as an authentication provider. You will need to link it in your [BuiltOn Dashboard](https://dashboard.builton.dev) account. You can do that by navigating to `Settings` and linking `Firebase` under `Auth Providers` section.
 
 3. You will need [Stripe](https://stripe.com) test account to process payments for the orders. After creating your account you will need to link it in your [BuiltOn Dashboard](https://dashboard.builton.dev). You can do that by navigating to `Settings` and linking `Stripe` under `Payment Providers` section.
+
+___Note:___ _For payments made in EU, please read on how to implement [Stripe SCA](https://stripe.com/docs/strong-customer-authentication) in our [SCA implementation documentation](https://docs.builton.dev/building-blocks/payments-1/strong-customer-authentication)._
 
 4. You will also need to generate your own [Google Maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key). You will need to replace the key in `/public/index.html`.
 ```
@@ -34,6 +38,26 @@ To run this project locally, a couple of prerequisities need to be met.
     "authDomain": [YOUR FIREBASE AUTH DOMAIN]
   }
 }
+```
+
+6. ML Support - currently this Demo Store supports [Complementary Items](https://docs.builton.dev/machine-learning/simple-ml#complementary-items), [Similar Products](https://docs.builton.dev/machine-learning/simple-ml#similar-products) and [Popular Product Recommendations](https://docs.builton.dev/machine-learning/simple-ml#popular-product-recommendations). To make those work on a local copy, products need to be created, order history need to be available and the respective models need to be trained through our [Dashboard](https://dashboard.builton.dev/). Model ID's need to be replaced in their respective API calls. For more information please follow our [ML Docs](https://docs.builton.dev/machine-learning/intro-to-ml-tools).
+
+_Example_:
+```
+    try {
+      const recommendations = await builton.aiModels.getRecommendations(<model-id>, {
+        body: {
+          data: <product_id>,
+          options: {
+            size: 3,
+          }
+        }
+      });
+
+     console.log(recommendations)
+    } catch(err) {
+      console.error(err)
+    }
 ```
 
 ### Installing

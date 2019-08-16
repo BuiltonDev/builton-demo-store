@@ -6,6 +6,8 @@ import { getProductName } from "../../utils/productModifiers";
 import useReactRouter from 'use-react-router';
 
 import "./index.scss";
+import ArrowLeft from "../../assets/icons/arrowLeft";
+import ArrowRight from "../../assets/icons/arrowRight";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
@@ -165,6 +167,16 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
                   <span>{getProductName(prod.name)}</span>
                 </div>
                 <div className="carousel-item-overlay"/>
+                {index < activeItem[0] &&
+                  <div className="carousel-left-arrow">
+                    <ArrowLeft width={36} height={36} color="#d5d5d5" />
+                  </div>
+                }
+                {index > activeItem[activeItem.length - 1] &&
+                <div className="carousel-right-arrow">
+                  <ArrowRight width={36} height={36} color="#d5d5d5" />
+                </div>
+                }
               </div>
               <div className={`similar-product-name-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
                 <span>{prod.short_description}</span>

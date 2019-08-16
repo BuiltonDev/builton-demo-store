@@ -9,6 +9,10 @@ import SectionHeader from "../../../components/SectionHeader";
 // We create test payment method on Builton API
 // And we attach the payment method to our order
 
+// Note: For clients in EEA/EU, Stripe applies SCA (String Customer Authentication)
+// Please follow https://docs.builton.dev/building-blocks/payments-1/strong-customer-authentication
+// to implement SCA in production environment
+
 const CheckoutPaymentMethod = () => {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [loading, setLoading] = useState(true);

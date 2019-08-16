@@ -2,7 +2,7 @@
 
 .main-cursor-container {
   z-index: 100;
-  .header-action-container {
+  & .header-action-container {
     position: absolute;
     top: 47px;
     border-top: 1px solid $PRIMARY_BORDER_COLOR;
@@ -24,7 +24,9 @@
 }
 
 @media all and (max-width: 780px) {
-  .header-action-container {
-    width: 100%;
+  .main-cursor-container {
+    & .header-action-container {
+      width: 100%;
+    }
   }
 }

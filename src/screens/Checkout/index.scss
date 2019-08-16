@@ -394,7 +394,7 @@
 
 @media all and (max-width: 780px) {
   .checkout-container {
-    min-width: 100vw;
+    min-width: 100%;
     padding: 0px !important;
     overflow: hidden;
     & .checkout-inner-container {

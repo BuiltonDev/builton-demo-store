@@ -19,3 +19,11 @@
     text-transform: uppercase;
   }
 }
+
+@media all and (max-width: 780px) {
+  .section-header-container {
+    &.sub {
+      margin: 24px;
+    }
+  }
+}

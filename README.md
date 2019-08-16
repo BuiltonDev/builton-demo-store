@@ -19,6 +19,8 @@ To run this project locally, a couple of prerequisities need to be met.
 
 3. You will need [Stripe](https://stripe.com) test account to process payments for the orders. After creating your account you will need to link it in your [BuiltOn Dashboard](https://dashboard.builton.dev). You can do that by navigating to `Settings` and linking `Stripe` under `Payment Providers` section.
 
+___Note:___ _For payments made in EU, please read on how to implement [Stripe SCA](https://stripe.com/docs/strong-customer-authentication) in our [SCA implementation documentation](https://docs.builton.dev/building-blocks/payments-1/strong-customer-authentication)._
+
 4. You will also need to generate your own [Google Maps API key](https://developers.google.com/maps/documentation/javascript/get-api-key). You will need to replace the key in `/public/index.html`.
 ```
 <script src="https://maps.googleapis.com/maps/api/js?key=[YOUR_GOOGLE_MAPS_API_KEY]&libraries=places"></script>

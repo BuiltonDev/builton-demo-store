@@ -18,7 +18,7 @@
     transform: translateX(35%) skew(-32deg);
   }
   & .product-description-container {
-    flex: 1;
+    flex: 1 50%;
     flex-direction: column;
     display: flex;
     position: relative;
@@ -254,6 +254,7 @@
       z-index: 1;
     }
     & .product-description-container {
+      flex: 1 50%;
       & .product-description {
         &:before {
           transform: translateX(0) skew(-5deg);

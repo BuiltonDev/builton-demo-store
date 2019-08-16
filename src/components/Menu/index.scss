@@ -81,6 +81,7 @@
     cursor: pointer;
     border-left: 1px solid $PRIMARY_BORDER_COLOR;
     color: $SECONDARY_TEXT;
+    background-color: $PRIMARY_BACKGROUND;
 
     &:last-child {
       border-right: 1px solid $PRIMARY_BORDER_COLOR;

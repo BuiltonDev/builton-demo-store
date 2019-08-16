@@ -253,6 +253,12 @@
       min-height: 340px;
       z-index: 1;
     }
-
+    & .product-description-container {
+      & .product-description {
+        &:before {
+          transform: translateX(0) skew(-5deg);
+        }
+      }
+    }
   }
 }

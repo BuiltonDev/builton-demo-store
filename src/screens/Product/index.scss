@@ -18,7 +18,7 @@
     transform: translateX(35%) skew(-32deg);
   }
   & .product-description-container {
-    flex: 1 50%;
+    flex: 1;
     flex-direction: column;
     display: flex;
     position: relative;
@@ -247,6 +247,15 @@
   }
 }
 
+@media all and (max-width: 1280px) {
+  .product-wrapper {
+
+    & .product-description-container {
+      flex: 1 50%;
+    }
+  }
+}
+
 @media all and (max-width: 720px) {
   .product-wrapper {
     & .similar-products-container {
@@ -254,7 +263,6 @@
       z-index: 1;
     }
     & .product-description-container {
-      flex: 1 50%;
       & .product-description {
         &:before {
           transform: translateX(0) skew(-5deg);

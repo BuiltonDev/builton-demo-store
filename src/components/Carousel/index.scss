@@ -64,6 +64,18 @@
       transform: translate3d(0, -12px, 0);
     }
 
+    .carousel-left-arrow {
+      position: absolute;
+      left: 12px;
+      top: 30%;
+    }
+
+    .carousel-right-arrow {
+      position: absolute;
+      right: 12px;
+      top: 30%;
+    }
+
     & .carousel-item-overlay {
       position: absolute;
       left: 0;
@@ -140,6 +152,18 @@
     overflow: visible;
     & > div {
       margin: 24px 0;
+      .carousel-left-arrow {
+        position: absolute;
+        left: 55%;
+        top: 15%;
+      }
+
+      .carousel-right-arrow {
+        position: absolute;
+        right: 55%;
+        top: 15%;
+      }
+
       & .similar-product-title-container {
         left: 50%;
         transform: translateX(-50%);

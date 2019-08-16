@@ -37,6 +37,7 @@ const ProductListHeader = ({
       try {
         const subProds = await builton.products.get({
           urlParams: {
+            tags: 'size',
             type: 'sub'
           }
         });

@@ -175,6 +175,9 @@
 }
 
 @media all and (max-width: 780px) {
+  .product-list-wrapper {
+    min-height: 100vh;
+  }
   .product-list-grid {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     grid-gap: 2rem;

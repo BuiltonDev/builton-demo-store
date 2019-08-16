@@ -137,6 +137,7 @@
 
 @media all and (max-width: 1280px) {
   .carousel-container {
+    overflow: visible;
     & > div {
       margin: 24px 0;
       & .similar-product-title-container {
@@ -150,8 +151,10 @@
   }
 }
 
-@media all and (max-width: 720px) {
+@media all and (max-width: 780px) {
   .carousel-container {
+    z-index: 1;
+    overflow: visible;
     & > div {
       margin: 24px 0;
       & .similar-product-name-container {

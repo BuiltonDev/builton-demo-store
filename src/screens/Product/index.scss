@@ -247,12 +247,27 @@
   }
 }
 
-@media all and (max-width: 720px) {
+@media all and (max-width: 1280px) {
   .product-wrapper {
 
+    & .product-description-container {
+      flex: 1 50%;
+    }
+  }
+}
+
+@media all and (max-width: 720px) {
+  .product-wrapper {
     & .similar-products-container {
       min-height: 340px;
+      z-index: 1;
     }
-
+    & .product-description-container {
+      & .product-description {
+        &:before {
+          transform: translateX(0) skew(-5deg);
+        }
+      }
+    }
   }
 }

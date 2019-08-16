@@ -249,9 +249,9 @@
 
 @media all and (max-width: 720px) {
   .product-wrapper {
-
     & .similar-products-container {
       min-height: 340px;
+      z-index: 1;
     }
 
   }

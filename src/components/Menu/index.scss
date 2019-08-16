@@ -81,6 +81,7 @@
     cursor: pointer;
     border-left: 1px solid $PRIMARY_BORDER_COLOR;
     color: $SECONDARY_TEXT;
+    background-color: $PRIMARY_BACKGROUND;
 
     &:last-child {
       border-right: 1px solid $PRIMARY_BORDER_COLOR;
@@ -283,6 +284,7 @@
       }
     }
   }
+
   .main-menu-container {
     & .responsive-menu {
       max-width: 320px;
@@ -290,6 +292,14 @@
     & .header-checkout-container {
       & .header-bag-amount {
         margin: 0;
+      }
+    }
+    & .bag-product-row {
+      & > div {
+        padding: 0 8px;
+      }
+      & > div:first-child {
+        max-width: 120px;
       }
     }
   }

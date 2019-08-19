@@ -8,6 +8,7 @@ import useReactRouter from 'use-react-router';
 import "./index.scss";
 import ArrowLeft from "../../assets/icons/arrowLeft";
 import ArrowRight from "../../assets/icons/arrowRight";
+import Image from "../Image";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
@@ -147,12 +148,14 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
               className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
-                <img
+                <Image
                   src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
-                  onLoad={() => {
+                  onLoad={(isCached) => {
                     if (loadedItems[index]) {
                       loadedItems[index].imageLoaded = true;
                       setLoadedItems([ ...loadedItems ])
+                    } else if (isCached && !loaded) {
+                      setLoaded(true);
                     }
                   }}
                   onError={() => {

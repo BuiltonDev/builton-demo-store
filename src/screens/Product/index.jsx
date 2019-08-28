@@ -13,7 +13,6 @@ import Button from "../../components/Button";
 import { useDispatch } from "reactn";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
-import { getRecommendations } from "../../utils/MLModifiers";
 
 const Product = React.memo(() => {
   const { history, match } = useReactRouter();
@@ -59,12 +58,16 @@ const Product = React.memo(() => {
           options: {
             size: 3,
           }
+        },
+        urlParams: {
+          expand: 'product'
         }
       });
 
       if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
-        const simProds = await getRecommendations(recommendations.result[0].similar, 'similarProducts');
-
+        const simProds = recommendations.result[0].similar.map((recommendedProduct) => {
+          return recommendedProduct.reference_label;
+        });
         setSimilarProducts(simProds.length > 0 ? simProds : undefined);
       } else {
         setSimilarProducts(undefined);

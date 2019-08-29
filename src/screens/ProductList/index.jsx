@@ -101,6 +101,7 @@ const ProductList = () => {
         apiProducts = await builton.products.search({
           query: searchString,
           urlParams: {
+            expand: "image",
             tags: tagsString
           }
         });

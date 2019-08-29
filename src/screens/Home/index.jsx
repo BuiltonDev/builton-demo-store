@@ -37,7 +37,7 @@ const Main = () => {
               }
             },
             urlParams: {
-              expand: 'product'
+              expand: 'product, result.recommendations.product.image'
             }
           }
         );

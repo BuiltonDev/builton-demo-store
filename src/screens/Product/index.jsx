@@ -60,7 +60,7 @@ const Product = React.memo(() => {
           }
         },
         urlParams: {
-          expand: 'product'
+          expand: 'product, result.similar.reference_label.image'
         }
       });
 

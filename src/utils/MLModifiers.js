@@ -2,7 +2,11 @@ import builton from "./builton";
 
 const getProduct = async (productId, callback) => {
   try {
-    const similarProduct = await builton.products.get(productId);
+    const similarProduct = await builton.products.get(productId, {
+      urlParams: {
+        expand: "image"
+      }
+    });
     callback(similarProduct);
   } catch (err) {
     callback(err);

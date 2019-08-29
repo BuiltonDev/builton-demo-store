@@ -17,7 +17,6 @@ import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
-import {getComplementaryItems} from "../../utils/MLModifiers";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -28,7 +27,7 @@ const Checkout = () => {
   const updateOrder = useDispatch("updateOrder");
   const clearCheckout = useDispatch("clearCheckout");
   const clearBag = useDispatch("clearBag");
-  const { history, match } = useReactRouter();
+  const { history } = useReactRouter();
   const [recommendedProducts, setRecommendedProducts] = useState([]);
 
   useEffect(() => {
@@ -42,6 +41,9 @@ const Checkout = () => {
               options: {
                 size: 4
               }
+            },
+            urlParams: {
+              expand: 'product, result.product.image'
             }
           }
         );
@@ -50,7 +52,9 @@ const Checkout = () => {
           recommendations.result &&
           recommendations.result.length > 0
         ) {
-          const complementaryItems = await getComplementaryItems(recommendations.result);
+          const complementaryItems = recommendations.result.map((recommendedProduct) => {
+            return recommendedProduct.product[0];
+          });
 
           setRecommendedProducts(complementaryItems.length > 0 ? complementaryItems : undefined);
         } else {

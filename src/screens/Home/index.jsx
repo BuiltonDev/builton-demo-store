@@ -13,7 +13,6 @@ import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
-import { getRecommendations } from "../../utils/MLModifiers";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -36,6 +35,9 @@ const Main = () => {
               options: {
                 size: 7
               }
+            },
+            urlParams: {
+              expand: 'product, result.recommendations.product.image'
             }
           }
         );
@@ -44,8 +46,9 @@ const Main = () => {
           recommendations.result[0].recommendations &&
           recommendations.result[0].recommendations.length > 0
         ) {
-
-          const recommendedProducts = await getRecommendations(recommendations.result[0].recommendations, 'popularProducts');
+          const recommendedProducts = recommendations.result[0].recommendations.map((recommendedProduct) => {
+            return recommendedProduct.product;
+          });
 
           setPopularProducts(recommendedProducts.length > 0 ? recommendedProducts : undefined);
         } else {
@@ -61,6 +64,7 @@ const Main = () => {
       try {
         const products = await builton.products.get({
           urlParams: {
+            expand: "image",
             tags: "category"
           }
         });
@@ -83,7 +87,7 @@ const Main = () => {
       for (let i = 0; i < products.length; i += 1) {
         cat[products[i].name.toLowerCase()] = {
           title: products[i].name.toLowerCase(),
-          image: products[i].image_url,
+          image: products[i].image.public_url,
           loaded: false
         };
       }
@@ -128,7 +132,7 @@ const Main = () => {
                   onClick={() =>
                     history.push(`product_list/${categories.adidas.title}`)
                   }
-                  imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
+                  imageSrc={categories.adidas.image}
                   category={categories.adidas.title}
                 />
               </div>
@@ -144,7 +148,7 @@ const Main = () => {
                   onClick={() =>
                     history.push(`product_list/${categories.nike.title}`)
                   }
-                  imageSrc={`${config.endpoint}images/${categories.nike.image}?api_key=${config.apiKey}`}
+                  imageSrc={categories.nike.image}
                   category={categories.nike.title}
                 />
                 <ImageCategory
@@ -158,7 +162,7 @@ const Main = () => {
                   onClick={() =>
                     history.push(`product_list/${categories.puma.title}`)
                   }
-                  imageSrc={`${config.endpoint}images/${categories.puma.image}?api_key=${config.apiKey}`}
+                  imageSrc={categories.puma.image}
                   category={categories.puma.title}
                 />
               </div>

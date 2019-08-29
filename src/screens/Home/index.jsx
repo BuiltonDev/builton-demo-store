@@ -13,7 +13,6 @@ import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
-import { getRecommendations } from "../../utils/MLModifiers";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -36,6 +35,9 @@ const Main = () => {
               options: {
                 size: 7
               }
+            },
+            urlParams: {
+              expand: 'product'
             }
           }
         );
@@ -44,8 +46,9 @@ const Main = () => {
           recommendations.result[0].recommendations &&
           recommendations.result[0].recommendations.length > 0
         ) {
-
-          const recommendedProducts = await getRecommendations(recommendations.result[0].recommendations, 'popularProducts');
+          const recommendedProducts = recommendations.result[0].recommendations.map((recommendedProduct) => {
+            return recommendedProduct.product;
+          });
 
           setPopularProducts(recommendedProducts.length > 0 ? recommendedProducts : undefined);
         } else {

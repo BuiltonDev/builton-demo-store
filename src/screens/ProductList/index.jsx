@@ -24,12 +24,6 @@ const ProductList = () => {
   const [brandLogo, setBrandLogo] = useState(null);
   const [tagsString, setTagsString] = useState(`${match.params.category}+product`);
 
-  const getProducts = async () => {
-    setProducts(null);
-    setLoading(true);
-    await fetchProducts();
-  };
-
   const searchProducts = async searchString => {
     setProducts(null);
     setSearchLoading(true);

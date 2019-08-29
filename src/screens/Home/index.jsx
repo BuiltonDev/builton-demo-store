@@ -61,6 +61,7 @@ const Main = () => {
       try {
         const products = await builton.products.get({
           urlParams: {
+            expand: "image",
             tags: "category"
           }
         });
@@ -83,7 +84,7 @@ const Main = () => {
       for (let i = 0; i < products.length; i += 1) {
         cat[products[i].name.toLowerCase()] = {
           title: products[i].name.toLowerCase(),
-          image: products[i].image_url,
+          image: products[i].image.public_url,
           loaded: false
         };
       }
@@ -128,7 +129,7 @@ const Main = () => {
                   onClick={() =>
                     history.push(`product_list/${categories.adidas.title}`)
                   }
-                  imageSrc={`${config.endpoint}images/${categories.adidas.image}?api_key=${config.apiKey}`}
+                  imageSrc={categories.adidas.image}
                   category={categories.adidas.title}
                 />
               </div>
@@ -144,7 +145,7 @@ const Main = () => {
                   onClick={() =>
                     history.push(`product_list/${categories.nike.title}`)
                   }
-                  imageSrc={`${config.endpoint}images/${categories.nike.image}?api_key=${config.apiKey}`}
+                  imageSrc={categories.nike.image}
                   category={categories.nike.title}
                 />
                 <ImageCategory
@@ -158,7 +159,7 @@ const Main = () => {
                   onClick={() =>
                     history.push(`product_list/${categories.puma.title}`)
                   }
-                  imageSrc={`${config.endpoint}images/${categories.puma.image}?api_key=${config.apiKey}`}
+                  imageSrc={categories.puma.image}
                   category={categories.puma.title}
                 />
               </div>

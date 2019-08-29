@@ -127,7 +127,7 @@ const MyOrder = () => {
                     <TableRow key={`product-item-${product.product._id.$oid}-${index}`}>
                       <div className="my-order-product-img row">
                         <img
-                          src={`${config.endpoint}images/${product.product.image_url}?api_key=${config.apiKey}`}
+                          src={product.product.image.public_url}
                           alt={`${product.name}-img`}
                         />
                       </div>

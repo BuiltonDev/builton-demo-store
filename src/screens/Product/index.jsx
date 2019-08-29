@@ -28,7 +28,7 @@ const Product = React.memo(() => {
       try {
         const apiProduct = await builton.products.get(match.params.productId, {
           urlParams: {
-            expand: "_sub_products"
+            expand: "_sub_products, image"
           }
         });
         setProduct(apiProduct);
@@ -60,7 +60,7 @@ const Product = React.memo(() => {
           }
         },
         urlParams: {
-          expand: 'product'
+          expand: 'product, result.similar.reference_label.image'
         }
       });
 
@@ -118,7 +118,7 @@ const Product = React.memo(() => {
                   <img
                     onLoad={() => setLoading(false)}
                     onError={() => setLoading(false)}
-                    src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+                    src={product.image.public_url}
                     alt={`${product.name}-img`}
                   />
                 </div>

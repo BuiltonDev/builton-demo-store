@@ -43,7 +43,7 @@ const Checkout = () => {
               }
             },
             urlParams: {
-              expand: 'product'
+              expand: 'product, result.product.image'
             }
           }
         );

@@ -97,7 +97,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
 
   useEffect(() => {
     if (items && items.length > 0) {
-      setLoadedItems(items.map(item => item.image_url && ({id: item._id.$oid, imageLoaded: false})));
+      setLoadedItems(items.map(item => item.image && item.image.public_url && ({id: item._id.$oid, imageLoaded: false})));
     } else {
       if (typeof items === 'undefined') {
         setLoaded(true);
@@ -141,7 +141,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
         {(items && items.length > 0) && items.map((prod, index) => (
-          prod.image_url ?
+          prod.image && prod.image.public_url ?
             <div
               key={`${prod._id.$oid}-product-${index}`}
               onClick={() => activeItem.includes(index) ? handleClick(prod) : pushActiveItem(index)}
@@ -149,7 +149,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
             >
               <div className="carousel-image-container">
                 <Image
-                  src={`${config.endpoint}images/${prod.image_url}?api_key=${config.apiKey}`}
+                  src={prod.image.public_url}
                   onLoad={(isCached) => {
                     if (loadedItems[index]) {
                       loadedItems[index].imageLoaded = true;

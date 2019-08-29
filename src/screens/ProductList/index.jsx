@@ -84,7 +84,7 @@ const ProductList = () => {
   const filterCategory = apiProducts => {
     return apiProducts.map(product => ({
       id: product._id.$oid,
-      image_url: product.image_url,
+      image: product.image,
       name: product.name,
       price: product.price,
       currency: product.currency,
@@ -101,12 +101,14 @@ const ProductList = () => {
         apiProducts = await builton.products.search({
           query: searchString,
           urlParams: {
+            expand: "image",
             tags: tagsString
           }
         });
       } else {
         apiProducts = await builton.products.get({
           urlParams: {
+            expand: "image",
             tags: tagsString
           }
         });
@@ -131,7 +133,7 @@ const ProductList = () => {
   const renderProductItem = (product, index) => {
     return (
       <CSSTransition
-        key={`product_image_${product.image_url}`}
+        key={`product_image_${product.image.public_url}`}
         timeout={250}
         classNames="item"
       >
@@ -149,7 +151,7 @@ const ProductList = () => {
               setProducts([...products]);
             }}
             alt={`${product.name}-product`}
-            src={`${config.endpoint}images/${product.image_url}?api_key=${config.apiKey}`}
+            src={product.image.public_url}
           />
           <div className="product-description">
             <div className="product-description-inner-container">

@@ -156,7 +156,7 @@ const ProductList = () => {
       >
         <div
           className={`product-container ${
-            "show-product"
+            loading ? "hide-product" : "show-product"
           }`}
           onClick={() =>
             history.push(`/product_list/${match.params.category}/${product.id}`)

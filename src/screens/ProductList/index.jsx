@@ -98,8 +98,7 @@ const ProductList = () => {
     try {
       let apiProducts;
       if (searchString) {
-        apiProducts = await builton.products.search({
-          query: searchString,
+        apiProducts = await builton.products.search(searchString, {
           urlParams: {
             expand: "image",
             tags: tagsString
@@ -114,7 +113,7 @@ const ProductList = () => {
         });
       }
 
-      setProducts(filterCategory(apiProducts));
+      setProducts(filterCategory(apiProducts.current));
     } catch (err) {
       if (loading) {
         setLoading(false);

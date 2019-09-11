@@ -30,9 +30,7 @@ const MyProfile = () => {
 
   const onSubmit = async values => {
     try {
-      const updatedUser = await builton.users.setMe().update({
-        body: values
-      });
+      const updatedUser = await builton.users.setMe().update(values);
       updateUser(updatedUser);
     } catch (err) {
       notify(`Failed to update user. Please try again.`, { type: "error" });

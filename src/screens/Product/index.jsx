@@ -52,17 +52,19 @@ const Product = React.memo(() => {
 
   const fetchRecommendations = async () => {
     try {
-      const recommendations = await builton.aiModels.getRecommendations('5d6ccc4ffdd6d6000fbeb546', {
-        body: {
+      const recommendations = await builton.aiModels.getRecommendations('5d6ccc4ffdd6d6000fbeb546',
+      {
           data: match.params.productId,
           options: {
             size: 3,
-          }
+          },
         },
-        urlParams: {
-          expand: 'product, result.similar.reference_label.image'
+        {
+          urlParams: {
+            expand: 'product, result.similar.reference_label.image'
+          }
         }
-      });
+      );
 
       if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
         const simProds = recommendations.result[0].similar.map((recommendedProduct) => {

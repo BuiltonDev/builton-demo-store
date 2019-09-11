@@ -56,7 +56,6 @@ const Main = () => {
         }
       } catch (err) {
         setPopularProducts(undefined);
-        console.log(err);
         console.error("Failed to fetch similar products.");
       }
     };

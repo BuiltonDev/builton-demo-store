@@ -214,7 +214,7 @@ const ProductList = () => {
         </TransitionGroup>
         <NoResults show={products && products.length === 0} />
       </div>
-      <div className={`product-list-load-more-container ${rawProducts && (rawProducts.paginationTotal > products.length) || (products && products.length > 0 && loading) ? 'show-load-more' : 'hide-load-more'}`}>
+      <div className={`product-list-load-more-container ${(products && rawProducts) && (rawProducts.paginationTotal > products.length) || (products && products.length > 0 && loading) ? 'show-load-more' : 'hide-load-more'}`}>
         <Button type="button" onClick={() => getNextProductsPage()} title="Load More" loading={loadingMore} />
       </div>
       <Footer>

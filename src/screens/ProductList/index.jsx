@@ -203,7 +203,7 @@ const ProductList = () => {
             </div>
             <div className="product-price-container">
               {product.discount > 0 &&
-                <span className="discounted-product">{product.final_price} {product.currency}</span>
+                <span className="discounted-product">{product.price} {product.currency}</span>
               }
               {product.final_price} {product.currency}
             </div>

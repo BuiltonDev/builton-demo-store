@@ -14,7 +14,6 @@ import ListItem from "../../components/ListItem";
 import Table from "../../components/Table";
 import TableHeader from "../../components/TableHeader";
 import TableRow from "../../components/TableRow";
-import config from "../../config";
 
 const MyOrder = () => {
   const [order, setOrder] = useState(undefined);
@@ -28,7 +27,7 @@ const MyOrder = () => {
         try {
           const order = await builton.orders.get(match.params.orderId, {
             urlParams: {
-              expand: 'payments,items.product,payments.payment_method'
+              expand: 'payments,items.product.image,payments.payment_method'
             }
           });
           setOrder(order);

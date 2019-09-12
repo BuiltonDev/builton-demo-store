@@ -64,9 +64,7 @@ const AuthForm = ({ onAuth }) => {
 
       if (formType === "register") {
         apiUser = await builton.users.authenticate({
-          body: {
             email: values.email
-          }
         });
       } else {
         apiUser = await builton.users.setMe().get();

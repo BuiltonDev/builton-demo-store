@@ -34,14 +34,14 @@ const Checkout = () => {
     const getRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-          "5d55180941f4e7000dea3ca4",
+        "5d55180941f4e7000dea3ca4",
+        {
+            data: bag.map(item => item.product._id.$oid),
+            options: {
+              size: 4
+            }
+          },
           {
-            body: {
-              data: bag.map(item => item.product._id.$oid),
-              options: {
-                size: 4
-              }
-            },
             urlParams: {
               expand: 'product, result.product.image'
             }
@@ -102,9 +102,7 @@ const Checkout = () => {
 
     try {
       await builton.orders.create({
-        body: {
-          ...order
-        }
+        ...order
       });
       history.push("/");
     } catch (err) {

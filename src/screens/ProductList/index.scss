@@ -14,9 +14,9 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 24px 0 48px;
+  margin: 62px 0 32px;
   &.show-load-more {
-    animation: animate-show-product 1s forwards;
+    animation: animate-show-button 1s forwards;
     opacity: 0;
     animation-delay: 1s;
     height: 0;

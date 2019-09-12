@@ -46,6 +46,8 @@
     -o-transition: all 250ms ease-in;
     transition: all 250ms ease-in;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 
     &.show-product {
       animation: animate-show-product 1s forwards;
@@ -73,6 +75,25 @@
       transition: all 250ms ease-out;
     }
 
+    & .product-discount-container {
+      position: absolute;
+      right: -140px;
+      top: 5%;
+      width: 100%;
+      height: 50px;
+      background-color: #00e500;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(45deg);
+      color: $TERTIARY_TEXT;
+      text-shadow: 0px 0px 5px #000000;
+      letter-spacing: 1px;
+      font-size: 1.2rem;
+    }
+
     & .product-description {
       display: flex;
       flex-direction: row;
@@ -84,6 +105,12 @@
         & div {
           font-size: 1.1rem;
           letter-spacing: 1px;
+          &.discounted-product {
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
         }
         & div:last-child {
           font-size: 0.92rem;
@@ -100,6 +127,13 @@
         min-width: 86px;
         font-size: 1.2rem;
         color: $PRIMARY_TEXT;
+
+        & .discounted-product {
+          text-decoration: line-through;
+          font-size: 0.86rem;
+          padding-top: 4px;
+          margin-right: 12px;
+        }
       }
     }
     & > img {

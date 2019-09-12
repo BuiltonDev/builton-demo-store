@@ -6,7 +6,6 @@ import notify from "../../utils/toast";
 import Header from "../../components/Header";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import "./index.scss";
-import config from "../../config";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import PumaLogo from "../../assets/images/puma-logo.png";
 import AdidasLogo from "../../assets/images/adidas-logo.png";
@@ -15,12 +14,15 @@ import Footer from "../../components/Footer";
 import ProductListHeader from "../../components/ProductListHeader";
 import NoResults from "../../components/NoResults";
 import { getProductName } from "../../utils/productModifiers";
+import Button from "../../components/Button";
 
 const ProductList = () => {
   const { match, history } = useReactRouter();
   const [products, setProducts] = useState(null);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [rawProducts, setRawProducts] = useState(null);
   const [brandLogo, setBrandLogo] = useState(null);
   const [tagsString, setTagsString] = useState(`${match.params.category}+product`);
 
@@ -98,8 +100,7 @@ const ProductList = () => {
     try {
       let apiProducts;
       if (searchString) {
-        apiProducts = await builton.products.search({
-          query: searchString,
+        apiProducts = await builton.products.search(searchString, {
           urlParams: {
             expand: "image",
             tags: tagsString
@@ -107,6 +108,7 @@ const ProductList = () => {
         });
       } else {
         apiProducts = await builton.products.get({
+          size: 6,
           urlParams: {
             expand: "image",
             tags: tagsString
@@ -114,8 +116,13 @@ const ProductList = () => {
         });
       }
 
-      setProducts(filterCategory(apiProducts));
+      setProducts(filterCategory(apiProducts.current));
+      setRawProducts(apiProducts);
     } catch (err) {
+      notify("Failed to fetch products", {
+        type: "error"
+      });
+    } finally {
       if (loading) {
         setLoading(false);
       }
@@ -123,11 +130,40 @@ const ProductList = () => {
       if (searchLoading) {
         setSearchLoading(false);
       }
+    }
+  };
 
+  const getNextProductsPage = async () => {
+    setLoadingMore(true);
+    try {
+      const nextPage = await rawProducts.next();
+      setProducts([...products, ...filterCategory(nextPage)]);
+    } catch(err) {
       notify("Failed to fetch products", {
         type: "error"
       });
+    } finally {
+      setLoadingMore(false);
     }
+  };
+
+  const sortProducts = (sort) => {
+    let tagsString = `${match.params.category}+product`;
+    for (let i = 0; i < sort.length; i += 1) {
+      if (typeof sort[i] === "object") {
+        tagsString += `+size${sort[i].size}`;
+      } else {
+        tagsString += `+${sort[i]}`;
+      }
+    }
+    setTagsString(tagsString);
+  };
+
+  const shouldShowLoadMore = () => {
+    if (products && rawProducts && products.length > 0) {
+      return rawProducts.paginationTotal > products.length;
+    }
+    return false;
   };
 
   const renderProductItem = (product, index) => {
@@ -167,18 +203,6 @@ const ProductList = () => {
     );
   };
 
-  const sortProducts = (sort) => {
-    let tagsString = `${match.params.category}+product`;
-    for (let i = 0; i < sort.length; i += 1) {
-      if (typeof sort[i] === "object") {
-        tagsString += `+size${sort[i].size}`;
-      } else {
-        tagsString += `+${sort[i]}`;
-      }
-    }
-    setTagsString(tagsString);
-  };
-
   return (
     <div className="main-container">
       <Header />
@@ -196,6 +220,9 @@ const ProductList = () => {
             products.map((product, index) => renderProductItem(product, index))}
         </TransitionGroup>
         <NoResults show={products && products.length === 0} />
+      </div>
+      <div className={`product-list-load-more-container ${shouldShowLoadMore() ? 'show-load-more' : 'hide-load-more'}`}>
+        <Button type="button" onClick={() => getNextProductsPage()} title="Load More" loading={loadingMore} />
       </div>
       <Footer>
         <div className="footer-inner">

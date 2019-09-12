@@ -28,14 +28,14 @@ const Main = () => {
     const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-           "5d53b0f91a7e86000fd0d84e",
+          "5d53b0f91a7e86000fd0d84e",
           {
-            body: {
-              data: "",
-              options: {
-                size: 7
-              }
+            data: "",
+            options: {
+              size: 7
             },
+          },
+          {
             urlParams: {
               expand: 'product, result.recommendations.product.image'
             }
@@ -68,7 +68,7 @@ const Main = () => {
             tags: "category"
           }
         });
-        setProducts(products);
+        setProducts(products.current);
       } catch (err) {
         notify("Failed to load products", {
           type: "error"

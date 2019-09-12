@@ -41,9 +41,9 @@ const ProductListHeader = ({
             type: 'sub'
           }
         });
-        if (subProds.length > 0) {
+        if (subProds.current.length > 0) {
           const sizes = [ ...filterOptions ];
-          sizes[1].options = getSneakersSizes(subProds);
+          sizes[1].options = getSneakersSizes(subProds.current);
           setFilterOptions(sizes);
         }
       } catch(err) {

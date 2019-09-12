@@ -27,10 +27,8 @@ const CheckoutPaymentMethod = () => {
       const paymentMethods = await builton.paymentMethods.get();
       if (!paymentMethods.length) {
         const paymentMethod = await builton.paymentMethods.create({
-          body: {
-            payment_method: "stripe",
-            token: "tok_visa"
-          }
+          payment_method: "stripe",
+          token: "tok_visa"
         });
         setPaymentMethod(paymentMethod);
         updateOrderState(paymentMethod);

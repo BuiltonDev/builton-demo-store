@@ -10,10 +10,13 @@ import { timestampToDateString } from "../../../utils/dateModifiers";
 import useReactRouter from "use-react-router";
 import { getStatusColor } from "../../../utils/orderModifiers";
 import BLogo from "../../../assets/icons/b_logo";
+import Button from "../../../components/Button";
 
 const MyOrders = () => {
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState(undefined);
+  const [rawOrders, setRawOrders] = useState(undefined);
+  const [loadMore, setLoadMore] = useState(false);
 
   const { history } = useReactRouter();
 
@@ -23,14 +26,36 @@ const MyOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const orders = await builton.users.setMe().getOrders();
-      setOrders(orders);
+      const orders = await builton.orders.get({ size: 10 });
+      setOrders(orders.current);
+      setRawOrders(orders);
     } catch (err) {
       notify("Failed to fetch orders. Please try again.", {
         type: "error"
       });
     }
     setLoading(false);
+  };
+
+  const loadMoreOrders = async () => {
+    setLoadMore(true);
+    try {
+      const newOrders = await rawOrders.next();
+      setOrders([...orders, ...newOrders]);
+    } catch(err) {
+      notify("Failed to fetch orders. Please try again.", {
+        type: "error"
+      });
+    } finally {
+      setLoadMore(false);
+    }
+  };
+
+  const hasMoreOrders = () => {
+    if (rawOrders && orders && orders.length > 0) {
+      return rawOrders.paginationTotal > orders.length;
+    }
+    return false;
   };
 
   return (
@@ -41,7 +66,7 @@ const MyOrders = () => {
         </div>
       )}
       {(!loading && orders.length > 0) && (
-        <>
+        <div className="orders-table-container">
           <SectionHeader title="My Orders" />
           <Table>
             <TableHeader>
@@ -77,8 +102,11 @@ const MyOrders = () => {
                 );
               })}
           </Table>
-        </>
+        </div>
       )}
+      <div className={`orders-load-more-container ${hasMoreOrders() ? 'show-orders-more' : 'hide-orders-more'}`}>
+        <Button loading={loadMore} onClick={() => loadMoreOrders()} title="Load more" type="button" />
+      </div>
       {(!loading && orders.length === 0) &&
         <div className="no-orders">
           <BLogo width={160} height={120}/>

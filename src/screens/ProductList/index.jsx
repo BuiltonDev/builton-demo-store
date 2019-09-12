@@ -147,6 +147,25 @@ const ProductList = () => {
     }
   };
 
+  const sortProducts = (sort) => {
+    let tagsString = `${match.params.category}+product`;
+    for (let i = 0; i < sort.length; i += 1) {
+      if (typeof sort[i] === "object") {
+        tagsString += `+size${sort[i].size}`;
+      } else {
+        tagsString += `+${sort[i]}`;
+      }
+    }
+    setTagsString(tagsString);
+  };
+
+  const shouldShowLoadMore = () => {
+    if (products && rawProducts && products.length > 0) {
+      return rawProducts.paginationTotal > products.length;
+    }
+    return false;
+  };
+
   const renderProductItem = (product, index) => {
     return (
       <CSSTransition
@@ -184,18 +203,6 @@ const ProductList = () => {
     );
   };
 
-  const sortProducts = (sort) => {
-    let tagsString = `${match.params.category}+product`;
-    for (let i = 0; i < sort.length; i += 1) {
-      if (typeof sort[i] === "object") {
-        tagsString += `+size${sort[i].size}`;
-      } else {
-        tagsString += `+${sort[i]}`;
-      }
-    }
-    setTagsString(tagsString);
-  };
-
   return (
     <div className="main-container">
       <Header />
@@ -214,7 +221,7 @@ const ProductList = () => {
         </TransitionGroup>
         <NoResults show={products && products.length === 0} />
       </div>
-      <div className={`product-list-load-more-container ${(products && rawProducts) && (rawProducts.paginationTotal > products.length) || (products && products.length > 0 && loading) ? 'show-load-more' : 'hide-load-more'}`}>
+      <div className={`product-list-load-more-container ${shouldShowLoadMore() ? 'show-load-more' : 'hide-load-more'}`}>
         <Button type="button" onClick={() => getNextProductsPage()} title="Load More" loading={loadingMore} />
       </div>
       <Footer>

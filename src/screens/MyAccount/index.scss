@@ -1,5 +1,27 @@
 @import "../../constants";
 
+.orders-table-container {
+  background-color: $PRIMARY_BACKGROUND;
+}
+
+.orders-load-more-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 62px 0 32px;
+  &.show-orders-more {
+    animation: animate-show-account 250ms forwards;
+    opacity: 0;
+    animation-delay: 1s;
+    height: 0;
+  }
+
+  &.hide-orders-more {
+    display: none;
+  }
+}
+
 .my-account-wrapper {
   display: flex;
   flex: 1;
@@ -326,6 +348,20 @@
 }
 
 @keyframes animate-show-account {
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+  20% {
+    height: auto;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@keyframes animate-show-orders-more {
   0% {
     opacity: 0;
     height: 0;

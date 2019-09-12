@@ -148,6 +148,11 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
               className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
+                {prod.discount > 0 &&
+                <div className="carousel-product-discount-container">
+                  - {prod.discount * 100} %
+                </div>
+                }
                 <Image
                   src={prod.image.public_url}
                   onLoad={(isCached) => {

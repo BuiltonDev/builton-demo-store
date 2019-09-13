@@ -47,7 +47,7 @@ const MyOrder = () => {
     let total = 0;
     if (order)
     for (let i = 0; i < order.items.length; i += 1) {
-      total += order.items[i].product.price;
+      total += order.items[i].product.final_price;
     }
     return total;
   };
@@ -134,7 +134,7 @@ const MyOrder = () => {
                         {product.product.name}
                       </div>
                       <div className="my-order-product-price row">
-                        {product.product.price} {product.product.currency}
+                        {product.product.final_price} {product.product.currency}
                       </div>
                     </TableRow>
                   )}

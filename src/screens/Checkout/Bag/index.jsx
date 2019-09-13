@@ -25,7 +25,7 @@ const CheckoutBag = () => {
   const calculateTotalAmount = () => {
     let total = 0;
     for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.price;
+      total += bag[i].product.final_price;
     }
     return total;
   };
@@ -49,7 +49,7 @@ const CheckoutBag = () => {
         </div>
         <div className="checkout-size-col">{getSneakersSize(item.size)}</div>
         <div className="checkout-price-col">
-          {item.product.price} {item.product.currency}
+          {item.product.final_price} {item.product.currency}
         </div>
         <div className="checkout-remove-col">
           <div

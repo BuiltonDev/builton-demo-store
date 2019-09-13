@@ -110,6 +110,25 @@
           font-size: 1.4rem;
           letter-spacing: 1px;
         }
+
+        & .product-discounted-price {
+          text-decoration: line-through;
+          font-size: 1rem;
+          margin: 0 12px 0 48px;
+        }
+
+        & .product-price {
+          font-size: 1.8rem;
+          position: relative;
+          & .product-new-price-title {
+            position: absolute;
+            font-size: 0.66rem;
+            right: 0;
+            top: -12px;
+            letter-spacing: 1px;
+            color: $ALTERNATIVE_TEXT
+          }
+        }
       }
     }
   }

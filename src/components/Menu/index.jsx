@@ -41,7 +41,7 @@ const Menu = () => {
   const calculateTotalAmount = () => {
     let total = 0;
     for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.price;
+      total += bag[i].product.final_price;
     }
     return total;
   };
@@ -126,7 +126,7 @@ const Menu = () => {
                   <div>{prod.product.name}</div>
                   <div>{`Size ${getSneakersSize(prod.size)}`}</div>
                   <div>
-                    {prod.product.price} {prod.product.currency}
+                    {prod.product.final_price} {prod.product.currency}
                   </div>
                   <div
                     className="remove-bag-item"

@@ -152,6 +152,17 @@ const Product = React.memo(() => {
                   <span className="product-subtitle">
                     {product.short_description}
                   </span>
+                  {product.discount > 0 &&
+                    <span className="product-discounted-price">
+                      {product.price} {product.currency}
+                    </span>
+                  }
+                  <span className="product-price">
+                    {product.discount > 0 &&
+                      <span className="product-new-price-title">new price</span>
+                    }
+                    {product.final_price} {product.currency}
+                  </span>
                 </div>
                 <div className="product-description-content">
                   {product.description}

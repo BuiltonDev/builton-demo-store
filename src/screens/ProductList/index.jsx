@@ -89,9 +89,11 @@ const ProductList = () => {
       image: product.image,
       name: product.name,
       price: product.price,
+      final_price: product.final_price,
       currency: product.currency,
       short_description: product.short_description,
       description: product.description,
+      discount: product.discount,
       loaded: false
     }));
   };
@@ -181,6 +183,11 @@ const ProductList = () => {
             history.push(`/product_list/${match.params.category}/${product.id}`)
           }
         >
+          {product.discount > 0 &&
+            <div className="product-discount-container">
+              - {product.discount * 100} %
+            </div>
+          }
           <img
             onLoad={() => {
               products[index].loaded = true;
@@ -192,10 +199,13 @@ const ProductList = () => {
           <div className="product-description">
             <div className="product-description-inner-container">
               <div>{getProductName(product.name)}</div>
-              <div>{product.short_description}</div>
+              <div className={product.discount > 0 && "discounted-product"}>{product.short_description}</div>
             </div>
             <div className="product-price-container">
-              {product.price} {product.currency}
+              {product.discount > 0 &&
+                <span className="discounted-product">{product.price} {product.currency}</span>
+              }
+              {product.final_price} {product.currency}
             </div>
           </div>
         </div>

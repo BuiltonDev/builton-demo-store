@@ -13,6 +13,8 @@ import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
+import {convertRecommendationsToProducts, generateProductCarouselItems} from "../../utils/carouselItems";
+import {getProductName} from "../../utils/productModifiers";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -46,11 +48,9 @@ const Main = () => {
           recommendations.result[0].recommendations &&
           recommendations.result[0].recommendations.length > 0
         ) {
-          const recommendedProducts = recommendations.result[0].recommendations.map((recommendedProduct) => {
-            return recommendedProduct.product;
-          });
+          const generatedItems = generateProductCarouselItems(convertRecommendationsToProducts(recommendations.result[0].recommendations));
 
-          setPopularProducts(recommendedProducts.length > 0 ? recommendedProducts : undefined);
+          setPopularProducts(generatedItems.length > 0 ? generatedItems : undefined);
         } else {
           setPopularProducts(undefined);
         }
@@ -176,8 +176,9 @@ const Main = () => {
           <Carousel
             activeItems={4}
             items={popularProducts}
-            onActiveItemClick={(category, productId) =>
-              history.push(`/product_list/${category}/${productId}`)
+            emptyMessage="Nothing to recommend"
+            onActiveItemClick={(item) =>
+              history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)
             }
           />
         </div>

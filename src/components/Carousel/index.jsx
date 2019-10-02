@@ -12,7 +12,7 @@ import Image from "../Image";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
-const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
+const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage }) => {
   const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
   const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -97,7 +97,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
 
   useEffect(() => {
     if (items && items.length > 0) {
-      setLoadedItems(items.map(item => item.image && item.image.public_url && ({id: item._id.$oid, imageLoaded: false})));
+      setLoadedItems(items.map(item => item.image_url && item.image_url && ({id: item.id, imageLoaded: false})));
     } else {
       if (typeof items === 'undefined') {
         setLoaded(true);
@@ -121,8 +121,8 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
     }
   }, [loadedItems]);
 
-  const handleClick = (prod) => {
-    onActiveItemClick(getProductName(prod.name).toLowerCase(), prod._id.$oid)
+  const handleClick = (item) => {
+    onActiveItemClick(item)
   };
 
   const pushActiveItem = (activeItemIndex) => {
@@ -140,21 +140,21 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
   return (
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
-        {(items && items.length > 0) && items.map((prod, index) => (
-          prod.image && prod.image.public_url ?
+        {(items && items.length > 0) && items.map((item, index) => (
+          item.image_url ?
             <div
-              key={`${prod._id.$oid}-product-${index}`}
-              onClick={() => activeItem.includes(index) ? handleClick(prod) : pushActiveItem(index)}
+              key={`${item.id}-product-${index}`}
+              onClick={() => activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)}
               className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
-                {prod.discount > 0 &&
-                <div className="carousel-product-discount-container">
-                  - {prod.discount * 100} %
-                </div>
+                {item.discount > 0 &&
+                  <div className="carousel-product-discount-container">
+                    - {item.discount * 100} %
+                  </div>
                 }
                 <Image
-                  src={prod.image.public_url}
+                  src={`${item.image_url}`}
                   onLoad={(isCached) => {
                     if (loadedItems[index]) {
                       loadedItems[index].imageLoaded = true;
@@ -169,10 +169,10 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
                       setLoadedItems([ ...loadedItems ])
                     }
                   }}
-                  alt={`${prod.name}-img`}
+                  alt={`${item.name}-img`}
                 />
                 <div className={`similar-product-title-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                  <span>{getProductName(prod.name)}</span>
+                  <span>{item.name}</span>
                 </div>
                 <div className="carousel-item-overlay"/>
                 {index < activeItem[0] &&
@@ -186,9 +186,11 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
                 </div>
                 }
               </div>
-              <div className={`similar-product-name-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                <span>{prod.short_description}</span>
-              </div>
+              {item.short_description &&
+                <div className={`similar-product-name-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
+                  <span>{item.short_description}</span>
+                </div>
+              }
             </div> : <div />
         ))}
       </div>
@@ -199,7 +201,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint }) => {
       }
       {typeof items === 'undefined' &&
         <div className="carousel-empty">
-          Nothing to recommend
+          {emptyMessage}
         </div>
       }
     </>
@@ -217,7 +219,8 @@ const shouldUpdate = (oldProp, newProp) => {
 Carousel.defaultProps = {
   onActiveItemClick: () => {},
   activeItems: 1,
-  breakpoint: 1280
+  breakpoint: 1280,
+  emptyMessage: '',
 };
 
 Carousel.propTypes = {
@@ -226,6 +229,7 @@ Carousel.propTypes = {
   breakpoint: PropTypes.number,
   activeItems: PropTypes.number,
   comparisonProdId: PropTypes.string,
+  emptyMessage: PropTypes.string,
 };
 
 export default React.memo(Carousel, shouldUpdate);

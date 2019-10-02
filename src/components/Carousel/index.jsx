@@ -12,7 +12,7 @@ import Image from "../Image";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
-const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage }) => {
+const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll }) => {
   const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
   const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -134,6 +134,9 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
         copyActiveItem[i] += 1;
       }
     }
+    if (selectOnScroll) {
+      onActiveItemClick(items[activeItemIndex])
+    }
     setActiveItem(copyActiveItem);
   };
 
@@ -221,6 +224,7 @@ Carousel.defaultProps = {
   activeItems: 1,
   breakpoint: 1280,
   emptyMessage: '',
+  selectOnScroll: false,
 };
 
 Carousel.propTypes = {
@@ -230,6 +234,7 @@ Carousel.propTypes = {
   activeItems: PropTypes.number,
   comparisonProdId: PropTypes.string,
   emptyMessage: PropTypes.string,
+  selectOnScroll: PropTypes.bool,
 };
 
 export default React.memo(Carousel, shouldUpdate);

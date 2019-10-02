@@ -12,8 +12,15 @@ const generateProductCarouselItems = (items) => {
   }))
 };
 
-const convertRecommendationsToProducts = (recommendations) => {
-  return recommendations.map(item => item.product);
+const getMediaItems = (items) => {
+  return items.map(item => ({
+    id: item.human_id,
+    image_url: item.url,
+  }))
 };
 
-export { generateProductCarouselItems, convertRecommendationsToProducts };
+const convertRecommendationsToProducts = (recommendations, type) => {
+  return recommendations.map(item => item[type]);
+};
+
+export { generateProductCarouselItems, convertRecommendationsToProducts, getMediaItems };

@@ -130,7 +130,7 @@ const Product = React.memo(() => {
               </>
             )}
             <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
-              {product &&
+              {(product && !loading) &&
                 <Carousel
                   items={getMediaItems(product.media)}
                   selectOnScroll
@@ -228,7 +228,7 @@ const Product = React.memo(() => {
               <Carousel
                 items={similarProducts}
                 activeItems={4}
-                onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}
+                onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
               />
             }
           </div>

@@ -17,6 +17,7 @@ import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import {convertRecommendationsToProducts, generateProductCarouselItems} from "../../utils/carouselItems";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -56,7 +57,9 @@ const Checkout = () => {
             return recommendedProduct.product[0];
           });
 
-          setRecommendedProducts(complementaryItems.length > 0 ? complementaryItems : undefined);
+          const generatedItems = generateProductCarouselItems(complementaryItems);
+
+          setRecommendedProducts(generatedItems.length > 0 ? generatedItems : undefined);
         } else {
           setRecommendedProducts(undefined);
         }
@@ -130,6 +133,8 @@ const Checkout = () => {
     }
     return true;
   };
+
+  console.log(recommendedProducts);
 
   return (
     <div className="main-container checkout-main-container">

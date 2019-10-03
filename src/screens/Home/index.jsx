@@ -4,7 +4,6 @@ import Header from "../../components/Header";
 import ImageCategory from "../../components/ImageCategory";
 import { withRouter } from "react-router-dom";
 import notify from "../../utils/toast";
-import config from "../../config";
 import { useGlobal } from "reactn";
 import "./index.scss";
 import BuiltonSplash from "../../components/BuiltonSplash";

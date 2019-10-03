@@ -6,7 +6,6 @@ import notify from "../../utils/toast";
 
 import "./index.scss";
 import Header from "../../components/Header";
-import config from "../../config";
 import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
@@ -130,6 +129,13 @@ const Product = React.memo(() => {
               </>
             )}
             <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
+              {(product && !loading) &&
+                <Carousel
+                  items={getMediaItems(product.media)}
+                  selectOnScroll
+                  onActiveItemClick={(item) => setProductImage(item.image_url)}
+                />
+              }
             </div>
           </div>
           <div className="product-description-container">

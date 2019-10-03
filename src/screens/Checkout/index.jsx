@@ -17,7 +17,7 @@ import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
-import {convertRecommendationsToProducts, generateProductCarouselItems} from "../../utils/carouselItems";
+import { generateProductCarouselItems} from "../../utils/carouselItems";
 import {getProductName} from "../../utils/productModifiers";
 
 const Checkout = () => {

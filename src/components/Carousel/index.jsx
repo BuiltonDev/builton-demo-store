@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import config from "../../config";
 import Spinner from '../../components/Spinner';
-import { getProductName } from "../../utils/productModifiers";
 import useReactRouter from 'use-react-router';
 
 import "./index.scss";
@@ -25,13 +23,21 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
     const carousel = carouselRef.current;
     if (!carousel || !carousel.children.length) return false;
     const marginFactor = 12;
-    let maxWidth = (carousel.clientWidth / (activeItems + 2)) - marginFactor;
+    let maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
+
+    // So it renders properly on small displays
+    if (window.innerWidth < 720) {
+      maxWidth = 240;
+    }
+
     for (let i = 0; i < carousel.children.length; i += 1) {
+      // Set each item size
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
       for (let x = 0; x < activeItem.length; x += 1) {
         if (activeItem.includes(i)) {
           // Active items
           let left = (100 / (activeItem.length + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
+          // In case we get items than we have set to display in activeItems
           if (items.length <= activeItem.length) {
             left = left / activeItems;
           }
@@ -61,34 +67,6 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
     }
   };
 
-  const handleResize = () => {
-    if (activeItems >= 2 && window.innerWidth <= 780) {
-      setActiveItem(calcActiveItems(1));
-    } else if (activeItems >= 4 && window.innerWidth <= 1280) {
-      if (items.length > 2) {
-        setActiveItem(calcActiveItems(2));
-      } else {
-        setActiveItem(calcActiveItems(1));
-      }
-    } else {
-      console.log(items.length);
-      console.log(activeItems);
-      if (items.length >= activeItems) {
-        setActiveItem(calcActiveItems(activeItems));
-      } else {
-        setActiveItem(calcActiveItems(items.length));
-      }
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useEffect(() => {
     if (match.params && match.params.productId) {
       setLoaded(false);
@@ -101,9 +79,27 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeItem]);
 
+  const handleResize = (initialItems) => {
+    if (activeItems >= 2 && window.innerWidth <= 780) {
+      setActiveItem(calcActiveItems(1));
+    } else if (activeItems >= 4 && window.innerWidth <= 1280) {
+      if (initialItems.length > 2) {
+        setActiveItem(calcActiveItems(2));
+      } else {
+        setActiveItem(calcActiveItems(1));
+      }
+    } else {
+      if (initialItems.length >= activeItems) {
+        setActiveItem(calcActiveItems(activeItems));
+      } else {
+        setActiveItem(calcActiveItems(initialItems.length));
+      }
+    }
+  };
+
   useEffect(() => {
     if (items && items.length > 0) {
-      handleResize();
+      handleResize(items);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded]);
@@ -116,10 +112,16 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
         setLoaded(true);
       }
     }
+
+    window.addEventListener("resize",  () => handleResize(items));
+    return () => {
+      window.removeEventListener("resize", () => handleResize(items));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   useEffect(() => {
+    // handle LazyLoad on images
     if (!loadedItems.length) return;
     let hasLoaded = true;
     for (let i = 0; i < loadedItems.length; i += 1) {

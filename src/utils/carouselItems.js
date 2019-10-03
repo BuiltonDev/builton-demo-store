@@ -13,6 +13,8 @@ const generateProductCarouselItems = (items) => {
         discount: item.discount,
       })
     }
+
+    return false;
   }).filter(item => typeof item !== 'undefined');
 };
 

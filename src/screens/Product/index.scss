@@ -8,9 +8,10 @@
     display: flex;
     flex-direction: row;
     padding: 0 62px;
+    position: relative;
     & .similar-products-carousel-container {
       min-height: 420px;
-      flex: 1
+      flex: 1;
     }
   }
   & .product-item-inner-wrapper {
@@ -21,6 +22,7 @@
     align-self: stretch;
     overflow: hidden;
     position: relative;
+    min-height: 80vh;
     &:before {
       position: absolute;
       content: "";

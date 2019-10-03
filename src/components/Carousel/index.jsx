@@ -23,16 +23,19 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
+    if (!carousel || !carousel.children.length) return false;
     const marginFactor = 12;
-    const maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
+    let maxWidth = (carousel.clientWidth / (activeItems + 2)) - marginFactor;
     for (let i = 0; i < carousel.children.length; i += 1) {
       carousel.children[i].style.maxWidth = `${maxWidth}px`;
       for (let x = 0; x < activeItem.length; x += 1) {
         if (activeItem.includes(i)) {
           // Active items
-          const left = (100 / (activeItem.length + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
+          let left = (100 / (activeItem.length + (window.innerWidth < breakpoint ? 1 : 2 ))) * (x + 1);
+          if (items.length <= activeItem.length) {
+            left = left / activeItems;
+          }
           const leftStyle = window.innerWidth < breakpoint ? `${left}%` : `calc(${left}% + ${marginFactor / 2}px)`;
-
           carousel.children[activeItem[x]].style.left = leftStyle;
           carousel.children[activeItem[x]].style.transform = `translate3d(${window.innerWidth < breakpoint ? '-50%' : '0'}, 0, 0)`;
         } else {
@@ -62,9 +65,19 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
     if (activeItems >= 2 && window.innerWidth <= 780) {
       setActiveItem(calcActiveItems(1));
     } else if (activeItems >= 4 && window.innerWidth <= 1280) {
-      setActiveItem(calcActiveItems(2));
+      if (items.length > 2) {
+        setActiveItem(calcActiveItems(2));
+      } else {
+        setActiveItem(calcActiveItems(1));
+      }
     } else {
-      setActiveItem(calcActiveItems(activeItems));
+      console.log(items.length);
+      console.log(activeItems);
+      if (items.length >= activeItems) {
+        setActiveItem(calcActiveItems(activeItems));
+      } else {
+        setActiveItem(calcActiveItems(items.length));
+      }
     }
   };
 

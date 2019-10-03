@@ -48,8 +48,7 @@ const Main = () => {
           recommendations.result[0].recommendations &&
           recommendations.result[0].recommendations.length > 0
         ) {
-          const generatedItems = generateProductCarouselItems(convertRecommendationsToProducts(recommendations.result[0].recommendations));
-
+          const generatedItems = generateProductCarouselItems(convertRecommendationsToProducts(recommendations.result[0].recommendations, 'product'));
           setPopularProducts(generatedItems.length > 0 ? generatedItems : undefined);
         } else {
           setPopularProducts(undefined);

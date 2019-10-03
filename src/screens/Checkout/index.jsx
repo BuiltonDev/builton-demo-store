@@ -18,6 +18,7 @@ import BLogo from "../../assets/icons/b_logo";
 import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import {convertRecommendationsToProducts, generateProductCarouselItems} from "../../utils/carouselItems";
+import {getProductName} from "../../utils/productModifiers";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -213,8 +214,8 @@ const Checkout = () => {
                       <Carousel
                         items={recommendedProducts}
                         activeItems={2}
-                        onActiveItemClick={(category, productId) =>
-                          history.push(`/product_list/${category}/${productId}`)
+                        onActiveItemClick={(item) =>
+                          history.push(`/product_list/${getProductName(item.name)}/${item.id}`)
                         }
                       />
                     </div>

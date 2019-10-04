@@ -7,10 +7,11 @@ import "./index.scss";
 import ArrowLeft from "../../assets/icons/arrowLeft";
 import ArrowRight from "../../assets/icons/arrowRight";
 import Image from "../Image";
+import Button from "../Button";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
-const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll }) => {
+const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll, actionButton, actionButtonTitle }) => {
   const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
   const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -204,9 +205,21 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
                 </div>
                 }
               </div>
-              {item.short_description &&
-                <div className={`similar-product-name-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                  <span>{item.short_description}</span>
+              <div className={`item-description-carousel-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
+                {item.short_description &&
+                  <div className="item-carousel-name">
+                    <span>{item.short_description}</span>
+                  </div>
+                }
+                {item.price &&
+                  <div className="product-carousel-price">
+                    {item.price} {item.currency}
+                  </div>
+                }
+              </div>
+              {actionButton &&
+                <div className={`action-button-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
+                  <Button onClick={() => actionButton(item)} type="button" style={{ height: 32 }} title={actionButtonTitle} />
                 </div>
               }
             </div> : <div />
@@ -240,6 +253,8 @@ Carousel.defaultProps = {
   breakpoint: 1280,
   emptyMessage: '',
   selectOnScroll: false,
+  actionButton: undefined,
+  actionButtonTitle: 'View'
 };
 
 Carousel.propTypes = {
@@ -250,6 +265,8 @@ Carousel.propTypes = {
   comparisonProdId: PropTypes.string,
   emptyMessage: PropTypes.string,
   selectOnScroll: PropTypes.bool,
+  actionButton: PropTypes.func,
+  actionButtonTitle: PropTypes.string,
 };
 
 export default React.memo(Carousel, shouldUpdate);

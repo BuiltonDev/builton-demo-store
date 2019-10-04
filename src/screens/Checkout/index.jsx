@@ -135,8 +135,6 @@ const Checkout = () => {
     return true;
   };
 
-  console.log(recommendedProducts);
-
   return (
     <div className="main-container checkout-main-container">
       <Header />

@@ -227,6 +227,8 @@ const Product = React.memo(() => {
               <Carousel
                 items={similarProducts}
                 activeItems={4}
+                actionButtonTitle="Add to Cart"
+                actionButton={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
                 onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
               />
             }

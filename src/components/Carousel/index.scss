@@ -53,10 +53,6 @@
     margin: 24px 0;
     background-color: $PRIMARY_BACKGROUND;
 
-    &:not(.next-active-carousel-item):not(.previous-active-carousel-item):hover {
-      top: -6px;
-    }
-
     .carousel-left-arrow {
       position: absolute;
       left: 12px;
@@ -116,6 +112,48 @@
         font-size: calc(0.6vmax + 0.6vmin);
       }
     }
+    & .item-description-carousel-container {
+      display: flex;
+      flex-direction: row;
+      align-self: stretch;
+      font-size: 0.88rem;
+      color: $PRIMARY_TEXT;
+      padding: 0px 24px;
+      letter-spacing: 1px;
+      justify-content: space-between;
+      &.show-title {
+        animation: animate-show-title 1s forwards;
+        opacity: 0;
+        animation-delay: 500ms;
+      }
+      &.hide-title {
+        opacity: 0;
+      }
+      & .item-carousel-name {
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    & .action-button-container {
+      display: flex;
+      flex-direction: column;
+      margin: 24px 0;
+      justify-content: center;
+      align-items: center;
+
+      &.show-title {
+        animation: animate-show-title 1s forwards;
+        opacity: 0;
+        animation-delay: 500ms;
+      }
+      &.hide-title {
+        opacity: 0;
+      }
+    }
+
     & .similar-product-name-container {
       display: flex;
       flex-direction: row;

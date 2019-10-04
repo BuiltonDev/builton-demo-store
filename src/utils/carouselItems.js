@@ -11,6 +11,7 @@ const generateProductCarouselItems = (items) => {
         image_url: item.image.public_url,
         short_description: item.short_description,
         discount: item.discount,
+        currency: item.currency,
       })
     }
 

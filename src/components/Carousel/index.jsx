@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import PropTypes from "prop-types";
 import Spinner from '../../components/Spinner';
 import useReactRouter from 'use-react-router';
@@ -8,17 +8,30 @@ import ArrowLeft from "../../assets/icons/arrowLeft";
 import ArrowRight from "../../assets/icons/arrowRight";
 import Image from "../Image";
 import Button from "../Button";
+import {getSneakersSize} from "../../utils/productModifiers";
+import useEventListener from "../../hooks/useEventListener";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
-const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll, actionButton, actionButtonTitle }) => {
+const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll, actionButton, actionButtonTitle, sneakerSizesAction, sneakerSizes, sneakerSizesButtonTitle,  }) => {
   const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
   const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [openSizes, setOpenSizes] = useState([]);
+  const dropdownRefs = useRef(null);
 
   const carouselRef = useRef(null);
 
   const { match } = useReactRouter();
+
+  const createRefs = (items) => {
+    if (dropdownRefs.current === null) {
+      dropdownRefs.current = items.map(() => React.createRef());
+    }
+  };
+  if (items.length > 0) {
+    createRefs(items);
+  }
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
@@ -156,6 +169,16 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
     setActiveItem(copyActiveItem);
   };
 
+  const handleOutsideClick = (e) => {
+    dropdownRefs.current.forEach((ref, index) => {
+      if (!ref.current.contains(e.target) && openSizes.includes(index)) {
+        setOpenSizes([])
+      }
+    })
+  };
+
+  useEventListener('mousedown', handleOutsideClick);
+
   return (
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
@@ -163,7 +186,10 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
           item.image_url ?
             <div
               key={`${item.id}-product-${index}`}
-              onClick={() => activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)}
+              onClick={() => {
+                if (openSizes.includes(index)) return false;
+                activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)
+              }}
               className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
@@ -217,8 +243,30 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
                   </div>
                 }
               </div>
-              {actionButton &&
-                <div className={`action-button-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
+                <div className={`sneaker-sizes-button-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
+                  <Button
+                    className="light"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOpenSizes([...openSizes, index]);
+                    }}
+                    type="button"
+                    style={{ height: 32 }}
+                    title={sneakerSizesButtonTitle}
+                  />
+                  <div
+                    ref={dropdownRefs.current[index]}
+                    className={`sneaker-sizes-dropdown ${openSizes.includes(index) ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
+                  >
+                    {sneakerSizes && sneakerSizes.map((size, index) =>
+                      <div className="sneaker-size-row" key={`sneaker-size-${index}-${size.product._id.$oid}`}>
+                        {getSneakersSize(size.product)}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              {sneakerSizes &&
+                <div className={` action-button-container  ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
                   <Button onClick={() => actionButton(item)} type="button" style={{ height: 32 }} title={actionButtonTitle} />
                 </div>
               }
@@ -254,7 +302,10 @@ Carousel.defaultProps = {
   emptyMessage: '',
   selectOnScroll: false,
   actionButton: undefined,
-  actionButtonTitle: 'View'
+  actionButtonTitle: 'View',
+  sneakerSizes: undefined,
+  sneakerSizesButtonTitle: 'Size',
+  sneakerSizesAction: undefined,
 };
 
 Carousel.propTypes = {
@@ -267,6 +318,9 @@ Carousel.propTypes = {
   selectOnScroll: PropTypes.bool,
   actionButton: PropTypes.func,
   actionButtonTitle: PropTypes.string,
+  sneakerSizes: PropTypes.arrayOf(PropTypes.object),
+  sneakerSizesButtonTitle: PropTypes.string,
+  sneakerSizesAction: PropTypes.func,
 };
 
 export default React.memo(Carousel, shouldUpdate);

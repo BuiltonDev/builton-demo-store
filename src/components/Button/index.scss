@@ -27,6 +27,7 @@
   border: 2px;
   align-items: center;
 
+
   &.round {
     border-radius: 40px;
   }
@@ -85,6 +86,28 @@
       opacity: 0;
       -webkit-transform: scale3d(0.8, 0.8, 1);
       transform: scale3d(0.8, 0.8, 1);
+    }
+  }
+
+  &.light {
+    color: $SECONDARY_BUTTON_BACKGROUND;
+    &:hover {
+      color: $TERTIARY_TEXT;
+      background: $SECONDARY_BUTTON_BACKGROUND;
+    }
+    &.selected {
+      color: $TERTIARY_TEXT;
+    }
+
+    &::before {
+      border: 2px solid $SECONDARY_BUTTON_BACKGROUND;
+      background: $SECONDARY_BUTTON_BACKGROUND;
+    }
+
+    &::after {
+      background: $SECONDARY_BACKGROUND;
+      border: 2px solid $SECONDARY_BUTTON_BACKGROUND;
+      color: $SECONDARY_BUTTON_BACKGROUND;
     }
   }
 

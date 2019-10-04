@@ -22,6 +22,7 @@ const Product = React.memo(() => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedRecommendedProductsSizes, setSelectedRecommendedProductsSizes] = useState([]);
   const addItemToBag = useDispatch("addItemToBag"); //reducer
 
   useEffect(() => {
@@ -58,7 +59,7 @@ const Product = React.memo(() => {
       {
           data: match.params.productId,
           options: {
-            size: 7,
+            size: 5,
           },
         },
         {
@@ -129,13 +130,13 @@ const Product = React.memo(() => {
               </>
             )}
             <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
-              {(product && !loading) &&
-                <Carousel
-                  items={getMediaItems(product.media)}
-                  selectOnScroll
-                  onActiveItemClick={(item) => setProductImage(item.image_url)}
-                />
-              }
+              {/*{(product && !loading) &&*/}
+              {/*  <Carousel*/}
+              {/*    items={getMediaItems(product.media)}*/}
+              {/*    selectOnScroll*/}
+              {/*    onActiveItemClick={(item) => setProductImage(item.image_url)}*/}
+              {/*  />*/}
+              {/*}*/}
             </div>
           </div>
           <div className="product-description-container">
@@ -230,6 +231,9 @@ const Product = React.memo(() => {
                 actionButtonTitle="Add to Cart"
                 actionButton={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
                 onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
+                sneakerSizesButtonTitle="Sizes"
+                sneakerSizes={getSneakersSizes(product).sort((a, b) => parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0)}
+                sneakerSizesAction={(size) => setSelectedSize(size)}
               />
             }
           </div>

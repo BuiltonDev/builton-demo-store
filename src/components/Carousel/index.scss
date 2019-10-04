@@ -137,12 +137,55 @@
       }
     }
 
-    & .action-button-container {
+
+    & .action-button-container, & .sneaker-sizes-button-container {
       display: flex;
       flex-direction: column;
       margin: 24px 0;
       justify-content: center;
       align-items: center;
+      position: relative;
+      z-index: 1;
+
+      & .sneaker-sizes-dropdown {
+        position: absolute;
+        background: $PRIMARY_BACKGROUND;
+        left: 50%;
+        bottom: -100px;
+        transform: translateX(-50%) scale(0.48);
+        width: 120px;
+        overflow-y: scroll;
+        z-index: 10;
+        height: 240px;
+        padding: 12px 0;
+        & .sneaker-size-row {
+          padding: 12px;
+          opacity: 0;
+          &:hover {
+            background-color: $SECONDARY_BACKGROUND;
+          }
+        }
+
+        &.open-sizes-dropdown {
+          animation: animate-show-dropdown 400ms forwards;
+          opacity: 0;
+          & .sneaker-size-row {
+            animation: animate-show-row 250ms forwards;
+            animation-delay: 150ms;
+          }
+        }
+        &.close-sizes-dropdown{
+          opacity: 0;
+          display: none;
+          & .sneaker-size-row {
+            padding: 12px;
+            opacity: 0;
+            &:hover {
+              background-color: $SECONDARY_BACKGROUND;
+            }
+          }
+        }
+      }
 
       &.show-title {
         animation: animate-show-title 1s forwards;
@@ -152,6 +195,10 @@
       &.hide-title {
         opacity: 0;
       }
+    }
+
+    & .action-button-container {
+      z-index: 0;
     }
 
     & .similar-product-name-container {
@@ -247,10 +294,54 @@
   }
   100% {
     opacity: 1;
+    display: block;
   }
 }
 
 @keyframes animate-show-title {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    display: block
+  }
+}
+
+@-webkit-keyframes animate-show-dropdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    bottom: -55px;
+    display: block;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes animate-show-dropdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    bottom: -55px;
+    transform: translateX(-50%) scale(1);
+    display: block;
+  }
+}
+
+@-webkit-keyframes animate-show-row {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-show-row {
   0% {
     opacity: 0;
   }

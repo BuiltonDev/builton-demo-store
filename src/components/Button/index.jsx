@@ -8,7 +8,7 @@ const Button = ({ loading, type, style, className, title, onClick }) => (
     disabled={loading}
     type={type}
     style={style}
-    className={className}
+    className={`button ${className}`}
     onClick={onClick}
   >
     {loading ? <Spinner /> : <span>{title}</span>}

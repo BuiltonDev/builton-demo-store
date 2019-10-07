@@ -81,7 +81,7 @@ const Product = React.memo(() => {
     }
   };
 
-  const addToBag = async () => {
+  const addToBag = async (recommendedProduct, index) => {
     if (!selectedSize) {
       notify("Please select your desired size.", {
         type: "warning"
@@ -89,10 +89,15 @@ const Product = React.memo(() => {
     } else {
       try {
         await addItemToBag({
-          product,
-          size: selectedSize,
+          ...(recommendedProduct || product),
+          size: selectedRecommendedProductsSizes[index] || selectedSize,
           category: match.params.category
         });
+
+        const selectedRecProdSizesKeys = Object.keys(selectedRecommendedProductsSizes[index]);
+        const indxToRem = selectedRecProdSizesKeys.indexOf(index);
+        setSelectedRecommendedProductsSizes(selectedRecProdSizesKeys.slice(indxToRem, 1));
+
         notify(`${product.name} successfully added to your bag.`, {
           type: "info"
         });
@@ -101,6 +106,14 @@ const Product = React.memo(() => {
           type: "error"
         });
       }
+    }
+  };
+
+  const setSneakerSize = (size, index) => {
+    console.log(size, index);
+    const recSizesKeys = Object.keys(selectedRecommendedProductsSizes);
+    if (!recSizesKeys.includes(index)) {
+      setSelectedRecommendedProductsSizes(selectedRecommendedProductsSizes.push({[index]: size}))
     }
   };
 
@@ -130,13 +143,13 @@ const Product = React.memo(() => {
               </>
             )}
             <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
-              {/*{(product && !loading) &&*/}
-              {/*  <Carousel*/}
-              {/*    items={getMediaItems(product.media)}*/}
-              {/*    selectOnScroll*/}
-              {/*    onActiveItemClick={(item) => setProductImage(item.image_url)}*/}
-              {/*  />*/}
-              {/*}*/}
+              {(product && !loading) &&
+                <Carousel
+                  items={getMediaItems(product.media)}
+                  selectOnScroll
+                  onActiveItemClick={(item) => setProductImage(item.image_url)}
+                />
+              }
             </div>
           </div>
           <div className="product-description-container">
@@ -229,11 +242,11 @@ const Product = React.memo(() => {
                 items={similarProducts}
                 activeItems={4}
                 actionButtonTitle="Add to Cart"
-                actionButton={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
+                actionButton={(item, index) => addToBag(item, index)}
                 onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
                 sneakerSizesButtonTitle="Sizes"
                 sneakerSizes={getSneakersSizes(product).sort((a, b) => parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0)}
-                sneakerSizesAction={(size) => setSelectedSize(size)}
+                sneakerSizesAction={(size, index) => setSneakerSize(size, index)}
               />
             }
           </div>

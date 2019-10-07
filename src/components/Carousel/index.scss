@@ -167,10 +167,11 @@
         }
 
         &.open-sizes-dropdown {
-          animation: animate-show-dropdown 400ms forwards;
+          animation: animate-show-dropdown 300ms forwards ease-in-out;
+          z-index: 200;
           opacity: 0;
           & .sneaker-size-row {
-            animation: animate-show-row 250ms forwards;
+            animation: animate-show-row 250ms forwards ease-in-out;
             animation-delay: 150ms;
           }
         }

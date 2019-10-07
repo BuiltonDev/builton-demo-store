@@ -18,6 +18,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
   const [loadedItems, setLoadedItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [openSizes, setOpenSizes] = useState([]);
+  const [selectedSneakerSize, setSelectedSneakerSize] = useState({});
   const dropdownRefs = useRef(null);
 
   const carouselRef = useRef(null);
@@ -170,14 +171,26 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
   };
 
   const handleOutsideClick = (e) => {
-    dropdownRefs.current.forEach((ref, index) => {
-      if (!ref.current.contains(e.target) && openSizes.includes(index)) {
-        setOpenSizes([])
-      }
-    })
+    if (dropdownRefs.current) {
+      dropdownRefs.current.forEach((ref, index) => {
+        if (!ref.current.contains(e.target) && openSizes.includes(index)) {
+          setOpenSizes([]);
+        }
+      })
+    }
+  };
+
+  const getSelectedSneakerSize = (index) => {
+    const sizeKeys = Object.keys(selectedSneakerSize);
+    if (sizeKeys.includes(index)) {
+      return selectedSneakerSize[index].name;
+    }
+    return false;
   };
 
   useEventListener('mousedown', handleOutsideClick);
+
+  // TODO the product sizes are not matching the sizes for each product, fix it
 
   return (
     <>
@@ -186,10 +199,10 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
           item.image_url ?
             <div
               key={`${item.id}-product-${index}`}
-              onClick={() => {
-                if (openSizes.includes(index)) return false;
-                activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)
-              }}
+              // onClick={() => {
+              //   if (openSizes.includes(index)) return false;
+              //   activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)
+              // }}
               className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
@@ -252,14 +265,33 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
                     }}
                     type="button"
                     style={{ height: 32 }}
-                    title={sneakerSizesButtonTitle}
+                    title={`${sneakerSizesButtonTitle}${getSelectedSneakerSize(index) ? ' ' + getSelectedSneakerSize(index) : ''}`}
                   />
                   <div
                     ref={dropdownRefs.current[index]}
                     className={`sneaker-sizes-dropdown ${openSizes.includes(index) ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
                   >
-                    {sneakerSizes && sneakerSizes.map((size, index) =>
-                      <div className="sneaker-size-row" key={`sneaker-size-${index}-${size.product._id.$oid}`}>
+                    {sneakerSizes && sneakerSizes.map((size, sIndex) =>
+                      <div
+                        className="sneaker-size-row"
+                        key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
+                        onClick={() => {
+                          const copySneakers = { ...selectedSneakerSize };
+                          if (!Object.keys(copySneakers).includes(index.toString())) {
+                            copySneakers[index] = [size.product];
+                          } else {
+                            for (let i = 0; i < copySneakers[index].length; i += 1) {
+                              if (copySneakers[index][i]._id.$oid !== size.product._id.$oid) {
+                                copySneakers[index].push(size.product)
+                              } else {
+                                copySneakers[index].splice(i, 1);
+                              }
+                            }
+                          }
+
+                          setSelectedSneakerSize(copySneakers);
+                        }}
+                      >
                         {getSneakersSize(size.product)}
                       </div>
                     )}
@@ -267,7 +299,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
                 </div>
               {sneakerSizes &&
                 <div className={` action-button-container  ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                  <Button onClick={() => actionButton(item)} type="button" style={{ height: 32 }} title={actionButtonTitle} />
+                  <Button onClick={() => actionButton(item, index)} type="button" style={{ height: 32 }} title={actionButtonTitle} />
                 </div>
               }
             </div> : <div />

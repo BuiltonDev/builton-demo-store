@@ -182,9 +182,18 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
 
   const getSelectedSneakerSize = (index) => {
     const sizeKeys = Object.keys(selectedSneakerSize);
-    if (sizeKeys.includes(index)) {
-      return selectedSneakerSize[index].name;
+    if (sizeKeys.includes(index.toString())) {
+      return getSneakersSize(selectedSneakerSize[index]);
     }
+    return false;
+  };
+
+  const isRowSelected = (productIndex, size) => {
+    const copySneakers = { ...selectedSneakerSize };
+    if (Object.keys(copySneakers).includes(productIndex.toString())) {
+      return copySneakers[productIndex]._id.$oid === size.product._id.$oid;
+    }
+
     return false;
   };
 
@@ -199,10 +208,10 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
           item.image_url ?
             <div
               key={`${item.id}-product-${index}`}
-              // onClick={() => {
-              //   if (openSizes.includes(index)) return false;
-              //   activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)
-              // }}
+              onClick={() => {
+                if (openSizes.includes(index)) return false;
+                activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)
+              }}
               className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
             >
               <div className="carousel-image-container">
@@ -265,7 +274,7 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
                     }}
                     type="button"
                     style={{ height: 32 }}
-                    title={`${sneakerSizesButtonTitle}${getSelectedSneakerSize(index) ? ' ' + getSelectedSneakerSize(index) : ''}`}
+                    title={`${getSelectedSneakerSize(index) ? 'Size ' + getSelectedSneakerSize(index) : sneakerSizesButtonTitle}`}
                   />
                   <div
                     ref={dropdownRefs.current[index]}
@@ -273,18 +282,18 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
                   >
                     {sneakerSizes && sneakerSizes.map((size, sIndex) =>
                       <div
-                        className="sneaker-size-row"
+                        className={`sneaker-size-row ${isRowSelected(index, size) ? 'selected' : ''}`}
                         key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
                         onClick={() => {
                           const copySneakers = { ...selectedSneakerSize };
                           if (!Object.keys(copySneakers).includes(index.toString())) {
-                            copySneakers[index] = [size.product];
+                            copySneakers[index] = size.product;
                           } else {
-                            for (let i = 0; i < copySneakers[index].length; i += 1) {
-                              if (copySneakers[index][i]._id.$oid !== size.product._id.$oid) {
-                                copySneakers[index].push(size.product)
+                            if (copySneakers[index]) {
+                              if (copySneakers[index]._id.$oid === size.product._id.$oid) {
+                                delete copySneakers[index];
                               } else {
-                                copySneakers[index].splice(i, 1);
+                                copySneakers[index] = size.product;
                               }
                             }
                           }

@@ -34,6 +34,7 @@ const Checkout = () => {
 
   useEffect(() => {
     const getRecommendations = async () => {
+      console.log(bag);
       try {
         const recommendations = await builton.aiModels.getRecommendations(
         "5d55180941f4e7000dea3ca4",
@@ -71,6 +72,7 @@ const Checkout = () => {
     };
 
     if (!recommendedProducts.length && bag && bag.length > 0) {
+      console.log(bag);
       getRecommendations();
     }
   }, []);

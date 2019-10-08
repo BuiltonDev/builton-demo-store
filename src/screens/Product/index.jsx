@@ -22,7 +22,6 @@ const Product = React.memo(() => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedRecommendedProductsSizes, setSelectedRecommendedProductsSizes] = useState([]);
   const addItemToBag = useDispatch("addItemToBag"); //reducer
 
   useEffect(() => {
@@ -64,7 +63,7 @@ const Product = React.memo(() => {
         },
         {
           urlParams: {
-            expand: 'product, result.similar.reference_label.image'
+            expand: 'result.similar.reference_label._sub_products,result.similar.reference_label.image'
           }
         }
       );
@@ -81,7 +80,7 @@ const Product = React.memo(() => {
     }
   };
 
-  const addToBag = async (recommendedProduct, index) => {
+  const addToBag = async () => {
     if (!selectedSize) {
       notify("Please select your desired size.", {
         type: "warning"
@@ -89,15 +88,10 @@ const Product = React.memo(() => {
     } else {
       try {
         await addItemToBag({
-          ...(recommendedProduct || product),
-          size: selectedRecommendedProductsSizes[index] || selectedSize,
+          product,
+          size: selectedSize,
           category: match.params.category
         });
-
-        const selectedRecProdSizesKeys = Object.keys(selectedRecommendedProductsSizes[index]);
-        const indxToRem = selectedRecProdSizesKeys.indexOf(index);
-        setSelectedRecommendedProductsSizes(selectedRecProdSizesKeys.slice(indxToRem, 1));
-
         notify(`${product.name} successfully added to your bag.`, {
           type: "info"
         });
@@ -106,14 +100,6 @@ const Product = React.memo(() => {
           type: "error"
         });
       }
-    }
-  };
-
-  const setSneakerSize = (size, index) => {
-    console.log(size, index);
-    const recSizesKeys = Object.keys(selectedRecommendedProductsSizes);
-    if (!recSizesKeys.includes(index)) {
-      setSelectedRecommendedProductsSizes(selectedRecommendedProductsSizes.push({[index]: size}))
     }
   };
 
@@ -241,12 +227,8 @@ const Product = React.memo(() => {
               <Carousel
                 items={similarProducts}
                 activeItems={4}
-                actionButtonTitle="Add to Cart"
-                actionButton={(item, index) => addToBag(item, index)}
+                showSneakerSizes
                 onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
-                sneakerSizesButtonTitle="Sizes"
-                sneakerSizes={getSneakersSizes(product).sort((a, b) => parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0)}
-                sneakerSizesAction={(size, index) => setSneakerSize(size, index)}
               />
             }
           </div>

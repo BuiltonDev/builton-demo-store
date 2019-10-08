@@ -78,7 +78,6 @@ const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onA
 
     const props = {
       className,
-      key: Math.random(),
       onClick: () => activeItem.includes(index) ? onActiveItemClick(index) : pushActiveItem(index),
       children: [
         ...child.props.children,

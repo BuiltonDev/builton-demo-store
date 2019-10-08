@@ -6,11 +6,11 @@ import notify from "../../utils/toast";
 
 import "./index.scss";
 import Header from "../../components/Header";
+import MLCarousel from '../../components/MLCarousel';
 import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
 import { useDispatch } from "reactn";
-import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import {convertRecommendationsToProducts, generateProductCarouselItems, getMediaItems} from "../../utils/carouselItems";
 import Footer from "../../components/Footer";
@@ -58,7 +58,7 @@ const Product = React.memo(() => {
       {
           data: match.params.productId,
           options: {
-            size: 5,
+            size: 7,
           },
         },
         {
@@ -129,13 +129,13 @@ const Product = React.memo(() => {
               </>
             )}
             <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
-              {(product && !loading) &&
-                <Carousel
-                  items={getMediaItems(product.media)}
-                  selectOnScroll
-                  onActiveItemClick={(item) => setProductImage(item.image_url)}
-                />
-              }
+              {/*{(product && !loading) &&*/}
+              {/*  <Carousel*/}
+              {/*    items={getMediaItems(product.media)}*/}
+              {/*    selectOnScroll*/}
+              {/*    onActiveItemClick={(item) => setProductImage(item.image_url)}*/}
+              {/*  />*/}
+              {/*}*/}
             </div>
           </div>
           <div className="product-description-container">
@@ -224,7 +224,7 @@ const Product = React.memo(() => {
               <SectionHeader title="You might also like" type="sub" style={{ flex: 1, marginBottom: 0 }} />
             </div>
             {product &&
-              <Carousel
+              <MLCarousel
                 items={similarProducts}
                 activeItems={4}
                 showSneakerSizes

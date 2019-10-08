@@ -1,47 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createElement } from "react";
 import PropTypes from "prop-types";
 import Spinner from '../../components/Spinner';
-import useReactRouter from 'use-react-router';
 
 import "./index.scss";
 import ArrowLeft from "../../assets/icons/arrowLeft";
 import ArrowRight from "../../assets/icons/arrowRight";
-import Image from "../Image";
-import Button from "../Button";
-import {getProductName, getSneakersSize, getSneakersSizes} from "../../utils/productModifiers";
-import useEventListener from "../../hooks/useEventListener";
-import notify from "../../utils/toast";
-import {useDispatch} from "reactn";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
-const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll, showSneakerSizes }) => {
+const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onActiveItemClick }) => {
   const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
-  const [loadedItems, setLoadedItems] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  const [openSizes, setOpenSizes] = useState(undefined);
-  const [selectedSneakerSize, setSelectedSneakerSize] = useState({});
-  const addItemToBag = useDispatch("addItemToBag"); //reducer
-  const dropdownRefs = useRef(null);
 
   const carouselRef = useRef(null);
-
-  const { match } = useReactRouter();
-
-  const createRefs = (items) => {
-    if (dropdownRefs.current === null) {
-      dropdownRefs.current = items.map(() => React.createRef());
-    }
-  };
-
-  if (items && items.length > 0) {
-    createRefs(items);
-  }
 
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
     if (!carousel || !carousel.children.length) return false;
     const marginFactor = 12;
+    const items = carousel.children;
     let maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
 
     // So it renders properly on small displays
@@ -87,99 +63,41 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
   };
 
   useEffect(() => {
-    if (match.params && match.params.productId) {
-      setLoaded(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [match.params.productId]);
-
-  useEffect(() => {
     setCarouselItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeItem]);
 
-  const handleResize = (initialItems) => {
-    if (activeItems >= 2 && window.innerWidth <= 780) {
-      setActiveItem(calcActiveItems(1));
-    } else if (activeItems >= 4 && window.innerWidth <= 1280) {
-      if (initialItems.length > 2) {
-        setActiveItem(calcActiveItems(2));
-      } else {
-        setActiveItem(calcActiveItems(1));
-      }
-    } else {
-      if (initialItems.length >= activeItems) {
-        setActiveItem(calcActiveItems(activeItems));
-      } else {
-        setActiveItem(calcActiveItems(initialItems.length));
-      }
-    }
-  };
+  const getModifiedChildren = (child, index) => {
+    let className = '';
 
-  useEffect(() => {
-    if (items && items.length > 0) {
-      handleResize(items);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loaded]);
-
-  useEffect(() => {
-    if (items && items.length > 0) {
-      setLoadedItems(items.map(item => item.image_url && item.image_url && ({id: item.id, imageLoaded: false})));
-    } else {
-      if (typeof items === 'undefined') {
-        setLoaded(true);
-      }
+    if (index - 1 === Math.max(...activeItem) && children.length > activeItems) {
+      className = 'next-active-carousel-item';
+    } else if (index + 1 === Math.min(...activeItem)) {
+      className = 'previous-active-carousel-item';
     }
 
-    window.addEventListener("resize",  () => handleResize(items));
-    return () => {
-      window.removeEventListener("resize", () => handleResize(items));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+    const props = {
+      className,
+      key: Math.random(),
+      onClick: () => activeItem.includes(index) ? onActiveItemClick(index) : pushActiveItem(index),
+      children: [
+        ...child.props.children,
+        className.length > 0 && createElement("div", {
+          className: 'carousel-item-overlay',
+          key: `carousel-left-overlay-${index}`,
+        }),
+        index < activeItem[0] && createElement("div", {
+          className: 'carousel-left-arrow',
+          key: `carousel-left-arrow-${index}`,
+        }, createElement(ArrowLeft, { width: 36, height: 36, color: "#d5d5d5"})),
+        index > activeItem[activeItem.length - 1] && createElement("div", {
+          className: 'carousel-right-arrow',
+          key: `carousel-right-arrow-${index}`,
+        }, createElement(ArrowRight, { width: 36, height: 36, color: "#d5d5d5"})),
+      ]
+    };
 
-  useEffect(() => {
-    // handle LazyLoad on images
-    if (!loadedItems.length) return;
-    let hasLoaded = true;
-    for (let i = 0; i < loadedItems.length; i += 1) {
-      if (loadedItems[i] && !loadedItems[i].imageLoaded) {
-        hasLoaded = false;
-        break;
-      }
-    }
-
-    if (hasLoaded) {
-      setLoaded(true);
-    }
-  }, [loadedItems]);
-
-  const handleClick = (item) => {
-    onActiveItemClick(item)
-  };
-
-  const addToBag = async (item, size) => {
-    if (!size) {
-      notify("Please select your desired size.", {
-        type: "warning"
-      });
-    } else {
-      try {
-        await addItemToBag({
-          product: item,
-          size: size,
-          category: match.params.category
-        });
-        notify(`${item.name} successfully added to your bag.`, {
-          type: "info"
-        });
-      } catch (err) {
-        notify(`Failed to add ${item.name} to your bag.`, {
-          type: "error"
-        });
-      }
-    }
+    return React.cloneElement(child, props)
   };
 
   const pushActiveItem = (activeItemIndex) => {
@@ -191,190 +109,53 @@ const Carousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMess
         copyActiveItem[i] += 1;
       }
     }
-    if (selectOnScroll) {
-      onActiveItemClick(items[activeItemIndex])
-    }
     setActiveItem(copyActiveItem);
   };
 
-  const handleOutsideClick = (e) => {
-    if (dropdownRefs.current) {
-      dropdownRefs.current.forEach((ref, index) => {
-        if (ref.current && !ref.current.contains(e.target) && openSizes === index) {
-          setOpenSizes(undefined);
+
+  useEffect(() => {
+    const handleResize = (initialItems) => {
+      if (activeItems >= 2 && window.innerWidth <= 780) {
+        setActiveItem(calcActiveItems(1));
+      } else if (activeItems >= 4 && window.innerWidth <= 1280) {
+        if (initialItems.length > 2) {
+          setActiveItem(calcActiveItems(2));
+        } else {
+          setActiveItem(calcActiveItems(1));
         }
-      })
-    }
-  };
+      } else {
+        if (initialItems.length >= activeItems) {
+          setActiveItem(calcActiveItems(activeItems));
+        } else {
+          setActiveItem(calcActiveItems(initialItems.length));
+        }
+      }
+    };
 
-  const getSelectedSneakerSize = (index) => {
-    const sizeKeys = Object.keys(selectedSneakerSize);
-    if (sizeKeys.includes(index.toString())) {
-      return getSneakersSize(selectedSneakerSize[index]);
-    }
-    return false;
-  };
-
-  const isRowSelected = (productIndex, size) => {
-    const copySneakers = { ...selectedSneakerSize };
-    if (Object.keys(copySneakers).includes(productIndex.toString())) {
-      return copySneakers[productIndex]._id.$oid === size.product._id.$oid;
+    if (children && children.length > 0) {
+      handleResize(children);
     }
 
-    return false;
-  };
+    window.addEventListener("resize",  () => handleResize(children));
+    return () => {
+      window.removeEventListener("resize", () => handleResize(children));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded]);
 
-  useEventListener('mousedown', handleOutsideClick);
-
-  // TODO the product sizes are not matching the sizes for each product, fix it
 
   return (
     <>
       <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
-        {(items && items.length > 0) && items.map((item, index) => (
-          item.image_url ?
-            <div
-              key={`${item.id}-product-${index}`}
-              onClick={() => {
-                activeItem.includes(index) ? handleClick(item) : pushActiveItem(index)
-              }}
-              className={`${index < activeItem[0] ? 'previous-active-carousel-item' : ''} ${index > activeItem[activeItem.length - 1] ? 'next-active-carousel-item' : ''}`}
-            >
-              <div className="carousel-image-container">
-                {item.discount > 0 &&
-                  <div className="carousel-product-discount-container">
-                    - {item.discount * 100} %
-                  </div>
-                }
-                <Image
-                  src={`${item.image_url}`}
-                  onLoad={(isCached) => {
-                    if (loadedItems[index]) {
-                      loadedItems[index].imageLoaded = true;
-                      setLoadedItems([ ...loadedItems ])
-                    } else if (isCached && !loaded) {
-                      setLoaded(true);
-                    }
-                  }}
-                  onError={() => {
-                    if (loadedItems[index]) {
-                      loadedItems[index].imageLoaded = true;
-                      setLoadedItems([ ...loadedItems ])
-                    }
-                  }}
-                  alt={`${item.name}-img`}
-                />
-                <div className={`similar-product-title-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                  <span>{item.name && getProductName(item.name)}</span>
-                </div>
-                <div className="carousel-item-overlay"/>
-                {index < activeItem[0] &&
-                  <div className="carousel-left-arrow">
-                    <ArrowLeft width={36} height={36} color="#d5d5d5" />
-                  </div>
-                }
-                {index > activeItem[activeItem.length - 1] &&
-                <div className="carousel-right-arrow">
-                  <ArrowRight width={36} height={36} color="#d5d5d5" />
-                </div>
-                }
-              </div>
-              <div className={`item-description-carousel-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                {item.short_description &&
-                  <div className="item-carousel-name">
-                    <span>{item.short_description}</span>
-                  </div>
-                }
-                {item.price &&
-                  <div className="product-carousel-price">
-                    {item.price} {item.currency}
-                  </div>
-                }
-              </div>
-              {showSneakerSizes &&
-                <>
-                  <div className={`sneaker-sizes-button-container ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                    <Button
-                      className="light"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setOpenSizes(index);
-                      }}
-                      type="button"
-                      style={{ height: 32 }}
-                      title={`${getSelectedSneakerSize(index) ? 'Size ' + getSelectedSneakerSize(index) : 'Sizes'}`}
-                    />
-                    <div
-                      ref={dropdownRefs.current[index]}
-                      className={`sneaker-sizes-dropdown ${openSizes === index ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
-                    >
-                      {item && getSneakersSizes(item)
-                        .sort((a, b) =>
-                          parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
-                        ).map((size, sIndex) =>{
-                          console.log(size);
-                          return (<div
-                            className={`sneaker-size-row ${isRowSelected(index, size) ? 'selected' : ''}`}
-                            key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const copySneakers = { ...selectedSneakerSize };
-                              if (!Object.keys(copySneakers).includes(index.toString())) {
-                                copySneakers[index] = size.product;
-                              } else {
-                                if (copySneakers[index]) {
-                                  if (copySneakers[index]._id.$oid === size.product._id.$oid) {
-                                    delete copySneakers[index];
-                                  } else {
-                                    copySneakers[index] = size.product;
-                                  }
-                                }
-                              }
-
-                              setSelectedSneakerSize(copySneakers);
-                            }}
-                          >
-                            {getSneakersSize(size.product)}
-                          </div>)}
-                      )}
-                    </div>
-                  </div>
-                  <div className={` action-button-container  ${activeItem.includes(index) ? 'show-title' : 'hide-title'}`}>
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToBag(item, selectedSneakerSize[index]);
-                      }}
-                      type="button"
-                      style={{ height: 32 }}
-                      title="Add to Cart"
-                    />
-                  </div>
-                </>
-              }
-            </div> : <div />
-        ))}
+        {children && children.map((child, index) => getModifiedChildren(child, index))}
       </div>
       {!loaded &&
         <div className="carousel-spinner-container">
           <Spinner />
         </div>
       }
-      {typeof items === 'undefined' &&
-        <div className="carousel-empty">
-          {emptyMessage}
-        </div>
-      }
     </>
   );
-};
-
-const shouldUpdate = (oldProp, newProp) => {
-  if (typeof newProp.items !== 'undefined') {
-    return newProp.items.length === oldProp.items.length
-  } else {
-    return typeof newProp.items === typeof oldProp.items;
-  }
 };
 
 Carousel.defaultProps = {
@@ -387,14 +168,15 @@ Carousel.defaultProps = {
 };
 
 Carousel.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  onActiveItemClick: PropTypes.func,
+  loaded: PropTypes.bool,
   breakpoint: PropTypes.number,
   activeItems: PropTypes.number,
-  comparisonProdId: PropTypes.string,
   emptyMessage: PropTypes.string,
   selectOnScroll: PropTypes.bool,
-  showSneakerSizes: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ])
 };
 
-export default React.memo(Carousel, shouldUpdate);
+export default React.memo(Carousel);

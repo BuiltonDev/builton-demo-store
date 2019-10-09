@@ -21,6 +21,8 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
 
   const { match } = useReactRouter();
 
+  // Create product sizes dropdown references
+  // so we know which dropdown to refer to when working with them
   const createRefs = (items) => {
     if (dropdownRefs.current === null) {
       dropdownRefs.current = items.map(() => React.createRef());
@@ -110,31 +112,30 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
     return getSneakersSizes(item)
       .sort((a, b) =>
         parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
-      ).map((size, sIndex) => {
-          return (<div
-            className={`sneaker-size-row ${isRowSelected(index, size) ? 'selected' : ''}`}
-            key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              const copySneakers = {...selectedSneakerSize};
-              if (!Object.keys(copySneakers).includes(index.toString())) {
-                copySneakers[index] = size.product;
-              } else {
-                if (copySneakers[index]) {
-                  if (copySneakers[index]._id.$oid === size.product._id.$oid) {
-                    delete copySneakers[index];
-                  } else {
-                    copySneakers[index] = size.product;
-                  }
+      ).map((size, sIndex) =>
+        <div
+          className={`sneaker-size-row ${isRowSelected(index, size) ? 'selected' : ''}`}
+          key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            const copySneakers = {...selectedSneakerSize};
+            if (!Object.keys(copySneakers).includes(index.toString())) {
+              copySneakers[index] = size.product;
+            } else {
+              if (copySneakers[index]) {
+                if (copySneakers[index]._id.$oid === size.product._id.$oid) {
+                  delete copySneakers[index];
+                } else {
+                  copySneakers[index] = size.product;
                 }
               }
+            }
 
-              setSelectedSneakerSize(copySneakers);
-            }}
-          >
-            {getSneakersSize(size.product)}
-          </div>)
-        }
+            setSelectedSneakerSize(copySneakers);
+          }}
+        >
+          {getSneakersSize(size.product)}
+        </div>
       )
   };
 
@@ -237,14 +238,6 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
       }
     </>
   );
-};
-
-const shouldUpdate = (oldProp, newProp) => {
-  if (typeof newProp.items !== 'undefined') {
-    return newProp.items.length === oldProp.items.length
-  } else {
-    return typeof newProp.items === typeof oldProp.items;
-  }
 };
 
 MLCarousel.defaultProps = {

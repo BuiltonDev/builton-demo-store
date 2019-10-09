@@ -82,7 +82,7 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
       className,
       onClick: () => activeItem.includes(index) ? onActiveItemClick(index) : pushActiveItem(index),
       children: [
-        ...child.props.children,
+        typeof child.props.children === 'object' ? child.props.children : [...child.props.children],
         className.length > 0 && createElement("div", {
           className: 'carousel-item-overlay',
           key: `carousel-item-overlay-${index}`,

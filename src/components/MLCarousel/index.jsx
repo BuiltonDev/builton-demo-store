@@ -254,7 +254,6 @@ MLCarousel.propTypes = {
   onActiveItemClick: PropTypes.func,
   breakpoint: PropTypes.number,
   activeItems: PropTypes.number,
-  comparisonProdId: PropTypes.string,
   emptyMessage: PropTypes.string,
   selectOnScroll: PropTypes.bool,
   showSneakerSizes: PropTypes.bool,

@@ -14,6 +14,7 @@ import { useDispatch } from "reactn";
 import SectionHeader from "../../components/SectionHeader";
 import {convertRecommendationsToProducts, generateProductCarouselItems, getMediaItems} from "../../utils/carouselItems";
 import Footer from "../../components/Footer";
+import ImagesCarousel from "../../components/ImagesCarousel";
 
 const Product = React.memo(() => {
   const { history, match } = useReactRouter();
@@ -130,13 +131,13 @@ const Product = React.memo(() => {
               </>
             )}
             <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
-              {/*{(product && !loading) &&*/}
-              {/*  <Carousel*/}
-              {/*    items={getMediaItems(product.media)}*/}
-              {/*    selectOnScroll*/}
-              {/*    onActiveItemClick={(item) => setProductImage(item.image_url)}*/}
-              {/*  />*/}
-              {/*}*/}
+              {(product && !loading) &&
+                <ImagesCarousel
+                  items={getMediaItems(product.media)}
+                  selectOnScroll
+                  onActiveItemClick={(item) => setProductImage(item.image_url)}
+                />
+              }
             </div>
           </div>
           <div className="product-description-container">

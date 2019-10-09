@@ -83,7 +83,7 @@ const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onA
         ...child.props.children,
         className.length > 0 && createElement("div", {
           className: 'carousel-item-overlay',
-          key: `carousel-left-overlay-${index}`,
+          key: `carousel-item-overlay-${index}`,
         }),
         index < activeItem[0] && createElement("div", {
           className: 'carousel-left-arrow',
@@ -145,7 +145,7 @@ const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onA
 
   return (
     <>
-      <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef} id="carousel">
+      <div className={`carousel-container ${loaded ? 'show-carousel' : 'hide-carousel'}`} ref={carouselRef}>
         {children && children.map((child, index) => getModifiedChildren(child, index))}
       </div>
       {!loaded &&
@@ -172,6 +172,7 @@ Carousel.propTypes = {
   activeItems: PropTypes.number,
   emptyMessage: PropTypes.string,
   selectOnScroll: PropTypes.bool,
+  onActiveItemClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

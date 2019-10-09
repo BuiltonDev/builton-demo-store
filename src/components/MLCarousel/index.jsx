@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Carousel from '../../components/Carousel';
 import useReactRouter from 'use-react-router';
-
-import "../Carousel/index.scss";
 import Image from "../Image";
 import Button from "../Button";
 import {getProductName, getSneakersSize, getSneakersSizes} from "../../utils/productModifiers";
 import useEventListener from "../../hooks/useEventListener";
 import notify from "../../utils/toast";
 import {useDispatch} from "reactn";
+
+import "../Carousel/index.scss";
 
 const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMessage, selectOnScroll, showSneakerSizes }) => {
   const [loadedItems, setLoadedItems] = useState([]);
@@ -30,6 +30,18 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
   if (items && items.length > 0) {
     createRefs(items);
   }
+
+  const handleOutsideClick = (e) => {
+    if (dropdownRefs.current) {
+      dropdownRefs.current.forEach((ref, index) => {
+        if (ref.current && !ref.current.contains(e.target) && openSizes === index) {
+          setOpenSizes(undefined);
+        }
+      })
+    }
+  };
+
+  useEventListener('mousedown', handleOutsideClick);
 
   useEffect(() => {
     if (match.params && match.params.productId) {
@@ -77,16 +89,6 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
     }
   };
 
-  const handleOutsideClick = (e) => {
-    if (dropdownRefs.current) {
-      dropdownRefs.current.forEach((ref, index) => {
-        if (ref.current && !ref.current.contains(e.target) && openSizes === index) {
-          setOpenSizes(undefined);
-        }
-      })
-    }
-  };
-
   const getSelectedSneakerSize = (index) => {
     const sizeKeys = Object.keys(selectedSneakerSize);
     if (sizeKeys.includes(index.toString())) {
@@ -104,116 +106,136 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
     return false;
   };
 
-  useEventListener('mousedown', handleOutsideClick);
+  const renderSneakerSizes = (item, index) => {
+    return getSneakersSizes(item)
+      .sort((a, b) =>
+        parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
+      ).map((size, sIndex) => {
+          return (<div
+            className={`sneaker-size-row ${isRowSelected(index, size) ? 'selected' : ''}`}
+            key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              const copySneakers = {...selectedSneakerSize};
+              if (!Object.keys(copySneakers).includes(index.toString())) {
+                copySneakers[index] = size.product;
+              } else {
+                if (copySneakers[index]) {
+                  if (copySneakers[index]._id.$oid === size.product._id.$oid) {
+                    delete copySneakers[index];
+                  } else {
+                    copySneakers[index] = size.product;
+                  }
+                }
+              }
+
+              setSelectedSneakerSize(copySneakers);
+            }}
+          >
+            {getSneakersSize(size.product)}
+          </div>)
+        }
+      )
+  };
 
   return (
-    <Carousel activeItems={4} loaded={loaded} onActiveItemClick={(index) => onActiveItemClick(items[index])}>
-        {(items && items.length > 0) && items.map((item, index) =>(
-          item.image_url ?
-            <div key={`${item.id}-product-${index}`}>
-              <div className="carousel-image-container">
-                {item.discount > 0 &&
-                <div className="carousel-product-discount-container">
-                  - {item.discount * 100} %
-                </div>
-                }
-                <Image
-                  src={`${item.image_url}`}
-                  onLoad={(isCached) => {
-                    if (loadedItems[index]) {
-                      loadedItems[index].imageLoaded = true;
-                      setLoadedItems([ ...loadedItems ])
-                    } else if (isCached && !loaded) {
-                      setLoaded(true);
-                    }
-                  }}
-                  onError={() => {
-                    if (loadedItems[index]) {
-                      loadedItems[index].imageLoaded = true;
-                      setLoadedItems([ ...loadedItems ])
-                    }
-                  }}
-                  alt={`${item.name}-img`}
-                />
-                <div className={`similar-product-title-container`}>
-                  <span>{item.name && getProductName(item.name)}</span>
-                </div>
-              </div>
-              <div className={`item-description-carousel-container`}>
-                {item.short_description &&
-                <div className="item-carousel-name">
-                  <span>{item.short_description}</span>
-                </div>
-                }
-                {item.price &&
-                <div className="product-carousel-price">
-                  {item.price} {item.currency}
-                </div>
-                }
-              </div>
-              {showSneakerSizes &&
-              <>
-                <div className={`sneaker-sizes-button-container`}>
-                  <Button
-                    className="light"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setOpenSizes(index);
-                    }}
-                    type="button"
-                    style={{ height: 32 }}
-                    title={`${getSelectedSneakerSize(index) ? 'Size ' + getSelectedSneakerSize(index) : 'Sizes'}`}
-                  />
-                  <div
-                    ref={dropdownRefs.current[index]}
-                    className={`sneaker-sizes-dropdown ${openSizes === index ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
-                  >
-                    {item && getSneakersSizes(item)
-                      .sort((a, b) =>
-                        parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
-                      ).map((size, sIndex) =>{
-                        return (<div
-                          className={`sneaker-size-row ${isRowSelected(index, size) ? 'selected' : ''}`}
-                          key={`sneaker-size-${sIndex}-${size.product._id.$oid}`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const copySneakers = { ...selectedSneakerSize };
-                            if (!Object.keys(copySneakers).includes(index.toString())) {
-                              copySneakers[index] = size.product;
-                            } else {
-                              if (copySneakers[index]) {
-                                if (copySneakers[index]._id.$oid === size.product._id.$oid) {
-                                  delete copySneakers[index];
-                                } else {
-                                  copySneakers[index] = size.product;
-                                }
-                              }
-                            }
-
-                            setSelectedSneakerSize(copySneakers);
-                          }}
-                        >
-                          {getSneakersSize(size.product)}
-                        </div>)}
-                      )}
+    <>
+      {items.length > 0 &&
+        <Carousel
+          activeItems={activeItems}
+          loaded={loaded}
+          breakpoint={breakpoint}
+          onActiveItemClick={(index) => onActiveItemClick(items[index])}
+          selectOnScroll={selectOnScroll}
+        >
+          {(items && items.length > 0) && items.map((item, index) => (
+            item.image_url ?
+              <div key={`${item.id}-product-${index}`}>
+                <div className="carousel-image-container">
+                  {item.discount > 0 &&
+                  <div className="carousel-product-discount-container">
+                    - {item.discount * 100} %
                   </div>
-                </div>
-                <div className={` action-button-container`}>
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      addToBag(item, selectedSneakerSize[index]);
+                  }
+                  <Image
+                    src={`${item.image_url}`}
+                    onLoad={(isCached) => {
+                      if (loadedItems[index]) {
+                        loadedItems[index].imageLoaded = true;
+                        setLoadedItems([...loadedItems])
+                      } else if (isCached && !loaded) {
+                        setLoaded(true);
+                      }
                     }}
-                    type="button"
-                    style={{ height: 32 }}
-                    title="Add to Cart"
+                    onError={() => {
+                      if (loadedItems[index]) {
+                        loadedItems[index].imageLoaded = true;
+                        setLoadedItems([...loadedItems])
+                      }
+                    }}
+                    alt={`${item.name}-img`}
                   />
                 </div>
-              </>
-              }
-            </div> : <div key={`${index}-empty-carousel-item`} />
-        ))}
-      </Carousel>
+                <div className="item-description-carousel-container">
+                  <div className="similar-product-title-container">
+                    <span>{item.name && getProductName(item.name)}</span>
+                  </div>
+                  <div className="item-descr-row">
+                    {item.short_description &&
+                    <div className="item-carousel-name">
+                      <span>{item.short_description}</span>
+                    </div>
+                    }
+                    {item.price &&
+                    <div className="product-carousel-price">
+                      {item.price} {item.currency}
+                    </div>
+                    }
+                  </div>
+                  {showSneakerSizes &&
+                  <>
+                    <div className={`sneaker-sizes-button-container`}>
+                      <Button
+                        className="light"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenSizes(index);
+                        }}
+                        type="button"
+                        style={{height: 32}}
+                        title={`${getSelectedSneakerSize(index) ? 'Size ' + getSelectedSneakerSize(index) : 'Sizes'}`}
+                      />
+                      <div
+                        ref={dropdownRefs.current[index]}
+                        className={`sneaker-sizes-dropdown ${openSizes === index ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
+                      >
+                        {item && renderSneakerSizes(item, index)}
+                      </div>
+                    </div>
+                    <div className={` action-button-container`}>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToBag(item, selectedSneakerSize[index]);
+                        }}
+                        type="button"
+                        style={{height: 32}}
+                        title="Add to Cart"
+                      />
+                    </div>
+                  </>
+                  }
+                </div>
+              </div> : <div/>
+          ))}
+        </Carousel>
+      }
+      {!items.length &&
+        <div className="carousel-empty">
+          {emptyMessage}
+        </div>
+      }
+    </>
   );
 };
 

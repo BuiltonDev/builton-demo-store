@@ -8,8 +8,8 @@ import ArrowRight from "../../assets/icons/arrowRight";
 
 const calcActiveItems = countActiveItems => new Array(countActiveItems).fill(0).map((i, index) => index);
 
-const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onActiveItemClick }) => {
-  const [activeItem, setActiveItem] = useState(calcActiveItems(activeItems));
+const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, onActiveItemClick }) => {
+  const [activeItem, setActiveItem] = useState(calcActiveItems(children.length < activeItems ? children.length : activeItems));
 
   const carouselRef = useRef(null);
 
@@ -20,9 +20,11 @@ const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onA
     const items = carousel.children;
     let maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
 
-    // So it renders properly on small displays
+    // So it renders properly on small displays and when less items then active items for the viewport
     if (window.innerWidth < 720) {
       maxWidth = 240;
+    } else if (maxWidth > 320) {
+      maxWidth = 320;
     }
 
     for (let i = 0; i < carousel.children.length; i += 1) {
@@ -70,9 +72,9 @@ const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onA
   const getModifiedChildren = (child, index) => {
     let className = '';
 
-    if (index - 1 === Math.max(...activeItem) && children.length > activeItems) {
+    if (index - 1 >= Math.max(...activeItem) && children.length > activeItems) {
       className = 'next-active-carousel-item';
-    } else if (index + 1 === Math.min(...activeItem)) {
+    } else if (index + 1 <= Math.min(...activeItem)) {
       className = 'previous-active-carousel-item';
     }
 
@@ -108,12 +110,18 @@ const Carousel = ({ activeItems, breakpoint, emptyMessage, children, loaded, onA
         copyActiveItem[i] += 1;
       }
     }
+
+    if (selectOnScroll) {
+      onActiveItemClick(activeItemIndex)
+    }
+
     setActiveItem(copyActiveItem);
   };
 
 
   useEffect(() => {
     const handleResize = (initialItems) => {
+      console.log(initialItems);
       if (activeItems >= 2 && window.innerWidth <= 780) {
         setActiveItem(calcActiveItems(1));
       } else if (activeItems >= 4 && window.innerWidth <= 1280) {

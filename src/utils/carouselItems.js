@@ -374,9 +374,9 @@ const generateProductCarouselItems = items => {
         };
       }
 
-      return false;
+      return undefined;
     })
-    .filter(item => typeof item !== "undefined");
+    .filter(item => typeof item !== 'undefined');
 };
 
 const getMediaItems = items => {

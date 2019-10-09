@@ -14,6 +14,7 @@ import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
 import {convertRecommendationsToProducts, generateProductCarouselItems} from "../../utils/carouselItems";
 import {getProductName} from "../../utils/productModifiers";
+import MLCarousel from "../../components/MLCarousel";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -171,13 +172,11 @@ const Main = () => {
           <div className="home-popular-products-title-container">
             <SectionHeader title="Most popular products" type="sub" />
           </div>
-          <Carousel
-            activeItems={4}
+          <MLCarousel
             items={popularProducts}
-            emptyMessage="Nothing to recommend"
-            onActiveItemClick={(item) =>
-              history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)
-            }
+            activeItems={4}
+            showSneakerSizes
+            onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
           />
         </div>
         <div className="home-footer-container">

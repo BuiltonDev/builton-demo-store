@@ -8,7 +8,6 @@ import { useGlobal } from "reactn";
 import "./index.scss";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import useReactRouter from "use-react-router";
-import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";

@@ -1,5 +1,3 @@
-import { getProductName } from "./productModifiers";
-
 const calculateFinalPrice = item => {
   if (item.discount === 0) {
     return item.price;

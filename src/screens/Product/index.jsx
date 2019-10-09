@@ -71,7 +71,6 @@ const Product = React.memo(() => {
 
       if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
         const generatedItems = generateProductCarouselItems(convertRecommendationsToProducts(recommendations.result[0].similar, 'reference_label'));
-        console.log(generatedItems);
         setSimilarProducts(generatedItems.length > 0 ? generatedItems : undefined);
       } else {
         setSimilarProducts(undefined);

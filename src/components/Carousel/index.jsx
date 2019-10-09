@@ -121,7 +121,6 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
 
   useEffect(() => {
     const handleResize = (initialItems) => {
-      console.log(initialItems);
       if (activeItems >= 2 && window.innerWidth <= 780) {
         setActiveItem(calcActiveItems(1));
       } else if (activeItems >= 4 && window.innerWidth <= 1280) {
@@ -149,7 +148,6 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded]);
-
 
   return (
     <>

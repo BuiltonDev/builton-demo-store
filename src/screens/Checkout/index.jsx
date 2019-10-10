@@ -15,10 +15,10 @@ import DeliveryAddress from "./DeliveryAddress";
 import Overview from "./Overview";
 import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
-import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import { generateProductCarouselItems} from "../../utils/carouselItems";
 import {getProductName} from "../../utils/productModifiers";
+import MLCarousel from "../../components/MLCarousel";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -211,7 +211,7 @@ const Checkout = () => {
                   <div className="checkout-carousel-container">
                     <SectionHeader title="Complementary items" type="sub" style={{ position: 'relative' }} />
                     <div className="checkout-carousel-content">
-                      <Carousel
+                      <MLCarousel
                         items={recommendedProducts}
                         activeItems={2}
                         onActiveItemClick={(item) =>

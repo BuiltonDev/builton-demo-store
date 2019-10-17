@@ -177,7 +177,7 @@ const MyProfile = () => {
           <input type="file" name="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/gif,image/jpeg,image/png,image/jpg"/>
           {user.avatar &&
             <img
-              src={`${config.endpoint}images/${user.avatar}?api_key=${config.apiKey}`}
+              src={`${config.endpoint}/images/${user.avatar}?api_key=${config.apiKey}`}
               alt={`profile-img-${user.first_name}`}
               onLoad={() => setLoading(false)}
               onError={() => setLoading(false)}

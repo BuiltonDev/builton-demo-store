@@ -101,9 +101,13 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      await builton.orders.create({
+      const createdOrder = await builton.orders.create({
         ...order
       });
+
+      // pay for the order
+      await builton.payments.pay(createdOrder.payments[0].$oid);
+
       history.push("/");
     } catch (err) {
       notify("Failed to create order", {

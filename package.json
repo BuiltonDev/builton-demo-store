@@ -9,7 +9,7 @@
   "license": "MIT",
   "homepage": "https://demo-store.builton.dev",
   "dependencies": {
-    "@builton/core-sdk": "^4.0.0",
+    "@builton/core-sdk": "^4.1.1",
     "final-form": "^4.16.1",
     "firebase": "^6.2.4",
     "gh-pages": "^2.0.1",

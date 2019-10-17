@@ -1,4 +1,4 @@
-import Builton from '@builton/core-sdk/src/main';
+import Builton from '@builton/core-sdk';
 import globalState from "../globalStore/globalState";
 import { getFieldCurry } from '../globalStore/localStorage';
 import firebase from './firebase';

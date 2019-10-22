@@ -23,7 +23,7 @@ const Product = React.memo(() => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
-  const addItemToBag = useDispatch("addItemToBag"); //reducer
+  const addItemToCart = useDispatch("addItemToCart"); //reducer
 
   useEffect(() => {
     setSimilarProducts([]);
@@ -88,7 +88,7 @@ const Product = React.memo(() => {
       });
     } else {
       try {
-        await addItemToBag({
+        addItemToCart({
           product,
           size: selectedSize,
           category: match.params.category
@@ -97,6 +97,7 @@ const Product = React.memo(() => {
           type: "info"
         });
       } catch (err) {
+        console.log(err);
         notify(`Failed to add ${product.name} to your bag.`, {
           type: "error"
         });

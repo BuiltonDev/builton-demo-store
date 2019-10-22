@@ -5,6 +5,7 @@ import {
   setFieldCurry,
   clearAllFields
 } from './localStorage';
+import builton from "../utils/builton";
 
 let INITIALIZED = false;
 
@@ -87,6 +88,68 @@ addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
   }
 });
 
+addReducer('addItemToCart', (global, dispatch, item) => {
+  const addItemToBuiltonCart = () => {
+    builton.cart.addProduct({
+      productId: item.product._id.$oid,
+      quantity: 1,
+      subProducts: [item.size._id.$oid]
+    });
+  };
+
+  const builtonCart = builton.cart.get();
+  if (!!builtonCart.length) {
+    for (let i = 0; i < builtonCart.length; i += 1) {
+      if (builtonCart[i].productId === item.product._id.$oid) {
+        // In case we have the product, we need to add a subproduct to that product
+        builton.cart.addSubproduct(item.size._id.$oid, item.product._id.$oid);
+        break;
+      } else if (i === builtonCart.length - 1) {
+        // in case we haven't found a product with the same id, we add one
+        builton.cart.addProduct({ productId: item.product._id.$oid, quantity: 1, subProducts: [ item.size._id.$oid ]})
+        break;
+      }
+    }
+  } else {
+    // Add product to the cart
+    addItemToBuiltonCart();
+  }
+
+
+  return {
+    cart: [
+      ...global.cart,
+      item
+    ]
+  }
+});
+
+addReducer('removeItemFromCart', (global, dispatch, item) => {
+  const builtonCart = builton.cart.get();
+  if (!!builtonCart.length) {
+    for (let i = 0; i < builtonCart.length; i += 1) {
+      if (builtonCart[i].productId === item.product._id.$oid) {
+        if (builtonCart[i].subProducts.length === 1) {
+          // If its the last sub product in the product, we remove the product
+          builton.cart.removeProduct({ productId: item.product._id.$oid, quantity: 1})
+        } else {
+          // otherwise we remove the sub product
+          builton.cart.removeSubproduct(item.size._id.$oid, item.product._id.$oid);
+        }
+      }
+    }
+  }
+  if (!!global.cart.length) {
+    for (let i = 0; i < global.cart.length; i += 1) {
+      if (global.cart[i].size._id.$oid === item.size._id.$oid) {
+        global.cart.splice(i, 1);
+        break;
+      }
+    }
+  }
+  return global;
+});
+
 addReducer('updateOrder', (global, dispatch, order) => {
   setOrder(order);
   return {
@@ -150,6 +213,7 @@ export default {
         bag: null,
         order: DEFAULT_ORDER,
         paymentMethod: null,
+        cart: [],
         checkout: DEFAULT_CHECKOUT
       };
 
@@ -160,6 +224,7 @@ export default {
         bag: getBag(),
         checkout: getCheckout() || DEFAULT_CHECKOUT,
         order: getOrder() || DEFAULT_ORDER,
+        cart: [],
         paymentMethod: null,
       };
     } catch (err) {

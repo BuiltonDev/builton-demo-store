@@ -10,15 +10,15 @@ import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutConfirmation = () => {
   const [order] = useGlobal("order");
-  const [bag] = useGlobal("bag");
+  const [cart] = useGlobal("cart");
   const [paymentMethod] = useGlobal("paymentMethod");
 
   const { history } = useReactRouter();
 
   const calculateTotalAmount = () => {
     let total = 0;
-    for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.final_price;
+    for (let i = 0; i < cart.length; i += 1) {
+      total += cart[i].product.final_price;
     }
     return total;
   };
@@ -75,7 +75,7 @@ const CheckoutConfirmation = () => {
           <div className="checkout-size-col">Size</div>
           <div className="checkout-price-col">Price</div>
         </div>
-        {bag && bag.map((item, index) => renderBagRow(item, index))}
+        {cart && cart.map((item, index) => renderBagRow(item, index))}
       </div>
     );
   };
@@ -104,13 +104,13 @@ const CheckoutConfirmation = () => {
   return (
     <div className="checkout-overview-container">
       <SectionHeader title="Order Overview" />
-      {bag && renderBag()}
+      {cart && renderBag()}
       {paymentMethod && renderPaymentMethod()}
       {order.delivery_address && renderDeliveryAddress()}
       <div className="checkout-bag-total-row">
         <div className="checkout-bag-total-title">Total</div>
         <div className="checkout-bag-total">
-          {calculateTotalAmount()} {bag[0].product.currency}
+          {calculateTotalAmount()} {cart[0].product.currency}
         </div>
       </div>
     </div>

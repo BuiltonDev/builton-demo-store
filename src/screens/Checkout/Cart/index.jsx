@@ -12,20 +12,20 @@ import TableHeader from "../../../components/TableHeader";
 import Table from "../../../components/Table";
 
 const CheckoutBag = () => {
-  const [bag] = useGlobal("bag");
+  const [cart] = useGlobal("cart");
 
-  const removeItemFrombag = useDispatch("removeItemFromBag");
+  const removeItemFromCart = useDispatch("removeItemFromCart");
   const { history } = useReactRouter();
 
-  const removeItem = (e, itemId) => {
+  const removeItem = (e, item) => {
     e.stopPropagation();
-    removeItemFrombag(itemId);
+    removeItemFromCart(item);
   };
 
   const calculateTotalAmount = () => {
     let total = 0;
-    for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.final_price;
+    for (let i = 0; i < cart.length; i += 1) {
+      total += cart[i].product.final_price;
     }
     return total;
   };
@@ -54,7 +54,7 @@ const CheckoutBag = () => {
         <div className="checkout-remove-col">
           <div
             className="remove-bag-item"
-            onClick={e => removeItem(e, item.size._id.$oid)}
+            onClick={e => removeItem(e, item)}
           >
             <RemoveShopping color="#c5c5c5" />
           </div>
@@ -63,7 +63,7 @@ const CheckoutBag = () => {
     );
   };
 
-  if (!bag) return null;
+  if (!cart) return null;
 
   return (
     <>
@@ -76,11 +76,11 @@ const CheckoutBag = () => {
           <div className="checkout-price-col">Price</div>
           <div className="checkout-remove-col" />
         </TableHeader>
-        {bag && bag.map((item, index) => renderBagRow(item, index))}
+        {cart && cart.map((item, index) => renderBagRow(item, index))}
         <TableRow className="checkout-bag-total-row">
           <div className="checkout-bag-total-title">Total</div>
           <div className="checkout-bag-total">
-            {calculateTotalAmount()} {bag[0].product.currency}
+            {calculateTotalAmount()} {cart[0].product.currency}
           </div>
           <div className="checkout-bag-empty" />
         </TableRow>

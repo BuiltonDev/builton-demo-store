@@ -46,7 +46,6 @@ const clearBuiltonSession = clearFieldCurry('builtonSession');
 const getBuiltonSession = getFieldCurry('builtonSession');
 const setBuiltonSession = setFieldCurry('builtonSession');
 
-const clearBag = clearFieldCurry('bag');
 const getBag = getFieldCurry('bag');
 const setBag = setFieldCurry('bag');
 
@@ -74,10 +73,10 @@ addReducer('addItemToBag', (global, dispatch, item) => {
   }
 });
 
-addReducer('clearBag', (global, dispatch) => {
-  setBag(null);
+addReducer('clearCart', (global, dispatch) => {
+  builton.cart.empty();
   return {
-    bag: null
+    cart: []
   }
 });
 
@@ -230,7 +229,6 @@ export default {
     } catch (err) {
       clearUser();
       clearBuiltonSession();
-      clearBag();
     }
 
     // Setting values in global store

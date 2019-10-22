@@ -8,7 +8,7 @@ import builton from "../../utils/builton";
 import notify from "../../utils/toast";
 import Header from "../../components/Header";
 import CheckoutNavigation from "../../components/CheckoutNavigation";
-import Bag from "./Bag";
+import Cart from "./Cart";
 import Authentication from "./Authentication";
 import PaymentMethod from "./PaymentMethod";
 import DeliveryAddress from "./DeliveryAddress";
@@ -24,22 +24,21 @@ const Checkout = () => {
   const [step, setStep] = useState(null);
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [bag] = useGlobal("bag");
+  const [cart] = useGlobal("cart");
   const [order] = useGlobal("order");
   const updateOrder = useDispatch("updateOrder");
   const clearCheckout = useDispatch("clearCheckout");
-  const clearBag = useDispatch("clearBag");
+  const clearCart = useDispatch("clearCart");
   const { history } = useReactRouter();
   const [recommendedProducts, setRecommendedProducts] = useState([]);
 
   useEffect(() => {
     const getRecommendations = async () => {
-      console.log(bag);
       try {
         const recommendations = await builton.aiModels.getRecommendations(
         "5d55180941f4e7000dea3ca4",
         {
-            data: bag.map(item => item.product._id.$oid),
+            data: cart.map(item => item.product._id.$oid),
             options: {
               size: 4
             }
@@ -71,20 +70,19 @@ const Checkout = () => {
       }
     };
 
-    if (!recommendedProducts.length && bag && bag.length > 0) {
-      console.log(bag);
+    if (!recommendedProducts.length && cart && cart.length > 0) {
       getRecommendations();
     }
   }, []);
 
   useEffect(() => {
-    if (step === 1 && bag && bag.length > 0) {
+    if (step === 1 && cart && cart.length > 0) {
       order.items = [];
-      for (let i = 0; i < bag.length; i += 1) {
+      for (let i = 0; i < cart.length; i += 1) {
         order.items.push({
-          product: bag[i].product._id.$oid,
+          product: cart[i].product._id.$oid,
           quantity: 1,
-          sub_products: [bag[i].size._id.$oid]
+          sub_products: [cart[i].size._id.$oid]
         });
       }
       updateOrder(order);
@@ -123,9 +121,9 @@ const Checkout = () => {
 
     setLoading(false);
 
-    // Clear the checkout and the bag after the order has been create
+    // Clear the checkout and the cart after the order has been create
     await clearCheckout();
-    await clearBag();
+    await clearCart();
   };
 
   const checkShouldNavigate = stepNumb => {
@@ -148,27 +146,27 @@ const Checkout = () => {
         <div className="checkout-container">
           <div
             className={`checkout-items-container checkout-no-items-container ${
-              !bag || bag.length === 0 ? "show-container" : "hide-container"
+              !cart || cart.length === 0 ? "show-container" : "hide-container"
             }`}
           >
-            {(!bag || bag.length === 0) && (
+            {(!cart || cart.length === 0) && (
               <div className="checkout-no-items">
                 <BLogo width={160} height={80} />
-                No items in the bag
+                No items in the cart
               </div>
             )}
           </div>
-          {bag && bag.length > 0 && (
+          {cart && cart.length > 0 && (
             <>
               <div style={{ overflow: 'hidden' }}>
                 <div className="checkout-inner-container">
-                  {bag && bag.length > 0 && <></>}
+                  {cart && cart.length > 0 && <></>}
                   <div
                     className={`checkout-items-container ${
                       step === 0 ? "show-container" : "hide-container"
                     }`}
                   >
-                    {step === 0 && <Bag />}
+                    {step === 0 && <Cart />}
                   </div>
                   <div
                     className={`checkout-items-container ${

@@ -35,6 +35,7 @@ const getCartItems = () => {
           }
         })
       });
+      // last iteration, we need to resolve with the array we have created
       if (index === builtonCartItems.length - 1) {
         if (cartProducts.length > 0) {
           resolve(cartProducts);

@@ -24,6 +24,9 @@ const getCartItems = () => {
           expand: '_sub_products',
         }
       });
+      // We need to match the products/sub products in the cart
+      // with the sub products fetched from the API
+      // to populate our local cart with the necessary product, size and category used for URL
       item.subProducts.forEach(subProd => {
         prod._sub_products.forEach(prodSub => {
           if (subProd === prodSub._id.$oid) {

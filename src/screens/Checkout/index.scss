@@ -92,7 +92,7 @@
             margin-top: 24px;
           }
 
-          & .checkout-bag-total-row {
+          & .checkout-cart-total-row {
             margin-top: 42px !important;
             font-size: 1.5rem;
             color: $SECONDARY_TEXT;
@@ -156,7 +156,7 @@
             }
           }
 
-          & .checkout-bag-item-row {
+          & .checkout-cart-item-row {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -199,7 +199,7 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            & .remove-bag-item {
+            & .remove-cart-item {
               &:hover > svg {
                 & > path {
                   &:last-child {
@@ -210,7 +210,7 @@
             }
           }
 
-          & .checkout-bag-total-row {
+          & .checkout-cart-total-row {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -222,17 +222,17 @@
               letter-spacing: 1px;
               padding: 8px 4px;
             }
-            & .checkout-bag-total-title {
+            & .checkout-cart-total-title {
               flex: 5;
             }
 
-            & .checkout-bag-total {
+            & .checkout-cart-total {
               flex: 2;
               display: flex;
               flex-direction: row;
               justify-content: flex-end;
             }
-            & .checkout-bag-empty {
+            & .checkout-cart-empty {
               flex: 1;
             }
           }
@@ -410,11 +410,11 @@
           text-overflow: ellipsis;
           max-width: 125px;
         }
-        & .checkout-bag-total-row {
-          & .checkout-bag-total-title {
+        & .checkout-cart-total-row {
+          & .checkout-cart-total-title {
             font-size: 1.12rem;
           }
-          & .checkout-bag-total {
+          & .checkout-cart-total {
             font-size: 1.12rem;
             min-width: 120px;
           }

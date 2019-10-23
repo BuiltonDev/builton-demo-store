@@ -10,15 +10,15 @@ import SectionHeader from "../../../components/SectionHeader";
 
 const CheckoutConfirmation = () => {
   const [order] = useGlobal("order");
-  const [bag] = useGlobal("bag");
+  const [cart] = useGlobal("cart");
   const [paymentMethod] = useGlobal("paymentMethod");
 
   const { history } = useReactRouter();
 
   const calculateTotalAmount = () => {
     let total = 0;
-    for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.final_price;
+    for (let i = 0; i < cart.length; i += 1) {
+      total += cart[i].product.final_price;
     }
     return total;
   };
@@ -66,7 +66,7 @@ const CheckoutConfirmation = () => {
     );
   };
 
-  const renderBag = () => {
+  const renderCart = () => {
     return (
       <div className="checkout-overview-sub-container">
         <div className="checkout-items-header">
@@ -75,17 +75,17 @@ const CheckoutConfirmation = () => {
           <div className="checkout-size-col">Size</div>
           <div className="checkout-price-col">Price</div>
         </div>
-        {bag && bag.map((item, index) => renderBagRow(item, index))}
+        {cart && cart.map((item, index) => renderCartRow(item, index))}
       </div>
     );
   };
 
-  const renderBagRow = (item, index) => {
+  const renderCartRow = (item, index) => {
     return (
       <div
-        className="checkout-bag-item-row"
-        key={`bag-item-${item.product.id}-${index}`}
-        onClick={() => history.push(`/checkout/bag`)}
+        className="checkout-cart-item-row"
+        key={`cart-item-${item.product.id}-${index}`}
+        onClick={() => history.push(`/checkout/cart`)}
       >
         <div className="checkout-name-col">
           {getProductName(item.product.name)}
@@ -104,13 +104,13 @@ const CheckoutConfirmation = () => {
   return (
     <div className="checkout-overview-container">
       <SectionHeader title="Order Overview" />
-      {bag && renderBag()}
+      {cart && renderCart()}
       {paymentMethod && renderPaymentMethod()}
       {order.delivery_address && renderDeliveryAddress()}
-      <div className="checkout-bag-total-row">
-        <div className="checkout-bag-total-title">Total</div>
-        <div className="checkout-bag-total">
-          {calculateTotalAmount()} {bag[0].product.currency}
+      <div className="checkout-cart-total-row">
+        <div className="checkout-cart-total-title">Total</div>
+        <div className="checkout-cart-total">
+          {calculateTotalAmount()} {cart[0].product.currency}
         </div>
       </div>
     </div>

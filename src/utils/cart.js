@@ -15,7 +15,6 @@ const getCartSubProduct = (cartProduct, subProdId) => {
 
 const getCartItems = () => {
   const builtonCartItems = builton.cart.get();
-  console.log(builtonCartItems);
   const cartProducts = [];
 
   return new Promise((resolve, reject) => {

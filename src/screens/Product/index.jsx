@@ -81,7 +81,7 @@ const Product = React.memo(() => {
     }
   };
 
-  const addToBag = async () => {
+  const addToCart = async () => {
     if (!selectedSize) {
       notify("Please select your desired size.", {
         type: "warning"
@@ -209,7 +209,7 @@ const Product = React.memo(() => {
                 </div>
                 <div className="add-to-cart-button-container">
                   <Button
-                    onClick={() => addToBag()}
+                    onClick={() => addToCart()}
                     type="button"
                     style={{ minWidth: 200 }}
                     className="button round"

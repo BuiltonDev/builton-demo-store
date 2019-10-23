@@ -16,7 +16,7 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
   const [loaded, setLoaded] = useState(false);
   const [openSizes, setOpenSizes] = useState(undefined);
   const [selectedSneakerSize, setSelectedSneakerSize] = useState({});
-  const addItemToBag = useDispatch("addItemToBag"); //reducer
+  const addItemToCart = useDispatch("addItemToCart"); //reducer
   const dropdownRefs = useRef(null);
 
   const { match } = useReactRouter();
@@ -68,14 +68,14 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
     }
   }, [loadedItems]);
 
-  const addToBag = async (item, size) => {
+  const addToCart = async (item, size) => {
     if (!size) {
       notify("Please select your desired size.", {
         type: "warning"
       });
     } else {
       try {
-        await addItemToBag({
+        await addItemToCart({
           product: item,
           size: size,
           category: match.params.category
@@ -218,7 +218,7 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
-                          addToBag(item, selectedSneakerSize[index]);
+                          addToCart(item, selectedSneakerSize[index]);
                         }}
                         type="button"
                         style={{height: 32}}

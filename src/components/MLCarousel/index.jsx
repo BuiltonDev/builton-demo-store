@@ -81,11 +81,11 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
           category: match.params.category
         });
         setSelectedSneakerSize({});
-        notify(`${item.name} successfully added to your bag.`, {
+        notify(`${item.name} successfully added to your cart.`, {
           type: "info"
         });
       } catch (err) {
-        notify(`Failed to add ${item.name} to your bag.`, {
+        notify(`Failed to add ${item.name} to your cart.`, {
           type: "error"
         });
       }

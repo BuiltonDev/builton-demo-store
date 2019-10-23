@@ -33,7 +33,7 @@ const CheckoutCart = () => {
   const renderCartRow = (item, index) => {
     return (
       <TableRow
-        key={`bag-item-${item.product.id}-${index}`}
+        key={`cart-item-${item.product.id}-${index}`}
         style={{ padding: "6px 12px" }}
         onClick={() =>
           history.push(
@@ -53,7 +53,7 @@ const CheckoutCart = () => {
         </div>
         <div className="checkout-remove-col">
           <div
-            className="remove-bag-item"
+            className="remove-cart-item"
             onClick={e => removeItem(e, item)}
           >
             <RemoveShopping color="#c5c5c5" />
@@ -77,12 +77,12 @@ const CheckoutCart = () => {
           <div className="checkout-remove-col" />
         </TableHeader>
         {cart && cart.map((item, index) => renderCartRow(item, index))}
-        <TableRow className="checkout-bag-total-row">
-          <div className="checkout-bag-total-title">Total</div>
-          <div className="checkout-bag-total">
+        <TableRow className="checkout-cart-total-row">
+          <div className="checkout-cart-total-title">Total</div>
+          <div className="checkout-cart-total">
             {calculateTotalAmount()} {cart[0].product.currency}
           </div>
-          <div className="checkout-bag-empty" />
+          <div className="checkout-cart-empty" />
         </TableRow>
       </Table>
     </>

@@ -93,12 +93,12 @@ const Product = React.memo(() => {
           size: selectedSize,
           category: match.params.category
         });
-        notify(`${product.name} successfully added to your bag.`, {
+        notify(`${product.name} successfully added to your cart.`, {
           type: "info"
         });
       } catch (err) {
         console.log(err);
-        notify(`Failed to add ${product.name} to your bag.`, {
+        notify(`Failed to add ${product.name} to your cart.`, {
           type: "error"
         });
       }
@@ -213,7 +213,7 @@ const Product = React.memo(() => {
                     type="button"
                     style={{ minWidth: 200 }}
                     className="button round"
-                    title="Add to Bag"
+                    title="Add to Cart"
                   />
                 </div>
               </div>

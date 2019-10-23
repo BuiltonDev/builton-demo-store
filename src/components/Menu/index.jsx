@@ -136,21 +136,21 @@ const Menu = () => {
           <>
             {cart.map((prod, index) => (
               <DropdownMenuItem
-                key={`bag-product-${prod.size._id.$oid}${index}`}
+                key={`cart-product-${prod.size._id.$oid}${index}`}
                 onClick={() =>
                   history.push(
                     `/product_list/${prod.category}/${prod.product._id.$oid}`
                   )
                 }
               >
-                <div className="bag-product-row">
+                <div className="cart-product-row">
                   <div>{prod.product.name}</div>
                   <div>{`Size ${getSneakersSize(prod.size)}`}</div>
                   <div>
                     {prod.product.final_price} {prod.product.currency}
                   </div>
                   <div
-                    className="remove-bag-item"
+                    className="remove-cart-item"
                     onClick={ev => removeItem(prod, ev)}
                   >
                     <RemoveShopping color="#c5c5c5" />
@@ -161,7 +161,7 @@ const Menu = () => {
             <div className="header-checkout-container">
               <Button
                 onClick={() => {
-                  history.push("/checkout/bag");
+                  history.push("/checkout/cart");
                 }}
                 type="button"
                 className="button round"
@@ -172,13 +172,13 @@ const Menu = () => {
                   fontSize: "0.72rem"
                 }}
               />
-              <div className="header-bag-amount">
+              <div className="header-cart-amount">
                 {calculateTotalAmount()} {cart[0].product.currency}
               </div>
             </div>
           </>
         ) : (
-          <div className="empty-bag-container">No items in the cart.</div>
+          <div className="empty-cart-container">No items in the cart.</div>
         )}
       </DropdownMenu>
     );

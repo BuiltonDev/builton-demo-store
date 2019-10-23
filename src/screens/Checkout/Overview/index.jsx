@@ -83,9 +83,9 @@ const CheckoutConfirmation = () => {
   const renderCartRow = (item, index) => {
     return (
       <div
-        className="checkout-bag-item-row"
-        key={`bag-item-${item.product.id}-${index}`}
-        onClick={() => history.push(`/checkout/bag`)}
+        className="checkout-cart-item-row"
+        key={`cart-item-${item.product.id}-${index}`}
+        onClick={() => history.push(`/checkout/cart`)}
       >
         <div className="checkout-name-col">
           {getProductName(item.product.name)}
@@ -107,9 +107,9 @@ const CheckoutConfirmation = () => {
       {cart && renderCart()}
       {paymentMethod && renderPaymentMethod()}
       {order.delivery_address && renderDeliveryAddress()}
-      <div className="checkout-bag-total-row">
-        <div className="checkout-bag-total-title">Total</div>
-        <div className="checkout-bag-total">
+      <div className="checkout-cart-total-row">
+        <div className="checkout-cart-total-title">Total</div>
+        <div className="checkout-cart-total">
           {calculateTotalAmount()} {cart[0].product.currency}
         </div>
       </div>

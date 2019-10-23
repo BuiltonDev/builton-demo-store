@@ -11,7 +11,7 @@ import TableRow from "../../../components/TableRow";
 import TableHeader from "../../../components/TableHeader";
 import Table from "../../../components/Table";
 
-const CheckoutBag = () => {
+const CheckoutCart = () => {
   const [cart] = useGlobal("cart");
 
   const removeItemFromCart = useDispatch("removeItemFromCart");
@@ -30,7 +30,7 @@ const CheckoutBag = () => {
     return total;
   };
 
-  const renderBagRow = (item, index) => {
+  const renderCartRow = (item, index) => {
     return (
       <TableRow
         key={`bag-item-${item.product.id}-${index}`}
@@ -76,7 +76,7 @@ const CheckoutBag = () => {
           <div className="checkout-price-col">Price</div>
           <div className="checkout-remove-col" />
         </TableHeader>
-        {cart && cart.map((item, index) => renderBagRow(item, index))}
+        {cart && cart.map((item, index) => renderCartRow(item, index))}
         <TableRow className="checkout-bag-total-row">
           <div className="checkout-bag-total-title">Total</div>
           <div className="checkout-bag-total">
@@ -89,4 +89,4 @@ const CheckoutBag = () => {
   );
 };
 
-export default CheckoutBag;
+export default CheckoutCart;

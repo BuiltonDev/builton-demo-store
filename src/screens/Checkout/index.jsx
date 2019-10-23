@@ -105,12 +105,7 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      const createdOrder = await builton.orders.create({
-        ...order
-      });
-
-      // pay for the order
-      await builton.payments.pay(createdOrder.payments[0].$oid);
+      await builton.cart.checkout(order.payment_method, order.delivery_address);
 
       history.push("/");
     } catch (err) {

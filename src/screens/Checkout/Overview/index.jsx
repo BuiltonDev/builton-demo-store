@@ -66,7 +66,7 @@ const CheckoutConfirmation = () => {
     );
   };
 
-  const renderBag = () => {
+  const renderCart = () => {
     return (
       <div className="checkout-overview-sub-container">
         <div className="checkout-items-header">
@@ -75,12 +75,12 @@ const CheckoutConfirmation = () => {
           <div className="checkout-size-col">Size</div>
           <div className="checkout-price-col">Price</div>
         </div>
-        {cart && cart.map((item, index) => renderBagRow(item, index))}
+        {cart && cart.map((item, index) => renderCartRow(item, index))}
       </div>
     );
   };
 
-  const renderBagRow = (item, index) => {
+  const renderCartRow = (item, index) => {
     return (
       <div
         className="checkout-bag-item-row"
@@ -104,7 +104,7 @@ const CheckoutConfirmation = () => {
   return (
     <div className="checkout-overview-container">
       <SectionHeader title="Order Overview" />
-      {cart && renderBag()}
+      {cart && renderCart()}
       {paymentMethod && renderPaymentMethod()}
       {order.delivery_address && renderDeliveryAddress()}
       <div className="checkout-bag-total-row">

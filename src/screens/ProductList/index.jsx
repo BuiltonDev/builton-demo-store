@@ -18,7 +18,6 @@ import Button from "../../components/Button";
 
 const ProductList = () => {
   const { match, history } = useReactRouter();
-  const [products, setProducts] = useState(null);
   const [loadingMore, setLoadingMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -27,7 +26,7 @@ const ProductList = () => {
   const [tagsString, setTagsString] = useState(`${match.params.category}+product`);
 
   const searchProducts = async searchString => {
-    setProducts(null);
+    setRawProducts(null);
     setSearchLoading(true);
     await fetchProducts(searchString);
   };
@@ -47,16 +46,16 @@ const ProductList = () => {
   }, [match]);
 
   useEffect(() => {
-    setProducts(null);
+    setRawProducts(null);
     fetchProducts();
   }, [tagsString]);
 
   useEffect(() => {
-    if (products) {
-      if (products.length > 0) {
+    if (rawProducts && rawProducts.current) {
+      if (rawProducts.current.length > 0) {
         let loaded = true;
-        for (let i = 0; i < products.length; i += 1) {
-          if (!products[i].loaded) {
+        for (let i = 0; i < rawProducts.current.length; i += 1) {
+          if (!rawProducts.current[i].loaded) {
             loaded = false;
             break;
           }
@@ -81,7 +80,7 @@ const ProductList = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [products]);
+  }, [rawProducts]);
 
   const filterCategory = apiProducts => {
     return apiProducts.map(product => ({
@@ -118,8 +117,10 @@ const ProductList = () => {
         });
       }
 
-      setProducts(filterCategory(apiProducts.current));
-      setRawProducts(apiProducts);
+      setRawProducts({
+        ...apiProducts,
+        current: filterCategory(apiProducts.current)
+      });
     } catch (err) {
       notify("Failed to fetch products", {
         type: "error"
@@ -139,7 +140,10 @@ const ProductList = () => {
     setLoadingMore(true);
     try {
       const nextPage = await rawProducts.next();
-      setProducts([...products, ...filterCategory(nextPage)]);
+      setRawProducts({
+        ...nextPage,
+        current: [...rawProducts.current, ...filterCategory(nextPage)]
+      });
     } catch(err) {
       notify("Failed to fetch products", {
         type: "error"
@@ -162,8 +166,8 @@ const ProductList = () => {
   };
 
   const shouldShowLoadMore = () => {
-    if (products && rawProducts && products.length > 0) {
-      return rawProducts.paginationTotal > products.length;
+    if (rawProducts && rawProducts.current.length > 0) {
+      return rawProducts.paginationTotal > rawProducts.current.length;
     }
     return false;
   };
@@ -190,8 +194,11 @@ const ProductList = () => {
           }
           <img
             onLoad={() => {
-              products[index].loaded = true;
-              setProducts([...products]);
+              rawProducts.current[index].loaded = true;
+              setRawProducts({
+                ...rawProducts,
+                current: [...rawProducts.current]
+              });
             }}
             alt={`${product.name}-product`}
             src={product.image.public_url}
@@ -226,10 +233,10 @@ const ProductList = () => {
           searchLoading={searchLoading}
         />
         <TransitionGroup className="product-list-grid">
-          {products &&
-            products.map((product, index) => renderProductItem(product, index))}
+          {rawProducts &&
+            rawProducts.current.map((product, index) => renderProductItem(product, index))}
         </TransitionGroup>
-        <NoResults show={products && products.length === 0} />
+        <NoResults show={rawProducts && rawProducts.current.length === 0} />
       </div>
       <div className={`product-list-load-more-container ${shouldShowLoadMore() ? 'show-load-more' : 'hide-load-more'}`}>
         <Button type="button" onClick={() => getNextProductsPage()} title="Load More" loading={loadingMore} />

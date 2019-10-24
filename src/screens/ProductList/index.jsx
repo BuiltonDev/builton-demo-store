@@ -21,12 +21,12 @@ const ProductList = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [rawProducts, setRawProducts] = useState(null);
+  const [products, setProducts] = useState(null);
   const [brandLogo, setBrandLogo] = useState(null);
   const [tagsString, setTagsString] = useState(`${match.params.category}+product`);
 
   const searchProducts = async searchString => {
-    setRawProducts(null);
+    setProducts(null);
     setSearchLoading(true);
     await fetchProducts(searchString);
   };
@@ -46,16 +46,16 @@ const ProductList = () => {
   }, [match]);
 
   useEffect(() => {
-    setRawProducts(null);
+    setProducts(null);
     fetchProducts();
   }, [tagsString]);
 
   useEffect(() => {
-    if (rawProducts && rawProducts.current) {
-      if (rawProducts.current.length > 0) {
+    if (products && products.current) {
+      if (products.current.length > 0) {
         let loaded = true;
-        for (let i = 0; i < rawProducts.current.length; i += 1) {
-          if (!rawProducts.current[i].loaded) {
+        for (let i = 0; i < products.current.length; i += 1) {
+          if (!products.current[i].loaded) {
             loaded = false;
             break;
           }
@@ -80,7 +80,7 @@ const ProductList = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rawProducts]);
+  }, [products]);
 
   const filterCategory = apiProducts => {
     return apiProducts.map(product => ({
@@ -117,7 +117,7 @@ const ProductList = () => {
         });
       }
 
-      setRawProducts({
+      setProducts({
         ...apiProducts,
         current: filterCategory(apiProducts.current)
       });
@@ -139,10 +139,10 @@ const ProductList = () => {
   const getNextProductsPage = async () => {
     setLoadingMore(true);
     try {
-      const nextPage = await rawProducts.next();
-      setRawProducts({
+      const nextPage = await products.next();
+      setProducts({
         ...nextPage,
-        current: [...rawProducts.current, ...filterCategory(nextPage)]
+        current: [...products.current, ...filterCategory(nextPage)]
       });
     } catch(err) {
       notify("Failed to fetch products", {
@@ -166,8 +166,8 @@ const ProductList = () => {
   };
 
   const shouldShowLoadMore = () => {
-    if (rawProducts && rawProducts.current.length > 0) {
-      return rawProducts.paginationTotal > rawProducts.current.length;
+    if (products && products.current.length > 0) {
+      return products.paginationTotal > products.current.length;
     }
     return false;
   };
@@ -194,10 +194,10 @@ const ProductList = () => {
           }
           <img
             onLoad={() => {
-              rawProducts.current[index].loaded = true;
-              setRawProducts({
-                ...rawProducts,
-                current: [...rawProducts.current]
+              products.current[index].loaded = true;
+              setProducts({
+                ...products,
+                current: [...products.current]
               });
             }}
             alt={`${product.name}-product`}
@@ -233,10 +233,10 @@ const ProductList = () => {
           searchLoading={searchLoading}
         />
         <TransitionGroup className="product-list-grid">
-          {rawProducts &&
-            rawProducts.current.map((product, index) => renderProductItem(product, index))}
+          {products &&
+            products.current.map((product, index) => renderProductItem(product, index))}
         </TransitionGroup>
-        <NoResults show={rawProducts && rawProducts.current.length === 0} />
+        <NoResults show={products && products.current.length === 0} />
       </div>
       <div className={`product-list-load-more-container ${shouldShowLoadMore() ? 'show-load-more' : 'hide-load-more'}`}>
         <Button type="button" onClick={() => getNextProductsPage()} title="Load More" loading={loadingMore} />

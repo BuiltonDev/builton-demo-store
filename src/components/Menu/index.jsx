@@ -16,7 +16,7 @@ import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
 import './index.scss';
 import {checkIfMobile} from "../../utils/mobile";
-import {getCartItems} from "../../utils/cart";
+import {calculateTotalAmount, getCartItems} from "../../utils/cart";
 import notify from "../../utils/toast";
 import builton from "../../utils/builton";
 
@@ -58,14 +58,6 @@ const Menu = () => {
       setCartItems();
     }
   }, []);
-
-  const calculateTotalAmount = () => {
-    let total = 0;
-    for (let i = 0; i < cart.length; i += 1) {
-      total += cart[i].product.final_price;
-    }
-    return total;
-  };
 
   const renderLogoutContainer = () => {
     return (
@@ -173,7 +165,7 @@ const Menu = () => {
                 }}
               />
               <div className="header-cart-amount">
-                {calculateTotalAmount()} {cart[0].product.currency}
+                {calculateTotalAmount(cart)} {cart[0].product.currency}
               </div>
             </div>
           </>

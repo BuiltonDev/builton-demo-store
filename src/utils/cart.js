@@ -1,6 +1,14 @@
 import builton from "./builton";
 import {getProductName} from "./productModifiers";
 
+const calculateTotalAmount = (cart) => {
+  let total = 0;
+  for (let i = 0; i < cart.length; i += 1) {
+    total += cart[i].product.final_price;
+  }
+  return total;
+};
+
 const getCartSubProduct = (cartProduct, subProdId) => {
   if(cartProduct && cartProduct._sub_products.length > 0 && subProdId) {
     for (let i = 0; i < cartProduct._sub_products.length; i += 1) {
@@ -50,4 +58,4 @@ const getCartItems = () => {
   });
 };
 
-export { getCartItems };
+export { getCartItems, calculateTotalAmount };

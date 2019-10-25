@@ -7,6 +7,7 @@ import {
 import useReactRouter from "use-react-router";
 import ListItem from "../../../components/ListItem";
 import SectionHeader from "../../../components/SectionHeader";
+import {calculateTotalAmount} from "../../../utils/cart";
 
 const CheckoutConfirmation = () => {
   const [order] = useGlobal("order");
@@ -14,14 +15,6 @@ const CheckoutConfirmation = () => {
   const [paymentMethod] = useGlobal("paymentMethod");
 
   const { history } = useReactRouter();
-
-  const calculateTotalAmount = () => {
-    let total = 0;
-    for (let i = 0; i < cart.length; i += 1) {
-      total += cart[i].product.final_price;
-    }
-    return total;
-  };
 
   const renderPaymentMethod = () => {
     return (
@@ -110,7 +103,7 @@ const CheckoutConfirmation = () => {
       <div className="checkout-cart-total-row">
         <div className="checkout-cart-total-title">Total</div>
         <div className="checkout-cart-total">
-          {calculateTotalAmount()} {cart[0].product.currency}
+          {calculateTotalAmount(cart)} {cart[0].product.currency}
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import SectionHeader from "../../../components/SectionHeader";
 import TableRow from "../../../components/TableRow";
 import TableHeader from "../../../components/TableHeader";
 import Table from "../../../components/Table";
+import {calculateTotalAmount} from "../../../utils/cart";
 
 const CheckoutCart = () => {
   const [cart] = useGlobal("cart");
@@ -20,14 +21,6 @@ const CheckoutCart = () => {
   const removeItem = (e, item) => {
     e.stopPropagation();
     removeItemFromCart(item);
-  };
-
-  const calculateTotalAmount = () => {
-    let total = 0;
-    for (let i = 0; i < cart.length; i += 1) {
-      total += cart[i].product.final_price;
-    }
-    return total;
   };
 
   const renderCartRow = (item, index) => {
@@ -80,7 +73,7 @@ const CheckoutCart = () => {
         <TableRow className="checkout-cart-total-row">
           <div className="checkout-cart-total-title">Total</div>
           <div className="checkout-cart-total">
-            {calculateTotalAmount()} {cart[0].product.currency}
+            {calculateTotalAmount(cart)} {cart[0].product.currency}
           </div>
           <div className="checkout-cart-empty" />
         </TableRow>

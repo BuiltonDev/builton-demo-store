@@ -207,7 +207,7 @@ const ProductList = () => {
           <div className="product-description">
             <div className="product-description-inner-container">
               <div>{getProductName(product.name)}</div>
-              <div className={product.discount > 0 && "discounted-product"}>{product.short_description}</div>
+              <div className={product.discount > 0 ? "discounted-product" : ""}>{product.short_description}</div>
             </div>
             <div className="product-price-container">
               {product.discount > 0 &&

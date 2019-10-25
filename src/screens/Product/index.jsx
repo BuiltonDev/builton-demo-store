@@ -97,7 +97,6 @@ const Product = React.memo(() => {
           type: "info"
         });
       } catch (err) {
-        console.log(err);
         notify(`Failed to add ${product.name} to your cart.`, {
           type: "error"
         });
@@ -190,15 +189,8 @@ const Product = React.memo(() => {
                             )
                           }
                           type="button"
-                          style={{
-                            fontSize: 14,
-                            padding: "4px 6px",
-                            marginTop: 12,
-                            minWidth: 80,
-                            height: 24
-                          }}
                           title={prodSize.size}
-                          className={`button ${
+                          className={`button sneaker-sizes-button ${
                             selectedSize && selectedSize._id.$oid === prodSize.id
                               ? "selected"
                               : ""

@@ -139,6 +139,7 @@ const ProductList = () => {
   const getNextProductsPage = async () => {
     setLoadingMore(true);
     try {
+      // Paginate to next page
       const nextPage = await products.next();
       setProducts({
         ...nextPage,

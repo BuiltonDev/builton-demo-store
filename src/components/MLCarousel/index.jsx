@@ -140,6 +140,8 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
       )
   };
 
+  console.log(items);
+
   return (
     <>
       {items.length > 0 &&

@@ -15,6 +15,8 @@ import {calculateTotalAmount} from "../../../utils/cart";
 const CheckoutCart = () => {
   const [cart] = useGlobal("cart");
 
+  console.log(cart);
+
   const removeItemFromCart = useDispatch("removeItemFromCart");
   const { history } = useReactRouter();
 

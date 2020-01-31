@@ -16,9 +16,9 @@ import Overview from "./Overview";
 import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
 import SectionHeader from "../../components/SectionHeader";
-import { generateProductCarouselItems} from "../../utils/carouselItems";
 import {getProductName} from "../../utils/productModifiers";
 import MLCarousel from "../../components/MLCarousel";
+import {getComplementaryItems} from "../../utils/carouselItems";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -45,7 +45,7 @@ const Checkout = () => {
           },
           {
             urlParams: {
-              expand: 'product, result.product.image'
+              expand: 'result.predictions.output._sub_products,result.predictions.output.image'
             }
           }
         );
@@ -54,13 +54,9 @@ const Checkout = () => {
           recommendations.result &&
           recommendations.result.length > 0
         ) {
-          const complementaryItems = recommendations.result.map((recommendedProduct) => {
-            return recommendedProduct.product[0];
-          });
+          const complementaryItems = getComplementaryItems(recommendations.result);
 
-          const generatedItems = generateProductCarouselItems(complementaryItems);
-
-          setRecommendedProducts(generatedItems.length > 0 ? generatedItems : undefined);
+          setRecommendedProducts(complementaryItems.length > 0 ? complementaryItems : undefined);
         } else {
           setRecommendedProducts(undefined);
         }
@@ -73,7 +69,7 @@ const Checkout = () => {
     if (!recommendedProducts.length && cart && cart.length > 0) {
       getRecommendations();
     }
-  }, []);
+  }, [cart]);
 
   useEffect(() => {
     if (step === 1 && cart && cart.length > 0) {

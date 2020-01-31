@@ -11,7 +11,7 @@ import useReactRouter from "use-react-router";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
-import {convertRecommendationsToProducts, exportMLItems, generateProductCarouselItems} from "../../utils/carouselItems";
+import {exportMLItems} from "../../utils/carouselItems";
 import {getProductName} from "../../utils/productModifiers";
 import MLCarousel from "../../components/MLCarousel";
 
@@ -38,7 +38,7 @@ const Main = () => {
           },
           {
             urlParams: {
-              expand: 'result.predictions.output.image,result.predictions.output._sub_products'
+              expand: 'result.predictions.output._sub_products,result.predictions.output.image'
             }
           }
         );
@@ -48,7 +48,7 @@ const Main = () => {
           recommendations.result[0].predictions.length > 0
         ) {
           const generatedItems = exportMLItems(recommendations.result[0].predictions);
-          // console.log(generatedItems);
+          console.log(generatedItems);
           setPopularProducts(generatedItems.length > 0 ? generatedItems : undefined);
         } else {
           setPopularProducts(undefined);
@@ -79,6 +79,8 @@ const Main = () => {
     getProducts();
     fetchRecommendations();
   }, []);
+
+  console.log(popularProducts);
 
 
   useEffect(() => {

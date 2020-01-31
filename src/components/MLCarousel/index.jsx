@@ -8,6 +8,7 @@ import {getProductName, getSneakersSize, getSneakersSizes} from "../../utils/pro
 import useEventListener from "../../hooks/useEventListener";
 import notify from "../../utils/toast";
 import {useDispatch} from "reactn";
+import config from '../../config';
 
 import "../Carousel/index.scss";
 
@@ -140,8 +141,6 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
       )
   };
 
-  console.log(items);
-
   return (
     <>
       {items.length > 0 &&
@@ -162,7 +161,7 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
                   </div>
                   }
                   <Image
-                    src={`${item.image_url}`}
+                    src={`${config.endpoint}/images/${item.image_url}?api_key=${config.apiKey}`}
                     onLoad={(isCached) => {
                       if (loadedItems[index]) {
                         loadedItems[index].imageLoaded = true;

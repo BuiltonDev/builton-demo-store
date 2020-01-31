@@ -12,7 +12,7 @@ import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
 import { useDispatch } from "reactn";
 import SectionHeader from "../../components/SectionHeader";
-import {convertRecommendationsToProducts, generateProductCarouselItems, getMediaItems} from "../../utils/carouselItems";
+import {exportMLItems, getMediaItems} from "../../utils/carouselItems";
 import Footer from "../../components/Footer";
 import ImagesCarousel from "../../components/ImagesCarousel";
 
@@ -64,13 +64,14 @@ const Product = React.memo(() => {
         },
         {
           urlParams: {
-            expand: 'result.similar.reference_label._sub_products,result.similar.reference_label.image'
+            expand: 'result.predictions.output._sub_products,result.predictions.output.image'
           }
         }
       );
 
-      if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
-        const generatedItems = generateProductCarouselItems(convertRecommendationsToProducts(recommendations.result[0].similar, 'reference_label'));
+      if (recommendations.result[0].predictions && recommendations.result[0].predictions.length > 0) {
+        const generatedItems = exportMLItems(recommendations.result[0].predictions);
+        console.log(generatedItems);
         setSimilarProducts(generatedItems.length > 0 ? generatedItems : undefined);
       } else {
         setSimilarProducts(undefined);
@@ -222,7 +223,7 @@ const Product = React.memo(() => {
                 items={similarProducts}
                 activeItems={4}
                 showSneakerSizes
-                onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
+                onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item._id.$oid}`)}
               />
             }
           </div>

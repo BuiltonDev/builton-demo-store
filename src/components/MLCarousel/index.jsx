@@ -143,96 +143,94 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
 
   return (
     <>
-      {items.length > 0 &&
-        <Carousel
-          activeItems={activeItems}
-          loaded={loaded}
-          breakpoint={breakpoint}
-          onActiveItemClick={(index) => onActiveItemClick(items[index])}
-          selectOnScroll={selectOnScroll}
-        >
-          {(items && items.length > 0) && items.map((item, index) => (
-            item.image_url ?
-              <div key={`${item.id}-product-${index}`}>
-                <div className="carousel-image-container">
-                  {item.discount > 0 &&
-                  <div className="carousel-product-discount-container">
-                    - {item.discount * 100} %
+      <Carousel
+        activeItems={activeItems}
+        loaded={loaded}
+        breakpoint={breakpoint}
+        onActiveItemClick={(index) => onActiveItemClick(items[index])}
+        selectOnScroll={selectOnScroll}
+      >
+        {(items && items.length > 0) && items.map((item, index) => (
+          item.image_url ?
+            <div key={`${item.id}-product-${index}`}>
+              <div className="carousel-image-container">
+                {item.discount > 0 &&
+                <div className="carousel-product-discount-container">
+                  - {item.discount * 100} %
+                </div>
+                }
+                <Image
+                  src={`${config.endpoint}/images/${item.image_url}?api_key=${config.apiKey}`}
+                  onLoad={(isCached) => {
+                    if (loadedItems[index]) {
+                      loadedItems[index].imageLoaded = true;
+                      setLoadedItems([...loadedItems])
+                    } else if (isCached && !loaded) {
+                      setLoaded(true);
+                    }
+                  }}
+                  onError={() => {
+                    if (loadedItems[index]) {
+                      loadedItems[index].imageLoaded = true;
+                      setLoadedItems([...loadedItems])
+                    }
+                  }}
+                  alt={`${item.name}-img`}
+                />
+              </div>
+              <div className="item-description-carousel-container">
+                <div className="similar-product-title-container">
+                  <span>{item.name && getProductName(item.name)}</span>
+                </div>
+                <div className="item-descr-row">
+                  {item.short_description &&
+                  <div className="item-carousel-name">
+                    <span>{item.short_description}</span>
                   </div>
                   }
-                  <Image
-                    src={`${config.endpoint}/images/${item.image_url}?api_key=${config.apiKey}`}
-                    onLoad={(isCached) => {
-                      if (loadedItems[index]) {
-                        loadedItems[index].imageLoaded = true;
-                        setLoadedItems([...loadedItems])
-                      } else if (isCached && !loaded) {
-                        setLoaded(true);
-                      }
-                    }}
-                    onError={() => {
-                      if (loadedItems[index]) {
-                        loadedItems[index].imageLoaded = true;
-                        setLoadedItems([...loadedItems])
-                      }
-                    }}
-                    alt={`${item.name}-img`}
-                  />
-                </div>
-                <div className="item-description-carousel-container">
-                  <div className="similar-product-title-container">
-                    <span>{item.name && getProductName(item.name)}</span>
+                  {item.price &&
+                  <div className="product-carousel-price">
+                    {item.price} {item.currency}
                   </div>
-                  <div className="item-descr-row">
-                    {item.short_description &&
-                    <div className="item-carousel-name">
-                      <span>{item.short_description}</span>
-                    </div>
-                    }
-                    {item.price &&
-                    <div className="product-carousel-price">
-                      {item.price} {item.currency}
-                    </div>
-                    }
-                  </div>
-                  {showSneakerSizes &&
-                  <>
-                    <div className={`sneaker-sizes-button-container`}>
-                      <Button
-                        className="light"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenSizes(index);
-                        }}
-                        type="button"
-                        style={{height: 32}}
-                        title={`${getSelectedSneakerSize(index) ? 'Size ' + getSelectedSneakerSize(index) : 'Sizes'}`}
-                      />
-                      <div
-                        ref={dropdownRefs.current[index]}
-                        className={`sneaker-sizes-dropdown ${openSizes === index ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
-                      >
-                        {item && renderSneakerSizes(item, index)}
-                      </div>
-                    </div>
-                    <div className={` action-button-container`}>
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToCart(item, selectedSneakerSize[index]);
-                        }}
-                        type="button"
-                        style={{height: 32}}
-                        title="Add to Cart"
-                      />
-                    </div>
-                  </>
                   }
                 </div>
-              </div> : <div/>
-          ))}
-        </Carousel>
-      }
+                {showSneakerSizes &&
+                <>
+                  <div className={`sneaker-sizes-button-container`}>
+                    <Button
+                      className="light"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOpenSizes(index);
+                      }}
+                      type="button"
+                      style={{height: 32}}
+                      title={`${getSelectedSneakerSize(index) ? 'Size ' + getSelectedSneakerSize(index) : 'Sizes'}`}
+                    />
+                    <div
+                      ref={dropdownRefs.current[index]}
+                      className={`sneaker-sizes-dropdown ${openSizes === index ? 'open-sizes-dropdown' : 'close-sizes-dropdown'}`}
+                    >
+                      {item && renderSneakerSizes(item, index)}
+                    </div>
+                  </div>
+                  <div className={` action-button-container`}>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(item, selectedSneakerSize[index]);
+                      }}
+                      type="button"
+                      style={{height: 32}}
+                      title="Add to Cart"
+                    />
+                  </div>
+                </>
+                }
+              </div>
+            </div> : <div/>
+        ))}
+      </Carousel>
       {!items.length &&
         <div className="carousel-empty">
           {emptyMessage}

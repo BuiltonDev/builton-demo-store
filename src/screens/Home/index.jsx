@@ -175,7 +175,7 @@ const Main = () => {
             items={popularProducts}
             activeItems={4}
             showSneakerSizes
-            onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item.id}`)}
+            onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item._id.$oid}`)}
           />
         </div>
         <div className="home-footer-container">

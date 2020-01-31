@@ -170,6 +170,7 @@ Carousel.defaultProps = {
   emptyMessage: '',
   selectOnScroll: false,
   showSneakerSizes: false,
+  loaded: false,
 };
 
 Carousel.propTypes = {

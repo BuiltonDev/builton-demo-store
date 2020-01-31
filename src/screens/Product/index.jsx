@@ -71,7 +71,6 @@ const Product = React.memo(() => {
 
       if (recommendations.result[0].predictions && recommendations.result[0].predictions.length > 0) {
         const generatedItems = exportMLItems(recommendations.result[0].predictions);
-        console.log(generatedItems);
         setSimilarProducts(generatedItems.length > 0 ? generatedItems : undefined);
       } else {
         setSimilarProducts(undefined);

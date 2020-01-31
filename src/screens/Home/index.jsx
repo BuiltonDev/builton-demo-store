@@ -48,7 +48,6 @@ const Main = () => {
           recommendations.result[0].predictions.length > 0
         ) {
           const generatedItems = exportMLItems(recommendations.result[0].predictions);
-          console.log(generatedItems);
           setPopularProducts(generatedItems.length > 0 ? generatedItems : undefined);
         } else {
           setPopularProducts(undefined);
@@ -79,9 +78,6 @@ const Main = () => {
     getProducts();
     fetchRecommendations();
   }, []);
-
-  console.log(popularProducts);
-
 
   useEffect(() => {
     if (products) {

@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.3bb6319c.chunk.css",
-    "main.js": "/static/js/main.ddc0ff05.chunk.js",
-    "main.js.map": "/static/js/main.ddc0ff05.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.9efcf531.js",
-    "runtime-main.js.map": "/static/js/runtime-main.9efcf531.js.map",
+    "main.css": "/static/css/main.d9a4bafd.chunk.css",
+    "main.js": "/static/js/main.f1f76e46.chunk.js",
+    "main.js.map": "/static/js/main.f1f76e46.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2aedbb4d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2aedbb4d.js.map",
     "static/css/2.5dbdccff.chunk.css": "/static/css/2.5dbdccff.chunk.css",
-    "static/js/2.35edeb5f.chunk.js": "/static/js/2.35edeb5f.chunk.js",
-    "static/js/2.35edeb5f.chunk.js.map": "/static/js/2.35edeb5f.chunk.js.map",
+    "static/js/2.b6ad568d.chunk.js": "/static/js/2.b6ad568d.chunk.js",
+    "static/js/2.b6ad568d.chunk.js.map": "/static/js/2.b6ad568d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.30f49e438c3f433aac50268a8597adfc.js": "/precache-manifest.30f49e438c3f433aac50268a8597adfc.js",
+    "precache-manifest.223a86881be8c322eb33e5fbb965c45d.js": "/precache-manifest.223a86881be8c322eb33e5fbb965c45d.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.5dbdccff.chunk.css.map": "/static/css/2.5dbdccff.chunk.css.map",
-    "static/css/main.3bb6319c.chunk.css.map": "/static/css/main.3bb6319c.chunk.css.map",
-    "static/js/2.35edeb5f.chunk.js.LICENSE": "/static/js/2.35edeb5f.chunk.js.LICENSE",
+    "static/css/main.d9a4bafd.chunk.css.map": "/static/css/main.d9a4bafd.chunk.css.map",
+    "static/js/2.b6ad568d.chunk.js.LICENSE.txt": "/static/js/2.b6ad568d.chunk.js.LICENSE.txt",
     "static/media/adidas-logo.png": "/static/media/adidas-logo.b6e2ef89.png",
     "static/media/nike-logo.png": "/static/media/nike-logo.aadac220.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.9efcf531.js",
+    "static/js/runtime-main.2aedbb4d.js",
     "static/css/2.5dbdccff.chunk.css",
-    "static/js/2.35edeb5f.chunk.js",
-    "static/css/main.3bb6319c.chunk.css",
-    "static/js/main.ddc0ff05.chunk.js"
+    "static/js/2.b6ad568d.chunk.js",
+    "static/css/main.d9a4bafd.chunk.css",
+    "static/js/main.f1f76e46.chunk.js"
   ]
 }

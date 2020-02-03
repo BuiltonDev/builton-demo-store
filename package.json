@@ -15,7 +15,7 @@
     "gh-pages": "^2.0.1",
     "install": "^0.12.2",
     "lodash.get": "^4.4.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-cursor-position": "^3.0.3",

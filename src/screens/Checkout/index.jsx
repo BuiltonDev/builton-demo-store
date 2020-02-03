@@ -8,25 +8,27 @@ import builton from "../../utils/builton";
 import notify from "../../utils/toast";
 import Header from "../../components/Header";
 import CheckoutNavigation from "../../components/CheckoutNavigation";
-import Bag from "./Bag";
+import Cart from "./Cart";
 import Authentication from "./Authentication";
 import PaymentMethod from "./PaymentMethod";
 import DeliveryAddress from "./DeliveryAddress";
 import Overview from "./Overview";
 import Disclaimer from "./Disclaimer";
 import BLogo from "../../assets/icons/b_logo";
-import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import {getProductName} from "../../utils/productModifiers";
+import MLCarousel from "../../components/MLCarousel";
+import {getComplementaryItems} from "../../utils/carouselItems";
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [bag] = useGlobal("bag");
+  const [cart] = useGlobal("cart");
   const [order] = useGlobal("order");
   const updateOrder = useDispatch("updateOrder");
   const clearCheckout = useDispatch("clearCheckout");
-  const clearBag = useDispatch("clearBag");
+  const clearCart = useDispatch("clearCart");
   const { history } = useReactRouter();
   const [recommendedProducts, setRecommendedProducts] = useState([]);
 
@@ -36,14 +38,14 @@ const Checkout = () => {
         const recommendations = await builton.aiModels.getRecommendations(
         "5d55180941f4e7000dea3ca4",
         {
-            data: bag.map(item => item.product._id.$oid),
+            data: cart.map(item => item.product._id.$oid),
             options: {
               size: 4
             }
           },
           {
             urlParams: {
-              expand: 'product, result.product.image'
+              expand: 'result.predictions.output._sub_products,result.predictions.output.image'
             }
           }
         );
@@ -52,9 +54,7 @@ const Checkout = () => {
           recommendations.result &&
           recommendations.result.length > 0
         ) {
-          const complementaryItems = recommendations.result.map((recommendedProduct) => {
-            return recommendedProduct.product[0];
-          });
+          const complementaryItems = getComplementaryItems(recommendations.result);
 
           setRecommendedProducts(complementaryItems.length > 0 ? complementaryItems : undefined);
         } else {
@@ -66,19 +66,19 @@ const Checkout = () => {
       }
     };
 
-    if (!recommendedProducts.length && bag && bag.length > 0) {
+    if (!recommendedProducts.length && cart && cart.length > 0) {
       getRecommendations();
     }
-  }, []);
+  }, [cart]);
 
   useEffect(() => {
-    if (step === 1 && bag && bag.length > 0) {
+    if (step === 1 && cart && cart.length > 0) {
       order.items = [];
-      for (let i = 0; i < bag.length; i += 1) {
+      for (let i = 0; i < cart.length; i += 1) {
         order.items.push({
-          product: bag[i].product._id.$oid,
+          product: cart[i].product._id.$oid,
           quantity: 1,
-          sub_products: [bag[i].size._id.$oid]
+          sub_products: [cart[i].size._id.$oid]
         });
       }
       updateOrder(order);
@@ -101,12 +101,7 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      const createdOrder = await builton.orders.create({
-        ...order
-      });
-
-      // pay for the order
-      await builton.payments.pay(createdOrder.payments[0].$oid);
+      await builton.cart.checkout(order.payment_method, order.delivery_address);
 
       history.push("/");
     } catch (err) {
@@ -117,9 +112,9 @@ const Checkout = () => {
 
     setLoading(false);
 
-    // Clear the checkout and the bag after the order has been create
+    // Clear the checkout and the cart after the order has been create
     await clearCheckout();
-    await clearBag();
+    await clearCart();
   };
 
   const checkShouldNavigate = stepNumb => {
@@ -142,27 +137,27 @@ const Checkout = () => {
         <div className="checkout-container">
           <div
             className={`checkout-items-container checkout-no-items-container ${
-              !bag || bag.length === 0 ? "show-container" : "hide-container"
+              !cart || cart.length === 0 ? "show-container" : "hide-container"
             }`}
           >
-            {(!bag || bag.length === 0) && (
+            {(!cart || cart.length === 0) && (
               <div className="checkout-no-items">
                 <BLogo width={160} height={80} />
-                No items in the bag
+                No items in the cart
               </div>
             )}
           </div>
-          {bag && bag.length > 0 && (
+          {cart && cart.length > 0 && (
             <>
               <div style={{ overflow: 'hidden' }}>
                 <div className="checkout-inner-container">
-                  {bag && bag.length > 0 && <></>}
+                  {cart && cart.length > 0 && <></>}
                   <div
                     className={`checkout-items-container ${
                       step === 0 ? "show-container" : "hide-container"
                     }`}
                   >
-                    {step === 0 && <Bag />}
+                    {step === 0 && <Cart />}
                   </div>
                   <div
                     className={`checkout-items-container ${
@@ -209,11 +204,11 @@ const Checkout = () => {
                   <div className="checkout-carousel-container">
                     <SectionHeader title="Complementary items" type="sub" style={{ position: 'relative' }} />
                     <div className="checkout-carousel-content">
-                      <Carousel
+                      <MLCarousel
                         items={recommendedProducts}
                         activeItems={2}
-                        onActiveItemClick={(category, productId) =>
-                          history.push(`/product_list/${category}/${productId}`)
+                        onActiveItemClick={(item) =>
+                          history.push(`/product_list/${getProductName(item.name)}/${item._id.$oid}`)
                         }
                       />
                     </div>

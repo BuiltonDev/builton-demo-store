@@ -4,15 +4,16 @@ import Header from "../../components/Header";
 import ImageCategory from "../../components/ImageCategory";
 import { withRouter } from "react-router-dom";
 import notify from "../../utils/toast";
-import config from "../../config";
 import { useGlobal } from "reactn";
 import "./index.scss";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import useReactRouter from "use-react-router";
-import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
 import Footer from "../../components/Footer";
 import globalState from "../../globalStore/globalState";
+import {exportMLItems} from "../../utils/carouselItems";
+import {getProductName} from "../../utils/productModifiers";
+import MLCarousel from "../../components/MLCarousel";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -24,7 +25,6 @@ const Main = () => {
   const [user] = useGlobal("user");
 
   useEffect(() => {
-
     const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
@@ -37,20 +37,17 @@ const Main = () => {
           },
           {
             urlParams: {
-              expand: 'product, result.recommendations.product.image'
+              expand: 'result.predictions.output._sub_products,result.predictions.output.image'
             }
           }
         );
 
         if (
-          recommendations.result[0].recommendations &&
-          recommendations.result[0].recommendations.length > 0
+          recommendations.result[0].predictions &&
+          recommendations.result[0].predictions.length > 0
         ) {
-          const recommendedProducts = recommendations.result[0].recommendations.map((recommendedProduct) => {
-            return recommendedProduct.product;
-          });
-
-          setPopularProducts(recommendedProducts.length > 0 ? recommendedProducts : undefined);
+          const generatedItems = exportMLItems(recommendations.result[0].predictions);
+          setPopularProducts(generatedItems.length > 0 ? generatedItems : undefined);
         } else {
           setPopularProducts(undefined);
         }
@@ -173,12 +170,11 @@ const Main = () => {
           <div className="home-popular-products-title-container">
             <SectionHeader title="Most popular products" type="sub" />
           </div>
-          <Carousel
-            activeItems={4}
+          <MLCarousel
             items={popularProducts}
-            onActiveItemClick={(category, productId) =>
-              history.push(`/product_list/${category}/${productId}`)
-            }
+            activeItems={4}
+            showSneakerSizes
+            onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item._id.$oid}`)}
           />
         </div>
         <div className="home-footer-container">

@@ -16,6 +16,9 @@ import RemoveShopping from "../../assets/icons/remove_shopping";
 import Button from "../Button";
 import './index.scss';
 import {checkIfMobile} from "../../utils/mobile";
+import {calculateTotalAmount, getCartItems} from "../../utils/cart";
+import notify from "../../utils/toast";
+import builton from "../../utils/builton";
 
 const Menu = () => {
   const [cartOpen, setCartOpen] = useState(false);
@@ -24,8 +27,8 @@ const Menu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [user] = useGlobal("user");
-  const [bag] = useGlobal("bag");
-  const removeItemFrombag = useDispatch("removeItemFromBag"); //reducer
+  const [cart, setCart] = useGlobal("cart");
+  const removeItemFromCart = useDispatch('removeItemFromCart');
 
   const { history } = useReactRouter();
 
@@ -33,18 +36,28 @@ const Menu = () => {
     document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
   }, [menuOpen]);
 
-  const removeItem = (itemId, ev) => {
+  const removeItem = (prod, ev) => {
     ev.stopPropagation();
-    removeItemFrombag(itemId);
+    removeItemFromCart(prod);
   };
 
-  const calculateTotalAmount = () => {
-    let total = 0;
-    for (let i = 0; i < bag.length; i += 1) {
-      total += bag[i].product.final_price;
+  useEffect(() => {
+    const setCartItems = async () => {
+      try {
+        const prods = await getCartItems();
+        setCart(prods);
+      } catch(err) {
+        notify('Failed to fetch cart items', {
+          type: 'error'
+        })
+      }
+    };
+    const builtonCart = builton.cart.get();
+
+    if (builtonCart.length && !cart.length) {
+      setCartItems();
     }
-    return total;
-  };
+  }, []);
 
   const renderLogoutContainer = () => {
     return (
@@ -79,7 +92,7 @@ const Menu = () => {
         >
           <span>
             <Cart width={18} height={18} color="black" />{" "}
-            <span className="cart-count">{(bag && bag.length) || 0}</span>
+            <span className="cart-count">{(cart && cart.length) || 0}</span>
           </span>
         </button>
         <HeaderDropdown open={userMenuOpen}>
@@ -111,26 +124,26 @@ const Menu = () => {
   const renderCartContainer = () => {
     return (
       <DropdownMenu>
-        {bag && bag.length > 0 ? (
+        {cart && cart.length > 0 ? (
           <>
-            {bag.map((prod, index) => (
+            {cart.map((prod, index) => (
               <DropdownMenuItem
-                key={`bag-product-${prod.size._id.$oid}${index}`}
+                key={`cart-product-${prod.size._id.$oid}${index}`}
                 onClick={() =>
                   history.push(
                     `/product_list/${prod.category}/${prod.product._id.$oid}`
                   )
                 }
               >
-                <div className="bag-product-row">
+                <div className="cart-product-row">
                   <div>{prod.product.name}</div>
                   <div>{`Size ${getSneakersSize(prod.size)}`}</div>
                   <div>
                     {prod.product.final_price} {prod.product.currency}
                   </div>
                   <div
-                    className="remove-bag-item"
-                    onClick={ev => removeItem(prod.size._id.$oid, ev)}
+                    className="remove-cart-item"
+                    onClick={ev => removeItem(prod, ev)}
                   >
                     <RemoveShopping color="#c5c5c5" />
                   </div>
@@ -140,7 +153,7 @@ const Menu = () => {
             <div className="header-checkout-container">
               <Button
                 onClick={() => {
-                  history.push("/checkout/bag");
+                  history.push("/checkout/cart");
                 }}
                 type="button"
                 className="button round"
@@ -151,13 +164,13 @@ const Menu = () => {
                   fontSize: "0.72rem"
                 }}
               />
-              <div className="header-bag-amount">
-                {calculateTotalAmount()} {bag[0].product.currency}
+              <div className="header-cart-amount">
+                {calculateTotalAmount(cart)} {cart[0].product.currency}
               </div>
             </div>
           </>
         ) : (
-          <div className="empty-bag-container">No items in the bag.</div>
+          <div className="empty-cart-container">No items in the cart.</div>
         )}
       </DropdownMenu>
     );
@@ -175,7 +188,7 @@ const Menu = () => {
           >
           <span>
             <Cart width={18} height={18} color="black" />{" "}
-            <span className="cart-count">{(bag && bag.length) || 0}</span>
+            <span className="cart-count">{(cart && cart.length) || 0}</span>
           </span>
           </button>
           <HeaderDropdown open={cartOpen}>{renderCartContainer()}</HeaderDropdown>

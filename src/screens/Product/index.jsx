@@ -6,21 +6,24 @@ import notify from "../../utils/toast";
 
 import "./index.scss";
 import Header from "../../components/Header";
-import config from "../../config";
+import MLCarousel from '../../components/MLCarousel';
 import { getProductName, getSneakersSizes } from "../../utils/productModifiers";
 import BuiltonSplash from "../../components/BuiltonSplash";
 import Button from "../../components/Button";
 import { useDispatch } from "reactn";
-import Carousel from "../../components/Carousel";
 import SectionHeader from "../../components/SectionHeader";
+import {exportMLItems, getMediaItems} from "../../utils/carouselItems";
+import Footer from "../../components/Footer";
+import ImagesCarousel from "../../components/ImagesCarousel";
 
 const Product = React.memo(() => {
   const { history, match } = useReactRouter();
   const [product, setProduct] = useState(null);
+  const [productImage, setProductImage] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
-  const addItemToBag = useDispatch("addItemToBag"); //reducer
+  const addItemToCart = useDispatch("addItemToCart"); //reducer
 
   useEffect(() => {
     setSimilarProducts([]);
@@ -56,21 +59,19 @@ const Product = React.memo(() => {
       {
           data: match.params.productId,
           options: {
-            size: 3,
+            size: 7,
           },
         },
         {
           urlParams: {
-            expand: 'product, result.similar.reference_label.image'
+            expand: 'result.predictions.output._sub_products,result.predictions.output.image'
           }
         }
       );
 
-      if (recommendations.result[0].similar && recommendations.result[0].similar.length > 0) {
-        const simProds = recommendations.result[0].similar.map((recommendedProduct) => {
-          return recommendedProduct.reference_label;
-        });
-        setSimilarProducts(simProds.length > 0 ? simProds : undefined);
+      if (recommendations.result[0].predictions && recommendations.result[0].predictions.length > 0) {
+        const generatedItems = exportMLItems(recommendations.result[0].predictions);
+        setSimilarProducts(generatedItems.length > 0 ? generatedItems : undefined);
       } else {
         setSimilarProducts(undefined);
       }
@@ -80,23 +81,23 @@ const Product = React.memo(() => {
     }
   };
 
-  const addToBag = async () => {
+  const addToCart = async () => {
     if (!selectedSize) {
       notify("Please select your desired size.", {
         type: "warning"
       });
     } else {
       try {
-        await addItemToBag({
+        addItemToCart({
           product,
           size: selectedSize,
           category: match.params.category
         });
-        notify(`${product.name} successfully added to your bag.`, {
+        notify(`${product.name} successfully added to your cart.`, {
           type: "info"
         });
       } catch (err) {
-        notify(`Failed to add ${product.name} to your bag.`, {
+        notify(`Failed to add ${product.name} to your cart.`, {
           type: "error"
         });
       }
@@ -108,115 +109,140 @@ const Product = React.memo(() => {
       <Header />
       <div className="product-wrapper">
         <BuiltonSplash show={loading} />
-        <div className="product-image-container">
-          {product && (
-            <>
+        <div className="product-item-inner-wrapper">
+          <div className="product-image-container">
+            {product && (
+              <>
+                <div
+                  className={`product-image-inner-container ${
+                    loading ? "hide-product" : "show-product"
+                  }`}
+                >
+                  <div>
+                    <img
+                      onLoad={() => setLoading(false)}
+                      onError={() => setLoading(false)}
+                      src={productImage || product.image.public_url}
+                      alt={`${product.name}-img`}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            <div className={`media-images-container ${loading ? "hide-image" : "show-image"}`}>
+              {(product && !loading) &&
+                <ImagesCarousel
+                  items={getMediaItems(product.media)}
+                  selectOnScroll
+                  onActiveItemClick={(item) => setProductImage(item.image_url)}
+                />
+              }
+            </div>
+          </div>
+          <div className="product-description-container">
+            {product && (
               <div
-                className={`product-image-inner-container ${
+                className={`product-description  ${
                   loading ? "hide-product" : "show-product"
                 }`}
               >
-                <div>
-                  <img
-                    onLoad={() => setLoading(false)}
-                    onError={() => setLoading(false)}
-                    src={product.image.public_url}
-                    alt={`${product.name}-img`}
+                <div className="product-description-top">
+                  <div className="product-title-container">
+                    <span className="product-title">
+                      {getProductName(product.name)}
+                    </span>
+                    <span className="product-subtitle">
+                      {product.short_description}
+                    </span>
+                    {product.discount > 0 &&
+                      <span className="product-discounted-price">
+                        {product.price} {product.currency}
+                      </span>
+                    }
+                    <span className="product-price">
+                      {product.discount > 0 &&
+                        <span className="product-new-price-title">new price</span>
+                      }
+                      {product.final_price} {product.currency}
+                    </span>
+                  </div>
+                  <div className="product-description-content">
+                    {product.description}
+                  </div>
+                  <div className="product-id">
+                    Article id: <span>{product.human_id}</span>
+                  </div>
+                  <div className="product-sizes-container">
+                    {getSneakersSizes(product)
+                      .sort((a, b) =>
+                        parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
+                      )
+                      .map(prodSize => (
+                        <Button
+                          key={`prodSize-${prodSize.id}`}
+                          onClick={() =>
+                            setSelectedSize(
+                              selectedSize &&
+                                selectedSize._id.$oid === prodSize.id
+                                ? null
+                                : prodSize.product
+                            )
+                          }
+                          type="button"
+                          title={prodSize.size}
+                          className={`button sneaker-sizes-button ${
+                            selectedSize && selectedSize._id.$oid === prodSize.id
+                              ? "selected"
+                              : ""
+                          }`}
+                        />
+                      ))}
+                  </div>
+                </div>
+                <div className="add-to-cart-button-container">
+                  <Button
+                    onClick={() => addToCart()}
+                    type="button"
+                    style={{ minWidth: 200 }}
+                    className="button round"
+                    title="Add to Cart"
                   />
                 </div>
               </div>
-            </>
-          )}
-          <div className={`similar-products-container ${loading ? "hide-product" : "show-product"}`}>
+            )}
+          </div>
+        </div>
+        <div className="similar-products-wrapper">
+          <div className="similar-products-carousel-container">
             <div className={`similar-products-title-container`}>
               <SectionHeader title="You might also like" type="sub" style={{ flex: 1, marginBottom: 0 }} />
             </div>
-            <Carousel
-              items={similarProducts}
-              onActiveItemClick={(category, productId) => history.push(`/product_list/${category}/${productId}`)}
-            />
+            {product &&
+              <MLCarousel
+                items={similarProducts}
+                activeItems={4}
+                showSneakerSizes
+                onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item._id.$oid}`)}
+              />
+            }
           </div>
         </div>
-        <div className="product-description-container">
-          {product && (
-            <div
-              className={`product-description  ${
-                loading ? "hide-product" : "show-product"
-              }`}
-            >
-              <div className="product-description-top">
-                <div className="product-title-container">
-                  <span className="product-title">
-                    {getProductName(product.name)}
-                  </span>
-                  <span className="product-subtitle">
-                    {product.short_description}
-                  </span>
-                  {product.discount > 0 &&
-                    <span className="product-discounted-price">
-                      {product.price} {product.currency}
-                    </span>
-                  }
-                  <span className="product-price">
-                    {product.discount > 0 &&
-                      <span className="product-new-price-title">new price</span>
-                    }
-                    {product.final_price} {product.currency}
-                  </span>
-                </div>
-                <div className="product-description-content">
-                  {product.description}
-                </div>
-                <div className="product-id">
-                  Article id: <span>{product.human_id}</span>
-                </div>
-                <div className="product-sizes-container">
-                  {getSneakersSizes(product)
-                    .sort((a, b) =>
-                      parseFloat(a.size) <= parseFloat(b.size) ? -1 : 0
-                    )
-                    .map(prodSize => (
-                      <Button
-                        key={`prodSize-${prodSize.id}`}
-                        onClick={() =>
-                          setSelectedSize(
-                            selectedSize &&
-                              selectedSize._id.$oid === prodSize.id
-                              ? null
-                              : prodSize.product
-                          )
-                        }
-                        type="button"
-                        style={{
-                          fontSize: 14,
-                          padding: "4px 6px",
-                          marginTop: 12,
-                          minWidth: 80,
-                          height: 24
-                        }}
-                        title={prodSize.size}
-                        className={`button ${
-                          selectedSize && selectedSize._id.$oid === prodSize.id
-                            ? "selected"
-                            : ""
-                        }`}
-                      />
-                    ))}
-                </div>
-              </div>
-              <div className="add-to-cart-button-container">
-                <Button
-                  onClick={() => addToBag()}
-                  type="button"
-                  style={{ minWidth: 200 }}
-                  className="button round"
-                  title="Add to Bag"
-                />
-              </div>
-            </div>
-          )}
-        </div>
       </div>
+      <Footer>
+        <div className="footer-inner">
+          *Note: The products and the ordering system is fictional. None of the
+          illustrated products exists and can be ordered. Please use only for
+          demo purposes and refer to{" "}
+          <a
+            href="https://builton.dev"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Builton.dev
+          </a>
+          .
+        </div>
+      </Footer>
     </div>
   );
 });

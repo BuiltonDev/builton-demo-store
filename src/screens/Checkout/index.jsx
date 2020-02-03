@@ -208,7 +208,7 @@ const Checkout = () => {
                         items={recommendedProducts}
                         activeItems={2}
                         onActiveItemClick={(item) =>
-                          history.push(`/product_list/${getProductName(item.name)}/${item.id}`)
+                          history.push(`/product_list/${getProductName(item.name)}/${item._id.$oid}`)
                         }
                       />
                     </div>

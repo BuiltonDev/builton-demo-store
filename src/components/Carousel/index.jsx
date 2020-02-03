@@ -118,7 +118,6 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
     setActiveItem(copyActiveItem);
   };
 
-
   useEffect(() => {
     const handleResize = (initialItems) => {
       if (activeItems >= 2 && window.innerWidth <= 780) {
@@ -142,7 +141,9 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
       handleResize(children);
     }
 
-    window.addEventListener("resize",  () => handleResize(children));
+    if (loaded) {
+      window.addEventListener("resize",  () => handleResize(children));
+    }
     return () => {
       window.removeEventListener("resize", () => handleResize(children));
     }

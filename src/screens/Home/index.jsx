@@ -25,7 +25,6 @@ const Main = () => {
   const [user] = useGlobal("user");
 
   useEffect(() => {
-
     const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(

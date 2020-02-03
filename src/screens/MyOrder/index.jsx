@@ -14,6 +14,7 @@ import ListItem from "../../components/ListItem";
 import Table from "../../components/Table";
 import TableHeader from "../../components/TableHeader";
 import TableRow from "../../components/TableRow";
+import {getSneakersSize} from "../../utils/productModifiers";
 
 const MyOrder = () => {
   const [order, setOrder] = useState(undefined);
@@ -27,7 +28,7 @@ const MyOrder = () => {
         try {
           const order = await builton.orders.get(match.params.orderId, {
             urlParams: {
-              expand: 'payments,items.product.image,payments.payment_method'
+              expand: 'payments,items.product.image,payments.payment_method,items.sub_products'
             }
           });
           setOrder(order);
@@ -42,15 +43,6 @@ const MyOrder = () => {
       fetchOrder();
     }
   }, [match.params.orderId]);
-
-  const calculateTotalAmount = () => {
-    let total = 0;
-    if (order)
-    for (let i = 0; i < order.items.length; i += 1) {
-      total += order.items[i].product.final_price;
-    }
-    return total;
-  };
 
   return (
     <div className="main-container">
@@ -118,30 +110,37 @@ const MyOrder = () => {
                     <div className="my-order-product-name">
                       Name
                     </div>
+                    <div className="my-order-product-name">
+                      Size
+                    </div>
                     <div className="my-order-product-price">
                       Price
                     </div>
                   </TableHeader>
-                  {order.items.map((product, index) =>
-                    <TableRow key={`product-item-${product.product._id.$oid}-${index}`}>
-                      <div className="my-order-product-img row">
-                        <img
-                          src={product.product.image.public_url}
-                          alt={`${product.name}-img`}
-                        />
-                      </div>
-                      <div className="my-order-product-name">
-                        {product.product.name}
-                      </div>
-                      <div className="my-order-product-price row">
-                        {product.product.final_price} {product.product.currency}
-                      </div>
-                    </TableRow>
-                  )}
+                  {order.items.map((item, iIndex) =>
+                    item.sub_products.map((product, index) =>
+                      <TableRow key={`product-item-${product._id.$oid}-${index}`}>
+                        <div className="my-order-product-img row">
+                          <img
+                            src={item.product.image.public_url}
+                            alt={`${item.name}-img`}
+                          />
+                        </div>
+                        <div className="my-order-product-name">
+                          {item.product.name}
+                        </div>
+                        <div className="my-order-product-name">
+                          Size {getSneakersSize(product)}
+                        </div>
+                        <div className="my-order-product-price row">
+                          {item.product.final_price} {item.product.currency}
+                        </div>
+                      </TableRow>
+                  ))}
                   <TableRow className="product-total-row">
                     <div className="product-total-title">Total</div>
                     <div className="product-total">
-                      {calculateTotalAmount()} {order.currency}
+                      {order.total_amount} {order.currency}
                     </div>
                   </TableRow>
                 </Table>

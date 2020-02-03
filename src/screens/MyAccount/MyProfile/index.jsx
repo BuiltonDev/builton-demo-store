@@ -45,7 +45,7 @@ const MyProfile = () => {
     return errors;
   };
 
-  const renderUserProfleForm = () => {
+  const renderUserProfileForm = () => {
     return (
       <div className="form-content-container">
         <Form
@@ -208,7 +208,7 @@ const MyProfile = () => {
         </div>
       </div>
       <SectionHeader title="General settings" type="sub" />
-      {renderUserProfleForm()}
+      {renderUserProfileForm()}
     </>
   );
 };

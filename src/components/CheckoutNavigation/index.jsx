@@ -140,7 +140,7 @@ const CheckoutNavigation = ({
           >
             <div />
           </div>
-          <div className="checkout-step-title">Your bag</div>
+          <div className="checkout-step-title">Your cart</div>
         </div>
         <div className={`checkout-step ${step >= 1 ? "active-step" : ""}`}>
           <div className="checkout-step-progress">

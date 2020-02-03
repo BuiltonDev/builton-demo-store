@@ -18,11 +18,10 @@ import Button from "../../components/Button";
 
 const ProductList = () => {
   const { match, history } = useReactRouter();
-  const [products, setProducts] = useState(null);
   const [loadingMore, setLoadingMore] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [rawProducts, setRawProducts] = useState(null);
+  const [products, setProducts] = useState(null);
   const [brandLogo, setBrandLogo] = useState(null);
   const [tagsString, setTagsString] = useState(`${match.params.category}+product`);
 
@@ -52,11 +51,11 @@ const ProductList = () => {
   }, [tagsString]);
 
   useEffect(() => {
-    if (products) {
-      if (products.length > 0) {
+    if (products && products.current) {
+      if (products.current.length > 0) {
         let loaded = true;
-        for (let i = 0; i < products.length; i += 1) {
-          if (!products[i].loaded) {
+        for (let i = 0; i < products.current.length; i += 1) {
+          if (!products.current[i].loaded) {
             loaded = false;
             break;
           }
@@ -118,8 +117,10 @@ const ProductList = () => {
         });
       }
 
-      setProducts(filterCategory(apiProducts.current));
-      setRawProducts(apiProducts);
+      setProducts({
+        ...apiProducts,
+        current: filterCategory(apiProducts.current)
+      });
     } catch (err) {
       notify("Failed to fetch products", {
         type: "error"
@@ -138,8 +139,12 @@ const ProductList = () => {
   const getNextProductsPage = async () => {
     setLoadingMore(true);
     try {
-      const nextPage = await rawProducts.next();
-      setProducts([...products, ...filterCategory(nextPage)]);
+      // Paginate to next page
+      const nextPage = await products.next();
+      setProducts({
+        ...nextPage,
+        current: [...products.current, ...filterCategory(nextPage)]
+      });
     } catch(err) {
       notify("Failed to fetch products", {
         type: "error"
@@ -162,8 +167,8 @@ const ProductList = () => {
   };
 
   const shouldShowLoadMore = () => {
-    if (products && rawProducts && products.length > 0) {
-      return rawProducts.paginationTotal > products.length;
+    if (products && products.current.length > 0) {
+      return products.paginationTotal > products.current.length;
     }
     return false;
   };
@@ -190,8 +195,11 @@ const ProductList = () => {
           }
           <img
             onLoad={() => {
-              products[index].loaded = true;
-              setProducts([...products]);
+              products.current[index].loaded = true;
+              setProducts({
+                ...products,
+                current: [...products.current]
+              });
             }}
             alt={`${product.name}-product`}
             src={product.image.public_url}
@@ -199,7 +207,7 @@ const ProductList = () => {
           <div className="product-description">
             <div className="product-description-inner-container">
               <div>{getProductName(product.name)}</div>
-              <div className={product.discount > 0 && "discounted-product"}>{product.short_description}</div>
+              <div className={product.discount > 0 ? "discounted-product" : ""}>{product.short_description}</div>
             </div>
             <div className="product-price-container">
               {product.discount > 0 &&
@@ -227,9 +235,9 @@ const ProductList = () => {
         />
         <TransitionGroup className="product-list-grid">
           {products &&
-            products.map((product, index) => renderProductItem(product, index))}
+            products.current.map((product, index) => renderProductItem(product, index))}
         </TransitionGroup>
-        <NoResults show={products && products.length === 0} />
+        <NoResults show={products && products.current.length === 0} />
       </div>
       <div className={`product-list-load-more-container ${shouldShowLoadMore() ? 'show-load-more' : 'hide-load-more'}`}>
         <Button type="button" onClick={() => getNextProductsPage()} title="Load More" loading={loadingMore} />

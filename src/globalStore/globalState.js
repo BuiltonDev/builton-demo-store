@@ -5,12 +5,13 @@ import {
   setFieldCurry,
   clearAllFields
 } from './localStorage';
+import builton from "../utils/builton";
 
 let INITIALIZED = false;
 
 const DEFAULT_CHECKOUT = {
   0: {
-    title: 'bag',
+    title: 'cart',
     complete: false,
   },
   1: {
@@ -45,10 +46,6 @@ const clearBuiltonSession = clearFieldCurry('builtonSession');
 const getBuiltonSession = getFieldCurry('builtonSession');
 const setBuiltonSession = setFieldCurry('builtonSession');
 
-const clearBag = clearFieldCurry('bag');
-const getBag = getFieldCurry('bag');
-const setBag = setFieldCurry('bag');
-
 const clearCheckout = clearFieldCurry('checkout');
 const getCheckout = getFieldCurry('checkout');
 const setCheckout = setFieldCurry('checkout');
@@ -66,17 +63,10 @@ addReducer('updateUser', (global, dispatch, user, setLocalStorage = true) => {
   };
 });
 
-addReducer('addItemToBag', (global, dispatch, item) => {
-  setBag([...(getBag() || []), item]);
+addReducer('clearCart', (global, dispatch) => {
+  builton.cart.empty();
   return {
-    bag: [...(getBag() || [])]
-  }
-});
-
-addReducer('clearBag', (global, dispatch) => {
-  setBag(null);
-  return {
-    bag: null
+    cart: []
   }
 });
 
@@ -85,6 +75,68 @@ addReducer('updateCheckoutStep', (global, dispatch, checkout) => {
   return {
     checkout
   }
+});
+
+addReducer('addItemToCart', (global, dispatch, item) => {
+  const addItemToBuiltonCart = () => {
+    builton.cart.addProduct({
+      productId: item.product._id.$oid,
+      quantity: 1,
+      subProducts: [item.size._id.$oid]
+    });
+  };
+
+  const builtonCart = builton.cart.get();
+  if (!!builtonCart.length) {
+    for (let i = 0; i < builtonCart.length; i += 1) {
+      if (builtonCart[i].productId === item.product._id.$oid) {
+        // In case we have the product, we need to add a subproduct to that product
+        builton.cart.addSubproduct(item.size._id.$oid, item.product._id.$oid, true);
+        break;
+      } else if (i === builtonCart.length - 1) {
+        // in case we haven't found a product with the same id, we add one
+        builton.cart.addProduct({ productId: item.product._id.$oid, quantity: 1, subProducts: [ item.size._id.$oid ]});
+        break;
+      }
+    }
+  } else {
+    // Add product to the cart
+    addItemToBuiltonCart();
+  }
+
+
+  return {
+    cart: [
+      ...global.cart,
+      item
+    ]
+  }
+});
+
+addReducer('removeItemFromCart', (global, dispatch, item) => {
+  const builtonCart = builton.cart.get();
+  if (!!builtonCart.length) {
+    for (let i = 0; i < builtonCart.length; i += 1) {
+      if (builtonCart[i].productId === item.product._id.$oid) {
+        if (builtonCart[i].subProducts.length === 1) {
+          // If its the last sub product in the product, we remove the product
+          builton.cart.removeProduct({ productId: item.product._id.$oid, quantity: 1})
+        } else {
+          // otherwise we remove the sub product
+          builton.cart.removeSubproduct(item.size._id.$oid, item.product._id.$oid, true);
+        }
+      }
+    }
+  }
+  if (!!global.cart.length) {
+    for (let i = 0; i < global.cart.length; i += 1) {
+      if (global.cart[i].size._id.$oid === item.size._id.$oid) {
+        global.cart.splice(i, 1);
+        break;
+      }
+    }
+  }
+  return global;
 });
 
 addReducer('updateOrder', (global, dispatch, order) => {
@@ -109,19 +161,6 @@ addReducer('updateBuiltonSession', (global, dispatch, builtonSession , setLocalS
   };
 });
 
-addReducer('removeItemFromBag', (global, dispatch, itemId) => {
-  const bag = getBag();
-  for (let i = 0; i < bag.length; i += 1) {
-    if (bag[i].size._id.$oid === itemId) {
-      bag.splice(i, 1);
-      break;
-    }
-  }
-  setBag(bag);
-  return {
-    bag
-  }
-});
 
 addReducer('clearCheckout', async (global, dispatch) => {
   await dispatch.updateOrder(DEFAULT_ORDER);
@@ -147,9 +186,9 @@ export default {
     let data = {
         user: null,
         builtonSession: null,
-        bag: null,
         order: DEFAULT_ORDER,
         paymentMethod: null,
+        cart: [],
         checkout: DEFAULT_CHECKOUT
       };
 
@@ -157,15 +196,14 @@ export default {
       data = {
         user: getUser(),
         builtonSession: getBuiltonSession(),
-        bag: getBag(),
         checkout: getCheckout() || DEFAULT_CHECKOUT,
         order: getOrder() || DEFAULT_ORDER,
+        cart: [],
         paymentMethod: null,
       };
     } catch (err) {
       clearUser();
       clearBuiltonSession();
-      clearBag();
     }
 
     // Setting values in global store

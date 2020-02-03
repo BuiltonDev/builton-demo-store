@@ -3,7 +3,7 @@
 .main-menu-container {
   display: flex;
   align-self: stretch;
-  & .empty-bag-container {
+  & .empty-cart-container {
     padding: 12px 24px;
     font-size: 0.82rem;
     color: $SECONDARY_TEXT;
@@ -18,7 +18,7 @@
     flex-direction: row;
   }
 
-  & .bag-product-row {
+  & .cart-product-row {
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -39,7 +39,7 @@
       padding: 0 12px 0 0;
     }
 
-    & .remove-bag-item {
+    & .remove-cart-item {
       flex: 0;
       overflow-x: visible;
       min-width: auto;
@@ -55,7 +55,7 @@
     justify-content: space-between;
     align-items: center;
 
-    & .header-bag-amount {
+    & .header-cart-amount {
       margin-right: 32px;
       color: $ALTERNATIVE_TEXT;
       font-size: 1.08rem;
@@ -290,11 +290,11 @@
       max-width: 320px;
     }
     & .header-checkout-container {
-      & .header-bag-amount {
+      & .header-cart-amount {
         margin: 0;
       }
     }
-    & .bag-product-row {
+    & .cart-product-row {
       & > div {
         padding: 0 8px;
       }

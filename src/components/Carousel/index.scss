@@ -53,17 +53,6 @@
     margin: 24px 0;
     background-color: $PRIMARY_BACKGROUND;
 
-    &:not(.next-active-carousel-item):not(.previous-active-carousel-item):hover {
-      -webkit-box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
-      box-shadow: 2px 0px 19px -7px rgba(0, 0, 0, 0.75);
-      -webkit-transform: translate3d(0, -12px, 1);
-      -moz-transform: translate3d(0, -12px, 0);
-      -o-transform: translate3d(0, -12px, 0);
-      -ms-transform: translate3d(0, -12px, 0);
-      transform: translate3d(0, -12px, 0);
-    }
-
     .carousel-left-arrow {
       position: absolute;
       left: 12px;
@@ -85,16 +74,6 @@
       background-color: rgba(255, 255, 255, 0.64);
       opacity: 0;
       transition: opacity 450ms ease-in;
-    }
-    &.next-active-carousel-item, &.previous-active-carousel-item {
-      & .carousel-item-overlay {
-        opacity: 1;
-        transition: opacity 450ms ease-in;
-        &:hover {
-          opacity: 0;
-          transition: opacity 450ms ease-in;
-        }
-      }
     }
     & .carousel-image-container {
       position: relative;
@@ -123,44 +102,167 @@
         font-size: calc(0.6vmax + 0.6vmin);
       }
     }
-    & .similar-product-name-container {
+    & .item-description-carousel-container {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-self: stretch;
       font-size: 0.88rem;
       color: $PRIMARY_TEXT;
-      padding: 12px 12px;
+      padding: 0px 24px;
       letter-spacing: 1px;
-      justify-content: center;
-      &.show-title {
-        animation: animate-show-title 1s forwards;
-        opacity: 0;
-        animation-delay: 500ms;
+      justify-content: space-between;
+
+      & .item-descr-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
-      &.hide-title {
-        opacity: 0;
+
+      & .item-carousel-name {
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      & .action-button-container, & .sneaker-sizes-button-container {
+        display: flex;
+        flex-direction: column;
+        margin: 24px 0;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+
+        & .sneaker-sizes-dropdown {
+          position: absolute;
+          background: $PRIMARY_BACKGROUND;
+          left: 50%;
+          bottom: -100px;
+          transform: translateX(-50%) scale(0.48);
+          width: 120px;
+          overflow-y: scroll;
+          z-index: 10;
+          height: 240px;
+          padding: 12px 0;
+          & .sneaker-size-row {
+            padding: 12px;
+            opacity: 0;
+            position: relative;
+            &:hover {
+              background-color: $SECONDARY_BACKGROUND;
+            }
+            &.selected {
+              background-color: $SECONDARY_BACKGROUND;
+              &:before {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                content: '';
+                width: 2px;
+                height: 60%;
+                background-color: $POSITIVE_STATUS;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+              }
+            }
+          }
+
+          &.open-sizes-dropdown {
+            animation: animate-show-dropdown 300ms forwards ease-in-out;
+            z-index: 200;
+            opacity: 0;
+            & .sneaker-size-row {
+              animation: animate-show-row 250ms forwards ease-in-out;
+              animation-delay: 150ms;
+            }
+          }
+          &.close-sizes-dropdown{
+            opacity: 0;
+            display: none;
+            & .sneaker-size-row {
+              padding: 12px;
+              opacity: 0;
+              &:hover {
+                background-color: $SECONDARY_BACKGROUND;
+              }
+            }
+          }
+        }
+
+        &.show-title {
+          animation: animate-show-title 1s forwards;
+          opacity: 0;
+          animation-delay: 500ms;
+        }
+        &.hide-title {
+          opacity: 0;
+        }
+      }
+
+      & .action-button-container {
+        z-index: 0;
+      }
+
+      & .sneaker-sizes-button-container {
+        margin: 36px 0 0;
+      }
+
+      & .similar-product-name-container {
+        display: flex;
+        flex-direction: row;
+        align-self: stretch;
+        font-size: 0.88rem;
+        color: $PRIMARY_TEXT;
+        padding: 12px 12px;
+        letter-spacing: 1px;
+        justify-content: center;
+        &.show-title {
+          animation: animate-show-title 1s forwards;
+          opacity: 0;
+          animation-delay: 500ms;
+        }
+        &.hide-title {
+          opacity: 0;
+        }
+      }
+
+      & .similar-product-title-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-self: stretch;
+        position: absolute;
+        top: 12%;
+        left: 0px;
+        letter-spacing: 1px;
+        font-size: 0.82rem;
+        color: $SECONDARY_TEXT;
+        padding: 12px 12px;
+        &.show-title {
+          animation: animate-show-title 1s forwards;
+          opacity: 0;
+          animation-delay: 500ms;
+        }
+        &.hide-title {
+          opacity: 0;
+        }
       }
     }
 
-    & .similar-product-title-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-self: stretch;
-      position: absolute;
-      top: 20%;
-      left: 0px;
-      letter-spacing: 1px;
-      font-size: 0.82rem;
-      color: $SECONDARY_TEXT;
-      padding: 12px 12px;
-      &.show-title {
-        animation: animate-show-title 1s forwards;
-        opacity: 0;
-        animation-delay: 500ms;
+    &.next-active-carousel-item, &.previous-active-carousel-item {
+      & .item-description-carousel-container {
+        display: none;
       }
-      &.hide-title {
-        opacity: 0;
+      & .carousel-item-overlay {
+        opacity: 1;
+        transition: opacity 450ms ease-in;
+        &:hover {
+          opacity: 0;
+          transition: opacity 450ms ease-in;
+        }
       }
     }
   }
@@ -216,10 +318,54 @@
   }
   100% {
     opacity: 1;
+    display: block;
   }
 }
 
 @keyframes animate-show-title {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    display: block
+  }
+}
+
+@-webkit-keyframes animate-show-dropdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    bottom: -55px;
+    display: block;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes animate-show-dropdown {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    bottom: -55px;
+    transform: translateX(-50%) scale(1);
+    display: block;
+  }
+}
+
+@-webkit-keyframes animate-show-row {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animate-show-row {
   0% {
     opacity: 0;
   }

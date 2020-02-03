@@ -148,23 +148,27 @@ const Product = React.memo(() => {
               >
                 <div className="product-description-top">
                   <div className="product-title-container">
-                    <span className="product-title">
-                      {getProductName(product.name)}
-                    </span>
-                    <span className="product-subtitle">
-                      {product.short_description}
-                    </span>
-                    {product.discount > 0 &&
-                      <span className="product-discounted-price">
-                        {product.price} {product.currency}
+                    <div className="product-title-wrapper">
+                      <span className="product-title">
+                        {getProductName(product.name)}
                       </span>
-                    }
-                    <span className="product-price">
+                      <span className="product-subtitle">
+                        {product.short_description}
+                      </span>
+                    </div>
+                    <div className="product-price-wrapper">
                       {product.discount > 0 &&
-                        <span className="product-new-price-title">new price</span>
+                        <span className="product-discounted-price">
+                          {product.price} {product.currency}
+                        </span>
                       }
-                      {product.final_price} {product.currency}
-                    </span>
+                      <span className="product-price">
+                        {product.discount > 0 &&
+                          <span className="product-new-price-title">new price</span>
+                        }
+                        {product.final_price} {product.currency}
+                      </span>
+                    </div>
                   </div>
                   <div className="product-description-content">
                     {product.description}

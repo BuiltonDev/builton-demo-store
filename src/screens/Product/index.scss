@@ -43,6 +43,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex: 1;
       }
       & .product-id {
         transform: translateX(80px);
@@ -122,34 +123,51 @@
 
         & .product-title-container {
           z-index: 4;
-          & .product-title {
-            font-size: 2.4rem;
-            letter-spacing: 1px;
-          }
-          & .product-subtitle {
-            margin-left: 24px;
-            color: $SECONDARY_TEXT;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-          }
-
-          & .product-discounted-price {
-            text-decoration: line-through;
-            font-size: 1rem;
-            margin: 0 12px 0 48px;
-          }
-
-          & .product-price {
-            font-size: 1.8rem;
-            position: relative;
-            margin: 0 12px 0 48px;
-            & .product-new-price-title {
-              position: absolute;
-              font-size: 0.66rem;
-              right: 0;
-              top: -12px;
+          display: flex;
+          flex-direction: column;
+          align-self: stretch;
+          padding: 0 128px;
+          & .product-title-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            & .product-title {
+              font-size: 2.4rem;
               letter-spacing: 1px;
-              color: $ALTERNATIVE_TEXT
+            }
+            & .product-subtitle {
+              margin-left: 24px;
+              color: $SECONDARY_TEXT;
+              font-size: 1.4rem;
+              letter-spacing: 1px;
+            }
+          }
+
+          & .product-price-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 12px;
+            & .product-discounted-price {
+              text-decoration: line-through;
+              font-size: 1rem;
+              margin: 0 12px 0 12px;
+            }
+
+            & .product-price {
+              font-size: 1.8rem;
+              position: relative;
+              margin: 0 12px 0 12px;
+              & .product-new-price-title {
+                position: absolute;
+                font-size: 0.66rem;
+                right: 0;
+                top: -12px;
+                letter-spacing: 1px;
+                color: $ALTERNATIVE_TEXT
+              }
             }
           }
         }

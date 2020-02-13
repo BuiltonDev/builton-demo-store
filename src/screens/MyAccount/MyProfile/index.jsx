@@ -159,7 +159,7 @@ const MyProfile = () => {
     setLoading(true);
     try {
       const user = builton.users.setMe();
-      const updatedUser = await user.update({ body: { image: null } });
+      const updatedUser = await user.update({ image: null });
       await updateUser(updatedUser);
     } catch(err) {
       notify('Failed to delete profile picture. Please try again.', {
@@ -175,7 +175,7 @@ const MyProfile = () => {
       <div className="profile-image-container">
         <div className="image-upload-container">
           <input type="file" name="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/gif,image/jpeg,image/png,image/jpg"/>
-          {user.image.url &&
+          {user.image && user.image.url &&
             <img
               src={`${config.endpoint}/images/${user.image.url}?api_key=${config.apiKey}`}
               alt={`profile-img-${user.first_name}`}
@@ -183,7 +183,7 @@ const MyProfile = () => {
               onError={() => setLoading(false)}
             />
           }
-          {!user.image.url &&
+          {!user.image &&
             <div className="empty-image-container">
               <Account width={48} height={48} color={'#C0C0C0'} />
             </div>
@@ -191,9 +191,9 @@ const MyProfile = () => {
           {!loading &&
             <div className="image-upload-actions">
               <button type="button" className="button-link" onClick={() => fileInputRef.current.click()}>
-                {user.image.url ? 'Change' : 'Upload'}
+                {user.image && user.image.url ? 'Change' : 'Upload'}
               </button>
-              {user.image.url &&
+              {user.image && user.image.url &&
                 <button type="button" className="button-link" onClick={() => deleteAvatar()}>
                   Delete
                 </button>

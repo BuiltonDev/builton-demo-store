@@ -30,7 +30,7 @@ const MyProfile = () => {
 
   const onSubmit = async values => {
     try {
-      const updatedUser = await builton.users.setMe().update(values);
+      const updatedUser = await builton.users.setMe().update(values, { urlParams: { expand: 'image' }});
       updateUser(updatedUser);
     } catch (err) {
       notify(`Failed to update user. Please try again.`, { type: "error" });
@@ -141,9 +141,9 @@ const MyProfile = () => {
       }
       setLoading(true);
       try {
-        const image = await builton.images.create({imageData, isPublic: true});
+        const image = await builton.images.create(imageData, {isPublic: true});
         const user = builton.users.setMe();
-        const updatedUser = await user.update({body: {avatar: image.url}});
+        const updatedUser = await user.update({image: image._id.$oid}, { urlParams: { expand: 'image' }});
         await updateUser(updatedUser);
         // This makes it possible to re-attach the same file, otherwise onChange on the input does not trigger
         ev.target.value = '';
@@ -159,7 +159,7 @@ const MyProfile = () => {
     setLoading(true);
     try {
       const user = builton.users.setMe();
-      const updatedUser = await user.update({ body: { avatar: '' } });
+      const updatedUser = await user.update({ image: null });
       await updateUser(updatedUser);
     } catch(err) {
       notify('Failed to delete profile picture. Please try again.', {
@@ -175,15 +175,15 @@ const MyProfile = () => {
       <div className="profile-image-container">
         <div className="image-upload-container">
           <input type="file" name="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/gif,image/jpeg,image/png,image/jpg"/>
-          {user.avatar &&
+          {user.image && user.image.url &&
             <img
-              src={`${config.endpoint}/images/${user.avatar}?api_key=${config.apiKey}`}
+              src={`${config.endpoint}/images/${user.image.url}?api_key=${config.apiKey}`}
               alt={`profile-img-${user.first_name}`}
               onLoad={() => setLoading(false)}
               onError={() => setLoading(false)}
             />
           }
-          {!user.avatar &&
+          {!user.image &&
             <div className="empty-image-container">
               <Account width={48} height={48} color={'#C0C0C0'} />
             </div>
@@ -191,9 +191,9 @@ const MyProfile = () => {
           {!loading &&
             <div className="image-upload-actions">
               <button type="button" className="button-link" onClick={() => fileInputRef.current.click()}>
-                {user.avatar ? 'Change' : 'Upload'}
+                {user.image && user.image.url ? 'Change' : 'Upload'}
               </button>
-              {user.avatar &&
+              {user.image && user.image.url &&
                 <button type="button" className="button-link" onClick={() => deleteAvatar()}>
                   Delete
                 </button>

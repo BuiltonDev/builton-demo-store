@@ -159,7 +159,7 @@ const MyProfile = () => {
     setLoading(true);
     try {
       const user = builton.users.setMe();
-      const updatedUser = await user.update({ body: { image: '' } });
+      const updatedUser = await user.update({ body: { image: null } });
       await updateUser(updatedUser);
     } catch(err) {
       notify('Failed to delete profile picture. Please try again.', {

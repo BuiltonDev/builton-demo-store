@@ -11,6 +11,13 @@ object-assign
 */
 
 /*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+
+/*!
  * is-extendable <https://github.com/jonschlinkert/is-extendable>
  *
  * Copyright (c) 2015-2017, Jon Schlinkert.

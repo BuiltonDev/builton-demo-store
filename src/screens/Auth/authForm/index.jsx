@@ -67,7 +67,7 @@ const AuthForm = ({ onAuth }) => {
             email: values.email
         });
       } else {
-        apiUser = await builton.users.setMe().get();
+        apiUser = await builton.users.setMe().get({urlParams: { expand: 'image' }});
       }
 
       await updateUser(apiUser);

@@ -9,7 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "@babel/polyfill": "^7.8.3",
-    "@builton/node-sdk": "^1.0.2",
-    "form-data": "^3.0.0"
+    "@builton/node-sdk": "^1.1.1"
   }
 }

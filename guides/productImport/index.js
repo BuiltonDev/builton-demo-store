@@ -1,7 +1,13 @@
 const Builton = require('@builton/node-sdk');
 const products = require('./DemoStoreProducts');
 const fs = require('fs');
-const FormData = require('form-data');
+
+const categories = [
+  "Puma",
+  "Adidas",
+  "Nike",
+  "Category"
+];
 
 const scrapItems = [
   "_id",
@@ -18,7 +24,9 @@ const scrapItems = [
   "company_take",
   "business_rules",
   "price_change_percentage",
-  "parents"
+  "parents",
+  "image_url",
+  "image"
 ];
 
 const productIds = [
@@ -66,6 +74,10 @@ const getSubProducts = () => {
   return subProds;
 };
 
+const getProductName = name => {
+  return name.substring(name.lastIndexOf('/') + 1);
+};
+
 const importProducts = async () => {
   try {
     const args = process.argv;
@@ -78,45 +90,32 @@ const importProducts = async () => {
       bearerToken: keys.serviceAccountKey
     });
 
-    // const stream = fs.createReadStream(`${__dirname}/images/Adidas/Adidas - A.R. Trainer W.jpg`, { encoding: 'base64'});
-    //
-    // console.log(stream);
-    //
-    // try {
-    //   const image = await builton.images.create(stream);
-    //   console.log(image);
-    // } catch(err) {
-    //   console.log(err);
-    // }
-    // return;
+    console.log(getSubProducts());``
 
-    fs.readFile(`${__dirname}/images/Adidas/Adidas - A.R. Trainer W.jpg`, async (err, data) => {
-      try {
-        // console.log(formData);
-        const formData = new FormData();
-        formData.append('image', data, {
-          filename: 'Adidas - A.R. Trainer W.jpg'
-        });
-        const image = await builton.images.create('test');
-        console.log(image);
-      } catch(err) {
-        console.log(err);
+    for (let i = 0; i < products.length; i += 1) {
+      const prod = await builton.products.create(products[i]);
+      // const category = categories.filter(category => products[i].tags.includes(category.toLowerCase()));
+      // if (category.length > 0) {
+      //   console.log(category[0]);
+        // fs.readFile(`${__dirname}/images/${category}/Adidas - A.R. Trainer W.jpg`, async (err, data) => {
+        //   try {
+        //     const image = await builton.images.create({ buffer: data, filename: 'test.jpg' });
+        //     console.log(image);
+        //   } catch(err) {
+        //     console.log(err);
+        //   }
+        // })
       }
-    })
 
-
-
-    // console.log(getSubProducts())
-
-    // for (let i = 0; i < products.length; i += 1) {
-    //   const body = scrapData(products[i]);
-    //   const prod = await builton.products.create(body);
-    //   if (!prod.main_product) {
-    //     productIds.push(prod._id.$oid);
-    //   } else {
-    //     const subProducts = getSubProducts();
-    //   }
+      // const body = scrapData(products[i]);
+      // const prod = await builton.products.create(body);
+      // if (!prod.main_product) {
+      //   productIds.push(prod._id.$oid);
+      // } else {
+      //   const subProducts = getSubProducts();
+      // }
     // }
+
 
   } catch(err) {
     console.error(err)

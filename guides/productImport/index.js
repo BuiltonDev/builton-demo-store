@@ -1,5 +1,6 @@
 const Builton = require("@builton/node-sdk");
 const products = require("./DemoStoreProducts");
+const cliProgress = require('cli-progress');
 
 const objectItems = ["image"];
 
@@ -100,6 +101,9 @@ const getSubProducts = () => {
   return subProds;
 };
 
+// create a new progress bar instance and use shades_classic theme
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+
 const importProducts = async () => {
   try {
     const args = process.argv;
@@ -112,6 +116,8 @@ const importProducts = async () => {
       bearerToken: keys.serviceAccountKey
     });
 
+    bar1.start(products.length, 0);
+
     for (let i = 0; i < products.length; i += 1) {
       const body = scrapData(products[i]);
       if (!products[i].main_product && !products[i].tags.includes('category')) {
@@ -119,12 +125,13 @@ const importProducts = async () => {
         productIds.push(prod._id.$oid);
       } else {
         body["_sub_products"] = getSubProducts();
-        console.log(body);
         await builton.products.create(body);
       }
+      bar1.increment(1);
     }
+    bar1.stop();
   } catch (err) {
-    console.error(err);
+    bar1.stop();
   }
 };
 

@@ -1,13 +1,7 @@
-const Builton = require('@builton/node-sdk');
-const products = require('./DemoStoreProducts');
-const fs = require('fs');
+const Builton = require("@builton/node-sdk");
+const products = require("./DemoStoreProducts");
 
-const categories = [
-  "Puma",
-  "Adidas",
-  "Nike",
-  "Category"
-];
+const objectItems = ["image"];
 
 const scrapItems = [
   "_id",
@@ -26,32 +20,64 @@ const scrapItems = [
   "price_change_percentage",
   "parents",
   "image_url",
-  "image"
+  "image._id",
+  "image.created",
+  "image.deleted",
+  "image.modified",
+  "image.company",
+  "image.metadata",
+  "image.stored_s3",
+  "image.url",
+  "image.original_file_type",
+  "image.public",
+  "media.human_id"
 ];
 
-const productIds = [
-  "5d2ed67ef1fc02000a6223e4",
-  "5d28560ff93362000cddcf94",
-  "5d2855e1f93362000ab82cc5",
-  "5d2854d2f93362000cddcf91",
-  "5d2853daf93362000ab82cbb"
-];
+const productIds = [];
 
 if (!Builton) {
-  throw new Error('BuiltOn was not found. Please install @builton/core-sdk')
+  throw new Error("BuiltOn was not found. Please install @builton/core-sdk");
 }
 
-const scrapData = (prod) => {
-  const prodCopy = { ...prod };
+const scrapData = prod => {
+  let prodCopy = { ...prod };
   const prodKeys = Object.keys(prod);
+
+  for (let i = 0; i < objectItems.length; i += 1) {
+    if (prodCopy[objectItems[i]]) {
+      prodCopy[objectItems[i]] = prodCopy[objectItems[i]][0];
+    }
+  }
+
   for (let i = 0; i < prodKeys.length; i += 1) {
-    if (scrapItems.includes(prodKeys[i])) {
-      delete prodCopy[prodKeys[i]];
+    for (let k = 0; k < scrapItems.length; k += 1) {
+      if (scrapItems[k].indexOf(".") > -1) {
+        const parts = scrapItems[k].split(".");
+        if (prodKeys[i] === parts[0]) {
+          if (
+            prodCopy[parts[0]] &&
+            prodCopy[parts[0]].constructor === Array &&
+            prodCopy[parts[0]].length > 0
+          ) {
+            for (let j = 0; j <= prodCopy[parts[0]].length; j += 1) {
+              if (prodCopy[parts[0]][j]) {
+                delete prodCopy[parts[0]][j][parts[1]];
+              }
+            }
+          } else if (prodCopy[parts[0]]) {
+            delete prodCopy[parts[0]][parts[1]];
+          } else {
+            delete prodCopy[parts[0]];
+          }
+        }
+      } else if (scrapItems[k] === prodKeys[i]) {
+        delete prodCopy[prodKeys[i]];
+      }
     }
   }
 
   if (!prodCopy.main_product) {
-    delete prodCopy['_sub_products'];
+    delete prodCopy["_sub_products"];
   }
 
   return prodCopy;
@@ -74,10 +100,6 @@ const getSubProducts = () => {
   return subProds;
 };
 
-const getProductName = name => {
-  return name.substring(name.lastIndexOf('/') + 1);
-};
-
 const importProducts = async () => {
   try {
     const args = process.argv;
@@ -85,40 +107,24 @@ const importProducts = async () => {
     const keys = JSON.parse(args[2]);
 
     const builton = new Builton({
-      endpoint: 'https://shareactor-backend-qa.herokuapp.com',
+      endpoint: "https://shareactor-backend-qa.herokuapp.com",
       apiKey: keys.apiKey,
       bearerToken: keys.serviceAccountKey
     });
 
-    console.log(getSubProducts());``
-
     for (let i = 0; i < products.length; i += 1) {
-      const prod = await builton.products.create(products[i]);
-      // const category = categories.filter(category => products[i].tags.includes(category.toLowerCase()));
-      // if (category.length > 0) {
-      //   console.log(category[0]);
-        // fs.readFile(`${__dirname}/images/${category}/Adidas - A.R. Trainer W.jpg`, async (err, data) => {
-        //   try {
-        //     const image = await builton.images.create({ buffer: data, filename: 'test.jpg' });
-        //     console.log(image);
-        //   } catch(err) {
-        //     console.log(err);
-        //   }
-        // })
+      const body = scrapData(products[i]);
+      if (!products[i].main_product && !products[i].tags.includes('category')) {
+        const prod = await builton.products.create(body);
+        productIds.push(prod._id.$oid);
+      } else {
+        body["_sub_products"] = getSubProducts();
+        console.log(body);
+        await builton.products.create(body);
       }
-
-      // const body = scrapData(products[i]);
-      // const prod = await builton.products.create(body);
-      // if (!prod.main_product) {
-      //   productIds.push(prod._id.$oid);
-      // } else {
-      //   const subProducts = getSubProducts();
-      // }
-    // }
-
-
-  } catch(err) {
-    console.error(err)
+    }
+  } catch (err) {
+    console.error(err);
   }
 };
 

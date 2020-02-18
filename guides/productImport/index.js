@@ -33,7 +33,6 @@ const importProducts = async () => {
     const keys = JSON.parse(args[2]);
 
     const builton = new Builton({
-      endpoint: "https://shareactor-backend-qa.herokuapp.com",
       apiKey: keys.apiKey,
       bearerToken: keys.serviceAccountKey
     });

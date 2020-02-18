@@ -1,6 +1,6 @@
 const Builton = require("@builton/node-sdk");
 const products = require("./DemoStoreProducts");
-const cliProgress = require('cli-progress');
+const cliProgress = require("cli-progress");
 
 const objectItems = ["image"];
 
@@ -91,10 +91,8 @@ function getRandomArbitrary(min, max) {
 const getSubProducts = () => {
   let subProds = [];
   if (productIds.length) {
-    // Shuffle array
     const shuffled = [...productIds].sort(() => 0.5 - Math.random());
 
-    // Get sub-array of first n elements after shuffled
     subProds = shuffled.slice(0, getRandomArbitrary(2, productIds.length));
   }
 
@@ -102,7 +100,7 @@ const getSubProducts = () => {
 };
 
 // create a new progress bar instance and use shades_classic theme
-const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+const progress = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
 const importProducts = async () => {
   try {
@@ -116,22 +114,31 @@ const importProducts = async () => {
       bearerToken: keys.serviceAccountKey
     });
 
-    bar1.start(products.length, 0);
+    progress.start(products.length, 0);
 
     for (let i = 0; i < products.length; i += 1) {
       const body = scrapData(products[i]);
-      if (!products[i].main_product && !products[i].tags.includes('category')) {
+      if (!products[i].main_product && !products[i].tags.includes("category")) {
         const prod = await builton.products.create(body);
         productIds.push(prod._id.$oid);
       } else {
         body["_sub_products"] = getSubProducts();
+        if (body.image) {
+          const image = await builton.images.create({
+            public_url: body.image.public_url,
+            original_name: body.image.original_name
+          });
+          body.image = image._id.$oid;
+        }
         await builton.products.create(body);
       }
-      bar1.increment(1);
+      progress.increment(1);
     }
-    bar1.stop();
+    progress.stop();
   } catch (err) {
-    bar1.stop();
+    console.error(err);
+    progress.stop();
+    process.exit();
   }
 };
 

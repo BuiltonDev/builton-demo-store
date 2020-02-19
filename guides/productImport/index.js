@@ -2,7 +2,7 @@ const Builton = require("@builton/node-sdk");
 const products = require("./DemoStoreProducts");
 const cliProgress = require("cli-progress");
 
-const productIds = [];
+const subProducts = [];
 
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -10,13 +10,41 @@ function getRandomArbitrary(min, max) {
 
 const getSubProducts = () => {
   let subProds = [];
-  if (productIds.length) {
-    const shuffled = [...productIds].sort(() => 0.5 - Math.random());
+  if (subProducts.length) {
+    const shuffled = [...subProducts].map((item => item._id.$oid)).sort(() => 0.5 - Math.random());
 
-    subProds = shuffled.slice(0, getRandomArbitrary(2, productIds.length));
+    subProds = shuffled.slice(0, getRandomArbitrary(2, subProducts.length));
   }
 
   return subProds;
+};
+
+const getTagName = (name) => name.replace('Sneakers ', '').replace(' ', '').toLowerCase();
+
+const getTags = (items) => {
+  let tags = [];
+  if (subProducts.length > 0) {
+    tags = subProducts.map(item => {
+      for (let i = 0; i < items.length; i += 1) {
+        if (item._id.$oid === items[i]) {
+          return getTagName(item.name);
+        }
+      }
+    }).filter(item => !!item)
+  }
+  return tags;
+};
+
+const filterTags = (product) => {
+  let tags = product.tags;
+  if (tags.length > 0) {
+    tags = product.tags.filter(tag => {
+      if (!tag.startsWith('size')) {
+        return tag;
+      }
+    })
+  }
+  return tags;
 };
 
 // create a new progress bar instance and use shades_classic theme
@@ -39,9 +67,11 @@ const importProducts = async () => {
 
       if (!products[i].main_product && !products[i].tags.includes("category")) {
         const prod = await builton.products.create(body);
-        productIds.push(prod._id.$oid);
+        subProducts.push(prod);
       } else {
-        body["_sub_products"] = getSubProducts();
+        const subProds = getSubProducts();
+        body["_sub_products"] = subProds;
+        body["tags"] = [ ...filterTags(products[i]), ...getTags(subProds)];
         if (body.image) {
           const image = await builton.images.create({
             public_url: body.image.public_url,

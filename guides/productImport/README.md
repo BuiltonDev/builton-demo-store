@@ -14,10 +14,9 @@ This guide will show you how to import products in your BuiltOn project.
 ### Installing
 
 1. Navigate to `guides/productImport` in the terminal
-2. `npm i`
-3. `npm run import`
-4. You will be prompt to insert your API key an Service Account key. You can get both from your BuiltOn dashboard account, by navigating to Settings. Copy the API key and generate new Service Account key if you don't have one.
-5. The script will import your products.
+2. `npm run import` - it will install dependencies
+3. You will be prompt to insert your API key an Service Account key. You can get both from your BuiltOn dashboard account, by navigating to Settings. Copy the API key and generate new Service Account key if you don't have one.
+4. The script will import your products.
 
 _Note: To get ML recommendations, you will need to train your models and replace the ID's in their respective API calls in the Demo Store._
 
@@ -29,4 +28,3 @@ If you have found issues or have feature request, please report to this reposito
 ## License
 
 This project is licensed under the MIT license. See the [LICENSE](LICENSE.md) file for more info.
-

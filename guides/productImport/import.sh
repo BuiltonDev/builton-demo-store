@@ -6,6 +6,7 @@ NOCOLOR='\033[0m'
 
 if which node > /dev/null
   then
+    npm i
     read -p "Enter Your API Key: "  apiKey
     read -p "Enter Your Service Account Key: "  serviceAccountKey
     echo -e "${GREEN}Starting import of products!${NOCOLOR}"

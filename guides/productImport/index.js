@@ -4,10 +4,6 @@ const cliProgress = require("cli-progress");
 
 const productIds = [];
 
-if (!Builton) {
-  throw new Error("BuiltOn was not found. Please install @builton/node-sdk");
-}
-
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }

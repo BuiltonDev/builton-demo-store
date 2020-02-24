@@ -170,12 +170,14 @@ const Main = () => {
           <div className="home-popular-products-title-container">
             <SectionHeader title="Most popular products" type="sub" />
           </div>
-          <MLCarousel
-            items={popularProducts}
-            activeItems={4}
-            showSneakerSizes
-            onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item._id.$oid}`)}
-          />
+          {popularProducts &&
+            <MLCarousel
+              items={popularProducts}
+              activeItems={4}
+              showSneakerSizes
+              onActiveItemClick={(item) => history.push(`/product_list/${getProductName(item.name).toLowerCase()}/${item._id.$oid}`)}
+            />
+          }
         </div>
         <div className="home-footer-container">
           <Footer>

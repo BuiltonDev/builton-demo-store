@@ -21,6 +21,7 @@ import MLCarousel from "../../components/MLCarousel";
 import {getComplementaryItems} from "../../utils/carouselItems";
 
 const Checkout = () => {
+  const a = 'a';
   const [step, setStep] = useState(null);
   const [confirmOrder, setConfirmOrder] = useState(false);
   const [loading, setLoading] = useState(false);

@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.d46e0cc9.chunk.css",
-    "main.js": "/static/js/main.574b83ed.chunk.js",
-    "main.js.map": "/static/js/main.574b83ed.chunk.js.map",
+    "main.css": "/static/css/main.aa9914f2.chunk.css",
+    "main.js": "/static/js/main.3b656663.chunk.js",
+    "main.js.map": "/static/js/main.3b656663.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.2aedbb4d.js",
     "runtime-main.js.map": "/static/js/runtime-main.2aedbb4d.js.map",
     "static/css/2.5dbdccff.chunk.css": "/static/css/2.5dbdccff.chunk.css",
     "static/js/2.d32a872f.chunk.js": "/static/js/2.d32a872f.chunk.js",
     "static/js/2.d32a872f.chunk.js.map": "/static/js/2.d32a872f.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.3ce698dda37a30c578475f709339dbde.js": "/precache-manifest.3ce698dda37a30c578475f709339dbde.js",
+    "precache-manifest.d712b069e212d057ab1e42dd681280aa.js": "/precache-manifest.d712b069e212d057ab1e42dd681280aa.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.5dbdccff.chunk.css.map": "/static/css/2.5dbdccff.chunk.css.map",
-    "static/css/main.d46e0cc9.chunk.css.map": "/static/css/main.d46e0cc9.chunk.css.map",
+    "static/css/main.aa9914f2.chunk.css.map": "/static/css/main.aa9914f2.chunk.css.map",
     "static/js/2.d32a872f.chunk.js.LICENSE.txt": "/static/js/2.d32a872f.chunk.js.LICENSE.txt",
     "static/media/adidas-logo.png": "/static/media/adidas-logo.b6e2ef89.png",
     "static/media/nike-logo.png": "/static/media/nike-logo.aadac220.png"
@@ -21,7 +21,7 @@
     "static/js/runtime-main.2aedbb4d.js",
     "static/css/2.5dbdccff.chunk.css",
     "static/js/2.d32a872f.chunk.js",
-    "static/css/main.d46e0cc9.chunk.css",
-    "static/js/main.574b83ed.chunk.js"
+    "static/css/main.aa9914f2.chunk.css",
+    "static/js/main.3b656663.chunk.js"
   ]
 }

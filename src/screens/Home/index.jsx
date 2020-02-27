@@ -153,14 +153,14 @@ const Main = () => {
                   onLoad={() =>
                     setCategories({
                       ...categories,
-                      puma: { ...categories.puma, loaded: true }
+                      converse: { ...categories.converse, loaded: true }
                     })
                   }
                   onClick={() =>
-                    history.push(`product_list/${categories.puma.title}`)
+                    history.push(`product_list/${categories.converse.title}`)
                   }
-                  imageSrc={categories.puma.image}
-                  category={categories.puma.title}
+                  imageSrc={categories.converse.image}
+                  category={categories.converse.title}
                 />
               </div>
             </>

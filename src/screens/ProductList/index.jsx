@@ -36,7 +36,7 @@ const ProductList = () => {
     if (match.params.category) {
       if (match.params.category === "adidas") {
         setBrandLogo(AdidasLogo);
-      } else if (match.params.category === "puma") {
+      } else if (match.params.category === "converse") {
         setBrandLogo(PumaLogo);
       } else if (match.params.category === "nike") {
         setBrandLogo(NikeLogo);

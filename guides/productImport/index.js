@@ -57,7 +57,6 @@ const importProducts = async () => {
     const keys = JSON.parse(args[2]);
 
     const builton = new Builton({
-      endpoint: 'https://andromeda.builton.dev',
       apiKey: keys.apiKey,
       bearerToken: keys.serviceAccountKey
     });

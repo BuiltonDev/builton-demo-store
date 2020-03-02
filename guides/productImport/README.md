@@ -26,5 +26,5 @@ If you have found issues or have feature request, please report to this reposito
 
 
 ## License
-
+Images used courtesy of ['stress95.com'](https://stress95.com) and can not be copied or redistributed without permission
 This project is licensed under the MIT license. See the [LICENSE](LICENSE.md) file for more info.

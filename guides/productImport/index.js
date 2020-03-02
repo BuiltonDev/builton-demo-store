@@ -57,6 +57,7 @@ const importProducts = async () => {
     const keys = JSON.parse(args[2]);
 
     const builton = new Builton({
+      endpoint: 'https://andromeda.builton.dev',
       apiKey: keys.apiKey,
       bearerToken: keys.serviceAccountKey
     });
@@ -65,9 +66,11 @@ const importProducts = async () => {
     for (let i = 0; i < products.length; i += 1) {
       const body = products[i];
 
-      if (!products[i].main_product && !products[i].tags.includes("category")) {
+      if (!products[i].main_product) {
         const prod = await builton.products.create(body);
-        subProducts.push(prod);
+        if (!products[i].tags.includes("category")) {
+          subProducts.push(prod);
+        }
       } else {
         const subProds = getSubProducts();
         body["_sub_products"] = subProds;
@@ -79,13 +82,18 @@ const importProducts = async () => {
           });
           body.image = image._id.$oid;
         }
+
         await builton.products.create(body);
       }
       progress.increment(1);
     }
     progress.stop();
   } catch (err) {
-    console.error(err);
+    if (err.status === 401) {
+      console.error(new Error('\n Authentication failed. Please check your API key and Service Account key.'))
+    } else {
+      console.error(err);
+    }
     progress.stop();
     process.exit();
   }

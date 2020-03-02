@@ -221,7 +221,7 @@ const Product = React.memo(() => {
             <div className={`similar-products-title-container`}>
               <SectionHeader title="You might also like" type="sub" style={{ flex: 1, marginBottom: 0 }} />
             </div>
-            {product &&
+            {product && similarProducts &&
               <MLCarousel
                 items={similarProducts}
                 activeItems={4}

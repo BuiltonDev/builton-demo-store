@@ -204,13 +204,15 @@ const Checkout = () => {
                   <div className="checkout-carousel-container">
                     <SectionHeader title="Complementary items" type="sub" style={{ position: 'relative' }} />
                     <div className="checkout-carousel-content">
-                      <MLCarousel
-                        items={recommendedProducts}
-                        activeItems={2}
-                        onActiveItemClick={(item) =>
-                          history.push(`/product_list/${getProductName(item.name)}/${item._id.$oid}`)
-                        }
-                      />
+                      {recommendedProducts &&
+                        <MLCarousel
+                          items={recommendedProducts}
+                          activeItems={2}
+                          onActiveItemClick={(item) =>
+                            history.push(`/product_list/${getProductName(item.name)}/${item._id.$oid}`)
+                          }
+                        />
+                      }
                     </div>
                   </div>
                 }

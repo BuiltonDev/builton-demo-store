@@ -65,15 +65,17 @@ const importProducts = async () => {
     for (let i = 0; i < products.length; i += 1) {
       const body = products[i];
 
-      if (!products[i].main_product) {
+      if (!products[i].main_product && !products[i].tags.includes("category")) {
         const prod = await builton.products.create(body);
-        if (!products[i].tags.includes("category")) {
-          subProducts.push(prod);
-        }
+        subProducts.push(prod);
       } else {
-        const subProds = getSubProducts();
-        body["_sub_products"] = subProds;
-        body["tags"] = [ ...filterTags(products[i]), ...getTags(subProds)];
+        if (!products[i].tags.includes("category")) {
+          const subProds = getSubProducts();
+          body["_sub_products"] = subProds;
+          body["tags"] = [ ...filterTags(products[i]), ...getTags(subProds)];
+        } else {
+          body["tags"] = ["category"];
+        }
         if (body.image) {
           const image = await builton.images.create({
             public_url: body.image.public_url,

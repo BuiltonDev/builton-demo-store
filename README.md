@@ -38,6 +38,11 @@ To run this project locally, a couple of prerequisities need to be met.
     "apiKey": [YOUR FIREBASE API KEY],
     "authDomain": [YOUR FIREBASE AUTH DOMAIN]
   }
+  "ML": {
+     "popularProducts": [YOUR POPULAR PRODUCTS ML MODEL ID],
+     "similarProducts": [YOUR SIMILAR PRODUCTS ML MODEL ID],
+     "complementaryItems": [YOUR COMPLEMENTARY PRODUCTS ML MODEL ID]
+  }
 }
 ```
 
@@ -61,6 +66,10 @@ _Example:_
       console.error(err)
     }
 ```
+
+#### Products
+
+To run the store locally, you will need to import your own products. Please follow this [guide](https://github.com/BuiltonDev/builton-demo-store/tree/master/guides/productImport) to do so.
 
 ### Installing
 

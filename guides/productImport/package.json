@@ -1,0 +1,15 @@
+{
+  "name": "productimport",
+  "version": "1.0.0",
+  "description": "A guide to import products to use BuiltOn Demo Store locally.",
+  "scripts": {
+    "import": "./import.sh"
+  },
+  "author": "Builton <hello@builton.dev> (https://builton.dev/)",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "@builton/node-sdk": "^1.1.2",
+    "cli-progress": "^3.6.0"
+  }
+}

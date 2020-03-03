@@ -15,6 +15,7 @@ import SectionHeader from "../../components/SectionHeader";
 import {exportMLItems, getMediaItems} from "../../utils/carouselItems";
 import Footer from "../../components/Footer";
 import ImagesCarousel from "../../components/ImagesCarousel";
+import config from '../../config';
 
 const Product = React.memo(() => {
   const { history, match } = useReactRouter();
@@ -48,14 +49,16 @@ const Product = React.memo(() => {
       setLoading(true);
     }
     fetchProduct();
-    fetchRecommendations();
+    if (!!config.ML.similarProducts) {
+      fetchRecommendations();
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.productId]);
 
   const fetchRecommendations = async () => {
     try {
-      const recommendations = await builton.aiModels.getRecommendations('5d7b67d8de7cb5000a1006aa',
+      const recommendations = await builton.aiModels.getRecommendations(config.ML.similarProducts,
       {
           data: match.params.productId,
           options: {

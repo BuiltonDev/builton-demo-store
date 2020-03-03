@@ -1,0 +1,2173 @@
+[
+  {
+    "name": "Sneakers Size 6",
+    "description": "",
+    "short_description": "Size - 6",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 7",
+    "description": "",
+    "short_description": "Size - 7",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 7.5",
+    "description": "",
+    "short_description": "Size - 7.5",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 8",
+    "description": "",
+    "short_description": "Size - 8",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 8.5",
+    "description": "",
+    "short_description": "Size - 8.5",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 9",
+    "description": "",
+    "short_description": "Size - 9",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 9.5",
+    "description": "",
+    "short_description": "Size - 9.5",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 10",
+    "description": "",
+    "short_description": "Size - 10",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 10.5",
+    "description": "",
+    "short_description": "Size - 10.5",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Sneakers Size 11",
+    "description": "",
+    "short_description": "Size - 11",
+    "price": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": ["size"],
+    "main_product": false,
+    "properties": {}
+  },
+  {
+    "name": "Nike",
+    "description": "",
+    "short_description": "",
+    "price": 120,
+    "vat": 0,
+    "currency": "NOK",
+    "main_product": false,
+    "properties": {},
+    "tags": ["category"],
+    "image": {
+      "original_name": "Nike_Cover_X720.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5d4194c5857ced000e0628b4/Nike_Cover_X720.jpg"
+    }
+  },
+  {
+    "name": "Adidas",
+    "description": "",
+    "short_description": "",
+    "price": 120,
+    "vat": 0,
+    "currency": "NOK",
+    "tags": ["category"],
+    "main_product": false,
+    "properties": {},
+    "image": {
+      "original_name": "Adidas_Cover_X480.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5d41939a857ced000add1a6f/Adidas_Cover_X480.jpg"
+    }
+  },
+  {
+    "name": "Converse",
+    "description": "",
+    "short_description": "",
+    "price": 120,
+    "vat": 0,
+    "currency": "NOK",
+    "tags": ["category"],
+    "main_product": false,
+    "properties": {},
+    "image": {
+      "original_name": "Puma_Cover_X720.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d81fc2e3ba0008c5d798/Puma_Cover_X720.jpg"
+    }
+  },
+  {
+    "name": "Adidas - A.R. Trainer W",
+    "description": "In the '80s, tennis champions triumphed on grass, clay and concrete to garner Grand Slam titles. These shoes take design cues from a 1988 tennis sneaker designed to perform on all surfaces. Made in a mix of textures, these streetwear shoes come in a supple leather upper with textured suede at the toe.",
+    "short_description": "A.R. Trainer W",
+    "price": 162,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "women",
+      "size10.5",
+      "size10",
+      "size6",
+      "size7",
+      "size11",
+      "size8",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c828407e2000817ac9b/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c8dbeb1570008036cd3/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c961d1bd600085d2802/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c9e8407e2000817ac9c/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578ca626bc890008c7532a/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578cae26bc890008c7532b/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Continental 80",
+    "description": "The Continental 80 is an authentic bringback of an indoor sneaker from the '80s. These low-top sneakers are made of smooth leather. They show off a swooping two-tone stripe on the side and a split rubber cupsole.",
+    "short_description": "Continental 80",
+    "price": 154,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "men",
+      "size10",
+      "size10.5",
+      "size6",
+      "size11",
+      "size7",
+      "size8",
+      "size9",
+      "size8.5",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c031b032b0008aeaafe/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c0bbeb1570008036ccf/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c1426bc890008c75328/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c1c1d1bd600085d27fc/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c251b032b0008aeaaff/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578c2f1d1bd600085d27fe/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Superstar",
+    "description": "The adidas Superstar sneaker reigns supreme. The fan favorite launched in 1969 and quickly lived up to its name as NBA players laced into the now-famous shell-toe design. These men's shoes come in full grain leather with serrated 3-Stripes and a rubber cupsole.",
+    "short_description": "Superstar",
+    "price": 157,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5789de1b032b0008aeaaf9/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578bbe26bc890008c75327/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578bc61d1bd600085d27f8/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578bcf1d1bd600085d27fa/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578bd71b032b0008aeaafb/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578be01b032b0008aeaafd/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Ultraboost \"UNDEFEATED\"",
+    "description": "Created with L.A. streetwear brand UNDEFEATED, these shoes put a fresh spin on the Ultraboost runner. They feature a flexible yet supportive adidas Primeknit upper and are cushioned with Boost for an energized feel with every step. An American flag at the heel adds some star-spangled flair.",
+    "short_description": "Ultraboost \"UNDEFEATED\"",
+    "price": 168,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "men",
+      "women",
+      "size10",
+      "size10.5",
+      "size11",
+      "size7",
+      "size6",
+      "size9",
+      "size9.5",
+      "size8",
+      "size8.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5787e8beb1570008036cc9/original.jpg"
+    },
+    "discount": 0.25,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5787f6beb1570008036cca/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5789ae26bc890008c75324/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5789b726bc890008c75325/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5789bf8407e2000817ac97/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5789c9beb1570008036ccc/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - FYW S-97 W",
+    "description": "Adidas Originals celebrates the weird and wonderful style of the late '90s with the FYW S-97. These shoes update the favourite oddball design with a few modern tweaks. Made of a mix of suede and mesh, this women's-only version comes in a neutral triple-nude palette. A chunky but lightweight EVA midsole anchors the look.",
+    "short_description": "FYW S-97 W",
+    "price": 172,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "women",
+      "size10",
+      "size11",
+      "size10.5",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5780e18407e2000817ac95/original.jpg"
+    },
+    "discount": 0.33,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5782cc1d1bd600085d27f5/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5782d4beb1570008036cc6/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5782dcbeb1570008036cc8/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5782e41d1bd600085d27f6/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5782ec1b032b0008aeaaef/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Falcon Women",
+    "description": "The Falcon takes inspiration from '90s running designs and the carefree, rebellious spirit of the decade. These shoes offer a distinctly '90s look with vibrant colors, iridescent details and a wide, chunky silhouette. The thick EVA midsole is built for comfortable, all-day wear.",
+    "short_description": "Falcon Women",
+    "price": 192,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "women",
+      "size10",
+      "size10.5",
+      "size6",
+      "size11",
+      "size7.5",
+      "size9",
+      "size9.5",
+      "size8",
+      "size8.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577efe1d1bd600085d27f1/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577f0abeb1570008036cc3/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577f13beb1570008036cc4/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577f1c26bc890008c7531d/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577f23beb1570008036cc5/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577f2a1b032b0008aeaaeb/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Yung 96",
+    "description": "Authentic '90s adidas vibes are transformed into a bold, confident look. These shoes put a daring spin on retro running style. The upper is made up of layered mesh and nubuck. A lightweight EVA midsole gives them all-day wearability.",
+    "short_description": "Yung 96",
+    "price": 148,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "men",
+      "women",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577e9d1d1bd600085d27f0/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577ea926bc890008c75319/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577eb126bc890008c7531a/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577eb81b032b0008aeaae8/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577ec01b032b0008aeaae9/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577ec88407e2000817ac91/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Force 1 High ´07 an20",
+    "description": "The legend lives on in the Nike Air Force 1 '07 an20, a modern take on the icon that blends classic style and fresh, crisp details.",
+    "short_description": "Air Force 1 High ´07 an20",
+    "price": 142,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size8.5",
+      "size9",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bfc9b9c6c80008eba7db/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bfcf45f8380008fff293/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bfd8b9c6c80008eba7dd/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bfe045f8380008fff295/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bfe8b9c6c80008eba7df/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bff1b9c6c80008eba7e0/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Force `07 lv8",
+    "description": "The Nike Air Force 1 '07 lv8 Essential takes the classic AF-1 design to the next level with an Air Sole unit for lightweight cushioning. Its soft leather upper features debossed logos, while a solid-rubber outsole optimi`es traction.",
+    "short_description": "Air Force `07 lv8",
+    "price": 172,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "size10",
+      "size6",
+      "size10.5",
+      "size11",
+      "size7",
+      "size8",
+      "size9",
+      "men"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bf17b9c6c80008eba7d5/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bf1f1f16ca00089b2b31/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bf2745f8380008fff28f/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bf2fb9c6c80008eba7d6/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bf37b9c6c80008eba7d8/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bf3fb9c6c80008eba7d9/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Force 1",
+    "description": "Originally released in 1994, the Nike Air Force 1 returns as a near-exact replica of the iconic runner with style for the street. Its mesh and synthetic upper, moulded heel and Max Air unit honor the OG, while the soft foam midsole optimizes all-day comfort.",
+    "short_description": "Air Force 1",
+    "price": 148,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size8",
+      "size8.5",
+      "size7",
+      "size7.5",
+      "size9",
+      "women"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57bb4b2598de0008b80564/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ba5f1f16ca00089b2b2c/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ba6b1f16ca00089b2b2d/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ba731f16ca00089b2b2f/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ba802598de0008b80562/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ba8ab9c6c80008eba7d3/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Women´s Air Max Tailwind IV",
+    "description": "The Nike Air Max Tailwind IV gives a new look to the late-90s classic. Max Air units give you comfort and style that last.",
+    "short_description": "Women´s Air Max Tailwind IV",
+    "price": 128,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "women",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size9",
+      "size8.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9d91f16ca00089b2b26/original.jpg"
+    },
+    "discount": 0.4,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9df2598de0008b8055a/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9e81f16ca00089b2b28/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9f11f16ca00089b2b29/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9f91f16ca00089b2b2a/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ba012598de0008b8055e/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Ghostracer",
+    "description": "Designed for speed, stability and comfort, the Nike Air Ghost Racer was a hit 20 years ago—and now it's back in a stitch-for-stitch remake. And though it has all the same features as the original, it might be even better than you remember.",
+    "short_description": "Air Ghostracer",
+    "price": 128,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size8.5",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b98045f8380008fff286/original.jpg"
+    },
+    "discount": 0.33,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9872598de0008b80557/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9902598de0008b80558/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b99945f8380008fff28a/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9a11f16ca00089b2b23/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9aab9c6c80008eba7d0/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Women´s Air Force 1 Shadow SE",
+    "description": "The Nike Air Force 1 Shadow SE makes its return this year in fine form. Nike’s iconic sneaker is celebrating its 20th anniversary following a brief hiatus. With the Nike Air Force 1 Shadow SE women’s kicking things off, 2020 is going to be a big year.",
+    "short_description": "Women´s Air Force 1 Shadow SE",
+    "price": 132,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "women",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9",
+      "size8.5",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b92e2598de0008b80553/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9361f16ca00089b2b1f/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b93f45f8380008fff284/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b94a45f8380008fff285/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b9531f16ca00089b2b21/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57b95c1f16ca00089b2b22/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Force 1 `07",
+    "description": "Nike has enjoyed flipping some of their most classic Air Force models inside-out this summer, and now the Air Force 1 `07 is set to join the Air Force 1 `07 in showing its inner workings.  ",
+    "short_description": "Air Force 1 `07",
+    "price": 167,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "nike",
+      "product",
+      "women",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579d458407e2000817acdb/original.jpg"
+    },
+    "discount": 0.1,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579d4a8407e2000817acdc/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579d538407e2000817acde/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579d5cbeb1570008036d2e/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579d658407e2000817acdf/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579d6d26bc890008c75381/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Max Triax",
+    "description": "Ever since its drop in 2002, 'Triax' has remained one of the most iconic Air Max 90 color to this day. The introduction of a snakeskin pattern and exotic materials on the upper made it highly sought-after for every sneaker in the early 2000s. ",
+    "short_description": "Air Max Triax",
+    "price": 166,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579cbf1d1bd600085d2843/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579cc7beb1570008036d2b/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579cd026bc890008c7537a/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579cd926bc890008c7537b/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579ce1beb1570008036d2d/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579ce926bc890008c7537c/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Air Max 98",
+    "description": "Originally released in 1994, the Nike Air Max 98 returns as a near-exact replica of the iconic runner with style for the street. Its mesh and synthetic upper, moulded heel and Max Air unit honor the OG, while the soft foam midsole optimizes all-day comfort.",
+    "short_description": "Air Max 98",
+    "price": 182,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9.5",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c19beb1570008036d22/original.jpg"
+    },
+    "discount": 0.5,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c1fbeb1570008036d23/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c2726bc890008c75377/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c2f8407e2000817acda/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c37beb1570008036d26/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c611d1bd600085d2841/original-4.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579c6a1d1bd600085d2842/original-5.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Women's Air Max React 270",
+    "description": "After unexpectedly re-launching via a compelling collaboration with A-COLD-WALL last year, Nike’s React 270's a running classic from the aughts, is returning this month in three compelling in-line colorways. Following up a duo of tonal releases that dropped at the top of the year, these three React 270's take a more colorful route than their monochromatic predecessors, using white, black, and grey paneling to great effect. ",
+    "short_description": "Women's Air Max React 270",
+    "price": 158,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9.5",
+      "women"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b6c1b032b0008aeab48/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b72beb1570008036d1f/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b7abeb1570008036d20/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b811d1bd600085d2839/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b871d1bd600085d283a/original-4.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b8f1d1bd600085d283b/original-5.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Women's P-6000",
+    "description": "A mash-up of Pegasus' past, the Nike P-6000 features breathable mesh with horizontal and vertical overlays for a 2000s running look that is as striking as, say, a majestic winged horse. Drawing on the design of the Nike Pegasus 25 and 2006, its running aesthetic meets all-day comfort for the streets.",
+    "short_description": "Women's P-6000",
+    "price": 148,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size9",
+      "size8.5",
+      "size7.5",
+      "size8",
+      "size9.5",
+      "women"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579add8407e2000817accf/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579afbbeb1570008036d1b/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b041b032b0008aeab43/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b0e1b032b0008aeab45/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b171b032b0008aeab46/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579b2126bc890008c75371/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Women's P 6",
+    "description": "Borrowing design lines from heritage Nike running shoes such as the Internationalist, the P 6 Women's Sneakers embraces history and pushes it into the future. P 6 foam delivers lightweight comfort, while transparent and reflective details offer a cutting-edge look that begs for a reaction.",
+    "short_description": "Women's P 6",
+    "price": 177,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "nike",
+      "product",
+      "size10",
+      "size10.5",
+      "size11",
+      "size7",
+      "size6",
+      "size8.5",
+      "size9",
+      "size9.5",
+      "women"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5799a78407e2000817acc8/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5799ae1b032b0008aeab3e/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5799d6beb1570008036d18/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5799df1b032b0008aeab40/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5799ffbeb1570008036d19/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579a098407e2000817acce/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - Women's P 6000",
+    "description": "The Nike Zoom Vomero 5 SE SP wraps your foot in breathable support. A combination of durable synthetic leather and breathable mesh stands ready for the rigours of your day. Soft foam and Zoom Air cushioning deliver lightweight comfort for a smooth ride.",
+    "short_description": "Women's P 6000",
+    "price": 158,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9.5",
+      "women"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57982a8407e2000817acc6/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5798351b032b0008aeab39/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57983dbeb1570008036d11/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5798461b032b0008aeab3a/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57985026bc890008c7536c/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5798581d1bd600085d2831/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Nike - P 6000",
+    "description": "A mash-up of Pegasus' past, the Nike P-6000 features breathable mesh with horizontal and vertical overlays for a 2000s running look that is as striking as, say, a majestic winged horse. Drawing on the design of the Nike Pegasus 25 and 2006, its running aesthetic meets all-day comfort for the streets.",
+    "short_description": "P 6000",
+    "price": 142,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "nike",
+      "men",
+      "size10",
+      "size10.5",
+      "size11",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size8.5",
+      "size9",
+      "size9.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5797501b032b0008aeab37/original.jpg"
+    },
+    "discount": 0,
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5797acbeb1570008036d0b/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5797b58407e2000817acc4/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5797bd1b032b0008aeab38/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5797c78407e2000817acc5/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5797d0beb1570008036d0e/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Falcon W",
+    "description": "Inspired by '90s jogging gear, the Falcon offers a bold retro look with a chunky silhouette. These shoes bring nostalgic vibes with a leather upper and a big, sculpted midsole. They're cut wide for a stable feel and all-day comfort.",
+    "short_description": "Falcon W",
+    "price": 142,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "women",
+      "adidas",
+      "size7",
+      "size11",
+      "size6",
+      "size8",
+      "size10.5",
+      "size10",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577dc726bc890008c75315/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577dff8407e2000817ac8e/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577e071b032b0008aeaae5/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577e621d1bd600085d27ef/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577e6926bc890008c75318/original-4.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e577e6fbeb1570008036cbe/original.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Adidas - Campus",
+    "description": "Sneakers that got their start in the '70s, the Campus has earned top marks for its relaxed streetwear style. These men's sneakers feature a premium leather, with a reinforced toe cap for added durability. Leather 3-Stripes provide an elevated look.",
+    "short_description": "Campus",
+    "price": 240,
+    "discount": 0.25,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size10",
+      "size10.5",
+      "men"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578d7a8407e2000817ac9e/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578d7f1d1bd600085d2806/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578d83beb1570008036cd7/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578d8826bc890008c7532e/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578d8c1d1bd600085d2807/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578d751d1bd600085d2805/original.jpg"
+    }
+  },
+  {
+    "name": "Adidas - EQT Gazelle Women",
+    "description": "Based on the 1999 Equipment Gazelle, these sneakers are extension of the classic design for today. Made of leather, the shoes show off a variety of textured overlays and versatile colors to give an authentic feel.",
+    "short_description": "EQT Gazelle Women",
+    "price": 182,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "adidas",
+      "product",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size8.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578f1826bc890008c75341/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578f1e26bc890008c75342/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578f2326bc890008c75343/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578f271b032b0008aeab0c/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578f2c1b032b0008aeab0e/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578f141b032b0008aeab0a/original.jpg"
+    }
+  },
+  {
+    "name": "Adidas - Magmur Runner Women",
+    "description": "With an exaggerated chunky shape and a wavy midsole, these sneakers originate a '90s design. They're made of a mix of mesh and leather and are detailed with reflective accents.",
+    "short_description": "Magmur Runner Women",
+    "price": 241,
+    "discount": 0.1,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8.5",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578fd326bc890008c75349/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578fd91b032b0008aeab14/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578fdd1d1bd600085d280e/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578fe126bc890008c7534a/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578fe5beb1570008036ce8/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e578fbe8407e2000817acb3/original.jpg"
+    }
+  },
+  {
+    "name": "Adidas - Stan Smith",
+    "description": "Named for one of tennis' all-time greats, the Stan Smith is an icon with the sneakers. This version of the beloved court sneakers features a printed square detail inspired by modern art. GORE-TEX insulation gives targeted warmth for cold weather.",
+    "short_description": "Stan Smith",
+    "price": 182,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "adidas",
+      "product",
+      "men",
+      "size6",
+      "size7",
+      "size8",
+      "size9",
+      "size10.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57909c1b032b0008aeab1b/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5790a08407e2000817acb7/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5790a51b032b0008aeab1c/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5790a9beb1570008036cf1/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5790ac8407e2000817acb9/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5790948407e2000817acb6/original.jpg"
+    }
+  },
+  {
+    "name": "Adidas - Top Ten Hi",
+    "description": "First launched in 1979 for the top 10 NBA players, these sneakers eventually made the leap to streetwear staple. This version stays true to form with a leather upper, padded collar and suede toe bumper.",
+    "short_description": "Top Ten Hi",
+    "price": 146,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "adidas",
+      "product",
+      "men",
+      "size7",
+      "size8.5",
+      "size9",
+      "size9.5",
+      "size10",
+      "size10.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5791df26bc890008c75352/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5791e51d1bd600085d281b/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5791eabeb1570008036cf4/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5791eebeb1570008036cf5/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5791f21d1bd600085d281c/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5791db26bc890008c75351/original.jpg"
+    }
+  },
+  {
+    "name": "Adidas - Ultraboost 20",
+    "description": "The new running superstar on the market. These high-performance shoes feature a foot-hugging knit upper. Stitched-in reinforcement is precisely placed to give you support in the places you need it most. The soft elastane heel delivers a more comfortable fit.",
+    "short_description": "Ultraboost 20",
+    "price": 199,
+    "discount": 0.1,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "adidas",
+      "product",
+      "men",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8.5",
+      "size9",
+      "size9.5",
+      "size10"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5792c11b032b0008aeab2c/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5792c61b032b0008aeab2d/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5792ca1b032b0008aeab2e/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5792cf1d1bd600085d2824/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5792d31d1bd600085d2825/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5792b91b032b0008aeab2b/original.jpg"
+    }
+  },
+  {
+    "name": "Adidas - Yung 1",
+    "description": "Reimagining the late '90s-era adidas Dorf, the Yung 1 offers an authentic, creative take on retro sneakers. This version echoes true '90s style with a layered look.",
+    "short_description": "Yung 1",
+    "price": 212,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "adidas",
+      "men",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9",
+      "size10.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57945abeb1570008036d03/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579460beb1570008036d05/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e5794641d1bd600085d2829/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57946926bc890008c75364/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57946e8407e2000817acc0/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e579452beb1570008036d01/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - Chuck 70 OX",
+    "description": "A Converse icon from the 1970’s remastered for today with superior craftsmanship and premium materials. The best ever.",
+    "short_description": "Chuck 70 OX",
+    "price": 182,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "men",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size8.5",
+      "size10"
+    ],
+    "main_product": true,
+    "properties": {},
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57c9f27ffd210008f9e89a/original.jpg"
+    },
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57c9f6c4dd7700082760a0/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57c9ffc4dd7700082760a2/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca06981c8c0008e07dde/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca0dc4dd7700082760a4/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca157ffd210008f9e89c/original-4.jpg"
+      }
+    ]
+  },
+  {
+    "name": "Converse - Chuck 70 Hi",
+    "description": "The best ever, with tougher canvas and an extra layer of comfort.",
+    "short_description": "Chuck 70 Hi",
+    "price": 172,
+    "discount": 0.2,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "men",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9",
+      "size10",
+      "size10.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca837ffd210008f9e8a0/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca8b105dc10008fe3660/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca90981c8c0008e07de0/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca947ffd210008f9e8a1/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca98105dc10008fe3663/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57ca7d105dc10008fe365f/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - Chuck 70 Hi W",
+    "description": "Bring the heat in premium Chuck 70 sneakers, topped with chenille flame overlays.",
+    "short_description": "Chuck 70 Hi W",
+    "price": 180,
+    "discount": 0.1,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "men",
+      "women",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9",
+      "size10",
+      "size10.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d545c2e3ba00080c4409/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d551c2e3ba00080c440b/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d556c2e3ba00080c440d/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d55bc2e3ba00080c440f/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d55fc2e3ba00080c4411/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d53bc2e3ba00080c4407/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - Chuck 70 Hi X",
+    "description": "Show yourself some love with these heartfelt Chuck 70s. They've got the same premium details you expect from your Chucks.",
+    "short_description": "Chuck 70 Hi X",
+    "price": 154,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "men",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size9",
+      "size10"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d6b9c2e3ba00080c4429/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d6c0c2e3ba00080c442b/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d6c5c2e3ba00080c442d/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d6ccc2e3ba00080c442f/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d6d1c2e3ba00080c4431/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d6b3c2e3ba00080c4427/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - Chuck 70 Ox",
+    "description": "To create our future, we’re looking to our past. That’s how the Chuck 70 OX came to be. A daring combination of the Chuck Taylor All Star, Pro Leather, One Star and Chuck 70 OX models, these sneakers take the best of Converse classics to create something totally new and unexpected – but every bit as iconic.",
+    "short_description": "Chuck 70 Ox",
+    "price": 176,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "men",
+      "women",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9",
+      "size9.5",
+      "size10"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d7d0c2e3ba00080c4449/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d7d4c2e3ba00080c444b/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d7dac2e3ba00080c444d/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d7dec2e3ba00080c444f/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d7e3c2e3ba00080c4451/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57d7c9c2e3ba00080c4447/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - Chuck 70 OX B",
+    "description": "The Chuck70 OX B was the first performance hoops sneaker in 1922, and there has never been another player name featured on the sneaker until now. As part of the Breaking Down Barriers collection, get it in three limited colorways to celebrate life.",
+    "short_description": "Chuck 70 OX B",
+    "price": 172,
+    "discount": 0.4,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "men",
+      "size6",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9",
+      "size10"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57dfe5c2e3ba0008141a27/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57dfecc2e3ba0008141a29/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57dff2c2e3ba0008141a2b/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57dff6c2e3ba0008141a2d/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57dffac2e3ba0008141a2f/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57dfd4c2e3ba0008141a24/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - Chuck 70 B",
+    "description": "Take your shoe game to the next level in durable leather Chuck 70s. They've got the same premium features you know and love, plus a new, limited-edition palette of the season's hottest colors.",
+    "short_description": "Chuck 70 B",
+    "price": 122,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "man",
+      "women",
+      "size6",
+      "size7",
+      "size8",
+      "size9",
+      "size10.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57e10fc2e3ba0008141a46/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57e114c2e3ba0008141a48/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57e119c2e3ba0008141a4a/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57e11dc2e3ba0008141a4c/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57e121c2e3ba0008141a4e/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e57e106c2e3ba0008141a44/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - One Star X",
+    "description": "Just like the OG One Star Academy, this edition comes in suede. With updated icon with fresh colors inspired by the collegiate elite for a best-in-class look and feel.",
+    "short_description": "One Star X",
+    "price": 148,
+    "discount": 0.2,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "converse",
+      "product",
+      "men",
+      "size7",
+      "size7.5",
+      "size8.5",
+      "size9",
+      "size10",
+      "size11"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58ca31c2e3ba0008c5d6fd/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58ca37c2e3ba0008c5d6ff/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58ca3bc2e3ba0008c5d701/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58ca40c2e3ba0008c5d703/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58ca44c2e3ba0008c5d705/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58ca28c2e3ba0008c5d6fb/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - One Star Ox B",
+    "description": "Just like the OG One Star Academy, this edition comes in suede. But this time, we've updated the icon with fresh colors inspired by the collegiate elite for a best-in-class look and feel.",
+    "short_description": "One Star Ox B",
+    "price": 166,
+    "discount": 0.2,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "converse",
+      "product",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size8.5"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d14ec2e3ba0008c5d71f/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d156c2e3ba0008c5d721/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d15bc2e3ba0008c5d723/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d15fc2e3ba0008c5d725/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d164c2e3ba0008c5d727/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d148c2e3ba0008c5d71d/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - One Star Ox G",
+    "description": "Just like the OG One Star Academy, this edition comes in suede. Updated the icon with fresh colors inspired by the collegiate elite for a best-in-class look and feel.",
+    "short_description": "One Star Ox G",
+    "price": 170,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "women",
+      "size6",
+      "size7",
+      "size7.5",
+      "size8",
+      "size8.5",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d1f6c2e3ba0008c5d73c/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d1fac2e3ba0008c5d73e/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d1fec2e3ba0008c5d740/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d203c2e3ba0008c5d742/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d208c2e3ba0008c5d744/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d1efc2e3ba0008c5d73a/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - One Star Light",
+    "description": "Just like the OG One Star Academy, this edition comes in suede. Updated the icon with fresh colors inspired by the collegiate elite for a best-in-class look and feel.",
+    "short_description": "One Star Light",
+    "price": 152,
+    "discount": 0,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "women",
+      "men",
+      "size6",
+      "size7.5",
+      "size8",
+      "size9",
+      "size11"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d339c2e3ba0008c5d75b/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d33fc2e3ba0008c5d75d/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d343c2e3ba0008c5d75f/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d348c2e3ba0008c5d761/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d34dc2e3ba0008c5d763/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d334c2e3ba0008c5d759/original.jpg"
+    }
+  },
+  {
+    "name": "Converse - One Star Ox P",
+    "description": "Just like the OG One Star Academy, this edition comes in suede. Updated the icon with fresh colors inspired by the collegiate elite for a best-in-class look and feel.",
+    "short_description": "One Star Ox P",
+    "price": 162,
+    "discount": 0.15,
+    "vat": 0,
+    "currency": "EUR",
+    "tags": [
+      "product",
+      "converse",
+      "women",
+      "size7",
+      "size8",
+      "size8.5",
+      "size9"
+    ],
+    "main_product": true,
+    "properties": {},
+    "media": [
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d4a4c2e3ba0008c5d77c/original.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d4aac2e3ba0008c5d77e/original-1.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d4afc2e3ba0008c5d780/original-2.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d4b4c2e3ba0008c5d782/original-3.jpg"
+      },
+      {
+        "kind": "image",
+        "url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d4b9c2e3ba0008c5d784/original-4.jpg"
+      }
+    ],
+    "image": {
+      "original_name": "original.jpg",
+      "public_url": "https://d1vk7rtgnzzicy.cloudfront.net/5e58d49fc2e3ba0008c5d77a/original.jpg"
+    }
+  }
+]

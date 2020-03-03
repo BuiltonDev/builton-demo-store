@@ -151,7 +151,7 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
         selectOnScroll={selectOnScroll}
       >
         {(items && items.length > 0) && items.map((item, index) => (
-          item.image_url ?
+          item.image ?
             <div key={`${item.id}-product-${index}`}>
               <div className="carousel-image-container">
                 {item.discount > 0 &&
@@ -160,7 +160,7 @@ const MLCarousel = ({ items, onActiveItemClick, activeItems, breakpoint, emptyMe
                 </div>
                 }
                 <Image
-                  src={`${config.endpoint}/images/${item.image_url}?api_key=${config.apiKey}`}
+                  src={`${item.image.public_url}`}
                   onLoad={(isCached) => {
                     if (loadedItems[index]) {
                       loadedItems[index].imageLoaded = true;

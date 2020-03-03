@@ -28,7 +28,7 @@ const Main = () => {
     const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-          "5d53b0f91a7e86000fd0d84e",
+          "5e5e147c92de14000c9ba9d3",
           {
             data: "",
             options: {
@@ -107,6 +107,8 @@ const Main = () => {
       }
     }
   }, [categories]);
+
+  console.log(popularProducts)
 
   return (
     <div className="main-container">

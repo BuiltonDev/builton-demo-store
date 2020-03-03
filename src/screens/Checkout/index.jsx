@@ -36,7 +36,7 @@ const Checkout = () => {
     const getRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-        "5d55180941f4e7000dea3ca4",
+        "5e5e14860a6583000b3520d0",
         {
             data: cart.map(item => item.product._id.$oid),
             options: {

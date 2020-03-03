@@ -14,6 +14,7 @@ import globalState from "../../globalStore/globalState";
 import {exportMLItems} from "../../utils/carouselItems";
 import {getProductName} from "../../utils/productModifiers";
 import MLCarousel from "../../components/MLCarousel";
+import config from '../../config';
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -28,7 +29,7 @@ const Main = () => {
     const fetchRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-          "5e5e147c92de14000c9ba9d3",
+          config.ML.popularProducts,
           {
             data: "",
             options: {
@@ -75,7 +76,9 @@ const Main = () => {
     };
 
     getProducts();
-    fetchRecommendations();
+    if (!!config.ML.popularProducts) {
+      fetchRecommendations();
+    }
   }, []);
 
   useEffect(() => {

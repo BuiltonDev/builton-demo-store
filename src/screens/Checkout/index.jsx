@@ -19,6 +19,7 @@ import SectionHeader from "../../components/SectionHeader";
 import {getProductName} from "../../utils/productModifiers";
 import MLCarousel from "../../components/MLCarousel";
 import {getComplementaryItems} from "../../utils/carouselItems";
+import config from '../../config';
 
 const Checkout = () => {
   const [step, setStep] = useState(null);
@@ -36,7 +37,7 @@ const Checkout = () => {
     const getRecommendations = async () => {
       try {
         const recommendations = await builton.aiModels.getRecommendations(
-        "5e5e14860a6583000b3520d0",
+        config.ML.complementaryItems,
         {
             data: cart.map(item => item.product._id.$oid),
             options: {
@@ -66,7 +67,7 @@ const Checkout = () => {
       }
     };
 
-    if (!recommendedProducts.length && cart && cart.length > 0) {
+    if (!recommendedProducts.length && cart && cart.length > 0 && !!config.ML.complementaryItems) {
       getRecommendations();
     }
   }, [cart]);

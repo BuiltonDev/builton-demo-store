@@ -67,6 +67,10 @@ _Example:_
     }
 ```
 
+#### Products
+
+To run the store locally, you will need to import your own products. Please follow this [guide](https://github.com/BuiltonDev/builton-demo-store/tree/master/guides/productImport) to do so.
+
 ### Installing
 
 1. ```git clone https://github.com/BuiltonDev/builton-demo-store.git```

@@ -108,8 +108,6 @@ const Main = () => {
     }
   }, [categories]);
 
-  console.log(popularProducts)
-
   return (
     <div className="main-container">
       <Header />

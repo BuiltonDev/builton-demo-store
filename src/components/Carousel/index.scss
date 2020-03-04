@@ -271,7 +271,6 @@
 
 @media all and (max-width: 1280px) {
   .carousel-container {
-    overflow: visible;
     & > div {
       margin: 24px 0;
       .carousel-left-arrow {
@@ -285,13 +284,14 @@
         right: 55%;
         top: 15%;
       }
-
-      & .similar-product-title-container {
-        left: 50%;
-        transform: translateX(-50%);
-        top: 10%;
-        font-size: 1.04rem;
-        right: auto;
+      & .item-description-carousel-container {
+        & .similar-product-title-container {
+          left: 50%;
+          transform: translateX(-50%);
+          top: 10%;
+          font-size: 1.04rem;
+          right: auto;
+        }
       }
     }
   }
@@ -299,14 +299,42 @@
 
 @media all and (max-width: 780px) {
   .carousel-container {
-    z-index: 1;
-    overflow: visible;
+    overflow: hidden;
     & > div {
       margin: 24px 0;
-      & .similar-product-name-container {
-        font-size: 0.82rem;
-        text-align: center;
-        line-height: 18px;
+      .carousel-left-arrow {
+        position: absolute;
+        left: 55%;
+        top: 15%;
+      }
+
+      .carousel-right-arrow {
+        position: absolute;
+        right: 55%;
+        top: 15%;
+      }
+      & .item-description-carousel-container {
+        & .similar-product-title-container {
+          left: 50%;
+          transform: translateX(-50%);
+          top: 10%;
+          font-size: 1.04rem;
+          right: auto;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 480px) {
+  .carousel-container {
+    & > div {
+      & .item-description-carousel-container {
+        & .similar-product-title-container {
+          left: 0;
+          transform: translateX(0);
+          top: 10px;
+        }
       }
     }
   }

@@ -21,7 +21,9 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
     let maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
 
     // So it renders properly on small displays and when less items then active items for the viewport
-    if (window.innerWidth < 720) {
+    if (window.innerWidth < 480) {
+      maxWidth = 162;
+    } else if (window.innerWidth < 720) {
       maxWidth = 240;
     } else if (maxWidth > 320) {
       maxWidth = 320;

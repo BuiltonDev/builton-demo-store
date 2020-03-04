@@ -318,7 +318,9 @@
 
 @media all and (max-width: 1280px) {
   .product-wrapper {
-
+    & .similar-products-wrapper {
+      padding: 0;
+    }
     & .product-description-container {
       flex: 1 50%;
     }

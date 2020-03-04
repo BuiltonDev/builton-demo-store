@@ -177,14 +177,6 @@
 @media all and (max-width: 720px) {
   .wrapper {
     & .home-popular-products-container {
-      min-height: 320px;
-    }
-  }
-}
-
-@media all and (max-width: 480px) {
-  .wrapper {
-    & .home-popular-products-container {
       min-height: 480px;
     }
   }

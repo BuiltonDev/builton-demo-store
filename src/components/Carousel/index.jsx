@@ -16,7 +16,7 @@ const Carousel = ({ activeItems, breakpoint, selectOnScroll, children, loaded, o
   const setCarouselItems = () => {
     const carousel = carouselRef.current;
     if (!carousel || !carousel.children.length) return false;
-    const marginFactor = 16;
+    const marginFactor = 12;
     const items = carousel.children;
     let maxWidth = (carousel.clientWidth / (activeItem.length + 2)) - marginFactor;
 
